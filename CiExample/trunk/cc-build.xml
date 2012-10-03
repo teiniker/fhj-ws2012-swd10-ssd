@@ -1,4 +1,4 @@
-<project name="AntExample" default="build" basedir=".">
+<project name="CiExample" default="build" basedir=".">
 	<property name="src" location="src" />
 	<property name="templates" location="templates" />
   	<property name="build" location="build-ant" />
@@ -6,10 +6,10 @@
   	<property name="doc" location="doc" />
   	<property name="install" location="dist" />
 	
-	<property name="svn.url.https.authenticated" value="https://fhj-ws2011-swd09-ssd.googlecode.com/svn/AntExample"/> 
+	<property name="svn.url.https.authenticated" value="https://fhj-ws2012-swd10-ssd.googlecode.com/svn/CiExample/trunk"/> 
 		<!-- Note: Anonymous svn url for checkout only, if checkins are necessary, use https path --> 	
-	<property name="svn.url.http.anonymous" value="http://fhj-ws2011-swd09-ssd.googlecode.com/svn/AntExample"/> 
-	<property name="svn.repository" value="${basedir}/AntExample"/>
+	<property name="svn.url.http.anonymous" value="http://fhj-ws2012-swd10-ssd.googlecode.com/svn/CiExample/trunk"/> 
+	<property name="svn.repository" value="${basedir}/CiExample"/>
 
 	<property name="svn.anttask.lib" location="vendor/svnant-1.3.0/lib"/>
 	<!-- Use Subclipse Svn Task Library -->
@@ -43,6 +43,6 @@
 	<svn javahl="false" >
     	    		<checkout url="${svn.url.http.anonymous}" destPath="${svn.repository}" />  
     		</svn>
-	<ant antfile="build.xml" dir="${basedir}/AntExample" target="install" />
+	<ant antfile="build.xml" dir="${basedir}/CiExample" target="install" />
 </target>
 </project>

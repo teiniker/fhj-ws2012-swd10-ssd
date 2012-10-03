@@ -1,4 +1,4 @@
-<project name="AntExample" default="install">	
+<project name="CiExample" default="install">	
 	<property name="src" location="src" />
 	<property name="templates" location="templates" />
   	<property name="build" location="build-ant" />
