@@ -1,0 +1,52 @@
+<project name="AntExample" default="install">	
+	<property name="src" location="src" />
+	<property name="templates" location="templates" />
+  	<property name="build" location="build-ant" />
+  	<property name="lib" location="lib" />
+  	<property name="doc" location="doc" />
+  	<property name="install" location="dist" />
+			
+	<property file="version.properties"/>
+	<fail unless="application.version" message="version.properties file not found!"/>
+	
+	<target name="init">
+		<echo message="Version: ${application.version}"/>
+		<mkdir dir="${build}" />
+		<mkdir dir="${install}" />
+		<mkdir dir="${doc}" />
+		<mkdir dir="${lib}" />
+	</target>  
+
+	<target name="clean">
+ 		<delete dir="${build}" /> 
+ 		<delete dir="${install}" /> 
+ 		<delete dir="${doc}" /> 
+  		<delete dir="${lib}" /> 
+	</target>
+	
+  	<target name="compile" depends="init">
+      	<javac srcdir="${src}" destdir="${build}"/>
+  	</target>
+
+  	<target name="jar" depends="compile">
+      	<jar jarfile="${lib}/AntExample.jar" basedir="${build}" >
+         	<manifest>
+            	<attribute name="Main-Class" value="at.fhj.itm.Hello" />
+         	</manifest>
+      	</jar>
+  	</target>
+	
+  	<target name="doc">
+      	<javadoc packagenames="at.fhj.itm.*"
+            sourcepath="${src}"
+	    	destDir="${doc}">
+      	</javadoc>
+  	</target>
+		
+  	<target name="install"  depends="jar, doc">      	
+  		<copy file="${lib}/AntExample.jar" todir="${install}/lib" overwrite="true" />   
+  		<copy todir="${install}/doc" overwrite="true">
+  			<fileset dir="${doc}"/>
+  		</copy>
+  	</target>
+</project>

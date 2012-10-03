@@ -1,0 +1,42 @@
+<!-- snippet to be added to cruisecontrol config.xml -->
+
+<!--
+What must be done to run this sample project under cruise control:
+0) setup and start cruise control  
+1) checkout AntExample to cruisecontrols project folder (under windows the folder exists)
+2) add snippet to cruise control config.xml
+3) start cruisecontrols dashboard.  
+-->
+
+<project name="AntExample">
+
+        <listeners>
+            <currentbuildstatuslistener file="logs/${project.name}/status.txt"/>
+        </listeners>
+
+        <bootstrappers>
+            <antbootstrapper anthome="apache-ant-1.7.0" buildfile="projects/${project.name}/cc-build.xml" target="all" />
+        </bootstrappers>
+
+        <modificationset quietperiod="3">
+            <!-- touch any file in connectfour project to trigger a build -->
+            <filesystem folder="projects/${project.name}"/>
+        </modificationset>
+
+        <schedule interval="3">
+            <!--<ant anthome="apache-ant-1.7.0" buildfile="projects/${project.name}/build.xml"/>-->
+            <ant anthome="apache-ant-1.7.0" buildfile="projects/${project.name}/cc-build.xml"/>
+        </schedule>
+
+        <log>
+            <merge dir="projects/${project.name}/target/test-results"/>
+        </log>
+
+        <publishers>
+            <onsuccess>
+                <artifactspublisher dest="artifacts/${project.name}" subdirectory="lib" file="projects/${project.name}/dist/lib/${project.name}.jar"/>
+                <artifactspublisher dest="artifacts/${project.name}" subdirectory="doc" dir="projects/${project.name}/dist/doc"/>
+            </onsuccess>
+        </publishers>
+
+    </project>
