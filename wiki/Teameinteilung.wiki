@@ -21,7 +21,7 @@ Anbei die Teameinteilung. Teamleiter (TM) und Leadentwickler (LE) markiert.
 *Team3*
   * Ziegler (TM)
   * Geisbacher (LE)
-  * Zechner (Anrechnung)!
+  *  ~~Zechner~~ (Anrechnung)
   * Pansi
   * Oberhoffner
   * Riedel
