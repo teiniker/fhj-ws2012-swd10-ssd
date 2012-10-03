@@ -29,7 +29,7 @@
   	</target>
 
   	<target name="jar" depends="compile">
-      	<jar jarfile="${lib}/AntExample.jar" basedir="${build}" >
+      	<jar jarfile="${lib}/CiExample.jar" basedir="${build}" >
          	<manifest>
             	<attribute name="Main-Class" value="at.fhj.itm.Hello" />
          	</manifest>
@@ -44,7 +44,7 @@
   	</target>
 		
   	<target name="install"  depends="jar, doc">      	
-  		<copy file="${lib}/AntExample.jar" todir="${install}/lib" overwrite="true" />   
+  		<copy file="${lib}/CiExample.jar" todir="${install}/lib" overwrite="true" />   
   		<copy todir="${install}/doc" overwrite="true">
   			<fileset dir="${doc}"/>
   		</copy>
