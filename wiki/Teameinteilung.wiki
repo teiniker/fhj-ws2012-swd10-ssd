@@ -21,7 +21,7 @@ Anbei die Teameinteilung. Teamleiter (TM) und Leadentwickler (LE) markiert.
 *Team3*
   * Ziegler (TM)
   * Geisbacher (LE)
-  *  ~~Zechner~~ (Anrechnung)
+  * Platzer
   * Pansi
   * Oberhoffner
   * Riedel
@@ -32,11 +32,11 @@ Anbei die Teameinteilung. Teamleiter (TM) und Leadentwickler (LE) markiert.
   * Hammer
   * Ameti
   * Neger
+  * Streiner
 
 *Team5*
   * Klemm (TM)
   * Seitlinger (LE)
   * Wresnig
-  * Platzer
   * Chabek
-  * Moser (?)
+  * Moser
