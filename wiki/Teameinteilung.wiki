@@ -5,38 +5,38 @@
 Anbei die Teameinteilung. Teamleiter (TM) und Leadentwickler (LE) markiert.
 
 *Team1*
-  *Fuchs (TM)
-  *Moik (LE)
-  *Tauss
-  *Deutsch
-  *Haj-Yahya
+  * Fuchs (TM)
+  * Moik (LE)
+  * Tauss
+  * Deutsch
+  * Haj-Yahya
 
 *Team2*
-  *Bauer (TM)
-  *Tomes (LE)
-  *Kronberger
-  *Mattheiss
-  *Eibegger
+  * Bauer (TM)
+  * Tomes (LE)
+  * Kronberger
+  * Mattheiss
+  * Eibegger
 
 *Team3*
-  *Ziegler (TM)
-  *Geisbacher (LE)
-  *Zechner (Anrechnung)!
-  *Pansi
-  *Oberhoffner
-  *Riedel
+  * Ziegler (TM)
+  * Geisbacher (LE)
+  * Zechner (Anrechnung)!
+  * Pansi
+  * Oberhoffner
+  * Riedel
 
 *Team4*
-  *Kernbichler (TM)
-  *Hausegger (LE)
-  *Hammer
-  *Ameti
-  *Neger
+  * Kernbichler (TM)
+  * Hausegger (LE)
+  * Hammer
+  * Ameti
+  * Neger
 
 *Team5*
-  *Kelmm (TM)
-  *Seitlinger (LE)
-  *Wresnig
-  *Platzer
-  *Chabek
-  *Moser (?)
+  * Klemm (TM)
+  * Seitlinger (LE)
+  * Wresnig
+  * Platzer
+  * Chabek
+  * Moser (?)
