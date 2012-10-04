@@ -36,9 +36,6 @@
 		  				<checkout url="${svn.url.https.authenticated}" destPath="${svn.repository}" />  
 		  		</svn>
 		  -->
-		<svn javahl="false" >
-    	    <checkout url="${svn.url.http.anonymous}" destPath="${svn.repository}" />  
-    </svn>
 	
 	<svn javahl="false" >
     	    		<checkout url="${svn.url.http.anonymous}" destPath="${svn.repository}" />  
