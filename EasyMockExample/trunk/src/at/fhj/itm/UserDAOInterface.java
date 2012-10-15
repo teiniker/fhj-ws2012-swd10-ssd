@@ -4,7 +4,7 @@ package at.fhj.itm;
  * This interface defines the PersonDAO methods which can be implemented
  * in different ways and technologies (JDBC, Hibernate, XML, etc.)  
  */
-public interface UserDAO
+public interface UserDAOInterface
 {
     void insert(User p) throws DAOException;
     void update(User p) throws DAOException;

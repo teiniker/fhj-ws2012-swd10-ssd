@@ -13,7 +13,7 @@ public class UserService
 	/*
 	 * Constructor
 	 */
-	public UserService(UserDAO userDAO)
+	public UserService(UserDAOInterface userDAO)
 	{
 		if(userDAO == null)
 			throw new IllegalArgumentException("UserDAO is null!");
@@ -25,8 +25,8 @@ public class UserService
 	/*
 	 * Dependency: userDao:UserDAO
 	 */
-	private UserDAO userDAO;
-    public void setUserDAO(UserDAO userDAO) 
+	private UserDAOInterface userDAO;
+    public void setUserDAO(UserDAOInterface userDAO) 
     {
 		this.userDAO = userDAO;
 	}

@@ -7,7 +7,7 @@ import org.junit.Test;
 import at.fhj.itm.DAOException;
 import at.fhj.itm.ServiceException;
 import at.fhj.itm.User;
-import at.fhj.itm.UserDAO;
+import at.fhj.itm.UserDAOInterface;
 import at.fhj.itm.UserService;
 
 
@@ -22,7 +22,7 @@ public class UserServiceStubTest
     @Test
     public void testAddPerson() throws ServiceException, DAOException
     {
-    	UserDAO stub = new UserDAOStub();
+    	UserDAOInterface stub = new UserDAOStub();
         UserService service = new UserService(stub);     	
     	
     	User user = new User(7, "Egon");
@@ -32,7 +32,7 @@ public class UserServiceStubTest
     @Test
     public void testToCsv() throws ServiceException, DAOException
     {
-    	UserDAO stub = new UserDAOStub();
+    	UserDAOInterface stub = new UserDAOStub();
     	UserService service = new UserService(stub);     	
         
         String csv = service.toCSV(7);

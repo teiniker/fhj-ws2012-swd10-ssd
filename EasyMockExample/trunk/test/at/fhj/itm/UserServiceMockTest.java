@@ -11,7 +11,7 @@ import org.junit.Test;
 import at.fhj.itm.DAOException;
 import at.fhj.itm.ServiceException;
 import at.fhj.itm.User;
-import at.fhj.itm.UserDAO;
+import at.fhj.itm.UserDAOInterface;
 import at.fhj.itm.UserService;
 
 
@@ -27,7 +27,7 @@ public class UserServiceMockTest
     public void testAddPerson() throws ServiceException, DAOException
     {
     	// Configure mock object
-    	UserDAO mock = createMock(UserDAO.class);
+    	UserDAOInterface mock = createMock(UserDAOInterface.class);
         User p = new User(7, "Egon");        
         mock.insert(p);
         replay(mock);
@@ -45,7 +45,7 @@ public class UserServiceMockTest
     public void testToCsv() throws ServiceException, DAOException
     {
     	// Configure mock object
-    	UserDAO mock = createMock(UserDAO.class);
+    	UserDAOInterface mock = createMock(UserDAOInterface.class);
         User p = new User(7, "Egon");        
         expect(mock.findById(7)).andReturn(p);
         replay(mock);

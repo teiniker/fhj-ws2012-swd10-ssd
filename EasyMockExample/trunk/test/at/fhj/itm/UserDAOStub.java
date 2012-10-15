@@ -2,14 +2,14 @@ package at.fhj.itm;
 
 import at.fhj.itm.DAOException;
 import at.fhj.itm.User;
-import at.fhj.itm.UserDAO;
+import at.fhj.itm.UserDAOInterface;
 
 /**
  * This is a dummy class that simulates UserDAO for unit tests.
  *
  */
 public class UserDAOStub
-	implements UserDAO
+	implements UserDAOInterface
 {
 
 	public void delete(int id) throws DAOException

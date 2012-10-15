@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import at.fhj.itm.DAOException;
 import at.fhj.itm.User;
-import at.fhj.itm.UserDAO;
+import at.fhj.itm.UserDAOInterface;
 
 
 /**
@@ -35,7 +35,7 @@ public class EasyMockTest
 	public void testInsert() throws DAOException
     {        
         // Configure mock object 
-        UserDAO mock = createMock(UserDAO.class);
+        UserDAOInterface mock = createMock(UserDAOInterface.class);
         mock.insert(new User(7, "Egon"));        
         replay(mock);
 
@@ -52,7 +52,7 @@ public class EasyMockTest
     public void testInsertException() throws DAOException
     {        
         // Configure mock object                
-        UserDAO mock = createMock(UserDAO.class);
+        UserDAOInterface mock = createMock(UserDAOInterface.class);
         mock.insert(new User(7, "Egon"));        
         expectLastCall().andThrow(new DAOException("Person already exists!"));        
         replay(mock);
@@ -80,7 +80,7 @@ public class EasyMockTest
     {        
         // Configure mock object
         User p = new User(7, "Egon");        
-        UserDAO mock = createMock(UserDAO.class);
+        UserDAOInterface mock = createMock(UserDAOInterface.class);
         mock.update(p);
         expectLastCall().times(1);        
         replay(mock);
@@ -100,7 +100,7 @@ public class EasyMockTest
         // Configure mock object 
         User p = new User(7, "Egon");
         int id = 13;
-        UserDAO mock = createMock(UserDAO.class);
+        UserDAOInterface mock = createMock(UserDAOInterface.class);
         expect(mock.findById(id)).andReturn(p); // also possible (not in this context): .andReturn((byte)17)
         replay(mock);
 
@@ -119,7 +119,7 @@ public class EasyMockTest
     {        
         // Configure mock object
         int id = 0;       
-        UserDAO mock = createMock(UserDAO.class);
+        UserDAOInterface mock = createMock(UserDAOInterface.class);
         mock.delete(id);        
         expectLastCall().andThrow(new DAOException("Wrong id!"));        
         replay(mock);
