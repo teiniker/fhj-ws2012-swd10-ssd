@@ -1,0 +1,45 @@
+<project name="EasyMockExample" default="test">
+	
+	<property name="src" location="src" />
+	<property name="src.test" location="test" />
+  	<property name="build" location="build-ant" />
+  	<property name="lib.easymock" location="vendor/easymock-2.5.2/lib" />
+	<property name="lib.junit" location="vendor/junit-4.5/lib" />
+	
+	
+	<!-- Definert den Pfad zu existierenden class und jar Files -->
+	<path id="test.classpath">
+		<pathelement path="${build}" />
+		<pathelement path="${lib.easymock}/easymock-2.5.2.jar" />
+		<pathelement path="${lib.junit}/junit-4.5.jar" />
+  	</path>
+
+	
+	<target name="init">
+	    <mkdir dir="${build}" />
+	</target>  
+
+	<target name="clean">
+ 		<delete dir="${build}" /> 
+	</target>
+
+	
+  	<target name="compile" depends="init">
+      	<javac srcdir="${src}:${src.test}" destdir="${build}">
+          	<classpath refid="test.classpath" />  
+      	</javac>
+  	</target>
+
+   <target name="test" depends="compile">
+        <junit>
+            <classpath refid="test.classpath" />
+            <formatter type="brief" usefile="false" />
+            <batchtest fork="true">
+                 <fileset dir="${src.test}">
+                     <include name="**/*Test.java"/>
+                 </fileset>
+             </batchtest>
+        </junit>
+    </target>
+
+</project>
