@@ -1,0 +1,6 @@
+#summary Link zu den UserStories
+
+Die User Stories sind unter folgendem Google Docs Link zu finden: 
+
+[https://docs.google.com/spreadsheet/ccc?key=0AkKIRQ-JCSjMdEZxUFhCTkNwb1U3SDF1WW8tN3VMRHc#gid=0]
+
