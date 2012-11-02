@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="layout/_template_master.xhtml">
+
+<ui:define name="title">ExecNet: Home</ui:define>
+	<ui:define name="content">
+	
+	<f:view>	
+	<div id="activitystream">
+		<c:if test="#{user.isLoggedIn() == true}">
+			<h:form>
+				<ui:repeat var="cmty" value="#{communityBean.getMy()}">
+					<h:commandLink action="#{activitystream.setCommunity(cmty)}">#{cmty.name}</h:commandLink> | 
+				</ui:repeat>
+			</h:form>
+			<div class="widget">
+
+					<h:form id="lessonForm">
+
+            <!-- h:panelGroup id="lessonDetails">
+				<b>#{msg.lesson_description}: </b><h:outputText value="#{semester.selected.course}" /> <br/>
+                <b>#{msg.lesson_title}: </b><h:outputText value="#{semester.selected.title}" /><br/>
+                <b>#{msg.lesson_start}: </b><h:outputText value="#{semester.selected.start}" /><br/>
+                <b>#{msg.lesson_end}: </b><h:outputText value="#{semester.selected.end}" /><br/>
+                <b>#{msg.lesson_speaker}: </b><h:outputText value="#{semester.selected.speaker}" /><br/>
+                <b>#{msg.lesson_place}: </b><h:outputText value="#{semester.selected.place}" /><br/>
+                <b>#{msg.lesson_type}: </b><h:outputText value="#{semester.selected.type}" /><br/>
+            </h:panelGroup>
+
+            <h:dataTable value="#{semester.getLessons()}" var="item">
+                <h:column>
+                    <h:commandLink action="#{course.changeName(item.course)}">#{item.course}</h:commandLink>
+                </h:column>
+
+                <h:column>
+                    <h:outputText value="#{item.description}"/>
+                </h:column>
+
+                <h:column>
+                    <h:outputText value="#{item.start}"/>
+                </h:column>
+
+                <h:column>
+                    <h:commandButton value="Show Details" >
+                        <f:setPropertyActionListener target="#{semester.selected}" value="#{item}"/>
+                        <f:ajax render=":lessonForm:lessonDetails" />
+                    </h:commandButton>
+                </h:column>
+
+            </h:dataTable  -->
+
+        </h:form>
+		
+			</div>
+		</c:if>   	
+	   	<c:if test="#{user.isLoggedIn() == false}">#{msg.global_signinfirst}</c:if>
+	   </div>
+	   </f:view>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="layout/_template_master.xhtml">
+
+	<ui:define name="title">ExecNet: Communities</ui:define>
+	<ui:define name="content">
+
+		<f:view>
+			<div id="tasks">
+				<c:if test="#{user.isLoggedIn() == true}">
+
+					<h:form>
+						<table>
+							<tr>
+								<td><b>#{msg.community_name}</b></td>
+								<td><b>#{msg.community_description}</b></td>
+								<td><b>#{msg.community_adminname}</b></td>
+								<td><b></b></td>
+							</tr>
+
+							<ui:repeat var="item" value="#{communityBean.getAll()}">
+								<tr>
+									<td>#{item.name}</td>
+									<td>#{item.description}</td>
+									<td>#{item.admin.username}</td>
+									<td nowrap="true">
+										<ui:fragment
+											rendered="#{item.admin.id == user.id}">
+
+											<h:commandButton action="#{communityBean.delete(item.id)}"
+												value="#{msg.community_delete}" />
+										</ui:fragment>
+										<ui:fragment
+											rendered="#{communityBean.isCurrentMember(item.id)}">
+
+											<h:commandButton action="#{communityBean.leaveNow(item.id)}"
+												value="#{msg.community_leave}" />
+										</ui:fragment>  
+										<ui:fragment
+											rendered="#{!communityBean.isCurrentMember(item.id)}">
+
+											<h:commandButton action="#{communityBean.joinNow(item.id)}"
+												value="#{msg.community_join}" />
+										</ui:fragment>  
+									</td>
+								</tr>
+							</ui:repeat>
+						</table>
+					</h:form>
+					<h:form>
+						<table width="500px">
+							<tr>
+								<th colspan="2" align="center">#{msg.community_add}</th>
+							</tr>
+							<tr>
+								<td><h:outputLabel for="name"
+										value="#{msg.community_name}" required="True" /></td>
+								<td><h:inputText id="name" value="#{communityBean.name}"
+										required="true" /></td>
+							</tr>
+							<tr>
+								<td><h:outputLabel for="description"
+										value="#{msg.community_description}" required="True" /></td>
+								<td><h:inputText id="description" value="#{communityBean.description}"
+										required="true" /></td>
+							</tr>
+
+							<tr>
+								<td />
+								<td><h:commandButton action="#{communityBean.addNow}"
+										value="#{msg.community_submit}" /></td>
+							</tr>
+							<tr>
+								<td colspan="2"><h:messages style="color: Red;" /></td>
+							</tr>
+						</table>
+					</h:form>
+				</c:if>
+
+				<c:if test="#{user.isLoggedIn() == false}">#{msg.lessons_signinfirst}</c:if>
+			</div>
+		</f:view>
+	</ui:define>
+</ui:composition>
+</html>

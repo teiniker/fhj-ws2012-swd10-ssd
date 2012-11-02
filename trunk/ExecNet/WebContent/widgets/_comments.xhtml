@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core">
+      	<body>
+<div class="widget" id="ccomments">
+							<h:form>
+							<table>
+								<tr><th>#{msg.comment_add}</th></tr>
+						   		<tr>
+							   		<td>
+								   		<h:outputLabel for="entry"
+								   			value="#{msg.comment_message}"
+								   			required="True"/> 
+								   	</td>
+								   	<td>
+								   		<h:inputText id="entry" 
+								   			value="#{comment.entry}"
+								   			required="true" />
+							   		</td>
+						   		</tr>
+						   		<tr>
+						   			<td/>
+						   			<td> 
+								   		<h:commandButton 
+								   			action="#{comment.addNow()}"
+								   			value="#{msg.comment_submit}"/>
+								   	</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+						   				<h:messages style="color: Red;"/>
+						   			</td>
+						   		</tr>						   	
+								</table>   	
+						   	</h:form>
+							<table>
+									<tr>
+										<th>#{msg.global_comments}</th>
+									</tr>				
+								<ui:repeat var="item" value="#{course.getComments()}">
+									<tr>
+										<td>on #{item.getTaskDate()}, #{item.user.getUsername()} wrote: </td> 
+									</tr>
+									<tr>
+										<td>#{item.entry}</td>
+									</tr>
+								</ui:repeat>
+							</table>
+						</div>
+						</body>
+						
+</html>

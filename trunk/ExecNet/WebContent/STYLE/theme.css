@@ -1,0 +1,125 @@
+body {
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	color : black;
+	background : black;
+	text-align : left;
+}
+a {
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	color : darkred;
+}
+hr {
+	border-style : dashed;
+}
+form {
+	margin : 5px;
+	text-align : center;
+}
+img {
+	border : 0px;
+}
+input {
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	width : 90%;
+	text-align : center;
+	margin : 2px;
+	border : 1px solid black;
+	background-color : #ffffff;
+}
+
+#content {
+	margin: 15px;
+}
+
+#logo {
+	position: absolute;
+	height: 200px;
+	z-index: 101;
+}
+#border {
+	
+	background : white;
+	width : 90%;
+	min-width : 836px;
+	margin-left : -45%;
+	min-height : 80%;
+	position : absolute;
+	top : 25px;
+	left : 50%;
+	border : 2px solid #444;
+}
+#langselect {
+	position: abolute;
+	right: 15 px;
+	top: 25px;
+}
+#navigation {
+	background : #efefef;
+	height : 30px;
+	text-align: center;
+	font-size: 120%;
+}
+#navigation ul li {
+	display: inline;
+	text-align: center;
+}
+
+#subnavigation {
+	background : #efefef;
+	text-align: center;
+}
+#footer {
+	text-align : center;
+	font-size : 80%;
+	vertical-align : bottom;
+	min-height : 90px;
+}
+
+#header {
+	background : darkRed;
+}
+#copyright {
+	background : #efefef;
+	height : 30px;
+}
+
+h1 {
+	margin : 0px;
+	height : 80px;
+	text-align : center;
+	font-variant : small-caps;
+	color : white;
+
+}
+
+#cposts {
+	height: 45%;
+	min-height: 200px;
+	max-height: 300px;
+	width: 100%;
+}
+
+#ccomments {
+	height: 50%;
+	min-height: 200px;
+	max-height: 300px;
+	width: 100%;
+	top: 5px;
+	
+}
+
+.widgetcontainer {
+	width: 100%;
+}
+
+.widgetcontainer td {
+	vertical-align: top;
+}
+
+.widget {
+	position: relative;
+	background-color: #fff;
+	font-size : 80%;
+	border: 2px solid darkred;
+	overflow: auto;
+}

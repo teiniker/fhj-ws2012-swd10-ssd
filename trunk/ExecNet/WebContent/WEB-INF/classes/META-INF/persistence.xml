@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence">
+
+	<persistence-unit name="ExecNet" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>at.fhj.swd.domain.User</class>
+		<class>at.fhj.swd.domain.Comment</class>
+		<class>at.fhj.swd.domain.Document</class>
+		<class>at.fhj.swd.domain.Post</class>
+		<class>at.fhj.swd.domain.Community</class>
+			<properties>
+				<property name = "javax.persistence.jdbc.driver"
+					value= "org.apache.derby.jdbc.EmbeddedDriver" />
+				<property name = "javax.persistence.jdbc.url"
+					value= "jdbc:derby:databases/ExecNetv111;create=true" />
+				
+				<!--...A relative path is relative to the value of the system
+				property derby.system.home if it is set, otherwise relative
+				the current working directory of the java virtual machine...-->
+				
+				<property name = "javax.persistence.jdbc.user"
+					value= "execnet_admin" />
+				<property name= "javax.persistence.jdbc.password"
+					value= "3x3cn3t" />
+				
+				<!-- EclipseLink should create the database schema
+				automatically (Note: when re-running the tests we will
+				get (but ignore) error "Table/View 'SONG' already exists
+				in Schema 'NOISEBAND_ADMIN'" ) -->
+				
+				<property name= "eclipselink.ddl-generation"
+					value= "create-tables" />
+				<property name= "eclipselink.ddl-generation.output-mode"
+					value= "database" />
+			</properties>
+	</persistence-unit>
+</persistence>
