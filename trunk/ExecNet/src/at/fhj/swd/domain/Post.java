@@ -52,6 +52,9 @@ public class Post implements IEntity {
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Comment.class)
     private Collection<Comment> comments;
 
+    public Post() {
+    }
+
     public void addComment(Comment comment) {
         Collection<Comment> _cl = this.getComments();
         if (_cl == null) {
@@ -111,6 +114,7 @@ public class Post implements IEntity {
         return formatedDate.toString();
     }
 
+    @Override
     public String toString() {
         return "ID = " + id + ", user = " + pinboard.getUsername() + ", date = " + date + ": entry = " + entry;
     }
@@ -120,12 +124,9 @@ public class Post implements IEntity {
         return Post.ENTITY_NAME;
     }
 
+    @Override
     public Long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Date getDate() {
@@ -144,11 +145,11 @@ public class Post implements IEntity {
         this.entry = entry;
     }
 
-    public boolean getIspublic() {
+    public boolean isPublic() {
         return ispublic;
     }
 
-    public void setIspublic(boolean ispublic) {
+    public void setPublic(boolean ispublic) {
         this.ispublic = ispublic;
     }
 

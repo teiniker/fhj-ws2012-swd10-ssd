@@ -37,7 +37,7 @@ public class PostBean {
             _new.setAuthor(_u);
             _new.setDate(new Date());
             _new.setEntry(this.getEntry());
-            _new.setIspublic(this.ispublic);
+            _new.setPublic(this.ispublic);
 
             if (this.getPinboard() != null) {
                 this.getPinboard().addPinPost(_new);
