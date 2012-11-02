@@ -1,14 +1,15 @@
 package at.fhj.swd.application;
 
-
-import at.fhj.swd.data.*;
-import at.fhj.swd.domain.*;
-
+import at.fhj.swd.data.DBContext;
+import at.fhj.swd.data.IDataContext;
+import at.fhj.swd.domain.Comment;
+import at.fhj.swd.domain.Community;
+import at.fhj.swd.domain.Document;
+import at.fhj.swd.domain.Post;
+import at.fhj.swd.domain.User;
 
 /**
- * Application is the Context initialization class
- * acts as assembler
- * 
+ * Application is the Context initialization class, acts as assembler.
  */
 public class Application {
 
@@ -69,5 +70,4 @@ public class Application {
     public IDataContext<Document> getDocumentContext() {
         return _documents;
     }
-
 }
