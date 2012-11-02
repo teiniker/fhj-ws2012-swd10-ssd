@@ -41,7 +41,7 @@ public class TestDataFactory {
 		Post _result = new Post();
 		
 		_result.setDate(new Date());
-		_result.setIspublic(true);
+		_result.setPublic(true);
 		_result.setEntry(text);
 		
 		return _result;
