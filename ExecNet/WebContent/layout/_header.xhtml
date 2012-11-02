@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core">
+<body>
+<div id="headline">
+<h1>ExecNet</h1>
+</div>
+<div id="navigation">
+<ul>
+	<li><a href="index.xhtml">Home</a></li>
+	<c:if test="#{user.isLoggedIn() == false}">
+		<li><a href="register.xhtml">#{msg.global_register}</a></li>
+		<li><a href="login.xhtml">#{msg.global_login}</a></li>
+	</c:if>
+	<c:if test="#{user.isLoggedIn() == true}">
+		<li><a href="communities.xhtml">#{msg.global_communities}</a></li>
+		<li><a href="usersettings.xhtml">#{msg.global_usersettings}</a></li>
+		<li><h:form style="display: inline;"><h:commandLink action="#{userBean.logoutNow}">#{msg.global_logout} (#{user.username})</h:commandLink></h:form></li>
+	
+	</c:if>
+</ul></div>
+</body>
+</html>

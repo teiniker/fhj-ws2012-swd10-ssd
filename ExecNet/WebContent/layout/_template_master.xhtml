@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+    	xmlns:f="http://java.sun.com/jsf/core"
+    	xmlns:p="http://primefaces.org/ui"
+    	>
+      
+      <f:loadBundle basename="at.fhj.swd.i18n.messages_#{user.culture}" var="msg" />
+<h:head>
+	<link rel="stylesheet" type="text/css" href="STYLE/theme.css"/>
+
+  <title><ui:insert name="title">#{msg.notitle}</ui:insert></title>
+</h:head>
+
+<h:body>
+<div id="border">
+	<div id="header">
+	    <ui:include src="_header.xhtml"/>
+	</div>
+	<div id="langselect"><h:form><h:commandLink action="#{user.changeCulture('en')}">english</h:commandLink> | <h:commandLink action="#{user.changeCulture('de')}">deutsch</h:commandLink></h:form></div>
+	
+	
+	<div id="content">
+	  <ui:insert name="content">
+	
+	  </ui:insert>
+	</div>
+	
+	<div id="footer">
+	    <ui:include src="_footer.xhtml"/>
+	</div>
+</div>
+<!-- img id="logo" src="STYLE/IMG/logo1.png"/-->
+</h:body>
+
+</html>

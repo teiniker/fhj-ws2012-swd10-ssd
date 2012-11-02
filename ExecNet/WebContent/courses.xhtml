@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="layout/_template_master.xhtml">
+
+<ui:define name="title">TimeFlies: Lessons</ui:define>
+	<ui:define name="content">
+	<f:view>	
+	<div id="courses">
+		<c:if test="#{user.isLoggedIn() == true}">
+			<div id ="subnavigation">
+				<h:form>
+					<ui:repeat var="crs" value="#{semester.getCourses()}">
+						<h:commandLink action="#{course.changeName(crs)}">#{crs}</h:commandLink> |  
+					</ui:repeat>
+				</h:form>
+			</div>
+			<c:if test="#{course.getName() != null}">
+			<table class="widgetcontainer">
+				<tr>
+					<td style= "width: 60%">
+						<ui:include src="widgets/_courselessons.xhtml"/>
+					</td>
+					<td>
+						<ui:include src="widgets/_tasks.xhtml"/>
+						<ui:include src="widgets/_comments.xhtml"/>
+					</td>
+			   </tr>
+		   </table>
+		   </c:if>
+		</c:if>   	
+	   	<c:if test="#{user.isLoggedIn() == false}">#{msg.lessons_signinfirst}</c:if>
+	   </div>
+	   </f:view>
+	
+	</ui:define>
+</ui:composition>
+</html>
