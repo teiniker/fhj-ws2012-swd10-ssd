@@ -7,35 +7,28 @@ import at.fhj.swd.domain.User;
 
 public class TestRuntimeContext implements IRuntimeContext {
 
-	private User currentuser;
-	private ActivityStream currentas;
-	private Community currentcommunity;
-	
-	
-	public void setCurrentUser(User user){
-		currentuser = user;
-	}
-	
-	@Override
-	public User getCurrentUser() {
+    private User currentUser;
+    private ActivityStream currentActivityStream;
+    private Community currentCommunity;
 
-		return currentuser;
-	}
+    @Override
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
-	@Override
-	public ActivityStream getCurrentActivityStream() {
-		return currentas;
-	}
+    @Override
+    public void setAuthenticated(User user) {
+        user.authenticate();
+    }
 
-	@Override
-	public Community getCurrentCommunity() {
-		return currentcommunity;
-	}
+    @Override
+    public ActivityStream getCurrentActivityStream() {
+        return currentActivityStream;
+    }
 
-	@Override
-	public void setAuthenticated(User user) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public Community getCurrentCommunity() {
+        return currentCommunity;
+    }
 
 }
