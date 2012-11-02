@@ -7,7 +7,7 @@ public class ActivityStream implements IEntity {
     private Long id;
 
     public ActivityStream() {
-        // TODO implement ActivityStream.
+        // TODO remove ActivityStream.
     }
 
     @Override
