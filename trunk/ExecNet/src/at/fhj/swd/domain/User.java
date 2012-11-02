@@ -26,12 +26,16 @@ public class User implements IEntity {
 
     @Column(name = "F_UNAME", unique = true)
     private String _username;
+
     @Column(name = "F_PASS", nullable = false)
     private String _password;
+
     @Column(name = "F_EMAIL", nullable = false)
     private String _email;
+
     @Column(name = "F_CULTURE", nullable = false)
     private String _culture = "en";
+
     @Column(name = "F_ISADMIN", nullable = false)
     private boolean _isAdmin = false;
 
