@@ -64,17 +64,10 @@ public class Comment implements IEntity {
                 return false;
         } else if (!date.equals(other.date))
             return false;
-        if (entry == null) {
-            if (other.entry != null)
-                return false;
-        } else if (!entry.equals(other.entry))
-            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
-            return false;
-        if (user.getId() != other.user.getId())
             return false;
         return true;
     }
@@ -84,9 +77,7 @@ public class Comment implements IEntity {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((date == null) ? 0 : date.hashCode());
-        result = prime * result + ((entry == null) ? 0 : entry.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + (int)(user.getId() ^ (user.getId() >>> 32));
         return result;
     }
 

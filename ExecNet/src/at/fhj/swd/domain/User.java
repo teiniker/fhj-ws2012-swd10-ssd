@@ -25,19 +25,19 @@ public class User implements IEntity {
     private Long id;
 
     @Column(name = "F_UNAME", unique = true)
-    private String _username;
+    private String username;
 
     @Column(name = "F_PASS", nullable = false)
-    private String _password;
+    private String password;
 
     @Column(name = "F_EMAIL", nullable = false)
-    private String _email;
+    private String email;
 
     @Column(name = "F_CULTURE", nullable = false)
-    private String _culture = "en";
+    private String culture = "en";
 
     @Column(name = "F_ISADMIN", nullable = false)
-    private boolean _isAdmin = false;
+    private boolean isAdmin = false;
 
     @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "users", targetEntity = Community.class)
     private Collection<Community> communities;
@@ -116,6 +116,42 @@ public class User implements IEntity {
     }
 
     @Override
+    public String toString() {
+        return "ID = " + id + ", username = " + username + ", isAdmin = " + isAdmin;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User)obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (username == null) {
+            if (other.username != null)
+                return false;
+        } else if (!username.equals(other.username))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((username == null) ? 0 : username.hashCode());
+        return result;
+    }
+
+    @Override
     public String getEntityName() {
         return User.ENTITY_NAME;
     }
@@ -126,44 +162,44 @@ public class User implements IEntity {
     }
 
     public String getUsername() {
-        return _username;
+        return username;
     }
 
     public void setUsername(String _username) {
-        this._username = _username;
+        this.username = _username;
     }
 
     public String getPassword() {
-        return _password;
+        return password;
     }
 
     public void setPassword(String _password) {
-        this._password = _password;
+        this.password = _password;
     }
 
     public String getEmail() {
-        return _email;
+        return email;
     }
 
     public void setEmail(String _email) {
-        this._email = _email;
+        this.email = _email;
     }
 
     public String getCulture() {
-        return _culture;
+        return culture;
     }
 
     public void setCulture(String culture) {
         if (culture.equalsIgnoreCase("en") || culture.equalsIgnoreCase("de"))
-            this._culture = culture;
+            this.culture = culture;
     }
 
     public boolean isAdmin() {
-        return _isAdmin;
+        return isAdmin;
     }
 
     public void setAdmin(boolean _isAdmin) {
-        this._isAdmin = _isAdmin;
+        this.isAdmin = _isAdmin;
     }
 
     public Collection<Community> getCommunities() {
