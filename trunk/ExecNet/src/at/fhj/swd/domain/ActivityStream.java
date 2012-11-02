@@ -1,29 +1,22 @@
 package at.fhj.swd.domain;
 
-import at.fhj.swd.application.Application;
-import at.fhj.swd.application.IRuntimeContext;
-
 public class ActivityStream implements IEntity {
 
-    private IRuntimeContext _runtime;
+    public static final String ENTITY_NAME = "ActivityStream";
+
+    private Long id;
 
     public ActivityStream() {
-        Application _app = Application.getInstance();
-        _runtime = _app.getRuntime();
     }
-
-    // TODO implement ActivityStream.
 
     @Override
     public String getEntityName() {
-        // TODO Auto-generated method stub
-        return null;
+        return ENTITY_NAME;
     }
 
     @Override
     public Long getId() {
-        // TODO Auto-generated method stub
-        return null;
+        return id;
     }
 
 }
