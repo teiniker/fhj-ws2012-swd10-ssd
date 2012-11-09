@@ -26,7 +26,8 @@ public class UserServiceStubTest
         UserService service = new UserService(stub);     	
     	
     	User user = new User(7, "Egon");
-        service.addUser(user);        
+        service.addUser(user); 
+        //To think about: Is this a good test?
     }
 
     @Test
