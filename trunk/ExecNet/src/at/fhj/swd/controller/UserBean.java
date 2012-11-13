@@ -33,12 +33,12 @@ public class UserBean {
         return "language-change";
     }
 
-    public String loginNow() {
+    public String loginNow() throws Exception {
         IRuntimeContext _rt = Application.getInstance().getRuntime();
         this.setPassword(hashSHA1(this.getPassword()));
 
-        try {
-            String _q = "i._username='" + this.getUsername() + "' and i._password='" + this.getPassword() + "'";
+       try {
+            String _q = "i.username='" + this.getUsername() + "' and i.password='" + this.getPassword() + "'";
             User _ref;
             _ref = _context.readOneByQuery(_q, User.class);
             _ref.authenticate();
@@ -47,6 +47,8 @@ public class UserBean {
         } catch (Exception e) {
             return "login-failed";
         }
+        
+        
     }
 
     public String logoutNow() {
