@@ -38,7 +38,7 @@ public class UserBean {
         this.setPassword(hashSHA1(this.getPassword()));
 
         try {
-            String _q = "i._username='" + this.getUsername() + "' and i._password='" + this.getPassword() + "'";
+            String _q = "i.username='" + this.getUsername() + "' and i.password='" + this.getPassword() + "'";
             User _ref;
             _ref = _context.readOneByQuery(_q, User.class);
             _ref.authenticate();
