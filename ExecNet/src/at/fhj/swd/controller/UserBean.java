@@ -47,8 +47,6 @@ public class UserBean {
         } catch (Exception e) {
             return "login-failed";
         }
-        
-        
     }
 
     public String logoutNow() {
