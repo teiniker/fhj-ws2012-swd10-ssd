@@ -37,7 +37,7 @@ public class UserBean {
         IRuntimeContext _rt = Application.getInstance().getRuntime();
         this.setPassword(hashSHA1(this.getPassword()));
 
-       try {
+        try {
             String _q = "i.username='" + this.getUsername() + "' and i.password='" + this.getPassword() + "'";
             User _ref;
             _ref = _context.readOneByQuery(_q, User.class);
