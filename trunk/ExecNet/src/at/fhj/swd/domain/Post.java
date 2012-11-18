@@ -36,9 +36,10 @@ public class Post implements IEntity {
     @Column(name = "F_ENTRY", nullable = false)
     private String entry;
 
-    @Column(name = "F_ISPUBLIC", nullable = false)
+   /* @Column(name = "F_ISPUBLIC", nullable = false)
     private boolean ispublic = true;
-
+    */
+    
     @ManyToOne(targetEntity = User.class)
     private User author;
 
@@ -54,7 +55,8 @@ public class Post implements IEntity {
 
     public Post() {
     }
-
+    
+   
     public void addComment(Comment comment) {
         Collection<Comment> _cl = this.getComments();
         if (_cl == null) {
@@ -176,13 +178,13 @@ public class Post implements IEntity {
         this.entry = entry;
     }
 
-    public boolean isPublic() {
+    /*public boolean isPublic() {
         return ispublic;
     }
 
     public void setPublic(boolean ispublic) {
         this.ispublic = ispublic;
-    }
+    }*/
 
     public User getAuthor() {
         return author;
