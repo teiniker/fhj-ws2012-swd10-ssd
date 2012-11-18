@@ -123,3 +123,17 @@ h1 {
 	border: 2px solid darkred;
 	overflow: auto;
 }
+
+table {
+	background: #EFEFEF;
+	border: none;
+	border-collapse: collapse;
+}
+
+td, th {
+	padding: 10px;
+	border: 1px solid #fff;
+	text-align: left;
+}
+
+
