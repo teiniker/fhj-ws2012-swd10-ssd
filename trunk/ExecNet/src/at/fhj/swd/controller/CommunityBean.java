@@ -52,6 +52,7 @@ public class CommunityBean {
         c.addUser(_u);
         _cc.update(c);
         _u.addCommunity(c);
+        _uc.update(_u);
         return "user-joined";
     }
 
@@ -61,6 +62,7 @@ public class CommunityBean {
         c.removeUser(_u);
         _cc.update(c);
         _u.removeCommunity(c);
+        _uc.update(_u);
         return "user-left";
     }
 
