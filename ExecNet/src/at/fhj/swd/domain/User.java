@@ -48,7 +48,8 @@ public class User implements IEntity {
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Comment.class)
     private Collection<Comment> comments;
-
+    
+    
     @Transient
     private boolean _isloggedin = false;
     
