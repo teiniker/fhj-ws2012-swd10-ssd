@@ -93,9 +93,6 @@ public class Community implements IEntity {
             _pl.add(post);
         }
         this.setPosts(_pl);
-        if (!post.getCommunities().contains(this)) {
-            post.addCommunity(this);
-        }
     }
 
     public void removePost(Post post) {
@@ -107,9 +104,6 @@ public class Community implements IEntity {
             _pl.remove(post);
         }
         this.setPosts(_pl);
-        if (post.getCommunities().contains(this)) {
-            post.removeCommunity(this);
-        }
     }
 
     public void addDocument(Document document) {
@@ -121,9 +115,6 @@ public class Community implements IEntity {
             _dl.add(document);
         }
         this.setDocuments(_dl);
-        if (!document.getCommunities().contains(this)) {
-            document.addCommunity(this);
-        }
     }
 
     public void removeDocument(Document document) {
@@ -135,9 +126,6 @@ public class Community implements IEntity {
             _dl.remove(document);
         }
         this.setDocuments(_dl);
-        if (document.getCommunities().contains(this)) {
-            document.removeCommunity(this);
-        }
     }
 
     @Override
