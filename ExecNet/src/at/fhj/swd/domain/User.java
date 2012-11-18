@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -50,6 +51,15 @@ public class User implements IEntity {
 
     @Transient
     private boolean _isloggedin = false;
+    
+    @PreRemove
+    public void preRemove() {
+        for (Community c : this.getCommunities()) {
+            c.getUsers().remove(this);
+        }
+        this.setPinPosts(null);
+        this.setComments(null);
+    }
 
     public User() {
     }
@@ -63,9 +73,9 @@ public class User implements IEntity {
             _cl.add(community);
         }
         this.setCommunities(_cl);
-        if (!community.getUsers().contains(this)) {
-            community.addUser(this);
-        }
+//        if (!community.getUsers().contains(this)) {
+//            community.addUser(this);
+//        }
     }
 
     public void removeCommunity(Community community) {
@@ -77,9 +87,9 @@ public class User implements IEntity {
             _cl.remove(community);
         }
         this.setCommunities(_cl);
-        if (community.getUsers().contains(this)) {
-            community.removeUser(this);
-        }
+//        if (community.getUsers().contains(this)) {
+//            community.removeUser(this);
+//        }
     }
 
     public void addPinPost(Post post) {

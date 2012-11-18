@@ -103,9 +103,9 @@ public class Post implements IEntity {
             _cl.remove(community);
         }
         this.setCommunities(_cl);
-        if (community.getPosts().contains(this)) {
-            community.removePost(this);
-        }
+//        if (community.getPosts().contains(this)) {
+//            community.removePost(this);
+//        }
     }
 
     public String getPostDate() {

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 @Entity(name = Community.ENTITY_NAME)
@@ -45,6 +46,16 @@ public class Community implements IEntity {
     @JoinTable(name = "tbl_document_community")
     private Collection<Document> documents;
 
+    @PreRemove
+    public void preRemove() {
+        for (User u : this.getUsers()) {
+            u.getCommunities().remove(this);
+        } 
+        for (Post p : this.getPosts()) {
+            p.getCommunities().remove(this);
+        }
+    }
+    
     public Community() {
     }
 
