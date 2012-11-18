@@ -26,6 +26,7 @@ public class CommunityBean {
     public String addNow() {
         User _u = _rt.getCurrentUser();
 
+        
         Community _new = new Community();
         _new.setDescription(this.getDescription());
         _new.setName(this.getName());

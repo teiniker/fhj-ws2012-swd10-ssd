@@ -54,6 +54,9 @@ public class Community implements IEntity {
         for (Post p : this.getPosts()) {
             p.getCommunities().remove(this);
         }
+        for (Document d : this.getDocuments()){
+        	d.getCommunities().remove(this);
+        }
     }
     
     public Community() {

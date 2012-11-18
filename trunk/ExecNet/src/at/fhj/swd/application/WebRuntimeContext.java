@@ -21,7 +21,7 @@ public class WebRuntimeContext implements IRuntimeContext {
         FacesContext _ctx = FacesContext.getCurrentInstance();
         HttpSession _session = (HttpSession)_ctx.getExternalContext().getSession(true);
         User sessionuser = (User)_session.getAttribute("user");
-        User user = _uc.update(sessionuser);
+        User user = _uc.readOne(sessionuser.getId(), User.class);
         return user;
     }
 
