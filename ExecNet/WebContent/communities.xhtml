@@ -33,13 +33,13 @@
 									<td>#{item.admin.username}</td>
 									<td nowrap="true">
 										<ui:fragment
-											rendered="#{item.admin.id == user.id}">
+											rendered="#{item.admin.id eq user.id}">
 
 											<h:commandButton action="#{communityBean.delete(item.id)}"
 												value="#{msg.community_delete}" />
 										</ui:fragment>
 										<ui:fragment
-											rendered="#{communityBean.isCurrentMember(item.id)}">
+											rendered="#{communityBean.isCurrentMember(item.id) and item.admin.id ne user.id}">
 
 											<h:commandButton action="#{communityBean.leaveNow(item.id)}"
 												value="#{msg.community_leave}" />
