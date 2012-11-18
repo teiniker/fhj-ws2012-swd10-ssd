@@ -17,6 +17,7 @@
 		<li><a href="login.xhtml">#{msg.global_login}</a></li>
 	</c:if>
 	<c:if test="#{user.isLoggedIn() == true}">
+		<li><a href="user.xhtml">#{msg.global_posts}</a></li>
 		<li><a href="communities.xhtml">#{msg.global_communities}</a></li>
 		<li><a href="usersettings.xhtml">#{msg.global_usersettings}</a></li>
 		<li><h:form style="display: inline;"><h:commandLink action="#{userBean.logoutNow}">#{msg.global_logout} (#{user.username})</h:commandLink></h:form></li>
