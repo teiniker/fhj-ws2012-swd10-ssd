@@ -20,8 +20,38 @@
 					<h:form>
 						
                        <p:fileUpload fileUploadListener="#{documentBean.upload}"
-                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true" sizeLimit="100000" description="Select Images"/>                        
-					</h:form>
+                       multiple="true"
+                       label="#{msg.document_upload_browse}" uploadLabel="#{msg.document_upload_upload}" cancelLabel="#{msg.document_upload_cancel}" 
+                       description="#{msg.document_upload_description}" 
+                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
+                       update="docList"
+                       />                        
+                        <p:outputPanel id="docList">
+                        <table>
+                            <tr>
+                                <td><b>#{msg.document_name}</b></td>
+                                <td><b>#{msg.document_owner}</b></td>
+                                <td><b>#{msg.document_date}</b></td>
+                                <td><b></b></td>
+                            </tr>
+
+                            <ui:repeat var="item" value="#{documentBean.getAll()}">
+                                <tr>
+        							<td>#{item.name}</td>
+        							<td>#{item.owner.username}</td>
+        							<td>#{item.dateCreated}</td>
+             
+                                    <td nowrap="true">
+                                        <ui:fragment>                                       
+                                            <h:commandButton action="#{documentBean.delete(item.id)}"
+                                                value="#{msg.document_delete}" />
+                                        </ui:fragment>
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </table>
+                      </p:outputPanel>
+                    </h:form>
 				</c:if>
 
 				<c:if test="#{user.isLoggedIn() == false}">#{msg.lessons_signinfirst}</c:if>
