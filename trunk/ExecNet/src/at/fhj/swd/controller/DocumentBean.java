@@ -101,6 +101,20 @@ public class DocumentBean {
         return _ispublic;
     }
 
+    public Boolean delete(Long id) {
+        try {
+            Document d = _dc.readOne(id, Document.class);
+            if (_dc.delete(d)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public void setPublic(boolean ispublic) {
         this._ispublic = ispublic;
     }
@@ -125,6 +139,8 @@ public class DocumentBean {
         try {
             copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
             addNow();
+            // RequestContext requestContext = RequestContext.getCurrentInstance();
+            // requestContext.update("@all");
         } catch (IOException e) {
             e.printStackTrace();
         }
