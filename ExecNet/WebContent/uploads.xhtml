@@ -42,9 +42,10 @@
         							<td>#{item.dateCreated}</td>
              
                                     <td nowrap="true">
+           
                                         <ui:fragment>                                       
-                                            <h:commandButton action="#{documentBean.delete(item.id)}"
-                                                value="#{msg.document_delete}" />
+                                            <h:commandButton rendered="#{item.owner.id eq user.id}"
+                                            action="#{documentBean.delete(item.id)}" value="#{msg.document_delete}" />
                                         </ui:fragment>
                                     </td>
                                 </tr>
