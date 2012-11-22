@@ -1,3 +1,9 @@
+/*
+ * 
+ * 
+ *   gmoik: OBSOLET -> wie kann man das löschen?? wie reorganisert man die DB?? 
+ * 
+ * */
 package at.fhj.swd.domain;
 
 import javax.persistence.Entity;

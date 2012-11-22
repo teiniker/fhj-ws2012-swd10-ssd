@@ -1,30 +1,26 @@
 package at.fhj.swd.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 
 import at.fhj.swd.application.Application;
 import at.fhj.swd.application.IRuntimeContext;
 import at.fhj.swd.data.IDataContext;
-import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Post;
 import at.fhj.swd.domain.User;
 
-public class PostBean {
+public class ActivityPostBean {
 
     private Date date;
     private String entry;
     private boolean ispublic = true;
 
     private User author;
-    private User pinboard;
-    private Collection<Community> communities;
 
     private IDataContext<Post> _pc;
     private IRuntimeContext _rc;
 
-    public PostBean() {
+    public ActivityPostBean() {
         this._pc = Application.getInstance().getPostContext();
         this._rc = Application.getInstance().getRuntime();
     }
@@ -37,23 +33,15 @@ public class PostBean {
             _new.setAuthor(_u);
             _new.setDate(new Date());
             _new.setEntry(this.getEntry());
-            _new.setActivityEntry(false);
             // _new.setPublic(this.ispublic);
 
-            if (this.getPinboard() != null) {
-                this.getPinboard().addPinPost(_new);
-            } else {
-                for (Community _c : this.getCommunities()) {
-                    _c.addPost(_new);
-                }
-            }
             if (_pc.create(_new)) {
-                return "post-added";
+                return "activityPost-added";
             } else {
-                return "postadding-failed";
+                return "activityPostadding-failed";
             }
         } catch (Exception e) {
-            return "postadding-failed";
+            return "activityPostadding-failed";
         }
     }
 
@@ -85,21 +73,5 @@ public class PostBean {
 
     public void setAuthor(User author) {
         this.author = author;
-    }
-
-    public User getPinboard() {
-        return pinboard;
-    }
-
-    public void setPinboard(User user) {
-        this.pinboard = user;
-    }
-
-    public Collection<Community> getCommunities() {
-        return communities;
-    }
-
-    public void setCommunities(Collection<Community> communities) {
-        this.communities = communities;
     }
 }

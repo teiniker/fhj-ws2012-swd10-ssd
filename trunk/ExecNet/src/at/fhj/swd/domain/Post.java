@@ -36,17 +36,26 @@ public class Post implements IEntity {
     @Column(name = "F_ENTRY", nullable = false)
     private String entry;
 
-   /* @Column(name = "F_ISPUBLIC", nullable = false)
-    private boolean ispublic = true;
-    */
-    
+    /*
+     * @Column(name = "F_ISPUBLIC", nullable = false)
+     * private boolean ispublic = true;
+     */
+
+    // gmoik:definiert ob der Post ein AktivityPost ist
+
+    @Column(name = "F_ACTIVITYENTRY", nullable = false)
+    private boolean activityEntry;
+
+
     @ManyToOne(targetEntity = User.class)
     private User author;
 
+    // gmoik:bei aktivity NULL
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(nullable = true)
     private User pinboard;
 
+    // gmoik:bei aktivity NULL
     @ManyToMany(mappedBy = "posts", cascade = CascadeType.ALL, targetEntity = Community.class)
     private Collection<Community> communities;
 
@@ -55,8 +64,8 @@ public class Post implements IEntity {
 
     public Post() {
     }
-    
-   
+
+
     public void addComment(Comment comment) {
         Collection<Comment> _cl = this.getComments();
         if (_cl == null) {
@@ -105,9 +114,9 @@ public class Post implements IEntity {
             _cl.remove(community);
         }
         this.setCommunities(_cl);
-//        if (community.getPosts().contains(this)) {
-//            community.removePost(this);
-//        }
+        // if (community.getPosts().contains(this)) {
+        // community.removePost(this);
+        // }
     }
 
     public String getPostDate() {
@@ -178,13 +187,15 @@ public class Post implements IEntity {
         this.entry = entry;
     }
 
-    /*public boolean isPublic() {
-        return ispublic;
-    }
-
-    public void setPublic(boolean ispublic) {
-        this.ispublic = ispublic;
-    }*/
+    /*
+     * public boolean isPublic() {
+     * return ispublic;
+     * }
+     * 
+     * public void setPublic(boolean ispublic) {
+     * this.ispublic = ispublic;
+     * }
+     */
 
     public User getAuthor() {
         return author;
@@ -216,5 +227,15 @@ public class Post implements IEntity {
 
     public void setComments(Collection<Comment> comments) {
         this.comments = comments;
+    }
+
+
+    public boolean getActivityEntry() {
+        return activityEntry;
+    }
+
+
+    public void setActivityEntry(boolean activityEntry) {
+        this.activityEntry = activityEntry;
     }
 }
