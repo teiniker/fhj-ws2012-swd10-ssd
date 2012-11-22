@@ -1,9 +1,19 @@
 package at.fhj.swd.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name = User.ENTITY_NAME)
+@Table(name = "tbl_ActivityStream")
 public class ActivityStream implements IEntity {
 
     public static final String ENTITY_NAME = "ActivityStream";
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public ActivityStream() {
