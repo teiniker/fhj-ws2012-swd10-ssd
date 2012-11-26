@@ -21,9 +21,12 @@ public class CommentBean {
         this._cc = Application.getInstance().getCommentContext();
     }
 
-    public String addNow(Post post) {
+    public String addNow() {
+        System.out.println("ADD NOW");
+        
         User _u = _rt.getCurrentUser();
-
+        Post post = new Post();
+   
         Comment _new = new Comment();
         _new.setDate(new Date());
         _new.setEntry(this.getEntry());
@@ -33,6 +36,7 @@ public class CommentBean {
         try {
             if (_cc.create(_new)) {
                 post.addComment(_new);
+                
                 return "comment-added";
             } else {
                 return "commentadding-failed";

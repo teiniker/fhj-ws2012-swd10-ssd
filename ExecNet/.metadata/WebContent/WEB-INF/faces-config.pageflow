@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13372566822990" configfile="/ExecNet/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="usersettings.xhtml" x="355" y="48" id="pf13396263811030" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf13396263811031 pf13396263811032" path="/usersettings.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="tasks.xhtml" x="48" y="204" id="pf13396263811037" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf13396263811038" path="/tasks.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="register.xhtml" x="624" y="250" id="pf13396263811039" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf133962638110310" path="/register.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="384" y="180" id="pf133962638110411" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf133962638110412 pf133962638110413 pf13396263811038 pf133962638110310 pf13396263811032" path="/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="lessons.xhtml" x="192" y="324" id="pf133962638110414" referenceLink="//@navigationRule.9/@fromViewId|" outlinks="pf133962638110412 pf133962638110415" path="/lessons.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="usersettings.xhtml" x="355" y="48" id="pf13396263811030" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf13396263811031 pf13396263811032" path="/usersettings.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="tasks.xhtml" x="48" y="204" id="pf13396263811037" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf13396263811038" path="/tasks.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="register.xhtml" x="624" y="250" id="pf13396263811039" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf133962638110310" path="/register.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="384" y="180" id="pf133962638110411" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf133962638110412 pf133962638110413 pf13396263811038 pf133962638110310 pf13396263811032" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="lessons.xhtml" x="192" y="324" id="pf133962638110414" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf133962638110412 pf133962638110415" path="/lessons.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="156" y="72" id="pf133962638110416" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13396263811031" path="/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="courses.xhtml" x="444" y="339" id="pf133962638110417" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" outlinks="pf133962638110413" inlinks="pf133962638110415" path="/courses.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="courses.xhtml" x="444" y="339" id="pf133962638110417" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" outlinks="pf133962638110413" inlinks="pf133962638110415" path="/courses.xhtml"/>
   <links id="pf13396263811031" target="pf133962638110416" source="pf13396263811030" outcome="user-edited"/>
   <links id="pf133962638110412" target="pf133962638110411" source="pf133962638110414" outcome="logged-out"/>
   <links id="pf133962638110413" target="pf133962638110411" source="pf133962638110417" outcome="logged-out"/>
