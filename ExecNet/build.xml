@@ -1,0 +1,69 @@
+<project name="ExecNet" default="main" basedir=".">
+	<property name="proj.name" value="ExecNet"/>
+	<property name="proj.version" value="1.0"/>
+	<property name="src.dir" value="src"/>
+	<property name="webcontent.dir" value="WebContent"/>
+	<property name="lib.dir" value="WebContent/WEB-INF/lib"/>
+	<property name="build.dir" value="build"/>
+	<property name="deploy.dir" value="deploy"/>
+	<property name="tomcat.dir" value="C:\\Progs\\apache-tomcat-7.0.26\\"/>
+	
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>
+	</path>
+	
+	<patternset id="properties.files">
+		<include name="**/*.properties"/>
+	</patternset>
+	
+	<target name="main">
+		<echo message="No default target!"/>
+		<echo message="Please specify a target: clean, compile, pack2war, deploy, test"/>
+	</target>
+	
+	<target name="clean" description="Build- und Deploy-Verzeichnis mit den alten Dateien loeschen">
+		<delete dir="${build.dir}"/>
+		<delete dir="${deploy.dir}"/>
+	</target>
+	
+	<target name="compile" depends="clean" description="Java-Dateien kompilieren">
+		<mkdir dir="${build.dir}"/>
+		<javac
+			srcdir="${src.dir}"
+			destdir="${build.dir}"
+			includes="**/*.java"
+			nowarn="on"
+			includeantruntime="false">
+			<classpath refid="project.classpath"/>
+		</javac>
+		<copy todir="${build.dir}">
+			<fileset dir="${src.dir}">
+				<patternset refid="properties.files"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="pack2war" depends="compile" description="Das war-File generieren">
+		<mkdir dir="${deploy.dir}"/>
+		<war 
+			destfile="${deploy.dir}/${proj.name}.war"
+			webxml="${webcontent.dir}/WEB-INF/web.xml">
+			<classes dir="${build.dir}"/>
+			<fileset dir="${webcontent.dir}">
+				    <exclude name="**/web.xml"/>
+			</fileset>
+		</war>
+	</target>
+	
+	<target name="deploy" depends="pack2war" description="war-File in das entsprechende Verzeichnis vom Tomcat kopieren">
+		<copy file="${deploy.dir}/${proj.name}.war" todir="${tomcat.dir}webapps" overwrite="true" />
+	</target>
+	
+	<target name="test" depends="compile" description="alle Tests durchfuehren">
+
+	</target>
+	
+</project>
