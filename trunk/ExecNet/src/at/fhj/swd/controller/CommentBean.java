@@ -15,27 +15,39 @@ public class CommentBean {
 
     private IRuntimeContext _rt;
     private IDataContext<Comment> _cc;
+    //Zwischenlösung
+    private IDataContext<Post> _pc;
 
     public CommentBean() {
         this._rt = Application.getInstance().getRuntime();
         this._cc = Application.getInstance().getCommentContext();
+        //Zwischenlösung
+        this._pc = Application.getInstance().getPostContext();
+       
+        
     }
 
     public String addNow() {
         System.out.println("ADD NOW");
         
         User _u = _rt.getCurrentUser();
-        Post post = new Post();
-   
+        //Dumy Post
+        Post _p = new Post();
+        _p.setDate(new Date());
+        _p.setEntry(this.getEntry());
+        _p.setActivityEntry(true);
+        _p.setAuthor(_u);
+        
+        
         Comment _new = new Comment();
         _new.setDate(new Date());
         _new.setEntry(this.getEntry());
-        _new.setPost(post);
+        _new.setPost(_p);
         _new.setUser(_u);
 
         try {
-            if (_cc.create(_new)) {
-                post.addComment(_new);
+            if (_pc.create(_p)&&_cc.create(_new)) {
+                _p.addComment(_new);
                 
                 return "comment-added";
             } else {
