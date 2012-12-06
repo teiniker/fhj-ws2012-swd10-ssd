@@ -1,0 +1,50 @@
+<project name="FindBugs-Examples" default="all">
+
+	<!-- 
+	Note: integration to cruisecontrol can be found here: 
+	http://confluence.public.thoughtworks.org/display/CC/CruiseControlWithFindBugs
+	-->
+	
+	<property file="findbugs.properties"/>
+	<fail unless="findbugs.src" message="findbugs.properties file not found!"/>
+	
+	<property name="findbugs.home" value="vendor/findbugs-1.3.8" />
+	<property name="findbugs.lib" location="${findbugs.home}/lib" />
+
+	
+	<path id="classpath">
+        <fileset dir="${findbugs.lib}">
+            <include name="*.jar"/>
+        </fileset>
+	</path>
+
+	<taskdef name="findbugs" 
+		classname="edu.umd.cs.findbugs.anttask.FindBugsTask" 
+		classpathref="classpath"/>
+	
+	<target name="all" depends="clean,init,findbugs"/>
+	
+	<target name="init">
+	</target>
+
+	<target name="clean">
+		<delete file="${findbugs.output.file}" failonerror="false"/>	
+	</target>
+	
+	
+	<target name="findbugs" depends="init">
+		<findbugs 
+			home="${findbugs.home}" 
+			output="${findbugs.output.format}" 
+			outputFile="${findbugs.output.file}" >
+			<!--
+			Note: auxiliary classpaths can be added here if needed by analysed libraries.
+			<auxClasspath path="${basedir}/lib/Regex.jar" />
+			-->
+			<sourcePath path="${findbugs.src}"/>
+			<sourcePath path="${findbugs.test}"/>
+	      	<class location="${findbugs.build}"/>
+	    </findbugs>
+	</target>
+
+</project>

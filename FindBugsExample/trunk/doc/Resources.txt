@@ -1,0 +1,28 @@
+
+
+findbugs-tutorials
+---------------------------------------------------------------------
+This project hosts tutorials and other documentation that have been 
+developed for FindBugs.
+http://findbugs.cs.umd.edu/eclipse/
+
+
+Papers
+---------------------------------------------------------------------
+Experiences Using Static Analysis to Find Bugs, 
+Nathaniel Ayewah, David Hovemeyer, J. David Morgenthaler, John Penix, William Pugh, 
+IEEE Software, vol. 25 (2008), pp. 22-29.
+
+Predicting Accurate and Actionable Static Analysis Warnings: An Experimental Approach, 
+Joseph Ruthruff, John Penix, J. David Morgenthaler, Sebastian Elbaum, Gregg Rothermel, 
+Proceedings of the International Conference on Software Engineering, 2008, pp. 341-350.
+
+Evaluating Static Analysis Defect Warnings on Production Software, 
+Nathaniel Ayewah, William Pugh, J. David Morgenthaler, John Penix, YuQian Zhou, 
+Proceedings of the 7th ACM SIGPLAN-SIGSOFT 
+workshop on Program analysis for software tools and engineering, 2007, pp. 1-8.
+
+Using FindBugs on Production Software, 
+Nathaniel Ayewah, J. David Morgenthaler, John Penix, William Pugh, YuQian Zhou, 
+Proc. OOPSLA'07, 2007.
+    
