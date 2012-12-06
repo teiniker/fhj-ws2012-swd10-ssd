@@ -1,0 +1,82 @@
+<project name="CoberturaExample" default="coverage">
+
+    <property name="src" location="src"/>
+	<property name="src.test" location="test"/>
+	<property name="build" location="build-ant"/>
+	<property name="build-instrumented" location="build-instrumented"/>
+	<property name="doc" location="report"/>	
+	<property name="lib.cobertura" location="vendor/cobertura-1.9.4.1"/>
+	<property name="lib.junit" location="vendor/junit-4.5/lib"/>
+	
+    <path id="junit.classpath">
+    	<fileset dir="${lib.junit}">
+    		<include name="**/*.jar"/>
+   	    </fileset>
+    </path>
+
+	
+	
+    <path id="cobertura.classpath">
+    	<fileset dir="${lib.cobertura}">
+    		<include name="**/*.jar"/>
+   	    </fileset>
+    </path>
+	
+    <path id="test.classpath">
+    	<path refid="cobertura.classpath"/>
+    	<path refid="junit.classpath"/>
+    	<pathelement path="${build-instrumented}" />
+    	<pathelement path="${build}" />
+    </path>
+	
+	
+    <target name="init">
+        <mkdir dir="${build-instrumented}"/>
+    	<mkdir dir="${build}"/>
+    	<mkdir dir="${doc}"/>
+    </target>
+
+    <target name="clean">
+    	<delete dir="${build}" failonerror="false"/>
+        <delete dir="${build-instrumented}" failonerror="false"/>
+    	<delete dir="${doc}" failonerror="false"/>
+    	<delete file="cobertura.ser" failonerror="false"/>
+    </target>
+
+  	<target name="compile" depends="init">
+  		<!-- Note: cobertura does not work with Java 7 set runtime to 1.6 - no new version since 2010! -->
+      	<javac srcdir="${src}:${src.test}" destdir="${build}" debug="true" includeantruntime="true" target = "1.6" source = "1.6">
+          	<classpath refid="test.classpath" />  
+      	</javac>
+  	</target>
+	
+	
+	<target name="test.init" depends="compile">
+		<taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+		<cobertura-instrument todir="${build-instrumented}" >
+		    <fileset dir="${build}">
+	    	    <include name="**/*.class"/>
+		    	<exclude name="**/*Test.class"/>
+	    	</fileset>
+		</cobertura-instrument>
+	</target>
+	
+	
+	<target name="test" depends="clean,test.init">
+        <junit fork="yes" haltonfailure="true">
+	        <classpath refid="test.classpath" /> 
+	        <formatter type="brief" usefile="false" />
+	        <test name="at.fhj.itm.UserTest" />
+	    </junit>
+	</target>
+
+	
+	<target name="coverage" depends="test">
+		<cobertura-report format="html" destdir="${doc}" >
+		    <fileset dir="${src}">
+		        <include name="**/*.java" />
+		    </fileset>
+		</cobertura-report>
+	</target>
+
+</project>
