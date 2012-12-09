@@ -3,6 +3,12 @@ package at.fhj.swd.data;
 import java.util.Collection;
 
 public interface IDataContext<T> {
+	
+	public abstract void beginTransaction();
+	
+	public abstract void commitTransaction();
+	
+	public abstract void rollbackTransaction();
 
     public abstract boolean create(T item);
 

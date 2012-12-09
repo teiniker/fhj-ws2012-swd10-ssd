@@ -127,4 +127,22 @@ public class DBContext<T> implements IDataContext<T> {
         return result;
     }
 
+	@Override
+	public void beginTransaction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void commitTransaction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rollbackTransaction() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
