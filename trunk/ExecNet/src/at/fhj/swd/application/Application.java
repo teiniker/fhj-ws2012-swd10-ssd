@@ -1,7 +1,9 @@
 package at.fhj.swd.application;
 
 import at.fhj.swd.data.DBContext;
+import at.fhj.swd.data.DBContextFactory;
 import at.fhj.swd.data.IDataContext;
+import at.fhj.swd.data.IDataContextFactory;
 import at.fhj.swd.domain.Comment;
 import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Document;
@@ -16,12 +18,8 @@ public class Application {
     private static Application _instance;
 
     private IRuntimeContext _runtime;
-    private IDataContext<User> _users;
-    private IDataContext<Post> _posts;
-    private IDataContext<Comment> _comments;
-    private IDataContext<Community> _communities;
-    private IDataContext<Document> _documents;
-
+    private IDataContextFactory _df;
+    
     public Application() {
         _instance = this;
         this.assembleApplication();
@@ -35,12 +33,10 @@ public class Application {
     }
 
     private void assembleApplication() {
-        _posts = new DBContext<Post>();
-        _communities = new DBContext<Community>();
-        _comments = new DBContext<Comment>();
-        _users = new DBContext<User>();
-        _documents = new DBContext<Document>();
-        _runtime = new WebRuntimeContext();
+        
+    	this.setDataContextFactory(new DBContextFactory());
+    	this.setRuntime(new WebRuntimeContext());
+        
     }
 
     public IRuntimeContext getRuntime() {
@@ -51,23 +47,31 @@ public class Application {
         _runtime = runtime;
     }
 
-    public IDataContext<User> getUserContext() {
-        return _users;
+    public IDataContextFactory getDataContextFactory() {
+		return _df;
+	}
+
+	public void setDataContextFactory(IDataContextFactory _df) {
+		this._df = _df;
+	}
+
+	public IDataContext<User> getUserContext() {
+        return _df.getUserContext();
     }
 
     public IDataContext<Post> getPostContext() {
-        return _posts;
+        return _df.getPostContext();
     }
 
     public IDataContext<Community> getCommunityContext() {
-        return _communities;
+        return _df.getCommunityContext();
     }
 
     public IDataContext<Comment> getCommentContext() {
-        return _comments;
+        return _df.getCommentContext();
     }
 
     public IDataContext<Document> getDocumentContext() {
-        return _documents;
+        return _df.getDocumentContext();
     }
 }
