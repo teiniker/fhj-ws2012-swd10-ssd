@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+      
+    <f:loadBundle basename="at.fhj.swd.i18n.messages_#{user.culture}" var="msg" />
+    
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="STYLE/style.css" />
+        <title>#{msg.notitle}</title>
+    </h:head>
+    
+    <h:body style="background-color: #000000;">
+        <div id="background">
+            <br/>
+            <table id="tableHeader" align="center" width="90%">
+                <tr>
+                    <td align="left" width="20%">
+                        <h:graphicImage value="STYLE/IMG/icon_logo.jpg" />
+                    </td>
+                    <td align="center" width="60%">
+                        <h:form>
+                            <h:outputText styleClass="h1" value="#{msg.notitle}" />
+                            <br/>
+                            <h:outputText styleClass="h2" value="Slogan Slogan Slogan" />
+                            <h:panelGrid columns="2">
+                                <h:commandLink action="#{userBean.changeCulture('de')}">
+                                    <h:graphicImage value="STYLE/IMG/icon_flag_german.jpg" />
+                                </h:commandLink>
+                                <h:commandLink action="#{userBean.changeCulture('en')}">
+                                    <h:graphicImage value="STYLE/IMG/icon_flag_british.jpg" />
+                                </h:commandLink>
+                            </h:panelGrid>
+                        </h:form>
+                    </td>
+                    <td align="right" width="20%">
+                        <h:graphicImage value="STYLE/IMG/icon_logo.jpg" />
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <table id="tableMenu" align="center" width="90%">
+                <tr>
+                    <td align="center" width="90%">
+                        <rich:toolbar height="50" itemSeparator="disc">
+                            <rich:toolbarGroup>
+                                <h:panelGrid columns="2">
+                                    <h:graphicImage value="STYLE/IMG/icon_home.jpg" />
+                                    <h:outputText styleClass="link" value="#{msg.global_home}" />
+                                </h:panelGrid>
+                            </rich:toolbarGroup>
+                            <rich:toolbarGroup>
+                                <h:panelGrid columns="2">
+                                    <h:graphicImage value="STYLE/IMG/icon_overview.jpg" />
+                                    <h:outputText styleClass="link" value="#{msg.global_myPage}" />
+                                </h:panelGrid>
+                            </rich:toolbarGroup>
+                            <rich:toolbarGroup>
+                                <h:panelGrid columns="2">
+                                    <h:graphicImage value="STYLE/IMG/icon_users.jpg" />
+                                    <h:outputText styleClass="link" value="#{msg.global_users}" />
+                                </h:panelGrid>
+                            </rich:toolbarGroup>
+                            <rich:toolbarGroup>
+                                <h:panelGrid columns="2">
+                                    <h:graphicImage value="STYLE/IMG/icon_communities.jpg" />
+                                    <h:outputText styleClass="link" value="#{msg.global_communities}" />
+                                </h:panelGrid>
+                            </rich:toolbarGroup>
+                            <rich:toolbarGroup>
+                                <h:panelGrid columns="2">
+                                    <h:graphicImage value="STYLE/IMG/icon_documents.jpg" />
+                                    <h:outputText styleClass="link" value="#{msg.global_documents}" />
+                                </h:panelGrid>
+                            </rich:toolbarGroup>
+                            <rich:toolbarGroup>
+                                <h:panelGrid columns="2">
+                                    <h:graphicImage value="STYLE/IMG/icon_settings.jpg" />
+                                    <h:outputText styleClass="link" value="#{msg.global_usersettings}" />
+                                </h:panelGrid>
+                            </rich:toolbarGroup>
+                            <rich:toolbarGroup location="right">
+                                <h:panelGrid columns="2">
+                                    <h:graphicImage value="STYLE/IMG/icon_logout.jpg" />
+                                    <h:outputText styleClass="link" value="#{msg.global_logout}" />
+                                </h:panelGrid>
+                            </rich:toolbarGroup>
+                        </rich:toolbar>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <table id="tableContent" align="center" width="90%">
+                <tr>
+                    <td width="30%">
+                        <center>
+                            <h:outputText styleClass="h3" value="Left" />
+                        </center>
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        <ui:insert name="left"></ui:insert>
+                    </td>
+                    <td width="40%">
+                        <center>
+                            <h:outputText styleClass="h3" value="Center" />
+                        </center>
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        <ui:insert name="center"></ui:insert>
+                    </td>
+                    <td width="30%">
+                        <center>
+                            <h:outputText styleClass="h3" value="Right" />
+                        </center>
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        <ui:insert name="right"></ui:insert>
+                    </td>
+                </tr>
+            </table>
+            <br/><br/>
+            <br/><br/>
+            <br/><br/>
+            <br/><br/>
+            <br/><br/>
+            <br/><br/>
+            <br/><br/>
+            <br/><br/>
+            <br/><br/>
+            <br/><br/>
+        </div>
+    </h:body>
+    
+</html>
