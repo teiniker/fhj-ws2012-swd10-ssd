@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13372566822990" configfile="/ExecNet/WebContent/WEB-INF/faces-config.xml">
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13372566822990" configfile="/ExecNetorg.eclipse.wst.jsdt.core.javascriptValidatororg.eclipse.jdt.core.javabuilderorg.eclipse.wst.common.project.facet.core.builderorg.eclipse.wst.validation.validationbuilder/WebContent/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="usersettings.xhtml" x="355" y="48" id="pf13396263811030" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf13396263811031 pf13396263811032" path="/usersettings.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="tasks.xhtml" x="48" y="204" id="pf13396263811037" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf13396263811038" path="/tasks.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="register.xhtml" x="624" y="250" id="pf13396263811039" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf133962638110310" path="/register.xhtml"/>
