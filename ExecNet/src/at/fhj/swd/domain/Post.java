@@ -36,15 +36,15 @@ public class Post implements IEntity {
     @Column(name = "F_ENTRY", nullable = false)
     private String entry;
 
-    /*
-     * @Column(name = "F_ISPUBLIC", nullable = false)
-     * private boolean ispublic = true;
-     */
+
+    @Column(name = "F_ISPUBLIC", nullable = false)
+    private boolean ispublic = true;
+
 
     // gmoik:definiert ob der Post ein AktivityPost ist
 
     @Column(name = "F_ACTIVITYENTRY", nullable = false)
-    private boolean activityEntry;
+    private boolean activityEntry = true;
 
 
     @ManyToOne(targetEntity = User.class)
@@ -187,15 +187,13 @@ public class Post implements IEntity {
         this.entry = entry;
     }
 
-    /*
-     * public boolean isPublic() {
-     * return ispublic;
-     * }
-     * 
-     * public void setPublic(boolean ispublic) {
-     * this.ispublic = ispublic;
-     * }
-     */
+    public boolean isPublic() {
+        return ispublic;
+    }
+
+    public void setPublic(boolean ispublic) {
+        this.ispublic = ispublic;
+    }
 
     public User getAuthor() {
         return author;
