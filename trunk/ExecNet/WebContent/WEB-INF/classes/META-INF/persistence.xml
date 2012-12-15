@@ -16,7 +16,7 @@
 				<property name = "javax.persistence.jdbc.driver"
 					value= "org.apache.derby.jdbc.EmbeddedDriver" />
 				<property name = "javax.persistence.jdbc.url"
-					value= "jdbc:derby:databases/ExecNetv111;create=true" />
+					value= "jdbc:derby:databases/ExecNetv144;create=true" />
 				
 				<!--...A relative path is relative to the value of the system
 				property derby.system.home if it is set, otherwise relative

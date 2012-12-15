@@ -27,7 +27,7 @@
 						   			<td/>
 						   			<td> 
 								   		<h:commandButton 
-								   			action="#{comment.addNow()}"
+								   			action="#{CommentBean.addNow(id_post)}"
 								   			value="#{msg.comment_submit}"/>
 								   	</td>
 								</tr>
@@ -42,9 +42,9 @@
 									<tr>
 										<th>#{msg.global_comments}</th>
 									</tr>				
-								<ui:repeat var="item" value="#{course.getComments()}">
+								<ui:repeat var="item" value="#{CommentBean.getComments(id_post)}">
 									<tr>
-										<td>on #{item.getTaskDate()}, #{item.user.getUsername()} wrote: </td> 
+										<td>on #{item.getCommentDate()}, #{item.user.getUsername()} #{msg.comment_output}: </td> 
 									</tr>
 									<tr>
 										<td>#{item.entry}</td>
