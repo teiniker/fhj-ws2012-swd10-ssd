@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core">
+      	<body>
+			<div class="widget" id="posts">
+							<h:form id="posts">
+							<table>
+								<tr><th>#{msg.post_add}</th></tr>
+						   		<tr>
+								   	<td>
+								   		<h:inputText id="entry" 
+								   			value="#{activityPostBean.entry}"
+								   			required="true" />
+								   	</td>
+						   			<td> 
+								   		<h:commandButton 
+								   			action="#{activityPostBean.addNow()}"
+								   			value="#{msg.post_submit}"
+							/>
+								   	</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+						   				<h:messages style="color: Red;"/>
+						   			</td>
+						   		</tr>						   	
+								</table>   	
+						   	</h:form>
+						   	<h:form>
+							<table>
+									<tr>
+										<th>#{msg.global_posts}</th>
+									</tr>				
+								<ui:repeat var="item" value="#{activityPostBean.getAll()}">
+									<tr>
+										<td>on #{item.getPostDate()}, #{item.author.getUsername()} wrote: </td> 
+										<td>#{item.entry}</td>
+										<td>
+											<h:commandButton action="#{activityPostBean.delete(item.id)}"
+												value="#{msg.post_delete}" />
+										</td>
+									</tr>
+                                    <tr>
+                                        
+                                    </tr>
+								</ui:repeat>
+							</table>
+							</h:form>
+						</div>
+						</body>
+						
+</html>
