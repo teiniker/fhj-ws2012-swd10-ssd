@@ -40,6 +40,11 @@
         <managed-bean-class>at.fhj.swd.controller.CommentBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+    	<managed-bean-name>activityPostBean</managed-bean-name>
+    	<managed-bean-class>at.fhj.swd.controller.ActivityPostBean</managed-bean-class>
+    	<managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 	<navigation-rule>
 		<display-name>usersettings.xhtml</display-name>
 		<from-view-id>/usersettings.xhtml</from-view-id>
