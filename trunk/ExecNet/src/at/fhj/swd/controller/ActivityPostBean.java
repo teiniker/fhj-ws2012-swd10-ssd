@@ -15,14 +15,14 @@ public class ActivityPostBean {
         this._bo = new ActivityBO();
     }
 
-    public String addNow() {
+    public nav addNow() {
         System.out.println("Activity addNow");
-        return _bo.add(entry) ? "post-added" : "post-failed";
+        return (_bo.add(entry)) ? nav.activity_add : nav.activity_add_FAIL;
     }
 
-    public String delete(Long id) {
+    public nav delete(Long id) {
         System.out.println("Activity delete");
-        return _bo.delete(id) ? "actitity_deleted" : "acitivity_deleted_failed";
+        return _bo.delete(id) ? nav.actitity_delete : nav.actitity_delete_FAIL;
     }
 
     public Collection<Post> getAll() {
