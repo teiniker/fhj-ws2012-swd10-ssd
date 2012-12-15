@@ -46,7 +46,9 @@
 										</td>
 									</tr>
                                     <tr>
-                                        
+                                        <ui:include src="_comments.xhtml">
+                                            <ui:param name="id_post" value="#{item.id}" />
+                                        </ui:include>
                                     </tr>
 								</ui:repeat>
 							</table>
