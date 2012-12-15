@@ -1,6 +1,6 @@
 package at.fhj.swd.controller;
 
-import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import at.fhj.swd.application.Application;
@@ -11,14 +11,13 @@ import at.fhj.swd.domain.User;
 
 public class ActivityPostBean {
 
-    private Date date;
-    private String entry;
-    private boolean ispublic = true;
 
-    private User author;
+    private String entry;
+    // private boolean ispublic = true
 
     private IDataContext<Post> _pc;
     private IRuntimeContext _rc;
+
 
     public ActivityPostBean() {
         this._pc = Application.getInstance().getPostContext();
@@ -26,38 +25,53 @@ public class ActivityPostBean {
     }
 
     public String addNow() {
+        System.out.println("Activity addNow");
         User _u = _rc.getCurrentUser();
 
-        try {
-            Post _new = new Post();
-            _new.setAuthor(_u);
-            _new.setDate(new Date());
-            _new.setEntry(this.getEntry());
-            // _new.setPublic(this.ispublic);
+        Post _new = new Post();
+        _new.setEntry(this.getEntry());
+        _new.setPinboard(_u);
+        _new.setAuthor(_u);
+        _new.setDate(new Date());
+        _new.setActivityEntry(true);
+        _u.addPinPost(_new);
 
+        try {
             if (_pc.create(_new)) {
-                return "activityPost-added";
+                return "post-added";
             } else {
-                return "activityPostadding-failed";
+                return "post-failed";
             }
         } catch (Exception e) {
-            return "activityPostadding-failed";
+            e.printStackTrace();
+            return "post-failed";
         }
     }
 
-    public String getPostDate() {
-        SimpleDateFormat dateformatDDMMYYYY = new SimpleDateFormat("dd.MM.yyyy");
-        StringBuilder formatedDate = new StringBuilder(dateformatDDMMYYYY.format(date));
-        return formatedDate.toString();
+    public Boolean delete(Long id) {
+        try {
+            Post p = _pc.readOne(id, Post.class);
+            if (_pc.delete(p)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
-    public Date getDate() {
-        return date;
+    public Collection<Post> getAll() {
+        try {
+
+            return _pc.readAll(Post.class);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public String getEntry() {
         return entry;
@@ -67,11 +81,5 @@ public class ActivityPostBean {
         this.entry = entry;
     }
 
-    public User getAuthor() {
-        return author;
-    }
 
-    public void setAuthor(User author) {
-        this.author = author;
-    }
 }
