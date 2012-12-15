@@ -33,8 +33,8 @@ public class ActivityPostBean {
         return _bo.isOwner(id);
     }
 
-    public Collection<Post> getAll() {
-        return _bo.getAll();
+    public Collection<Post> getAll(boolean isPublic) {
+        return _bo.getAll(isPublic);
     }
 
     public String getEntry() {

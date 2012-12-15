@@ -51,9 +51,24 @@ public class ActivityBO {
         }
     }
 
-    public Collection<Post> getAll() {
+    public Collection<Post> getAll(boolean isPublic) {
         try {
+
+            // Für Teambesprechung zum abklären der querys
+            /*
+             * String query;
+             * if(isPublic){
+             * query = "isPublic = true";
+             * }
+             * else
+             * {
+             * query = "isPublic = true AND id_author = " + _rc.getCurrentUser().getId();
+             * }
+             * 
+             * return _pc.readByQuery(query, Post.class);
+             */
             return _pc.readAll(Post.class);
+
         } catch (Exception e) {
             return null;
         }
