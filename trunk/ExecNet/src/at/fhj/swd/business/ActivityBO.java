@@ -20,7 +20,7 @@ public class ActivityBO {
         this._rc = Application.getInstance().getRuntime();
     }
 
-    public Boolean add(String entry) {
+    public Boolean add(String entry, boolean isPublic) {
         User _u = _rc.getCurrentUser();
 
         Post _new = new Post();
@@ -29,7 +29,9 @@ public class ActivityBO {
         _new.setAuthor(_u);
         _new.setDate(new Date());
         _new.setActivityEntry(true);
+        _new.setPublic(isPublic);
         _u.addPinPost(_new);
+
 
         try {
             return _pc.create(_new);

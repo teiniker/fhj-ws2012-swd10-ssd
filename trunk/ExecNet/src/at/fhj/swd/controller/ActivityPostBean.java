@@ -8,7 +8,7 @@ import at.fhj.swd.domain.Post;
 public class ActivityPostBean {
 
     private String entry;
-
+    private boolean isPublic;
     private ActivityBO _bo;
 
     public ActivityPostBean() {
@@ -17,7 +17,7 @@ public class ActivityPostBean {
 
     public nav addNow() {
         System.out.println("Activity addNow");
-        return (_bo.add(entry)) ? nav.activity_add : nav.activity_add_FAIL;
+        return (_bo.add(entry, isPublic)) ? nav.activity_add : nav.activity_add_FAIL;
     }
 
     public nav delete(Long id) {
@@ -43,5 +43,13 @@ public class ActivityPostBean {
 
     public void setEntry(String entry) {
         this.entry = entry;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 }
