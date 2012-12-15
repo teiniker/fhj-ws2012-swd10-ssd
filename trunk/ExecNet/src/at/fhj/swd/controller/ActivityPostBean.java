@@ -25,6 +25,14 @@ public class ActivityPostBean {
         return _bo.delete(id) ? nav.actitity_delete : nav.actitity_delete_FAIL;
     }
 
+    public nav edit(Long id) {
+        return null;
+    }
+
+    public Boolean isOwner(Long id) {
+        return _bo.isOwner(id);
+    }
+
     public Collection<Post> getAll() {
         return _bo.getAll();
     }

@@ -25,7 +25,7 @@
 								   	</td>
 								</tr>
 								<tr>
-									<td colspan="2">
+									<td colspan="3">
 						   				<h:messages style="color: Red;"/>
 						   			</td>
 						   		</tr>						   	
@@ -33,22 +33,28 @@
 						   	</h:form>
 						   	<h:form>
 							<table>
-									<tr>
-										<th>#{msg.global_posts}</th>
-									</tr>				
+    							<tr>
+    								<th>#{msg.global_posts}</th>
+    							</tr>				
 								<ui:repeat var="item" value="#{activityPostBean.getAll()}">
 									<tr>
 										<td>on #{item.getPostDate()}, #{item.author.getUsername()} wrote: </td> 
 										<td>#{item.entry}</td>
 										<td>
-											<h:commandButton action="#{activityPostBean.delete(item.id)}"
-												value="#{msg.post_delete}" />
+                                            <c:if test="#{activityPostBean.isOwner(item.id)}">
+    											<h:commandButton action="#{activityPostBean.delete(item.id)}"
+    												value="#{msg.post_delete}" />
+                                                <h:commandButton action="#{activityPostBean.edit(item.id)}"
+                                                    value="#{msg.post_delete}" />
+                                             </c:if>
 										</td>
 									</tr>
                                     <tr>
-                                        <ui:include src="_comments.xhtml">
-                                            <ui:param name="id_post" value="#{item.id}" />
-                                        </ui:include>
+                                        <!-- 
+                                        < u i :include src="_comments.xhtml">
+                                            < u i :param name="id_post" value="#{item.id}" />
+                                        < / u i:include>
+                                        -->
                                     </tr>
 								</ui:repeat>
 							</table>

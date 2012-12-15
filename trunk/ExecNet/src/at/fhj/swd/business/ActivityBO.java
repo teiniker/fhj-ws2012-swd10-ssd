@@ -57,5 +57,19 @@ public class ActivityBO {
         }
     }
 
+    public Boolean isOwner(Long id) {
+        try {
+            Post p = _pc.readOne(id, Post.class);
+            if (p == null) {
+                return null;
+            } else {
+                return p.getAuthor().getId() == _rc.getCurrentUser().getId();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 }
