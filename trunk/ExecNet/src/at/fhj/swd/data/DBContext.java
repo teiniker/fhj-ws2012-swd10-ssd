@@ -127,22 +127,40 @@ public class DBContext<T> implements IDataContext<T> {
         return result;
     }
 
-	@Override
-	public void beginTransaction() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void beginTransaction() {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void commitTransaction() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void rollbackTransaction() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void commitTransaction() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void rollbackTransaction() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Collection<T> readByQuery(String query, Class<T> c) throws Exception {
+        EntityManager _em = _factory.createEntityManager();
+        T _x = (T)c.newInstance();
+        String _s = ((IEntity)_x).getEntityName();
+        Query _q = _em.createQuery("select i from " + _s + " i where " + query);
+        try {
+            Collection<T> result = _q.getResultList();
+            return result;
+        } catch (NoResultException e) {
+            logger.debug("No results found");
+            return null;
+        } finally {
+            _em.close();
+        }
+    }
 
 }
