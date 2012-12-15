@@ -37,7 +37,7 @@
     							<tr>
     								<th>#{msg.global_posts}</th>
     							</tr>				
-								<ui:repeat var="item" value="#{activityPostBean.getAll()}">
+								<ui:repeat var="item" value="#{activityPostBean.getAll(isPublic)}">
 									<tr>
 										<td>on #{item.getPostDate()}, #{item.author.getUsername()} wrote: </td> 
 										<td>#{item.entry}</td>

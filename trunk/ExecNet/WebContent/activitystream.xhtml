@@ -16,7 +16,10 @@
                     <table class="widgetcontainer">
                         <tr>
                             <td>
-                            	<ui:include src="widgets/_activityposts.xhtml"/>
+                            	<ui:include src="widgets/_activityposts.xhtml">
+                                    <ui:param name="isPublic" value="false"></ui:param>
+                                </ui:include>
+                                
                             </td>
                         </tr>
                     </table>
