@@ -22,6 +22,10 @@
 	<property name="build-instrumented" location="build-instrumented"/>
 	<property name="doc" location="reports"/>
 	
+	<property name="svn.url.http.anonymous" value="https://fhj-ws2012-swd10-ssd.googlecode.com/svn/trunk/ExecNet"/>	
+	<property name="svn.repository" value="${basedir}/ExecNet"/>
+	<property name="svn.anttask.lib" location="vendor/svnant-1.3.0/lib"/>
+
 	<path id="project.classpath">
 		<fileset dir="${lib.dir}">
 			<include name="**/*.jar"/>
@@ -46,6 +50,14 @@
     		<include name="**/*.jar"/>
    	    </fileset>
     </path>
+	
+	<path id="svnant.classpath">
+		<fileset dir="${svn.anttask.lib}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="svnant.classpath" />
 
 	<path id="test.classpath">
     	<path refid="cobertura.classpath"/>
@@ -65,7 +77,7 @@
 	
 	<target name="main">
 		<echo message="No default target!"/>
-		<echo message="Please specify a target: clean, compile, pack2war, deploy, test, findbugs, coverage"/>
+		<echo message="Please specify a target: clean, compile, pack2war, deploy, test, findbugs, coverage, cruisecontrol"/>
 	</target>
 	
 	<target name="clean" description="Build- und Deploy-Verzeichnis mit den alten Dateien loeschen">
@@ -107,8 +119,10 @@
 		<copy file="${deploy.dir}/${proj.name}.war" todir="${tomcat.dir}webapps" overwrite="true" />
 	</target>
 	
-	<target name="test" depends="compile" description="alle Tests durchfuehren">
-
+	<target name="checkout" depends="clean" description="alle Tests durchfuehren">
+		<svn javahl="false" >
+    	    <checkout url="${svn.url.http.anonymous}" destPath="${svn.repository}" />  
+    	</svn>
 	</target>
 	
 	<target name="findbugs" depends="compile" description="FindBugs ausfuehren">
@@ -170,6 +184,9 @@
 		        <include name="**/*.java" />
 		    </fileset>
 		</cobertura-report>
+	</target>
+	
+	<target name="cruisecontrol" depends="checkout,compile,findbugs,coverage" description="kompilieren für CruiseControl">
 	</target>
 	
 </project>
