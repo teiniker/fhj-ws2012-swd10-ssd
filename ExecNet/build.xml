@@ -2,11 +2,25 @@
 	<property name="proj.name" value="ExecNet"/>
 	<property name="proj.version" value="1.0"/>
 	<property name="src.dir" value="src"/>
+	<property name="test.dir" value="test"/>
 	<property name="webcontent.dir" value="WebContent"/>
 	<property name="lib.dir" value="WebContent/WEB-INF/lib"/>
 	<property name="build.dir" value="build"/>
 	<property name="deploy.dir" value="deploy"/>
 	<property name="tomcat.dir" value="C:\\Progs\\apache-tomcat-7.0.26\\"/>
+	<property name="report.dir" value="reports"/>	
+	
+	<property file="findbugs.properties"/>
+	<fail unless="findbugs.src" message="findbugs.properties file not found!"/>	
+	<property name="findbugs.home" value="vendor/findbugs-1.3.8" />
+	<property name="findbugs.lib" location="${findbugs.home}/lib" />
+
+	<!-- eventuell auch fuer Cobertura ein Properties-File verwenden, wie in vendor\cobertura-1.9.4.1\examples\basic -->	
+	<property name="lib.cobertura" location="vendor/cobertura-1.9.4.1"/>
+	<property name="lib.junit" location="vendor/junit-4.5/lib"/>
+	<property name="build" location="build-ant"/>
+	<property name="build-instrumented" location="build-instrumented"/>
+	<property name="doc" location="reports"/>
 	
 	<path id="project.classpath">
 		<fileset dir="${lib.dir}">
@@ -15,18 +29,49 @@
 		</fileset>
 	</path>
 	
+	<path id="findbugs.classpath">
+        <fileset dir="${findbugs.lib}">
+            <include name="*.jar"/>
+        </fileset>
+	</path>
+	
+	<path id="junit.classpath">
+    	<fileset dir="${lib.junit}">
+    		<include name="**/*.jar"/>
+   	    </fileset>
+    </path>	
+	
+    <path id="cobertura.classpath">
+    	<fileset dir="${lib.cobertura}">
+    		<include name="**/*.jar"/>
+   	    </fileset>
+    </path>
+
+	<path id="test.classpath">
+    	<path refid="cobertura.classpath"/>
+    	<path refid="junit.classpath"/>
+		<path refid="project.classpath"/>
+    	<pathelement path="${build-instrumented}" />
+    	<pathelement path="${build}" />
+    </path>
+
 	<patternset id="properties.files">
 		<include name="**/*.properties"/>
 	</patternset>
 	
+	<taskdef name="findbugs" 
+		classname="edu.umd.cs.findbugs.anttask.FindBugsTask" 
+		classpathref="findbugs.classpath"/>
+	
 	<target name="main">
 		<echo message="No default target!"/>
-		<echo message="Please specify a target: clean, compile, pack2war, deploy, test"/>
+		<echo message="Please specify a target: clean, compile, pack2war, deploy, test, findbugs, coverage"/>
 	</target>
 	
 	<target name="clean" description="Build- und Deploy-Verzeichnis mit den alten Dateien loeschen">
 		<delete dir="${build.dir}"/>
 		<delete dir="${deploy.dir}"/>
+		<delete file="${findbugs.output.file}" failonerror="false"/>
 	</target>
 	
 	<target name="compile" depends="clean" description="Java-Dateien kompilieren">
@@ -64,6 +109,67 @@
 	
 	<target name="test" depends="compile" description="alle Tests durchfuehren">
 
+	</target>
+	
+	<target name="findbugs" depends="compile" description="FindBugs ausfuehren">
+		<findbugs 
+			home="${findbugs.home}" 
+			output="${findbugs.output.format}" 
+			outputFile="${findbugs.output.file}" >
+			<!--
+			Note: auxiliary classpaths can be added here if needed by analysed libraries.
+			<auxClasspath path="${basedir}/lib/Regex.jar" />
+			-->
+			<sourcePath path="${findbugs.src}"/>
+			<sourcePath path="${findbugs.test}"/>
+	      	<class location="${findbugs.build}"/>
+	    </findbugs>
+	</target>
+	
+	<target name="coverageinit">
+        <mkdir dir="${build-instrumented}"/>
+    	<mkdir dir="${build}"/>
+    	<mkdir dir="${doc}"/>
+    </target>
+
+    <target name="coverageclean">
+    	<delete dir="${build}" failonerror="false"/>
+        <delete dir="${build-instrumented}" failonerror="false"/>
+    	<delete dir="${doc}" failonerror="false"/>
+    	<delete file="cobertura.ser" failonerror="false"/>
+    </target>
+
+  	<target name="coveragecompile" depends="coverageinit">
+  		<!-- Note: cobertura does not work with Java 7 set runtime to 1.6 - no new version since 2010! -->
+      	<javac srcdir="${src.dir}:${test.dir}" destdir="${build}" debug="true" includeantruntime="false" target = "1.6" source = "1.6">
+          	<classpath refid="test.classpath" />  
+      	</javac>
+  	</target>	
+	
+	<target name="coveragetest.init" depends="coveragecompile">
+		<taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+		<cobertura-instrument todir="${build-instrumented}" >
+		    <fileset dir="${build}">
+	    	    <include name="**/*.class"/>
+		    	<exclude name="**/*Test.class"/>
+	    	</fileset>
+		</cobertura-instrument>
+	</target>	
+	
+	<target name="coveragetest" depends="coverageclean,coveragetest.init">
+        <junit fork="yes" haltonfailure="true">
+	        <classpath refid="test.classpath" /> 
+	        <formatter type="brief" usefile="false" />
+	        <test name="at.fhj.swd.data.DummyTest" />
+	    </junit>
+	</target>
+	
+	<target name="coverage" depends="coveragetest">
+		<cobertura-report format="html" destdir="${doc}" >
+		    <fileset dir="${src.dir}">
+		        <include name="**/*.java" />
+		    </fileset>
+		</cobertura-report>
 	</target>
 	
 </project>
