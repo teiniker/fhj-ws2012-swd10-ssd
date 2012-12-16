@@ -1,9 +1,11 @@
 package at.fhj.swd.business;
 
 import java.security.MessageDigest;
+import java.util.Collection;
 
 import at.fhj.swd.application.Application;
 import at.fhj.swd.data.IDataContext;
+import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.User;
 
 public class UserBO extends ABusinessObject {
@@ -16,7 +18,16 @@ public class UserBO extends ABusinessObject {
     	
     	this._context = Application.getInstance().getUserContext();
     }
-
+    
+    public Collection<User> getAll() {
+        try {
+            return _context.readAll(User.class);
+        } catch (Exception e) {
+        	logger.error(e);
+            return null;
+        }
+    }
+    
     public boolean login(User user) {
         user.setPassword(hashSHA1(user.getPassword()));
 
