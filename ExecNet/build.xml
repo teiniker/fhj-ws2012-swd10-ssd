@@ -1,4 +1,4 @@
-<project name="ExecNet" default="main" basedir=".">
+<project name="ExecNet" default="cruisecontrol" basedir=".">
 	<property name="proj.name" value="ExecNet"/>
 	<property name="proj.version" value="1.0"/>
 	<property name="src.dir" value="src"/>
@@ -186,7 +186,7 @@
 		</cobertura-report>
 	</target>
 	
-	<target name="cruisecontrol" depends="checkout,compile,findbugs,coverage" description="kompilieren für CruiseControl">
+	<target name="cruisecontrol" depends="checkout,compile,findbugs,coverage" description="kompilieren fÃ¼r CruiseControl">
 	</target>
 	
 </project>
