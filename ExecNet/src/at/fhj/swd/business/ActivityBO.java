@@ -1,11 +1,13 @@
 package at.fhj.swd.business;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
 import at.fhj.swd.application.Application;
 import at.fhj.swd.application.IRuntimeContext;
 import at.fhj.swd.data.IDataContext;
+import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Post;
 import at.fhj.swd.domain.User;
 
@@ -20,67 +22,21 @@ public class ActivityBO {
         this._rc = Application.getInstance().getRuntime();
     }
 
-    public Boolean add(String entry, boolean isPublic) {
+    public Boolean add(String entry) {
         User _u = _rc.getCurrentUser();
 
         Post _new = new Post();
         _new.setEntry(entry);
-        _new.setPinboard(_u);
         _new.setAuthor(_u);
         _new.setDate(new Date());
         _new.setActivityEntry(true);
-        _new.setPublic(isPublic);
-        _u.addPinPost(_new);
-
 
         try {
-            return _pc.create(_new);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public Boolean delete(long id) {
-        try {
-            Post p = _pc.readOne(id, Post.class);
-            return (_pc.delete(p));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public Collection<Post> getAll(boolean isPublic) {
-        try {
-
-            // Für Teambesprechung zum abklären der querys
-            /*
-             * String query;
-             * if(isPublic){
-             * query = "isPublic = true";
-             * }
-             * else
-             * {
-             * query = "isPublic = true AND id_author = " + _rc.getCurrentUser().getId();
-             * }
-             * 
-             * return _pc.readByQuery(query, Post.class);
-             */
-            return _pc.readAll(Post.class);
-
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public Boolean isOwner(Long id) {
-        try {
-            Post p = _pc.readOne(id, Post.class);
-            if (p == null) {
-                return null;
+            if (_pc.create(_new)) {
+                _u.addPinPost(_new);
+                return true;
             } else {
-                return p.getAuthor().getId() == _rc.getCurrentUser().getId();
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,5 +44,31 @@ public class ActivityBO {
         }
     }
 
+    public Boolean delete(Post p) {
+        try {
+            return _pc.delete(p);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean isOwner(Post p) {
+        try {
+            return p.getAuthor().getId() == _rc.getCurrentUser().getId();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Collection<Post> getAllByUser() {
+        Collection<Post> ps = new ArrayList<Post>();
+        Collection<Community> cs = _rc.getCurrentUser().getCommunities();
+        for (Community c : cs) {
+            ps.addAll(c.getPosts());
+        }
+        return ps;
+    }
 
 }
