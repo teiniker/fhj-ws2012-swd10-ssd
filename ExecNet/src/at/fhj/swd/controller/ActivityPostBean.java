@@ -15,17 +15,17 @@ public class ActivityPostBean {
         this._bo = new ActivityBO();
     }
 
-    public nav addNow() {
+    public Nav addNow() {
         System.out.println("Activity addNow");
-        return (_bo.add(entry, isPublic)) ? nav.activity_add : nav.activity_add_FAIL;
+        return (_bo.add(entry, isPublic)) ? Nav.activity_add : Nav.FAIL;
     }
 
-    public nav delete(Long id) {
+    public Nav delete(Long id) {
         System.out.println("Activity delete");
-        return _bo.delete(id) ? nav.actitity_delete : nav.actitity_delete_FAIL;
+        return _bo.delete(id) ? Nav.actitity_delete : Nav.FAIL;
     }
 
-    public nav edit(Long id) {
+    public Nav edit(Long id) {
         return null;
     }
 
