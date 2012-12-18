@@ -22,6 +22,12 @@ public class ActivityBO {
         this._rc = Application.getInstance().getRuntime();
     }
 
+    /**
+     * Adding new Post
+     * 
+     * @param entry
+     * @return
+     */
     public Boolean add(String entry) {
         User _u = _rc.getCurrentUser();
 
@@ -44,6 +50,12 @@ public class ActivityBO {
         }
     }
 
+    /**
+     * delete Post
+     * 
+     * @param p
+     * @return
+     */
     public Boolean delete(Post p) {
         try {
             return _pc.delete(p);
@@ -53,7 +65,16 @@ public class ActivityBO {
         }
     }
 
-    public Boolean isOwner(Post p) {
+    /**
+     * is user logged in author of the post
+     * 
+     * @param p
+     * @return
+     */
+    public Boolean isAuthor(Post p) {
+        if (p == null) {
+            return false;
+        }
         try {
             return p.getAuthor().getId() == _rc.getCurrentUser().getId();
         } catch (Exception e) {
@@ -62,6 +83,11 @@ public class ActivityBO {
         }
     }
 
+    /**
+     * All posts from communities where the user logged in is member
+     * 
+     * @return
+     */
     public Collection<Post> getAllByUser() {
         Collection<Post> ps = new ArrayList<Post>();
         Collection<Community> cs = _rc.getCurrentUser().getCommunities();

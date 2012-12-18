@@ -40,8 +40,8 @@ public class ActivityPostBean {
         return Nav.activity_edit;
     }
 
-    public Boolean isOwner(Post p) {
-        return _bo.isOwner(p);
+    public Boolean isAuthor(Post p) {
+        return _bo.isAuthor(p);
     }
 
     public Collection<Post> getAllByCommunity(Community c) {
