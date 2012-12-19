@@ -25,6 +25,19 @@ public class User implements IEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Column(name = "F_FNAME", unique = true)
+    private String firstname;
+
+    @Column(name = "F_LNAME", unique = true)
+    private String lastname;
+
+    @Column(name = "F_DEPT", unique = true)
+    private String department;
+
+    @Column(name = "F_LOC", unique = true)
+    private String location;
+
     @Column(name = "F_UNAME", unique = true)
     private String username;
 
@@ -74,9 +87,6 @@ public class User implements IEntity {
             _cl.add(community);
         }
         this.setCommunities(_cl);
-//        if (!community.getUsers().contains(this)) {
-//            community.addUser(this);
-//        }
     }
 
     public void removeCommunity(Community community) {
@@ -88,9 +98,6 @@ public class User implements IEntity {
             _cl.remove(community);
         }
         this.setCommunities(_cl);
-//        if (community.getUsers().contains(this)) {
-//            community.removeUser(this);
-//        }
     }
 
     public void addPinPost(Post post) {
@@ -172,7 +179,39 @@ public class User implements IEntity {
         return id;
     }
 
-    public String getUsername() {
+    public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getUsername() {
         return username;
     }
 

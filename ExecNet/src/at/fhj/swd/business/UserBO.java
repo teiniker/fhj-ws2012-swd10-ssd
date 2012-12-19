@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import at.fhj.swd.application.Application;
 import at.fhj.swd.data.IDataContext;
-import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.User;
 
 public class UserBO extends ABusinessObject {
@@ -67,7 +66,10 @@ public class UserBO extends ABusinessObject {
             if (hashSHA1(user.getPassword()).equals(_newuser.getPassword())) {
                 return false;
             }
-            _newuser.setUsername(user.getUsername());
+            _newuser.setFirstname(user.getFirstname());
+            _newuser.setLastname(user.getLastname());
+            _newuser.setDepartment(user.getDepartment());
+            _newuser.setLocation(user.getLocation());
             _newuser.setEmail(user.getEmail());
             _newuser.setAdmin(true);
             _newuser.setCulture(user.getCulture());
