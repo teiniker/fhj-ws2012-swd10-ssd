@@ -7,6 +7,10 @@ import at.fhj.swd.domain.User;
 
 public class UserBean {
 
+	private String firstname;
+	private String lastname; 
+	private String department;
+	private String location;
     private String username;
     private String oldpassword;
     private String password;
@@ -49,6 +53,10 @@ public class UserBean {
     public String registerNow() {
         
         User _newuser = new User();
+        _newuser.setFirstname(this.getFirstname());
+        _newuser.setLastname(this.getLastname());
+        _newuser.setDepartment(this.getDepartment());
+        _newuser.setLocation(this.getLocation());
         _newuser.setUsername(this.getUsername());
         _newuser.setEmail(this.getEmail());
         _newuser.setAdmin(true);
@@ -65,6 +73,10 @@ public class UserBean {
     public String editNow() {
  
     	User _newuser = new User();;
+    	_newuser.setFirstname(this.getFirstname());
+        _newuser.setLastname(this.getLastname());
+        _newuser.setDepartment(this.getDepartment());
+        _newuser.setLocation(this.getLocation());
         _newuser.setEmail(this.getEmail());
         _newuser.setAdmin(true);
         _newuser.setCulture(this.getCulture());
@@ -78,7 +90,23 @@ public class UserBean {
     }
 
 
-    public String getUsername() {
+    public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getUsername() {
         return username;
     }
 
@@ -117,4 +145,20 @@ public class UserBean {
     public void setCulture(String culture) {
         this.culture = culture;
     }
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 }

@@ -16,6 +16,63 @@
 	   <table>
 	   		<tr>
 		   		<td>
+			   		<h:outputLabel for="firstname"
+			   			value="#{msg.fname_enter}"
+			   			required="True"/> 
+			   	</td>
+			   	<td>
+			   		<h:inputText id="firstname" 
+			   			value="#{userBean.firstname}"
+			   			required="true"
+			   			validatorMessage="#{msg.fname_valid}">
+			   			<f:validateLength minimum="3" maximum="100"/>
+			   		</h:inputText>
+		   		</td>
+		   	</tr>
+	   		<tr>
+		   		<td>
+			   		<h:outputLabel for="lastname"
+			   			value="#{msg.lname_enter}"
+			   			required="True"/> 
+			   	</td>
+			   	<td>
+			   		<h:inputText id="lastname" 
+			   			value="#{userBean.lastname}"
+			   			required="true"
+			   			validatorMessage="#{msg.lname_valid}">
+			   			<f:validateLength minimum="3" maximum="120"/>
+			   		</h:inputText>
+		   		</td>
+		   	</tr>
+	   		<tr>
+		   		<td>
+			   		<h:outputLabel for="department"
+			   			value="#{msg.department_enter}"
+			   			required="True"/> 
+			   	</td>
+			   	<td>
+			   		<h:inputText id="department" 
+			   			value="#{userBean.department}"
+			   			required="false">
+			   		</h:inputText>
+		   		</td>
+		   	</tr>
+	   		<tr>
+		   		<td>
+			   		<h:outputLabel for="location"
+			   			value="#{msg.location_enter}"
+			   			required="false"/> 
+			   	</td>
+			   	<td>
+			   		<h:inputText id="location" 
+			   			value="#{userBean.location}"
+			   			required="false">
+			   		</h:inputText>
+		   		</td>
+		   	</tr>
+
+	   		<tr>
+		   		<td>
 			   		<h:outputLabel for="username"
 			   			value="#{msg.uname_enter}"
 			   			required="True"/> 
