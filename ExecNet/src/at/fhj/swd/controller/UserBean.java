@@ -1,5 +1,7 @@
 package at.fhj.swd.controller;
 
+import java.util.Collection;
+
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import at.fhj.swd.business.UserBO;
@@ -89,6 +91,9 @@ public class UserBean {
         }
     }
 
+    public Collection<User> getAll() {
+        return _bo.getAll();
+    }
 
     public String getFirstname() {
 		return firstname;
@@ -161,4 +166,8 @@ public class UserBean {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
+	public boolean setAdmin(int id) {
+        return _bo.setAdmin(id);
+    }
 }
