@@ -106,6 +106,18 @@ public class UserBO extends ABusinessObject {
         }
         return password;
     }
+    
+    public Boolean setAdmin(int id) {
+        try {
+            User u = _context.readOne(id, User.class);
+            u.setAdmin(true);
+            _context.update(u);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+    }
 
 
 }
