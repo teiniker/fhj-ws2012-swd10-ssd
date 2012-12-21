@@ -1,4 +1,4 @@
-<project name="ExecNet" default="cruisecontrol" basedir=".">
+<project name="ExecNet" default="main" basedir=".">
 	<property name="proj.name" value="ExecNet"/>
 	<property name="proj.version" value="1.0"/>
 	<property name="src.dir" value="src"/>
@@ -8,10 +8,11 @@
 	<property name="build.dir" value="build"/>
 	<property name="deploy.dir" value="deploy"/>
 	<property name="tomcat.dir" value="C:\\Progs\\apache-tomcat-7.0.26\\"/>
-	<property name="report.dir" value="reports"/>	
+	<property name="report.dir" value="reports"/>
+	<property name="unittests.dir" value="unittests"/>
 	
 	<property file="findbugs.properties"/>
-	<fail unless="findbugs.src" message="findbugs.properties file not found!"/>	
+	<!-- <fail unless="findbugs.properties" message="findbugs.properties file not found!"/>	-->
 	<property name="findbugs.home" value="vendor/findbugs-1.3.8" />
 	<property name="findbugs.lib" location="${findbugs.home}/lib" />
 
@@ -22,8 +23,12 @@
 	<property name="build-instrumented" location="build-instrumented"/>
 	<property name="doc" location="reports"/>
 	
-	<property name="svn.url.http.anonymous" value="https://fhj-ws2012-swd10-ssd.googlecode.com/svn/trunk/ExecNet"/>	
-	<property name="svn.repository" value="${basedir}/ExecNet"/>
+	<property name="svn.execnet.databases" value="https://fhj-ws2012-swd10-ssd.googlecode.com/svn/trunk/ExecNet/databases"/>
+	<property name="svn.execnet.log4j" value="https://fhj-ws2012-swd10-ssd.googlecode.com/svn/trunk/ExecNet/log4j"/>
+	<property name="svn.execnet.src" value="https://fhj-ws2012-swd10-ssd.googlecode.com/svn/trunk/ExecNet/src"/>
+	<property name="svn.execnet.test" value="https://fhj-ws2012-swd10-ssd.googlecode.com/svn/trunk/ExecNet/test"/>
+	<property name="svn.execnet.WebContent" value="https://fhj-ws2012-swd10-ssd.googlecode.com/svn/trunk/ExecNet/WebContent"/>
+	<property name="svn.repository" value="${basedir}"/>
 	<property name="svn.anttask.lib" location="vendor/svnant-1.3.0/lib"/>
 
 	<path id="project.classpath">
@@ -33,16 +38,24 @@
 		</fileset>
 	</path>
 	
+	<path id="lib.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+	</path>
+	
 	<path id="findbugs.classpath">
         <fileset dir="${findbugs.lib}">
             <include name="*.jar"/>
         </fileset>
+		<path refid="lib.classpath"/>
 	</path>
 	
 	<path id="junit.classpath">
     	<fileset dir="${lib.junit}">
     		<include name="**/*.jar"/>
    	    </fileset>
+		<path refid="lib.classpath"/>
     </path>	
 	
     <path id="cobertura.classpath">
@@ -77,12 +90,13 @@
 	
 	<target name="main">
 		<echo message="No default target!"/>
-		<echo message="Please specify a target: clean, compile, pack2war, deploy, test, findbugs, coverage, cruisecontrol"/>
+		<echo message="Please specify a target: clean, compile, pack2war, deploy, unittests, findbugs, coverage, cruisecontrol"/>
 	</target>
 	
 	<target name="clean" description="Build- und Deploy-Verzeichnis mit den alten Dateien loeschen">
 		<delete dir="${build.dir}"/>
 		<delete dir="${deploy.dir}"/>
+		<delete dir="${unittests.dir}"/>
 		<delete file="${findbugs.output.file}" failonerror="false"/>
 	</target>
 	
@@ -104,6 +118,7 @@
 	</target>
 	
 	<target name="pack2war" depends="compile" description="Das war-File generieren">
+		<echo message="war-File erstellen" />
 		<mkdir dir="${deploy.dir}"/>
 		<war 
 			destfile="${deploy.dir}/${proj.name}.war"
@@ -120,12 +135,51 @@
 	</target>
 	
 	<target name="checkout" depends="clean" description="alle Tests durchfuehren">
+		<echo message="Checkout der Sources von Google-Code durchfuehren" />
 		<svn javahl="false" >
-    	    <checkout url="${svn.url.http.anonymous}" destPath="${svn.repository}" />  
+			<checkout url="${svn.execnet.databases}" destPath="${svn.repository}/databases" />
     	</svn>
+		<svn javahl="false" >
+			<checkout url="${svn.execnet.log4j}" destPath="${svn.repository}/log4j" />
+		</svn>
+		<svn javahl="false" >
+			<checkout url="${svn.execnet.src}" destPath="${svn.repository}/src" />
+		</svn>
+		<svn javahl="false" >
+			<checkout url="${svn.execnet.test}" destPath="${svn.repository}/test" />
+		</svn>
+		<svn javahl="false" >
+			<checkout url="${svn.execnet.WebContent}" destPath="${svn.repository}/WebContent" />
+		</svn>
 	</target>
 	
+	<target name="unittests" depends="compile">
+		<echo message="Unittests durchfuehren" />
+		<mkdir dir="${unittests.dir}"/>
+		<mkdir dir="${unittests.dir}/test-classes"/>
+        <mkdir dir="${unittests.dir}/test-results"/>
+        <javac srcdir="test" destdir="${unittests.dir}/test-classes">
+            <classpath>
+                <pathelement location="${build.dir}"/>
+                <path refid="junit.classpath"/>
+            </classpath>
+        </javac>
+        <junit haltonfailure="no" printsummary="on">
+            <classpath >
+                <pathelement location="${build.dir}"/>
+                <path refid="junit.classpath"/>
+                <pathelement location="${unittests.dir}/test-classes"/>
+            </classpath>
+            <formatter type="brief" usefile="false"/>
+            <formatter type="xml" />
+            <batchtest todir="${unittests.dir}/test-results" >
+                <fileset dir="${unittests.dir}/test-classes" includes="**/*Test.class"/>
+            </batchtest>
+        </junit>
+    </target>
+	
 	<target name="findbugs" depends="compile" description="FindBugs ausfuehren">
+		<echo message="FindBugs ausfuehren" />
 		<findbugs 
 			home="${findbugs.home}" 
 			output="${findbugs.output.format}" 
@@ -134,10 +188,11 @@
 			Note: auxiliary classpaths can be added here if needed by analysed libraries.
 			<auxClasspath path="${basedir}/lib/Regex.jar" />
 			-->
-			<sourcePath path="${findbugs.src}"/>
-			<sourcePath path="${findbugs.test}"/>
-	      	<class location="${findbugs.build}"/>
-	    </findbugs>
+			<auxClasspath refid="findbugs.classpath" />
+			<sourcePath path="${src.dir}"/>
+			<sourcePath path="${test.dir}"/>
+			<class location="${build.dir}"/>
+		</findbugs>
 	</target>
 	
 	<target name="coverageinit">
@@ -163,19 +218,25 @@
 	<target name="coveragetest.init" depends="coveragecompile">
 		<taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
 		<cobertura-instrument todir="${build-instrumented}" >
-		    <fileset dir="${build}">
-	    	    <include name="**/*.class"/>
-		    	<exclude name="**/*Test.class"/>
-	    	</fileset>
+			<fileset dir="${build}">
+				<include name="**/*.class"/>
+				<exclude name="**/*Test.class"/>
+			</fileset>
 		</cobertura-instrument>
-	</target>	
+	</target>
 	
 	<target name="coveragetest" depends="coverageclean,coveragetest.init">
-        <junit fork="yes" haltonfailure="true">
-	        <classpath refid="test.classpath" /> 
-	        <formatter type="brief" usefile="false" />
-	        <test name="at.fhj.swd.data.DummyTest" />
-	    </junit>
+		<echo message="Coverage-Test durchfuehren" />
+		<junit fork="yes" haltonfailure="false">
+			<classpath refid="test.classpath" /> 
+			<formatter type="brief" usefile="false" />
+		<!--	<test name="at.fhj.swd.controller.EmailTest" /> -->
+			<batchtest>
+				<fileset dir="${test.dir}">
+					<include name="**/*Test*.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
 	</target>
 	
 	<target name="coverage" depends="coveragetest">
@@ -186,7 +247,8 @@
 		</cobertura-report>
 	</target>
 	
-	<target name="cruisecontrol" depends="checkout,compile,findbugs,coverage" description="kompilieren für CruiseControl">
+	<target name="cruisecontrol" depends="checkout,pack2war,unittests,findbugs,coverage" description="kompilieren für CruiseControl">
+		<echo message="CruiseControl - Ant erledigt" />
 	</target>
 	
 </project>
