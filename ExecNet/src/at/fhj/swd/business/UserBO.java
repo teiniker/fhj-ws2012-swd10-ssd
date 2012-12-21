@@ -34,9 +34,15 @@ public class UserBO extends ABusinessObject {
             String _q = "i.username='" + user.getUsername() + "' and i.password='" + user.getPassword() + "'";
             User _ref;
             _ref = _context.readOneByQuery(_q, User.class);
+            if(_ref.isActive()) {
             _ref.authenticate();
             this.getRuntimeContext().setAuthenticated(_ref);
             return true;
+            }
+            else {
+                return false;
+            }
+            
         } catch (Exception e) {
             return false;
         }
