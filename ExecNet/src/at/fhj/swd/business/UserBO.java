@@ -128,6 +128,51 @@ public class UserBO extends ABusinessObject {
             return false;
         }
     }
+    
+    public Boolean setPortalAdmin(int id) {
+        try {
+            User u = _context.readOne(id, User.class);
+            
+            if(u.isPortalAdmin() == true) {
+                u.setPortalAdmin(false);
+                System.out.println("false");
+            }
+            
+            else {
+                u.setPortalAdmin(true);
+                System.out.println("true");
+            }
+            
+            _context.update(u);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+    }
+ 
+    public Boolean setActive(int id) {
+        try {
+            User u = _context.readOne(id, User.class);
+            
+            if(u.isActive() == true) {
+                u.setActive(false);
+                System.out.println("false");
+            }
+            
+            else {
+                u.setActive(true);
+                System.out.println("true");
+            }
+            
+            _context.update(u);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
+    }
+    
 
 
 }

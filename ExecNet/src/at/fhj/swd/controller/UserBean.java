@@ -64,6 +64,8 @@ public class UserBean {
         _newuser.setAdmin(true);
         _newuser.setCulture(this.getCulture());
         _newuser.setPassword(this.getPassword());
+        _newuser.setActive(true);
+        _newuser.setPortalAdmin(false);
 
         if (_bo.register(_newuser)) {
             return "logged-in";
@@ -169,5 +171,13 @@ public class UserBean {
 	
 	public boolean setAdmin(int id) {
         return _bo.setAdmin(id);
+    }
+	
+	public boolean setPortalAdmin(int id) {
+	        return _bo.setPortalAdmin(id);
+	}
+	
+	public boolean setActive(int id) {
+        return _bo.setActive(id);
     }
 }
