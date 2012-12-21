@@ -52,6 +52,12 @@ public class User implements IEntity {
 
     @Column(name = "F_ISADMIN", nullable = false)
     private boolean isAdmin = false;
+    
+    @Column(name = "F_ISPORTALADMIN", nullable = false)
+    private boolean isPortalAdmin = false;
+    
+    @Column(name = "F_ISACTIVE", nullable = false)
+    private boolean isActive = false;
 
     @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "users", targetEntity = Community.class)
     private Collection<Community> communities;
@@ -247,11 +253,27 @@ public class User implements IEntity {
     public boolean isAdmin() {
         return isAdmin;
     }
+    
+    public boolean isPortalAdmin() {
+        return isPortalAdmin;
+    }
 
     public void setAdmin(boolean _isAdmin) {
         this.isAdmin = _isAdmin;
     }
+    
+    public void setPortalAdmin(boolean _isPortalAdmin) {
+        this.isPortalAdmin = _isPortalAdmin;
+    }
 
+    public boolean isActive() {
+        return isActive;
+    }
+    
+    public void setActive(boolean _isActive) {
+        this.isActive = _isActive;
+    }
+    
     public Collection<Community> getCommunities() {
         return communities;
     }
