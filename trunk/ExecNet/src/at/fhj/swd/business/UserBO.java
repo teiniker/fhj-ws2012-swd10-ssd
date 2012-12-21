@@ -110,7 +110,17 @@ public class UserBO extends ABusinessObject {
     public Boolean setAdmin(int id) {
         try {
             User u = _context.readOne(id, User.class);
-            u.setAdmin(true);
+            
+            if(u.isAdmin() == true) {
+                u.setAdmin(false);
+                System.out.println("false");
+            }
+            
+            else {
+                u.setAdmin(true);
+                System.out.println("true");
+            }
+            
             _context.update(u);
             return true;
         } catch (Exception e) {
