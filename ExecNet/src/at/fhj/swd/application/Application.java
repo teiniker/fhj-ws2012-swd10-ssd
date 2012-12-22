@@ -7,6 +7,7 @@ import at.fhj.swd.data.IDataContextFactory;
 import at.fhj.swd.domain.Comment;
 import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Document;
+import at.fhj.swd.domain.News;
 import at.fhj.swd.domain.Post;
 import at.fhj.swd.domain.User;
 
@@ -73,5 +74,8 @@ public class Application {
 
     public IDataContext<Document> getDocumentContext() {
         return _df.getDocumentContext();
+    }
+    public IDataContext<News> getNewsContext() {
+        return _df.getNewsContext();
     }
 }

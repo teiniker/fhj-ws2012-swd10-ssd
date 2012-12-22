@@ -3,6 +3,7 @@ package at.fhj.swd.data;
 import at.fhj.swd.domain.Comment;
 import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Document;
+import at.fhj.swd.domain.News;
 import at.fhj.swd.domain.Post;
 import at.fhj.swd.domain.User;
 
@@ -16,6 +17,14 @@ public final class DBContextFactory implements IDataContextFactory {
         return new DBContext<User>();
     }
 
+    /* (non-Javadoc)
+     * @see at.fhj.swd.data.IDataContextFactory#getNewsContext()
+     */
+    @Override
+    public IDataContext<News> getNewsContext() {
+        return new DBContext<News>();
+    }
+    
     /* (non-Javadoc)
 	 * @see at.fhj.swd.data.IDataContextFactory#getPostContext()
 	 */

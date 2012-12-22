@@ -13,6 +13,15 @@
 	<ui:define name="content">
 	
 	<f:view>	
+    
+            <table class="widgetcontainer">
+                <tr>
+                <td>
+                        <ui:include src="widgets/_news.xhtml"/>
+                    </td>
+               </tr>
+           </table>
+    
 	<div id="activitystream">
 		<c:if test="#{user.isLoggedIn() == true}">
 			<h:form>
@@ -20,6 +29,9 @@
 					<h:commandLink action="#{activitystream.setCommunity(cmty)}">#{cmty.name}</h:commandLink> | 
 				</ui:repeat>
 			</h:form>
+            
+            
+          
 			<div class="widget">
 
 					<h:form id="lessonForm">

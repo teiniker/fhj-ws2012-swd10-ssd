@@ -12,11 +12,12 @@
 		<class>at.fhj.swd.domain.Document</class>
 		<class>at.fhj.swd.domain.Post</class>
 		<class>at.fhj.swd.domain.Community</class>
-			<properties>
+        <class>at.fhj.swd.domain.News</class>
+        			<properties>
 				<property name = "javax.persistence.jdbc.driver"
 					value= "org.apache.derby.jdbc.EmbeddedDriver" />
 				<property name = "javax.persistence.jdbc.url"
-					value= "jdbc:derby:databases/ExecNetv108;create=true" />
+					value= "jdbc:derby:databases/ExecNetv108v2;create=true" />
 				
 				<!--...A relative path is relative to the value of the system
 				property derby.system.home if it is set, otherwise relative
