@@ -8,6 +8,11 @@
         <managed-bean-class>at.fhj.swd.controller.UserBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+        <managed-bean>
+        <managed-bean-name>newsBean</managed-bean-name>
+        <managed-bean-class>at.fhj.swd.controller.NewsBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <managed-bean>
         <managed-bean-name>communityBean</managed-bean-name>
         <managed-bean-class>at.fhj.swd.controller.CommunityBean</managed-bean-class>
