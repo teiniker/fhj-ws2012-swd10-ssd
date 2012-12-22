@@ -9,108 +9,109 @@
       
     <f:loadBundle basename="at.fhj.swd.i18n.messages_#{user.culture}" var="msg" />
     
-    <h:head>
-        <link rel="stylesheet" type="text/css" href="STYLE/style.css" />
-        <title><ui:insert name="title">#{msg.notitle}</ui:insert></title>
-    </h:head>
-    
-    <h:body style="background-color: #000000;">
-        <div id="background">
-            <br/>
-            <table id="tableHeader" align="center" width="90%">
-                <tr>
-                    <td align="left" width="20%">
-                        <h:graphicImage value="STYLE/IMG/icon_logo.jpg" />
-                    </td>
-                    <td align="center" width="60%">
-                        <h:form>
-                            <h:outputText styleClass="h1" value="#{msg.notitle}" />
-                            <br/>
-                            <h:outputText styleClass="h2" value="#{msg.notitle} - Slogan" />
-                            <h:panelGrid columns="2">
-                                <h:commandLink action="#{userBean.changeCulture('de')}">
-                                    <h:graphicImage value="STYLE/IMG/icon_flag_german.jpg" />
-                                </h:commandLink>
-                                <h:commandLink action="#{userBean.changeCulture('en')}">
-                                    <h:graphicImage value="STYLE/IMG/icon_flag_british.jpg" />
-                                </h:commandLink>
-                            </h:panelGrid>
-                        </h:form>
-                    </td>
-                    <td align="right" width="20%">
-                        <h:graphicImage value="STYLE/IMG/icon_logo.jpg" />
-                    </td>
-                </tr>
-            </table>
-            <br/>
-            <table id="tableMenu" align="center" width="90%">
-                <tr>
-                    <td align="center" width="90%">
-                        <h:form>
-                            <rich:toolbar height="50" itemSeparator="disc">
-                                <rich:toolbarGroup>
-                                    <h:panelGrid columns="2">
-                                        <h:graphicImage value="STYLE/IMG/icon_home.jpg" />
-                                        <h:commandLink styleClass="link" value="#{msg.global_home}" action="#{navigationBean.home}" />
-                                    </h:panelGrid>
-                                </rich:toolbarGroup>
-                                <rich:toolbarGroup>
-                                    <h:panelGrid columns="2">
-                                        <h:graphicImage value="STYLE/IMG/icon_overview.jpg" />
-                                        <h:commandLink styleClass="link" value="#{msg.global_myPage}" action="#{navigationBean.myPage}" />
-                                    </h:panelGrid>
-                                </rich:toolbarGroup>
-                                <rich:toolbarGroup>
-                                    <h:panelGrid columns="2">
-                                        <h:graphicImage value="STYLE/IMG/icon_users.jpg" />
-                                        <h:commandLink styleClass="link" value="#{msg.global_users}" action="#{navigationBean.users}" />
-                                    </h:panelGrid>
-                                </rich:toolbarGroup>
-                                <rich:toolbarGroup>
-                                    <h:panelGrid columns="2">
-                                        <h:graphicImage value="STYLE/IMG/icon_communities.jpg" />
-                                        <h:commandLink styleClass="link" value="#{msg.global_communities}" action="#{navigationBean.communities}" />
-                                    </h:panelGrid>
-                                </rich:toolbarGroup>
-                                <rich:toolbarGroup>
-                                    <h:panelGrid columns="2">
-                                        <h:graphicImage value="STYLE/IMG/icon_documents.jpg" />
-                                        <h:commandLink styleClass="link" value="#{msg.global_documents}" action="#{navigationBean.documents}" />
-                                    </h:panelGrid>
-                                </rich:toolbarGroup>
-                                <rich:toolbarGroup>
-                                    <h:panelGrid columns="2">
-                                        <h:graphicImage value="STYLE/IMG/icon_settings.jpg" />
-                                        <h:commandLink styleClass="link" value="#{msg.global_usersettings}" action="#{navigationBean.settings}" />
-                                    </h:panelGrid>
-                                </rich:toolbarGroup>
-                                <rich:toolbarGroup location="right">
-                                    <h:panelGrid columns="2">
-                                        <h:graphicImage value="STYLE/IMG/icon_logout.jpg" />
-                                        <h:commandLink styleClass="link" value="#{msg.global_logout}" action="#{userBean.logoutNow}" />
-                                    </h:panelGrid>
-                                </rich:toolbarGroup>
-                            </rich:toolbar>
-                        </h:form>
-                    </td>
-                </tr>
-            </table>
-            <br/>
-            <table id="tableContent" align="center" width="90%">
-                <tr>
-                    <td width="30%">
-                        <ui:insert name="left"></ui:insert>
-                    </td>
-                    <td width="40%">
-                        <ui:insert name="center"></ui:insert>
-                    </td>
-                    <td width="30%">
-                        <ui:insert name="right"></ui:insert>
-                    </td>
-                </tr>
-            </table>
-            <br/>
-        </div>
-    </h:body>
+    <f:view>
+        <h:head>
+            <link rel="stylesheet" type="text/css" href="STYLE/style.css" />
+            <title><ui:insert name="title">#{msg.notitle}</ui:insert></title>
+        </h:head>
+        <h:body style="background-color: #000000;">
+            <div id="background">
+                <br/>
+                <table id="tableHeader" align="center" width="90%">
+                    <tr>
+                        <td align="left" width="20%">
+                            <h:graphicImage value="STYLE/IMG/icon_logo.jpg" />
+                        </td>
+                        <td align="center" width="60%">
+                            <h:form>
+                                <h:outputText styleClass="h1" value="#{msg.notitle}" />
+                                <br/>
+                                <h:outputText styleClass="h2" value="#{msg.notitle} - Slogan" />
+                                <h:panelGrid columns="2">
+                                    <h:commandLink action="#{userBean.changeCulture('de')}">
+                                        <h:graphicImage value="STYLE/IMG/icon_flag_german.jpg" />
+                                    </h:commandLink>
+                                    <h:commandLink action="#{userBean.changeCulture('en')}">
+                                        <h:graphicImage value="STYLE/IMG/icon_flag_british.jpg" />
+                                    </h:commandLink>
+                                </h:panelGrid>
+                            </h:form>
+                        </td>
+                        <td align="right" width="20%">
+                            <h:graphicImage value="STYLE/IMG/icon_logo.jpg" />
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <table id="tableMenu" align="center" width="90%">
+                    <tr>
+                        <td align="center" width="90%">
+                            <h:form>
+                                <rich:toolbar height="50" itemSeparator="disc">
+                                    <rich:toolbarGroup>
+                                        <h:panelGrid columns="2">
+                                            <h:graphicImage value="STYLE/IMG/icon_home.jpg" />
+                                            <h:commandLink styleClass="link" value="#{msg.global_home}" action="#{navigationBean.home}" />
+                                        </h:panelGrid>
+                                    </rich:toolbarGroup>
+                                    <rich:toolbarGroup>
+                                        <h:panelGrid columns="2">
+                                            <h:graphicImage value="STYLE/IMG/icon_overview.jpg" />
+                                            <h:commandLink styleClass="link" value="#{msg.global_myPage}" action="#{navigationBean.myPage}" />
+                                        </h:panelGrid>
+                                    </rich:toolbarGroup>
+                                    <rich:toolbarGroup>
+                                        <h:panelGrid columns="2">
+                                            <h:graphicImage value="STYLE/IMG/icon_users.jpg" />
+                                            <h:commandLink styleClass="link" value="#{msg.global_users}" action="#{navigationBean.users}" />
+                                        </h:panelGrid>
+                                    </rich:toolbarGroup>
+                                    <rich:toolbarGroup>
+                                        <h:panelGrid columns="2">
+                                            <h:graphicImage value="STYLE/IMG/icon_communities.jpg" />
+                                            <h:commandLink styleClass="link" value="#{msg.global_communities}" action="#{navigationBean.communities}" />
+                                        </h:panelGrid>
+                                    </rich:toolbarGroup>
+                                    <rich:toolbarGroup>
+                                        <h:panelGrid columns="2">
+                                            <h:graphicImage value="STYLE/IMG/icon_documents.jpg" />
+                                            <h:commandLink styleClass="link" value="#{msg.global_documents}" action="#{navigationBean.documents}" />
+                                        </h:panelGrid>
+                                    </rich:toolbarGroup>
+                                    <rich:toolbarGroup>
+                                        <h:panelGrid columns="2">
+                                            <h:graphicImage value="STYLE/IMG/icon_settings.jpg" />
+                                            <h:commandLink styleClass="link" value="#{msg.global_usersettings}" action="#{navigationBean.settings}" />
+                                        </h:panelGrid>
+                                    </rich:toolbarGroup>
+                                    <rich:toolbarGroup location="right">
+                                        <h:panelGrid columns="2">
+                                            <h:graphicImage value="STYLE/IMG/icon_logout.jpg" />
+                                            <h:commandLink styleClass="link" value="#{msg.global_logout}" action="#{userBean.logoutNow}" />
+                                        </h:panelGrid>
+                                    </rich:toolbarGroup>
+                                </rich:toolbar>
+                            </h:form>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <table id="tableContent" align="center" width="90%">
+                    <tr>
+                        <td width="30%">
+                            <ui:insert name="left"></ui:insert>
+                        </td>
+                        <td width="40%">
+                            <ui:insert name="center"></ui:insert>
+                        </td>
+                        <td width="30%">
+                            <ui:insert name="right"></ui:insert>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+            </div>
+        </h:body>
+    </f:view>
     
 </html>
