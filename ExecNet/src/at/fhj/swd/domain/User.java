@@ -141,7 +141,7 @@ public class User implements IEntity {
 
     @Override
     public String toString() {
-        return "ID = " + id + ", username = " + username + ", isAdmin = " + isAdmin;
+        return "ID = " + id + ", username = " + username + ", isAdmin = " + isAdmin + ", isPortalAdmin = " + isPortalAdmin ;
     }
 
     @Override
