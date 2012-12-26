@@ -24,7 +24,8 @@ public class DBContextTest {
         User _u1 = _f.createUser("hugo");
         _context.create(_u1);
 
-        User _u = _context.readOneByQuery("i._username='hugo'", User.class);
+        User _u = _context.readOneByQuery("i.username='hugo'", User.class);
+        System.out.println(_u);
 
         assertNotNull(_u);
     }
