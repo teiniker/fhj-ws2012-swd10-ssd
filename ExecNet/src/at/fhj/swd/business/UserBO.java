@@ -12,7 +12,6 @@ public class UserBO extends ABusinessObject {
     private IDataContext<User> _context;
 
     public UserBO() {
-        super();
         this._context = Application.getInstance().getUserContext();
     }
 
@@ -167,6 +166,30 @@ public class UserBO extends ABusinessObject {
             logger.error(e);
             return false;
         }
+    }
+
+    public Collection<User> searchUser(String searchQuery) throws Exception {
+
+        String[] tokens = searchQuery.trim().split("\\s+");
+        
+        
+        StringBuffer queryBuffer = new StringBuffer();
+        
+        for (int i = 0; i < tokens.length; i++) {
+            queryBuffer.append("i.firstname like '%" + tokens[i] + "%' or i.lastname like '%" + tokens[i] + "%'");
+            
+            if (i < tokens.length-1) {
+                queryBuffer.append(" or ");
+            }
+                
+                
+        }
+        
+        String query = queryBuffer.toString();
+
+        Collection<User> users = _context.readByQuery(query, User.class);
+        return users;
+
     }
 
 }
