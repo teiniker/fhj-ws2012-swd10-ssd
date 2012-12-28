@@ -34,6 +34,11 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>sstFileBean</managed-bean-name>
+        <managed-bean-class>at.fhj.swd.controller.SSTFileBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>    
+    <managed-bean>
         <managed-bean-name>user</managed-bean-name>
         <managed-bean-class>at.fhj.swd.domain.User</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
