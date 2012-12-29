@@ -114,14 +114,38 @@ public class ActivityBO {
      * All posts from communities where the user logged in is member
      * 
      * @return
+     * @throws Exception
      */
     public Collection<Post> getAllByUser() {
+        // alle Post holen welche keiner community zugewiesen und somit global sind
+        // so irgendwie
+        // Collection<Post> ps = _pc.readByQuery("WHERE community IS NULL AND pinpost IS NULL", Post.class);
+
         Collection<Post> ps = new ArrayList<Post>();
         Collection<Community> cs = _rc.getCurrentUser().getCommunities();
         for (Community c : cs) {
             ps.addAll(c.getPosts());
         }
         return ps;
+
+
+        /*
+         * try {
+         * ps = _pc.readAll(Post.class);
+         * 
+         * Collection<Community> cs = _rc.getCurrentUser().getCommunities();
+         * for(Post p : ps){
+         * if(p.getCommunity() != null && !cs.contains(p.getCommunity())){
+         * ps.remove(p);
+         * }
+         * }
+         * return ps;
+         * } catch (Exception e) {
+         * // TODO Auto-generated catch block
+         * e.printStackTrace();
+         * return null;
+         * }
+         */
     }
 
     public Collection<Community> getCommunities() {
