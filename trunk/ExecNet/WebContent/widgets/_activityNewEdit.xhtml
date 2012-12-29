@@ -10,7 +10,20 @@
     <body>
     	<div class="widget" id="activityNewEdit">
         	<h:form id="newEdit">
-
+            #{msg.activitys_add}
+            <h:inputText id="entry" 
+                    value="#{activityPostBean.entry}"
+                    required="true" />
+            
+                <h:selectOneMenu value="#{activityPostBean.idCommunity}">
+                    <f:selectItems value="#{activityPostBean.communities}" var="item" itemValue="#{item.id}" itemLabel="#{item.name}" />
+                </h:selectOneMenu> 
+                
+                <h:commandButton 
+                    action="#{activityPostBean.addNow}"
+                    value="#{msg.post_submit}"/>
+                <h:messages style="color: Red;"/>
+         
         	</h:form>
         </div>
     </body>			

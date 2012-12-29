@@ -13,16 +13,8 @@
 		<f:view>
 			<div id="tasks">
 				<c:if test="#{user.isLoggedIn() == true}">
-                    <table class="widgetcontainer">
-                        <tr>
-                            <td>
-                            	<ui:include src="widgets/_activityposts.xhtml">
-                                    <ui:param name="isPublic" value="false"></ui:param>
-                                </ui:include>
-                                
-                            </td>
-                        </tr>
-                    </table>
+                	<ui:include src="widgets/_activityList.xhtml"></ui:include>
+                    <ui:include src="widgets/_activityNewEdit.xhtml"></ui:include>
                 </c:if>
                 <c:if test="#{user.isLoggedIn() == false}">#{msg.global_signinfirst}</c:if>
 			</div>
