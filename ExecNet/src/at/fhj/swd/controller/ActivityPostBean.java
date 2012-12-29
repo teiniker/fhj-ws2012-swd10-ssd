@@ -29,6 +29,9 @@ public class ActivityPostBean {
 
     public String addNow() {
         System.out.println("Activity addNow");
+        if (dateto.before(datefrom)) {
+            dateto = datefrom;
+        }
         if (_bo.add(entry, getDatefrom(), getDateto(), getIdCommunity())) {
             return Nav.activity_add.toString();
         } else {
