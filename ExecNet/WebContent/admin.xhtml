@@ -18,22 +18,29 @@
                             <td>#{item.getUsername()}</td>
                             <td><ui:fragment rendered="#{item.isAdmin()}">
                                     <h:commandButton action="#{userBean.setAdmin(item.getId())}" value="#{msg.admin_unset_admin}" />
-                                </ui:fragment> <ui:fragment rendered="#{!item.isAdmin()}">
+                                </ui:fragment> 
+                                <ui:fragment rendered="#{!item.isAdmin()}">
                                     <h:commandButton action="#{userBean.setAdmin(item.getId())}" value="#{msg.admin_set_admin}" />
-                                </ui:fragment><br /></td>
+                                </ui:fragment><br />
+                            </td>
                             <td>#{item.isAdmin()}</td>
                             <td><ui:fragment rendered="#{item.isPortalAdmin()}">
                                     <h:commandButton action="#{userBean.setPortalAdmin(item.getId())}" value="#{msg.admin_unset_portal_admin}" />
-                                </ui:fragment> <ui:fragment rendered="#{!item.isPortalAdmin()}">
+                                </ui:fragment> 
+                                <ui:fragment rendered="#{!item.isPortalAdmin()}">
                                     <h:commandButton action="#{userBean.setPortalAdmin(item.getId())}" value="#{msg.admin_set_portal_admin}" />
-                                </ui:fragment><br /></td>
+                                </ui:fragment><br />
+                            </td>
                             <td>#{item.isPortalAdmin()}</td>
                             <td><ui:fragment rendered="#{item.isActive()}">
                                     <h:commandButton action="#{userBean.setActive(item.getId())}" value="#{msg.admin_unset_active}" />
-                                </ui:fragment> <ui:fragment rendered="#{!item.isActive()}">
+                                </ui:fragment> 
+                                <ui:fragment rendered="#{!item.isActive()}">
                                     <h:commandButton action="#{userBean.setActive(item.getId())}" value="#{msg.admin_set_active}" />
-                                </ui:fragment><br /></td>
-                            <td>#{item.isActive()}</td>
+                                </ui:fragment><br />
+                            </td>
+                            <td>#{item.isActive()}
+                            </td>
                         </tr>
                     </ui:repeat>
 
@@ -43,16 +50,20 @@
 
 
             <!--  Haui todo begin  -->
-            <h:form enctype="multipart/form-data">  
+            <h:form enctype="multipart/form-data" rendered="#{user.isLoggedIn() == true}" title="admin_user_file_upload" >  
               
                 <p:fileUpload fileUploadListener="#{sstFileBean.handleFileUpload}"  
                         mode="advanced"  
                         update="messages"  
                         auto="true"  
-                        sizeLimit="10000000"   
+                        sizeLimit="100000"   
+                        label="#{msg.global_File_Upload_Choose}"  
+                                              
+                        
                         />  
               
-                <p:growl id="messages" showDetail="true"/>  
+                <p:messages id="messages" display="both" showSummary="false" showDetail="true" autoUpdate="true" />  
+              
               
             </h:form>  
 
