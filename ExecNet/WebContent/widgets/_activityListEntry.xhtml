@@ -9,16 +9,22 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
     <body>
     	
-        <span>on #{item.getPostDate()}, #{item.author.getUsername()} wrote:</span>
-        <span>#{item.entry}</span>
-        <c:if test="#{activityPostBean.isAuthor(item)}">
-            <div>                    
-                is Author
-            
+        <span>#{post.getPostDate()}, #{post.author.getUsername()}</span><br/>
+        <span>#{post.entry}</span>
+        <c:when test="#{activityPostBean.isAuthor(post)}">
+            <div>            
+            <h:commandButton action="#{activityPostBean.delete}"
+                value="#{msg.post_delete}">
+                <ui:param name="post" value="#{post}"></ui:param>    
+            </h:commandButton>       
+            <h:commandButton action="#{activityPostBean.edit}"
+                value="#{msg.post_edit}">
+                <ui:param name="post" value="#{post}"></ui:param>    
+            </h:commandButton>  
             </div>
-        </c:if>
+        </c:when>
         <ui:include src="_comments.xhtml">
-            <ui:param name="post" value="#{item}" />
+            <ui:param name="post" value="#{post}" />
         </ui:include>
     
     </body>			
