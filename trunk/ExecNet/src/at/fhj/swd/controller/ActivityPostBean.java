@@ -13,14 +13,15 @@ public class ActivityPostBean {
     private String entry;
     private ActivityBO _bo;
     private long idCommunity;
+    private long idPostToEdit;
     private Locale locale;
     private boolean popup;
     private Date datefrom;
     private Date dateto;
 
-
     public ActivityPostBean() {
-        this._bo = new ActivityBO();
+        _bo = new ActivityBO();
+        idPostToEdit = 0;
         ThreadLocals.setPostToEdit(null);
         setPopup(true);
         setLocale(Locale.GERMAN);
@@ -82,6 +83,14 @@ public class ActivityPostBean {
 
     public void setIdCommunity(long idCommunity) {
         this.idCommunity = idCommunity;
+    }
+
+    public long getIdPostToEdit() {
+        return idPostToEdit;
+    }
+
+    public void setIdPostToEdit(long idPostToEdit) {
+        this.idPostToEdit = idPostToEdit;
     }
 
     public Locale getLocale() {

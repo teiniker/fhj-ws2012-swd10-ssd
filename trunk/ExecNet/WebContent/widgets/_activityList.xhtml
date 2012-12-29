@@ -10,38 +10,40 @@
     <body>
     	<div class="widget" id="activityList">
             <span>#{msg.global_activitys}</span>
-            <c:if test="not empty community">
-                <ui:repeat var="item" value="#{activityPostBean.getAllByCommunity(community)}">
-                    <c:choose>
-                        <c:when test="#{activityPostBean.isAuthor(item)}">
-                            <ui:include src="_activityNewEdit.xhtml">
-                                <ui:param name="post" value="#{item}"></ui:param>
-                            </ui:include>
-                        </c:when>
-                        <c:otherwise>
-                            <ui:include src="_activityListEntry.xhtml">
-                                <ui:param name="post" value="#{item}"></ui:param>
-                            </ui:include>
-                        </c:otherwise>
-                    </c:choose>
-                </ui:repeat>
-            </c:if>
-            <c:if test="empty community">
-                <ui:repeat var="item" value="#{activityPostBean.getAllByUser}">
-                    <c:choose>
-                        <c:when test="#{activityPostBean.isAuthor(item)}">
-                            <ui:include src="_activityNewEdit.xhtml">
-                                <ui:param name="post" value="#{item}"></ui:param>
-                            </ui:include>
-                        </c:when>
-                        <c:otherwise>
-                            <ui:include src="_activityListEntry.xhtml">
-                                <ui:param name="post" value="#{item}"></ui:param>
-                            </ui:include>
-                        </c:otherwise>
-                    </c:choose>
-                </ui:repeat>
-            </c:if>
+            <c:choose>
+                <c:when test="not empty community">
+                    <ui:repeat var="item" value="#{activityPostBean.getAllByCommunity(community)}">
+                        <c:choose>
+                            <c:when test="#{activityPostBean.isAuthor(item)}">
+                                <ui:include src="_activityNewEdit.xhtml">
+                                    <ui:param name="post" value="#{item}"></ui:param>
+                                </ui:include>
+                            </c:when>
+                            <c:otherwise>
+                                <ui:include src="_activityListEntry.xhtml">
+                                    <ui:param name="post" value="#{item}"></ui:param>
+                                </ui:include>
+                            </c:otherwise>
+                        </c:choose>
+                    </ui:repeat>
+                </c:when>
+                <c:otherwise>
+                    <ui:repeat var="item" value="#{activityPostBean.getAllByUser()}">
+                        <c:choose>
+                            <c:when test="#{activityPostBean.idPostToEdit eq item.id}">
+                                <ui:include src="_activityNewEdit.xhtml">
+                                    <ui:param name="post" value="#{item}"></ui:param>
+                                </ui:include>
+                            </c:when>
+                            <c:otherwise>
+                                <ui:include src="_activityListEntry.xhtml">
+                                    <ui:param name="post" value="#{item}"></ui:param>
+                                </ui:include>
+                            </c:otherwise>
+                        </c:choose>
+                    </ui:repeat>
+                </c:otherwise>
+            </c:choose>
         </div>
     </body>			
 </html>
