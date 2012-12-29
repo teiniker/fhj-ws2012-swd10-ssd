@@ -77,6 +77,20 @@ public class ActivityBO {
         }
     }
 
+    public Boolean delete(Long idPost) {
+        try {
+            Post p = _pc.readOne(idPost, Post.class);
+            if (_pc.delete(p)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     /**
      * is user logged in author of the post
      * 

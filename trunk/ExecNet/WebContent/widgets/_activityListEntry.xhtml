@@ -12,16 +12,8 @@
         <span>#{post.getPostDate()}, #{post.author.getUsername()}</span><br/>
         <span>#{post.entry}</span>
         <c:when test="#{activityPostBean.isAuthor(post)}">
-            <div>            
-            <h:commandButton action="#{activityPostBean.delete}"
-                value="#{msg.post_delete}">
-                <ui:param name="post" value="#{post}"></ui:param>    
-            </h:commandButton>       
-            <h:commandButton action="#{activityPostBean.edit}"
-                value="#{msg.post_edit}">
-                <ui:param name="post" value="#{post}"></ui:param>    
-            </h:commandButton>  
-            </div>
+            <h:commandButton action="#{activityPostBean.edit(post.id)}" value="#{msg.post_edit}"/>
+            <h:commandButton action="#{activityPostBean.delete(post.id)}" value="#{msg.post_delete}"/>
         </c:when>
         <ui:include src="_comments.xhtml">
             <ui:param name="post" value="#{post}" />
