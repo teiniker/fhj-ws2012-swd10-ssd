@@ -32,6 +32,14 @@ public class Post implements IEntity {
     @Temporal(TemporalType.DATE)
     private Date date;
 
+    @Column(name = "F_DATE_TO", nullable = true)
+    @Temporal(TemporalType.DATE)
+    private Date dateto;
+
+    @Column(name = "F_DATE_FROM", nullable = true)
+    @Temporal(TemporalType.DATE)
+    private Date datefrom;
+
     @Column(name = "F_ENTRY", nullable = false)
     private String entry;
 
@@ -242,5 +250,25 @@ public class Post implements IEntity {
 
     public void setActivityEntry(boolean activityEntry) {
         this.activityEntry = activityEntry;
+    }
+
+
+    public Date getDateto() {
+        return dateto;
+    }
+
+
+    public void setDateto(Date dateto) {
+        this.dateto = dateto;
+    }
+
+
+    public Date getDatefrom() {
+        return datefrom;
+    }
+
+
+    public void setDatefrom(Date datefrom) {
+        this.datefrom = datefrom;
     }
 }

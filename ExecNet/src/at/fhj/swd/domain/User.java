@@ -52,10 +52,10 @@ public class User implements IEntity {
 
     @Column(name = "F_ISADMIN", nullable = false)
     private boolean isAdmin = false;
-    
+
     @Column(name = "F_ISPORTALADMIN", nullable = false)
     private boolean isPortalAdmin = false;
-    
+
     @Column(name = "F_ISACTIVE", nullable = false)
     private boolean isActive = false;
 
@@ -67,11 +67,11 @@ public class User implements IEntity {
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Comment.class)
     private Collection<Comment> comments;
-    
-    
+
+
     @Transient
     private boolean _isloggedin = false;
-    
+
     @PreRemove
     public void preRemove() {
         for (Community c : this.getCommunities()) {
@@ -115,7 +115,7 @@ public class User implements IEntity {
             _pl.add(post);
         }
         this.setPinPosts(_pl);
-        if (!post.getPinboard().equals(this)) {
+        if (post.getPinboard() != null && !post.getPinboard().equals(this)) {
             post.setPinboard(this);
         }
     }
@@ -141,7 +141,8 @@ public class User implements IEntity {
 
     @Override
     public String toString() {
-        return "ID = " + id + ", username = " + username + ", isAdmin = " + isAdmin + ", isPortalAdmin = " + isPortalAdmin ;
+        return "ID = " + id + ", username = " + username + ", isAdmin = " + isAdmin + ", isPortalAdmin = "
+            + isPortalAdmin;
     }
 
     @Override
@@ -186,38 +187,38 @@ public class User implements IEntity {
     }
 
     public String getFirstname() {
-		return firstname;
-	}
+        return firstname;
+    }
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
 
-	public String getLastname() {
-		return lastname;
-	}
+    public String getLastname() {
+        return lastname;
+    }
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
-	public String getDepartment() {
-		return department;
-	}
+    public String getDepartment() {
+        return department;
+    }
 
-	public void setDepartment(String department) {
-		this.department = department;
-	}
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public String getLocation() {
+        return location;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-	public String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -253,7 +254,7 @@ public class User implements IEntity {
     public boolean isAdmin() {
         return isAdmin;
     }
-    
+
     public boolean isPortalAdmin() {
         return isPortalAdmin;
     }
@@ -261,7 +262,7 @@ public class User implements IEntity {
     public void setAdmin(boolean _isAdmin) {
         this.isAdmin = _isAdmin;
     }
-    
+
     public void setPortalAdmin(boolean _isPortalAdmin) {
         this.isPortalAdmin = _isPortalAdmin;
     }
@@ -269,11 +270,11 @@ public class User implements IEntity {
     public boolean isActive() {
         return isActive;
     }
-    
+
     public void setActive(boolean _isActive) {
         this.isActive = _isActive;
     }
-    
+
     public Collection<Community> getCommunities() {
         return communities;
     }
