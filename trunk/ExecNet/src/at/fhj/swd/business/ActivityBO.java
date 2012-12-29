@@ -125,7 +125,15 @@ public class ActivityBO {
     }
 
     public Collection<Community> getCommunities() {
-        return _rc.getCurrentUser().getCommunities();
+        Collection<Community> co = new ArrayList<Community>();
+        Community cn = new Community();
+        cn.setName("Global");
+        co.add(cn);
+
+        for (Community c : _rc.getCurrentUser().getCommunities()) {
+            co.add(c);
+        }
+        return co;
     }
 
 }
