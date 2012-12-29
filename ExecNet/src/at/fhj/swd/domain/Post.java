@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -56,8 +55,14 @@ public class Post implements IEntity {
     private User pinboard;
 
     // gmoik:bei aktivity NULL
-    @ManyToMany(mappedBy = "posts", cascade = CascadeType.ALL, targetEntity = Community.class)
-    private Collection<Community> communities;
+
+    /*
+     * @ManyToMany(mappedBy = "posts", cascade = CascadeType.ALL, targetEntity = Community.class)
+     * private Collection<Community> communities;
+     */
+    @ManyToOne(targetEntity = Community.class)
+    @JoinColumn(nullable = true)
+    private Community community;
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Comment.class)
     private Collection<Comment> comments;
@@ -91,34 +96,35 @@ public class Post implements IEntity {
         this.setComments(_cl);
     }
 
-    public void addCommunity(Community community) {
-        Collection<Community> _cl = this.getCommunities();
-        if (_cl == null) {
-            _cl = new ArrayList<Community>();
-        }
-        if (!_cl.contains(community)) {
-            _cl.add(community);
-        }
-        this.setCommunities(_cl);
-        if (!community.getPosts().contains(this)) {
-            community.addPost(this);
-        }
-    }
-
-    public void removeCommunity(Community community) {
-        Collection<Community> _cl = this.getCommunities();
-        if (_cl == null) {
-            _cl = new ArrayList<Community>();
-        }
-        if (_cl.contains(community)) {
-            _cl.remove(community);
-        }
-        this.setCommunities(_cl);
-        // if (community.getPosts().contains(this)) {
-        // community.removePost(this);
-        // }
-    }
-
+    /*
+     * public void addCommunity(Community community) {
+     * Collection<Community> _cl = this.getCommunities();
+     * if (_cl == null) {
+     * _cl = new ArrayList<Community>();
+     * }
+     * if (!_cl.contains(community)) {
+     * _cl.add(community);
+     * }
+     * this.setCommunities(_cl);
+     * if (!community.getPosts().contains(this)) {
+     * community.addPost(this);
+     * }
+     * }
+     * 
+     * public void removeCommunity(Community community) {
+     * Collection<Community> _cl = this.getCommunities();
+     * if (_cl == null) {
+     * _cl = new ArrayList<Community>();
+     * }
+     * if (_cl.contains(community)) {
+     * _cl.remove(community);
+     * }
+     * this.setCommunities(_cl);
+     * // if (community.getPosts().contains(this)) {
+     * // community.removePost(this);
+     * // }
+     * }
+     */
     public String getPostDate() {
         SimpleDateFormat dateformatDDMMYYYY = new SimpleDateFormat("dd.MM.yyyy");
         StringBuilder formatedDate = new StringBuilder(dateformatDDMMYYYY.format(date));
@@ -211,12 +217,13 @@ public class Post implements IEntity {
         this.pinboard = user;
     }
 
-    public Collection<Community> getCommunities() {
-        return communities;
+    public Community getCommunity() {
+        return community;
     }
 
-    public void setCommunities(Collection<Community> communities) {
-        this.communities = communities;
+
+    public void setCommunity(Community community) {
+        this.community = community;
     }
 
     public Collection<Comment> getComments() {

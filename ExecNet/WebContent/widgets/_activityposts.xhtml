@@ -18,7 +18,12 @@
             		   			value="#{activityPostBean.entry}"
             		   			required="true" />
             		   	</td>
-               			<td>
+                        <td>
+                            <h:selectOneMenu value=#{activityPostBean.idCommunity}>
+                                    <f:selectItems value="#{activityPostBean.communities}" var="item" itemValue="#{item.id}" itemLabel="#{item.name}" />
+                            </h:selectOneMenu> 
+                        </td>                                           			
+                        <td>
             		   		<h:commandButton 
             		   			action="#{activityPostBean.addNow()}"
             		   			value="#{msg.post_submit}"/>

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
@@ -38,12 +39,18 @@ public class Community implements IEntity {
     @ManyToOne(cascade = CascadeType.DETACH, targetEntity = User.class)
     private User admin;
 
-    @ManyToMany(cascade = CascadeType.MERGE, targetEntity = Post.class)
-    @JoinTable(name = "tbl_post_community")
-    private Collection<Post> posts;
+    /*
+     * @ManyToMany(cascade = CascadeType.MERGE, targetEntity = Post.class)
+     * 
+     * @JoinTable(name = "tbl_post_community")
+     * private Collection<Post> posts;
+     */
 
     @ManyToMany(cascade = CascadeType.MERGE, targetEntity = Document.class)
     private Collection<Document> documents;
+
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Post.class, mappedBy = "community")
+    private Collection<Post> posts;
 
     @PreRemove
     public void preRemove() {
@@ -51,7 +58,9 @@ public class Community implements IEntity {
             u.getCommunities().remove(this);
         }
         for (Post p : this.getPosts()) {
-            p.getCommunities().remove(this);
+            if (p.getCommunity().equals(this)) {
+                p.setCommunity(null);
+            }
         }
         for (Document d : this.getDocuments()) {
             d.getCommunities().remove(this);
