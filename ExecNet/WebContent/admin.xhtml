@@ -50,7 +50,7 @@
 
 
             <!--  Haui todo begin  -->
-            <h:form enctype="multipart/form-data" rendered="#{user.isLoggedIn() == true}" title="admin_user_file_upload" >  
+            <h:form enctype="multipart/form-data" rendered="#{user.isLoggedIn() == true}" title="#{msg.admin_user_file_upload}" >  
               
                 <p:fileUpload fileUploadListener="#{sstFileBean.handleFileUpload}"  
                         mode="advanced"  
