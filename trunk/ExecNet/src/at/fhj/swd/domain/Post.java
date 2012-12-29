@@ -185,6 +185,10 @@ public class Post implements IEntity {
         return id;
     }
 
+    public String getIdAsString() {
+        return id.toString();
+    }
+
     public Date getDate() {
         return date;
     }

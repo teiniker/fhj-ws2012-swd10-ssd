@@ -40,25 +40,14 @@ public class ActivityPostBean {
         }
     }
 
-    /*
-     * public String delete(Post p) {
-     * System.out.println("Activity delete");
-     * if (_bo.delete(p)) {
-     * return Nav.actitity_delete.toString();
-     * } else {
-     * ThreadLocals.setErrorMessage("delete activity failed");
-     * return Nav.FAIL.toString();
-     * }
-     * }
-     */
-
-    public String delete(Long idPost) {
-        return _bo.delete(idPost) ? "" : "";
+    public String deletepost(String idPost) {
+        _bo.delete(Long.parseLong(idPost));
+        return "";
     }
 
-    public String edit(Long idPost) {
+    public String editpost(String idPost) {
         // ThreadLocals.setPostToEdit(p);
-        idPostToEdit = idPost;
+        idPostToEdit = Long.parseLong(idPost);
         return "";
         // return Nav.activity_edit.toString();
     }
