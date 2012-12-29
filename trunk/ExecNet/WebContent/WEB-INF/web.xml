@@ -10,19 +10,11 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet>
-        <servlet-name>Resource Servlet</servlet-name>
-        <servlet-class>org.primefaces.resource.ResourceServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
         <url-pattern>*.jsf</url-pattern>
         <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Resource Servlet</servlet-name>
-        <url-pattern>/primefaces_resource/*</url-pattern>
     </servlet-mapping>
     <context-param>
         <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
@@ -41,6 +33,10 @@
         <param-name>uploadDirectory</param-name>
         <param-value>d:\temp\</param-value>
     </context-param>
+<context-param>
+    <param-name>com.sun.faces.disableUnicodeEscaping</param-name>
+    <param-value>true</param-value>
+</context-param>
     <context-param>
         <param-name>org.richfaces.skin</param-name>
         <param-value>ruby</param-value>
@@ -48,12 +44,4 @@
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
-    <filter>
-        <filter-name>PrimeFaces FileUpload Filter</filter-name>
-        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>PrimeFaces FileUpload Filter</filter-name>
-        <servlet-name>Faces Servlet</servlet-name>
-    </filter-mapping>
 </web-app>
