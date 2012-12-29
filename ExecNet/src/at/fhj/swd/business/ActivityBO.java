@@ -152,6 +152,8 @@ public class ActivityBO {
         Collection<Community> co = new ArrayList<Community>();
         Community cn = new Community();
         cn.setName("Global");
+        cn.setId((long)999);
+        cn.setDescription("Für alle sichtbar");
         co.add(cn);
 
         for (Community c : _rc.getCurrentUser().getCommunities()) {
