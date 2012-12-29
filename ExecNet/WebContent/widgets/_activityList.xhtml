@@ -9,28 +9,39 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
     <body>
     	<div class="widget" id="activityList">
-        	<h:form>
-                <table>
-                    <tr>
-                        <th>#{msg.global_activitys}</th>
-                    </tr>               
-                    <ui:repeat var="item" value="#{activityPostBean.getAllByUser()}">
-                        
-                        <!-- unterscheidung Edit ... -->
-                        
-                        <ui:include src="_activityNewEdit.xhtml">
-                            <ui:param name="post" value="#{item}"></ui:param>
-                        </ui:include>
-                        
-                        <!-- ... oder ListEntry -->
-                        
-                        <ui:include src="_activityListEntry.xhtml">
-                            <ui:param name="post" value="#{item}"></ui:param>
-                        </ui:include>
-                        
-                    </ui:repeat>
-                </table>
-            </h:form>
+            <span>#{msg.global_activitys}</span>
+            <c:if test="not empty community">
+                <ui:repeat var="item" value="#{activityPostBean.getAllByCommunity(community)}">
+                    <c:choose>
+                        <c:when test="#{activityPostBean.isAuthor(item)}">
+                            <ui:include src="_activityNewEdit.xhtml">
+                                <ui:param name="post" value="#{item}"></ui:param>
+                            </ui:include>
+                        </c:when>
+                        <c:otherwise>
+                            <ui:include src="_activityListEntry.xhtml">
+                                <ui:param name="post" value="#{item}"></ui:param>
+                            </ui:include>
+                        </c:otherwise>
+                    </c:choose>
+                </ui:repeat>
+            </c:if>
+            <c:if test="empty community">
+                <ui:repeat var="item" value="#{activityPostBean.getAllByUser}">
+                    <c:choose>
+                        <c:when test="#{activityPostBean.isAuthor(item)}">
+                            <ui:include src="_activityNewEdit.xhtml">
+                                <ui:param name="post" value="#{item}"></ui:param>
+                            </ui:include>
+                        </c:when>
+                        <c:otherwise>
+                            <ui:include src="_activityListEntry.xhtml">
+                                <ui:param name="post" value="#{item}"></ui:param>
+                            </ui:include>
+                        </c:otherwise>
+                    </c:choose>
+                </ui:repeat>
+            </c:if>
         </div>
     </body>			
 </html>
