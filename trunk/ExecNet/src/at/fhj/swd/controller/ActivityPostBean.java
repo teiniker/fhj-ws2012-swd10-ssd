@@ -15,31 +15,32 @@ public class ActivityPostBean {
 
     public ActivityPostBean() {
         this._bo = new ActivityBO();
+        ThreadLocals.setPostToEdit(null);
     }
 
-    public Nav addNow() {
+    public String addNow() {
         System.out.println("Activity addNow");
         if (_bo.add(entry)) {
-            return Nav.activity_add;
+            return Nav.activity_add.toString();
         } else {
             ThreadLocals.setErrorMessage("add activity failed");
-            return Nav.FAIL;
+            return Nav.FAIL.toString();
         }
     }
 
-    public Nav delete(Post p) {
+    public String delete(Post p) {
         System.out.println("Activity delete");
         if (_bo.delete(p)) {
-            return Nav.actitity_delete;
+            return Nav.actitity_delete.toString();
         } else {
             ThreadLocals.setErrorMessage("delete activity failed");
-            return Nav.FAIL;
+            return Nav.FAIL.toString();
         }
     }
 
-    public Nav edit(Post p) {
+    public String edit(Post p) {
         ThreadLocals.setPostToEdit(p);
-        return Nav.activity_edit;
+        return Nav.activity_edit.toString();
     }
 
     public Collection<Community> getCommunities() {

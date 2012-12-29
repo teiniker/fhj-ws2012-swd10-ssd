@@ -13,14 +13,8 @@
             <span>#{item.entry}</span>
             <c:if test="#{activityPostBean.isAuthor(item)}">
                 <div>                    
-                    <h:commandButton action="#{activityPostBean.delete}"
-                        value="#{msg.post_delete}">
-                        <ui:param name="post" value="#{item}"></ui:param>
-                    </h:commandButton>
-                    <h:commandButton action="#{activityPostBean.edit}"
-                        value="#{msg.post_delete}">
-                        <ui:param name="post" value="#{item}"></ui:param>
-                    </h:commandButton>
+                    is Author
+                
                 </div>
             </c:if>
             <ui:include src="_comments.xhtml">
