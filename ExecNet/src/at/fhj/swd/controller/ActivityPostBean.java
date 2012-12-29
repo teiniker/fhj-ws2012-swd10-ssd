@@ -24,7 +24,7 @@ public class ActivityPostBean {
         idPostToEdit = 0;
         ThreadLocals.setPostToEdit(null);
         setPopup(true);
-        setLocale(Locale.GERMAN);
+        setLocale(Locale.ENGLISH);
     }
 
     public String addNow() {
@@ -102,9 +102,9 @@ public class ActivityPostBean {
 
     public void setLocale(Locale locale) {
         if (_bo.getCurrentCulture().toUpperCase().equals("EN")) {
-            locale = Locale.ENGLISH;
-        } else {
             this.locale = locale;
+        } else {
+            this.locale = Locale.GERMAN;
         }
     }
 
