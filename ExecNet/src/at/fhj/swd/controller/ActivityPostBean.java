@@ -40,19 +40,27 @@ public class ActivityPostBean {
         }
     }
 
-    public String delete(Post p) {
-        System.out.println("Activity delete");
-        if (_bo.delete(p)) {
-            return Nav.actitity_delete.toString();
-        } else {
-            ThreadLocals.setErrorMessage("delete activity failed");
-            return Nav.FAIL.toString();
-        }
+    /*
+     * public String delete(Post p) {
+     * System.out.println("Activity delete");
+     * if (_bo.delete(p)) {
+     * return Nav.actitity_delete.toString();
+     * } else {
+     * ThreadLocals.setErrorMessage("delete activity failed");
+     * return Nav.FAIL.toString();
+     * }
+     * }
+     */
+
+    public String delete(Long idPost) {
+        return _bo.delete(idPost) ? "" : "";
     }
 
-    public String edit(Post p) {
-        ThreadLocals.setPostToEdit(p);
-        return Nav.activity_edit.toString();
+    public String edit(Long idPost) {
+        // ThreadLocals.setPostToEdit(p);
+        idPostToEdit = idPost;
+        return "";
+        // return Nav.activity_edit.toString();
     }
 
     public Collection<Community> getCommunities() {
