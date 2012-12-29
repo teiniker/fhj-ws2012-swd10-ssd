@@ -137,3 +137,9 @@ td, th {
 }
 
 
+/*rich:fileUpload CSS-FIX*/
+.rf-fu-inp{
+        opacity: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+}

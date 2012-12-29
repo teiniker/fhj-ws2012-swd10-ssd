@@ -111,3 +111,12 @@ root {
     border-bottom-color: #900000;
     border-top-color: #900000;
 }
+
+
+/*rich:fileUpload CSS-FIX*/
+.rf-fu-inp{
+        opacity: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+}
+
