@@ -42,23 +42,22 @@ public class Community implements IEntity {
     @JoinTable(name = "tbl_post_community")
     private Collection<Post> posts;
 
-    @ManyToMany(cascade = CascadeType.MERGE, targetEntity = Post.class)
-    @JoinTable(name = "tbl_document_community")
+    @ManyToMany(cascade = CascadeType.MERGE, targetEntity = Document.class)
     private Collection<Document> documents;
 
     @PreRemove
     public void preRemove() {
         for (User u : this.getUsers()) {
             u.getCommunities().remove(this);
-        } 
+        }
         for (Post p : this.getPosts()) {
             p.getCommunities().remove(this);
         }
-        for (Document d : this.getDocuments()){
-        	d.getCommunities().remove(this);
+        for (Document d : this.getDocuments()) {
+            d.getCommunities().remove(this);
         }
     }
-    
+
     public Community() {
     }
 

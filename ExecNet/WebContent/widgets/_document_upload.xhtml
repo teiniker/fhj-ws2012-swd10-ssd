@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+<body>
+    <div class="widget" id="wDocument">
+        <h:form prependId="false">
+            <h:panelGrid columns="1">
+                <rich:extendedDataTable value="#{communityBean.my}" var="item" selection="#{documentBean.selection}" id="table" selectionMode="multipleKeyboardFree">
+                    <a4j:ajax execute="@form" event="selectionchange" listener="#{documentBean.selectionListener}" />
+                    <f:facet name="header">
+                        <h:outputText value="Communities" />
+                    </f:facet>
+                    <rich:column width="235px">
+                        <h:outputText value="#{item.name}" />
+                    </rich:column>
+                </rich:extendedDataTable>
+                <rich:fileUpload fileUploadListener="#{documentBean.upload}" id="upload" addLabel="#{msg.document_upload_browse}" uploadLabel="#{msg.document_upload_upload}" deleteLabel="#{msg.document_upload_delete}" clearAllLabel="#{msg.document_upload_clearall}" clearLabel="#{msg.document_upload_clear}"  style="width: 240px; height: 222px">
+                    <a4j:ajax event="uploadcomplete" execute="@none" oncomplete="#{rich:component('upload')}.__removeAllItems(this);" render="info" />
+                </rich:fileUpload>
+            </h:panelGrid>
+        </h:form>
+    </div>
+</body>
+
+</html>

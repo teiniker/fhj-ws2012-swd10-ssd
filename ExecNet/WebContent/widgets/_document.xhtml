@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+<body>
+    <div class="widget" id="wUpload">
+        <h:form prependId="false">
+            <a4j:outputPanel id="info">
+                <table>
+                    <tr>
+                        <td><b>#{msg.document_name}</b></td>
+                        <td><b>#{msg.document_owner}</b></td>
+                        <td><b>#{msg.document_date}</b></td>
+                        <td><b></b></td>
+                    </tr>
+                    <ui:repeat var="item" value="#{documentBean.getAll()}">
+                        <tr>
+                            <td>#{item.name}</td>
+                            <td>#{item.owner.username}</td>
+                            <td>#{item.dateCreated}</td>
+
+                            <td><ui:fragment>
+                                    <h:commandButton action="#{documentBean.download(item)}" value="#{msg.document_download}" />
+                                    <h:commandButton rendered="#{item.owner.id eq user.id}" action="#{documentBean.delete(item.id)}" value="#{msg.document_delete}" />
+                                </ui:fragment></td>
+                        </tr>
+                    </ui:repeat>
+                </table>
+            </a4j:outputPanel>
+        </h:form>
+    </div>
+</body>
+
+</html>
