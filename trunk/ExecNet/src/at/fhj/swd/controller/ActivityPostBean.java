@@ -10,6 +10,8 @@ public class ActivityPostBean {
 
     private String entry;
     private ActivityBO _bo;
+    private long idCommunity;
+
 
     public ActivityPostBean() {
         this._bo = new ActivityBO();
@@ -40,6 +42,11 @@ public class ActivityPostBean {
         return Nav.activity_edit;
     }
 
+    public Collection<Community> getCommunities() {
+        return _bo.getCommunities();
+
+    }
+
     public Boolean isAuthor(Post p) {
         return _bo.isAuthor(p);
     }
@@ -58,5 +65,13 @@ public class ActivityPostBean {
 
     public void setEntry(String entry) {
         this.entry = entry;
+    }
+
+    public long getIdCommunity() {
+        return idCommunity;
+    }
+
+    public void setIdCommunity(long idCommunity) {
+        this.idCommunity = idCommunity;
     }
 }
