@@ -97,4 +97,8 @@ public class ActivityBO {
         return ps;
     }
 
+    public Collection<Community> getCommunities() {
+        return _rc.getCurrentUser().getCommunities();
+    }
+
 }
