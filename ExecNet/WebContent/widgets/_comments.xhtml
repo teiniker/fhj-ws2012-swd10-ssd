@@ -5,53 +5,50 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	 xmlns:c="http://java.sun.com/jsp/jstl/core">
-      	<body>
-<div class="widget" id="ccomments">
-							<h:form>
-							<table>
-								<tr><th>#{msg.comment_add}</th></tr>
-						   		<tr>
-							   		<td>
-								   		<h:outputLabel for="entry"
-								   			value="#{msg.comment_message}"
-								   			required="True"/> 
-								   	</td>
-								   	<td>
-								   		<h:inputText id="entry" 
-								   			value="#{comment.entry}"
-								   			required="true" />
-							   		</td>
-						   		</tr>
-						   		<tr>
-						   			<td/>
-						   			<td> 
-								   		<h:commandButton 
-								   			action="#{CommentBean.addNow(post)}"
-								   			value="#{msg.comment_submit}"/>
-								   	</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-						   				<h:messages style="color: Red;"/>
-						   			</td>
-						   		</tr>						   	
-								</table>   	
-						   	</h:form>
-							<table>
-									<tr>
-										<th>#{msg.global_comments}</th>
-									</tr>				
-								<ui:repeat var="item" value="#{CommentBean.getComments(post)}">
-									<tr>
-										<td>on #{item.getCommentDate()}, #{item.user.getUsername()} #{msg.comment_output}: </td> 
-									</tr>
-									<tr>
-										<td>#{item.entry}</td>
-									</tr>
-								</ui:repeat>
-							</table>
-						</div>
-						</body>
-						
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <body>
+        <h:form>
+        <table>
+        	<tr><th>#{msg.comment_add}</th></tr>
+        	<tr>
+           		<td>
+        	   		<h:outputLabel for="entry"
+        	   			value="#{msg.comment_message}"
+        	   			required="True"/> 
+        	   	</td>
+        	   	<td>
+        	   		<h:inputText id="entry" 
+        	   			value="#{comment.entry}"
+        	   			required="true" />
+           		</td>
+        	</tr>
+        	<tr>
+        		<td/>
+        		<td> 
+        	   		<h:commandButton 
+        	   			action="#{CommentBean.addNow(post)}"
+        	   			value="#{msg.comment_submit}"/>
+        	   	</td>
+        	</tr>
+        	<tr>
+        		<td colspan="2">
+        			<h:messages style="color: Red;"/>
+           			</td>
+           		</tr>						   	
+        		</table>   	
+           	</h:form>
+        	<table>
+        			<tr>
+        				<th>#{msg.global_comments}</th>
+        			</tr>				
+        		<ui:repeat var="item" value="#{CommentBean.getComments(post)}">
+        			<tr>
+        				<td>on #{item.getCommentDate()}, #{item.user.getUsername()} #{msg.comment_output}: </td> 
+        			</tr>
+        			<tr>
+        				<td>#{item.entry}</td>
+        			</tr>
+        		</ui:repeat>
+        	</table>
+        </body>				
 </html>

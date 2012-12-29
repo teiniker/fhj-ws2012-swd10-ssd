@@ -8,18 +8,18 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
     <body>
-    	<div class="widget" id="activityListEntry">
-            <span>on #{item.getPostDate()}, #{item.author.getUsername()} wrote:</span>
-            <span>#{item.entry}</span>
-            <c:if test="#{activityPostBean.isAuthor(item)}">
-                <div>                    
-                    is Author
-                
-                </div>
-            </c:if>
-            <ui:include src="_comments.xhtml">
-                <ui:param name="post" value="#{item}" />
-            </ui:include>
-        </div>
+    	
+        <span>on #{item.getPostDate()}, #{item.author.getUsername()} wrote:</span>
+        <span>#{item.entry}</span>
+        <c:if test="#{activityPostBean.isAuthor(item)}">
+            <div>                    
+                is Author
+            
+            </div>
+        </c:if>
+        <ui:include src="_comments.xhtml">
+            <ui:param name="post" value="#{item}" />
+        </ui:include>
+    
     </body>			
 </html>
