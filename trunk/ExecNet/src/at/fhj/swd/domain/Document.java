@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -45,7 +46,10 @@ public class Document implements IEntity {
     private User owner;
 
     @ManyToMany(cascade = CascadeType.ALL, targetEntity = Community.class)
-    @JoinTable(name = "tbl_document_community")
+    @JoinTable(
+            name = "tbl_document_community",
+            joinColumns = { @JoinColumn(name = "DOCUMENT_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "COMMUNITY_ID") })
     private Collection<Community> communities;
 
     public Document() {

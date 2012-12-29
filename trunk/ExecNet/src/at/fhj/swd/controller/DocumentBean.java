@@ -1,52 +1,48 @@
 package at.fhj.swd.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Calendar;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
-import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.apache.log4j.Logger;
-import org.primefaces.event.FileUploadEvent;
+import org.richfaces.component.UIExtendedDataTable;
+import org.richfaces.event.FileUploadEvent;
+import org.richfaces.model.UploadedFile;
 
-import at.fhj.swd.application.Application;
-import at.fhj.swd.application.IRuntimeContext;
-import at.fhj.swd.data.IDataContext;
+import at.fhj.swd.business.CommunityBO;
+import at.fhj.swd.business.DocumentBO;
 import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Document;
-import at.fhj.swd.domain.User;
 
-public class DocumentBean {
+public class DocumentBean implements Serializable {
 
+    private static final long serialVersionUID = -3512126679665410531L;
     private Date _datecreated;
     private String _name;
     private String _url;
     private boolean _ispublic = true;
 
-    private Collection<Community> _communities;
-    private IRuntimeContext _rt;
-    private IDataContext<Document> _dc;
+    private List<Community> _communities;
+    private Collection<Object> selection;
+    private List<Community> selectionItems = new ArrayList<Community>();
+
+    private CommunityBO _cbo;
+    private DocumentBO _dbo;
 
     protected static final Logger logger = Logger.getLogger(DocumentBean.class.getName());
 
     public DocumentBean() {
-        this._rt = Application.getInstance().getRuntime();
-        this._dc = Application.getInstance().getDocumentContext();
+        this._cbo = new CommunityBO();
+        this._dbo = new DocumentBO();
+        this._communities = new ArrayList<Community>(_cbo.getMy());
     }
 
-
     public Collection<Document> getAll() {
-        try {
-            return _dc.readAll(Document.class);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            return null;
-        }
+        return _dbo.getAll();
     }
 
     public Date getDateCreated() {
@@ -78,110 +74,70 @@ public class DocumentBean {
     }
 
     public Boolean delete(Long id) {
-        try {
-            Document d = _dc.readOne(id, Document.class);
-            if (_dc.delete(d) && deleteFile(d.getUrl())) {
+        return _dbo.remove(id);
 
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            return false;
-        }
     }
 
     public void setPublic(boolean ispublic) {
         this._ispublic = ispublic;
     }
 
-    public Collection<Community> getCommunities() {
+    public List<Community> getSelectionItems() {
+        return selectionItems;
+    }
+
+    public void setSelectionItems(List<Community> selectionItems) {
+        this.selectionItems = selectionItems;
+    }
+
+    public List<Community> getCommunities() {
         return _communities;
     }
 
-    public void setCommunities(Collection<Community> communities) {
+    public void setCommunities(List<Community> communities) {
         this._communities = communities;
+    }
+
+
+    public void selectionListener(AjaxBehaviorEvent event) {
+        UIExtendedDataTable dataTable = (UIExtendedDataTable)event.getComponent();
+        Object originalKey = dataTable.getRowKey();
+        selectionItems.clear();
+        for (Object selectionKey : selection) {
+            dataTable.setRowKey(selectionKey);
+            if (dataTable.isRowAvailable()) {
+                selectionItems.add((Community)dataTable.getRowData());
+            }
+        }
+        dataTable.setRowKey(originalKey);
+    }
+
+    public Collection<Object> getSelection() {
+        return selection;
+    }
+
+    public void setSelection(Collection<Object> selection) {
+        this.selection = selection;
+    }
+
+    public Community getSelectionItem() {
+        if (selectionItems == null || selectionItems.isEmpty()) {
+            return null;
+        }
+        return selectionItems.get(0);
+    }
+
+
+    public String download(Document doc) { // called from a h:commandLink
+        _dbo.download(doc);
+        return "REFRESH";
     }
 
     public void upload(FileUploadEvent event) {
 
-        User _u = _rt.getCurrentUser();
-        setName(event.getFile().getFileName());
-        // set empty url -> filename = Document.id
-        setUrl("");
-        Date CreationTime = Calendar.getInstance().getTime();
-        setDateCreated(CreationTime);
-
-        try {
-
-            Document _new = new Document();
-            _new.setName(this.getName());
-            _new.setDateCreated(this.getDateCreated());
-            _new.setPublic(this.isPublic());
-            _new.setUrl(this.getUrl());
-            _new.setOwner(_u);
-            _dc.create(_new);
-
-            // getting file extension
-            String Ext = "";
-            String[] TempArray = this.getName().split("\\.");
-            if (TempArray.length > 1) {
-                Ext = "." + TempArray[TempArray.length - 1];
-            }
-
-            // setting url with Document.id as filename
-            setUrl(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("uploadDirectory")
-                + _new.getId().toString() + Ext);
-
-
-            _new.setUrl(this.getUrl());
-            _new = _dc.update(_new);
-
-
-            copyFile(this.getName(), event.getFile().getInputstream());
-
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
+        UploadedFile _file = event.getUploadedFile();
+        _dbo.upload(_file, selectionItems);
     }
 
-    public void copyFile(String fileName, InputStream in) {
-
-        try {
-
-
-            // write the inputStream to a FileOutputStream
-            OutputStream out = new FileOutputStream(new File(_url));
-
-            int read = 0;
-            byte[] bytes = new byte[1024];
-
-            while ((read = in.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
-            }
-
-            in.close();
-            out.flush();
-            out.close();
-
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        }
-    }
-
-    public boolean deleteFile(String file) {
-        File f = new File(file);
-        boolean bRet = f.delete();
-
-        if (bRet) {
-            logger.info("file deleted");
-        } else {
-            logger.error("file deletion failed");
-        }
-
-        return bRet;
-
-    }
 
 }
