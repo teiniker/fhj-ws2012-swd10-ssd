@@ -17,6 +17,7 @@ public class ActivityBO {
     private IDataContext<Post> _pc;
     private IRuntimeContext _rc;
 
+
     public ActivityBO() {
         this._pc = Application.getInstance().getPostContext();
         this._rc = Application.getInstance().getRuntime();
@@ -28,7 +29,7 @@ public class ActivityBO {
      * @param entry
      * @return
      */
-    public Boolean add(String entry) {
+    public Boolean add(String entry, Date datefrom, Date dateto) {
         User _u = _rc.getCurrentUser();
 
         Post _new = new Post();
@@ -36,10 +37,13 @@ public class ActivityBO {
         _new.setAuthor(_u);
         _new.setDate(new Date());
         _new.setActivityEntry(true);
+        _new.setDatefrom(datefrom);
+        _new.setDateto(dateto);
+        // _new.setCommunity(dieausgewählte);
 
         try {
             if (_pc.create(_new)) {
-                _u.addPinPost(_new);
+                // dieausgewählte.addPost(_new);
                 return true;
             } else {
                 return false;
@@ -48,6 +52,10 @@ public class ActivityBO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public String getCurrentCulture() {
+        return _rc.getCurrentUser().getCulture();
     }
 
     /**
