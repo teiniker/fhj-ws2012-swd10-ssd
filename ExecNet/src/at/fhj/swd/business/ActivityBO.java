@@ -48,6 +48,7 @@ public class ActivityBO {
         try {
             if (_pc.create(_new)) {
                 _c.addPost(_new);
+                _cc.update(_c);
                 return true;
             } else {
                 return false;
