@@ -20,7 +20,7 @@
                  <tr>
                     <td>
                         <h:outputLabel for="text"
-                            value="#{msg.fname_enter}"
+                            value="#{msg.activityNewEdit_message}"
                             required="True"/> 
                     </td>
                     <td>
@@ -32,7 +32,7 @@
                   <tr>
                        <td>
                             <h:outputLabel for="datefrom"
-                                value="#{msg.fname_enter}"
+                                value="#{msg.activity_datefrom_text}"
                                 required="True"/> 
                         </td>
                         <td>
@@ -46,7 +46,7 @@
                        <tr>
                        <td>
                             <h:outputLabel for="dateto"
-                                value="#{msg.fname_enter}"
+                                value="#{msg.activity_dateto_text}"
                                 required="True"/> 
                         </td>
                         <td>
@@ -57,13 +57,14 @@
                             </a4j:outputPanel>
                          </td>
                     </tr>
-                    <tr>                      
-                        <h:selectOneMenu value="#{activityPostBean.idCommunity}">
-                            <f:selectItems value="#{activityPostBean.communities}" var="itemCommunitiy" itemValue="#{itemCommunitiy.id}" itemLabel="#{itemCommunitiy.name}" />
-                        </h:selectOneMenu> 
-                    </tr>
+                   
 
                     <tr>
+                        <td>                 
+                                <h:selectOneMenu value="#{activityPostBean.idCommunity}">
+                                    <f:selectItems value="#{activityPostBean.communities}" var="itemCommunitiy" itemValue="#{itemCommunitiy.id}" itemLabel="#{itemCommunitiy.name}" />
+                                </h:selectOneMenu> 
+                        </td>
                         <td> 
                             <h:commandButton 
                                 action="#{activityPostBean.addNow()}"

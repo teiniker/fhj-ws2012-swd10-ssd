@@ -29,7 +29,7 @@ public class ActivityPostBean {
 
     public String addNow() {
         System.out.println("Activity addNow");
-        if (_bo.add(entry, getDatefrom(), getDateto())) {
+        if (_bo.add(entry, getDatefrom(), getDateto(), getIdCommunity())) {
             return Nav.activity_add.toString();
         } else {
             ThreadLocals.setErrorMessage("add activity failed");

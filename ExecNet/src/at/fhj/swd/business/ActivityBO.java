@@ -15,12 +15,14 @@ import at.fhj.swd.domain.User;
 public class ActivityBO {
 
     private IDataContext<Post> _pc;
-    private IRuntimeContext _rc;
+    private IDataContext<Community> _cc;
 
+    private IRuntimeContext _rc;
 
     public ActivityBO() {
         this._pc = Application.getInstance().getPostContext();
         this._rc = Application.getInstance().getRuntime();
+        this._cc = Application.getInstance().getCommunityContext();
     }
 
     /**
@@ -29,8 +31,10 @@ public class ActivityBO {
      * @param entry
      * @return
      */
-    public Boolean add(String entry, Date datefrom, Date dateto) {
+    public Boolean add(String entry, Date datefrom, Date dateto, long idCommunity) {
         User _u = _rc.getCurrentUser();
+
+        Community _c = _cc.readOne(idCommunity, Community.class);
 
         Post _new = new Post();
         _new.setEntry(entry);
@@ -39,11 +43,11 @@ public class ActivityBO {
         _new.setActivityEntry(true);
         _new.setDatefrom(datefrom);
         _new.setDateto(dateto);
-        // _new.setCommunity(dieausgewählte);
+        _new.setCommunity(_c);
 
         try {
             if (_pc.create(_new)) {
-                // dieausgewählte.addPost(_new);
+                _c.addPost(_new);
                 return true;
             } else {
                 return false;
