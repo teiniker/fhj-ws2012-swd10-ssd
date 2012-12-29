@@ -9,7 +9,28 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
     <body>
     	<div class="widget" id="activityList">
-        	
+        	<h:form>
+                <table>
+                    <tr>
+                        <th>#{msg.global_activitys}</th>
+                    </tr>               
+                    <ui:repeat var="item" value="#{activityPostBean.getAllByUser()}">
+                        
+                        <!-- unterscheidung Edit ... -->
+                        
+                        <ui:inculde src="_activityNewEdit">
+                            <ui:param name="post" value="#{item}"></ui:param>
+                        </ui:inculde>
+                        
+                        <!-- ... oder ListEntry -->
+                        
+                        <ui:include src="_activityListEntry.xhtml">
+                            <ui:param name="post" value="#{item}"></ui:param>
+                        </ui:include>
+                        
+                    </ui:repeat>
+                </table>
+            </h:form>
         </div>
     </body>			
 </html>
