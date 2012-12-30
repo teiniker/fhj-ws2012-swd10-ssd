@@ -1,4 +1,5 @@
 /**
+ * Controller bean for the Java Server Faces page that acts as controller for it. 
  * 
  */
 package at.fhj.swd.controller;
@@ -27,6 +28,11 @@ public class SSTFileBean {
 		    .remove();
 
 	FacesContext.getCurrentInstance().addMessage("message_sst_file", _msg);
+
+	// Haui
+	System.out.println(event.getFile().getContents().toString());
+
+	// event.getFile().getInputstream()
 
 	// Haui hier später noch überlegen wegen der Anzeige der automatischen
 	// Fehlermessages.
