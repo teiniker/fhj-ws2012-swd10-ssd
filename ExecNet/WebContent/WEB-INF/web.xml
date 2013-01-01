@@ -49,6 +49,14 @@
         <param-name>emailport</param-name>
         <param-value>587</param-value>
     </context-param>
+    <context-param>
+        <param-name>emailuser</param-name>
+        <param-value>swdstudents@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>emailpassword</param-name>
+        <param-value>JSF1stsuper</param-value>
+    </context-param>
 
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
