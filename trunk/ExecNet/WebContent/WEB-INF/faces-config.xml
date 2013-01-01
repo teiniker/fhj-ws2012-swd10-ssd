@@ -59,7 +59,12 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>emailsend</managed-bean-name>
+        <managed-bean-name>emailBean</managed-bean-name>
+        <managed-bean-class>at.fhj.swd.controller.EmailBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>emailsenderBean</managed-bean-name>
         <managed-bean-class>at.fhj.swd.controller.EmailSenderBean</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
