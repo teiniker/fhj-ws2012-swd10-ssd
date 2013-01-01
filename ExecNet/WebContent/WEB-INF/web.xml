@@ -9,14 +9,6 @@
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
-        <init-param>
-            <param-name>emailhost</param-name>
-            <param-value>smtp.gmail.com</param-value>
-        </init-param>
-        <init-param>
-            <param-name>emailport</param-name>
-            <param-value>587</param-value>
-        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -41,31 +33,38 @@
         <param-name>uploadDirectory</param-name>
         <param-value>d:\temp\</param-value>
     </context-param>
-<context-param>
-    <param-name>com.sun.faces.disableUnicodeEscaping</param-name>
-    <param-value>true</param-value>
-</context-param>
+    <context-param>
+        <param-name>com.sun.faces.disableUnicodeEscaping</param-name>
+        <param-value>true</param-value>
+    </context-param>
     <context-param>
         <param-name>org.richfaces.skin</param-name>
         <param-value>ruby</param-value>
     </context-param>
+    <context-param>
+        <param-name>emailhost</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>emailport</param-name>
+        <param-value>587</param-value>
+    </context-param>
+
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
-    
 
 <!--  
      Please be so kind and do NOT delete this filter anymore!
      It is needed for the SST file upload!
  -->    
-<filter>
-    <filter-name>PrimeFaces FileUpload Filter</filter-name>
-    <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
-</filter>
-<filter-mapping>
-    <filter-name>PrimeFaces FileUpload Filter</filter-name>
-    <servlet-name>Faces Servlet</servlet-name>    
-</filter-mapping>    
-    
-    
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>    
+    </filter-mapping>    
+
 </web-app>
