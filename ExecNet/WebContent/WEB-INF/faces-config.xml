@@ -58,6 +58,11 @@
         <managed-bean-class>at.fhj.swd.controller.NavigationBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>emailsend</managed-bean-name>
+        <managed-bean-class>at.fhj.swd.controller.EmailSenderBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
 
     <!-- TODO: check navigation rules -->
     <navigation-rule>
