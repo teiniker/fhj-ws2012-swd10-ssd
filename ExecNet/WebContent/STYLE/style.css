@@ -9,6 +9,13 @@ root {
     color: #ffffff;
 }
 
+.link2 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: plain;
+    color: #900000;
+}
+
 .button {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 12px;
