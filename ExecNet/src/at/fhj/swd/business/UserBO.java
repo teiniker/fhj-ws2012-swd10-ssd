@@ -28,14 +28,15 @@ public class UserBO extends ABusinessObject {
         user.setPassword(hashSHA1(user.getPassword()));
 
         try {
-            String _q = "i.username='" + user.getUsername() + "' and i.password='" + user.getPassword() + "'";
-            User _ref;
-            _ref = _context.readOneByQuery(_q, User.class);
-            if (_ref.isActive()) {
-                _ref.authenticate();
-                this.getRuntimeContext().setAuthenticated(_ref);
+            String _query = "i.username='" + user.getUsername() + "' and i.password='" + user.getPassword() + "'";
+            User _refuser = _context.readOneByQuery(_query, User.class);
+            if (_refuser.isActive()) {
+                _refuser.authenticate();
+                this.getRuntimeContext().setAuthenticated(_refuser);
+                logger.info("Login successful");
                 return true;
             } else {
+                logger.info("Login failed: user is not active");
                 return false;
             }
         } catch (Exception e) {
@@ -45,13 +46,16 @@ public class UserBO extends ABusinessObject {
     }
 
     public boolean register(User user) {
+        user.setPassword(hashSHA1(user.getPassword()));
+
         try {
-            user.setPassword(hashSHA1(user.getPassword()));
             if (_context.create(user)) {
                 user.authenticate();
                 this.getRuntimeContext().setAuthenticated(user);
+                logger.info("Registration successful");
                 return true;
             } else {
+                logger.info("Registration failed: could not create user");
                 return false;
             }
         } catch (Exception e) {
@@ -64,6 +68,7 @@ public class UserBO extends ABusinessObject {
         try {
             User _newuser = this.getRuntimeContext().getCurrentUser();
             if (hashSHA1(user.getPassword()).equals(_newuser.getPassword())) {
+                logger.info("Edit failed: unequal passwords");
                 return false;
             }
             _newuser.setFirstname(user.getFirstname());
@@ -76,11 +81,24 @@ public class UserBO extends ABusinessObject {
             _newuser.setPassword(hashSHA1(user.getPassword()));
 
             this.getRuntimeContext().setAuthenticated(_context.update(_newuser));
+            logger.info("Edit successful");
             return true;
         } catch (Exception e) {
             logger.error(e);
             return false;
         }
+    }
+
+    private String hashSHA1(String password) {
+        try {
+            MessageDigest cript = MessageDigest.getInstance("SHA-1");
+            cript.reset();
+            cript.update(password.getBytes());
+            password = new String(cript.digest());
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return password;
     }
 
     public boolean changeCulture(String culture) {
@@ -93,19 +111,6 @@ public class UserBO extends ABusinessObject {
             logger.error(e);
             return false;
         }
-    }
-
-    private String hashSHA1(String password) {
-        try {
-            MessageDigest cript;
-            cript = MessageDigest.getInstance("SHA-1");
-            cript.reset();
-            cript.update(password.getBytes());
-            password = new String(cript.digest());
-        } catch (Exception e) {
-            logger.error(e);
-        }
-        return password;
     }
 
     public Boolean setAdmin(int id) {
@@ -171,20 +176,20 @@ public class UserBO extends ABusinessObject {
     public Collection<User> searchUser(String searchQuery) throws Exception {
 
         String[] tokens = searchQuery.trim().split("\\s+");
-        
-        
+
+
         StringBuffer queryBuffer = new StringBuffer();
-        
+
         for (int i = 0; i < tokens.length; i++) {
             queryBuffer.append("i.firstname like '%" + tokens[i] + "%' or i.lastname like '%" + tokens[i] + "%'");
-            
-            if (i < tokens.length-1) {
+
+            if (i < tokens.length - 1) {
                 queryBuffer.append(" or ");
             }
-                
-                
+
+
         }
-        
+
         String query = queryBuffer.toString();
 
         Collection<User> users = _context.readByQuery(query, User.class);
