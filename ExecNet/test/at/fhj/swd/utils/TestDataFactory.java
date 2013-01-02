@@ -1,5 +1,6 @@
 package at.fhj.swd.utils;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import at.fhj.swd.application.Application;
@@ -36,6 +37,8 @@ public class TestDataFactory {
 
     public Document createDocument(String name) {
         Document _result = new Document();
+        Date CreationTime = Calendar.getInstance().getTime();
+        _result.setDateCreated(CreationTime);
         _result.setPublic(true);
         _result.setUrl("http://wurscht.bla.com");
         _result.setName(name);
