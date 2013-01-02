@@ -143,7 +143,7 @@ public class ActivityBO {
         // so irgendwie
         // Collection<Post> ps = _pc.readByQuery("WHERE community IS NULL AND pinpost IS NULL", Post.class);
 
-        Collection<Post> ps = new ArrayList<Post>();
+        Collection<Post> ps = new ArrayList<Post>();        
         Collection<Community> cs = _rc.getCurrentUser().getCommunities();
         for (Community c : cs) {
             ps.addAll(c.getPosts());
