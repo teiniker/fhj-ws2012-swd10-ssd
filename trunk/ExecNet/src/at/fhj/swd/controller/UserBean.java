@@ -2,6 +2,7 @@ package at.fhj.swd.controller;
 
 import java.util.Collection;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -25,12 +26,50 @@ public class UserBean {
         _bo = new UserBO();
     }
 
-    public String changeCulture(String culture) {
-        if (_bo.changeCulture(culture))
-            return "language-change";
-        return "language-change-failed";
+    public String login() {
+        User user = new User();
+        user.setUsername(this.getUsername());
+        user.setPassword(this.getPassword());
+
+        if (_bo.login(user)) {
+            return "new_home";
+        } else {
+            FacesContext.getCurrentInstance().addMessage("login", new FacesMessage("Login not successful!"));
+            return "new_login";
+        }
     }
 
+    public String logout() {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession)ctx.getExternalContext().getSession(true);
+        session.removeAttribute("user");
+        session.invalidate();
+        return "new_login";
+    }
+
+    public String register() {
+        User user = new User();
+        user.setFirstname(this.getFirstname());
+        user.setLastname(this.getLastname());
+        user.setUsername(this.getUsername());
+        user.setPassword(this.getPassword());
+        user.setEmail(this.getEmail());
+        user.setCulture(this.getCulture());
+        user.setDepartment(this.getDepartment());
+        user.setLocation(this.getLocation());
+        user.setAdmin(true);
+        user.setPortalAdmin(false);
+        user.setActive(true);
+
+        if (_bo.register(user)) {
+            return "new_home";
+        } else {
+            FacesContext.getCurrentInstance().addMessage("register", new FacesMessage("Registration not successful!"));
+            return "new_register";
+        }
+    }
+
+    @Deprecated
     public String loginNow() {
         User _ref = new User();
         _ref.setUsername(this.getUsername());
@@ -43,6 +82,7 @@ public class UserBean {
         }
     }
 
+    @Deprecated
     public String logoutNow() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession)ctx.getExternalContext().getSession(true);
@@ -51,6 +91,7 @@ public class UserBean {
         return "logged-out";
     }
 
+    @Deprecated
     public String registerNow() {
         User _newuser = new User();
         _newuser.setFirstname(this.getFirstname());
@@ -88,6 +129,12 @@ public class UserBean {
         } else {
             return "user-edit-failed";
         }
+    }
+
+    public String changeCulture(String culture) {
+        if (_bo.changeCulture(culture))
+            return "language-change";
+        return "language-change-failed";
     }
 
     public Collection<User> getAll() {

@@ -52,7 +52,7 @@
                                         <h:inputSecret styleClass="h6" id="password" value="#{userBean.password}" required="true" requiredMessage="#{msg.pass_required}" />
                                     </h:panelGrid>
                                     <br/>
-                                    <h:commandButton styleClass="button" action="#{userBean.loginNow}" value="#{msg.login_submit}" />
+                                    <h:commandButton styleClass="button" action="#{userBean.login}" value="#{msg.login_submit}" />
                                     <br/>
                                     <br/>
                                     <h:link styleClass="link2" outcome="new_register" value="#{msg.global_register}"></h:link>
