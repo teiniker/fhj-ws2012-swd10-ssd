@@ -28,7 +28,7 @@
                     </ui:repeat>
                 </c:when>
                 <c:otherwise>
-                   <ui:repeat var="item" value="#{activityPostBean.getAllByUser()}">
+                    <ui:repeat var="item" value="#{activityPostBean.getAllByUser()}">
                         <c:choose>
                             <c:when test="#{activityPostBean.idPostToEdit eq item.id}">
                                 <ui:include src="_activityNewEdit.xhtml">
@@ -37,11 +37,11 @@
                             </c:when>
                             <c:otherwise>
                                 <ui:include src="_activityListEntry.xhtml">
-                                    <ui:param name="post" value="#{item}"></ui:param>
+                                    <ui:param name="post" value="#{item}"></ui:param> 
                                 </ui:include>
                             </c:otherwise>
                         </c:choose>
-                   </ui:repeat>
+                    </ui:repeat>
                 </c:otherwise>
             </c:choose>
         </div>
