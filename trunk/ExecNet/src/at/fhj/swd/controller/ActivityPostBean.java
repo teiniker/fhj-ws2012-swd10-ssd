@@ -57,8 +57,21 @@ public class ActivityPostBean {
 
     }
 
-    public Boolean isAuthor(Post p) {
-       return _bo.isAuthor(p);
+    public Boolean isAuthor(Post p) {        
+        if (p==null){
+            return false;
+        }
+        else
+        {
+            if (p.getIdAsString()!=null){
+                System.out.println("ID=" +p.getIdAsString());
+            }
+            else
+            {
+                System.out.println("ID==null");
+            }
+                return  _bo.isAuthor(p);  
+        }
     }
 
     public Boolean isPortalAdmin(){
