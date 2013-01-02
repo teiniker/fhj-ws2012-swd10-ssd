@@ -12,7 +12,7 @@ root {
 .button {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: plain;
     color: #ffffff;
 }
 
@@ -41,7 +41,7 @@ root {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 14px;
     font-weight: bold;
-    color: #ffffff;
+    color: #000000;
 }
 
 .h5 {
