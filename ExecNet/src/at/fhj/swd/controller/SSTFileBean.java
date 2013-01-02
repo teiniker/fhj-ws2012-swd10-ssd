@@ -9,6 +9,9 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 
+import at.fhj.swd.utils.sst.SSTFileDataExtractor;
+import at.fhj.swd.utils.sst.SSTFileDataExtractorResult;
+
 /**
  * @author Michael Hausegger, CAFK
  * 
@@ -19,8 +22,40 @@ public class SSTFileBean {
 
     public void handleFileUpload(FileUploadEvent event) {
 
-	FacesMessage _msg = new FacesMessage("Succesful", event.getFile()
-		.getFileName() + " is uploaded.");
+	SSTFileDataExtractorResult _result = SSTFileDataExtractor
+		.getParseResult(event.getFile().getContents().toString());
+
+	// Haui
+	// System.out.println(_result.getErrorMessage());
+
+	if (_result.getParsingSuccessfull() == false) {
+
+	    // Haui
+	    // Noch Textkürzel
+	    showMessageToUser("Es konnte kein Import durchgeführt werden. Ursache: "
+		    + _result.getErrorMessage());
+
+	    return;
+
+	}
+
+	// Haui hier später noch überlegen wegen der Anzeige der automatischen
+	// Fehlermessages.
+	// Jedoch: http://forum.primefaces.org/viewtopic.php?f=3&t=23853
+
+	showMessageToUser("\"" + event.getFile().getFileName() + "\""
+		+ " is uploaded.");
+
+    }
+
+    /**
+     * Haui TODO
+     * 
+     * @param messageString
+     */
+    private static void showMessageToUser(String messageString) {
+
+	FacesMessage _msg = new FacesMessage("Information", messageString);
 
 	if (FacesContext.getCurrentInstance().getMessages("message_sst_file")
 		.hasNext())
@@ -28,15 +63,6 @@ public class SSTFileBean {
 		    .remove();
 
 	FacesContext.getCurrentInstance().addMessage("message_sst_file", _msg);
-
-	// Haui
-	System.out.println(event.getFile().getContents().toString());
-
-	// event.getFile().getInputstream()
-
-	// Haui hier später noch überlegen wegen der Anzeige der automatischen
-	// Fehlermessages.
-	// Jedoch: http://forum.primefaces.org/viewtopic.php?f=3&t=23853
 
     }
 
