@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+    <f:loadBundle basename="at.fhj.swd.i18n.messages_#{user.culture}" var="msg" />
+
+    <f:view>
+        <h:head>
+            <link rel="stylesheet" type="text/css" href="STYLE/style.css" />
+            <title>#{msg.login_title}</title>
+        </h:head>
+        <h:body style="background-color: #000000;">
+            <div id="background">
+                <br/>
+                <table id="tableHeader" align="center" width="90%">
+                    <tr>
+                        <td align="left" width="20%">
+                            <h:graphicImage value="STYLE/IMG/icon_logo.jpg" />
+                        </td>
+                        <td align="center" width="60%">
+                            <h:outputText styleClass="h1" value="#{msg.notitle}" />
+                            <br/>
+                            <h:outputText styleClass="h2" value="#{msg.notitle} - Slogan" />
+                        </td>
+                        <td align="right" width="20%">
+                            <h:graphicImage value="STYLE/IMG/icon_logo.jpg" />
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <center>
+                    <table id="tableContent" align="center" width="90%">
+                        <tr>
+                            <td align="center">
+                                <br/>
+                                <h:outputText styleClass="h2" value="#{msg.global_login}" />
+                                <br/>
+                                <h:outputText rendered ="#{user.isLoggedIn() == true}" styleClass="h3" value="#{msg.user_loggedin}" />
+                                <br/>
+                                <h:messages styleClass="h3" />
+                                <br/>
+                                <h:form rendered ="#{user.isLoggedIn() == false}">
+                                    <h:panelGrid columns="2">
+                                        <h:outputText styleClass="h5" value="#{msg.uname_enter}" />
+                                        <h:inputText styleClass="h6" id="username" value="#{userBean.username}" required="true" requiredMessage="#{msg.uname_required}" />
+                                        <h:outputText styleClass="h5" value="#{msg.pass_enter}" />
+                                        <h:inputSecret styleClass="h6" id="password" value="#{userBean.password}" required="true" requiredMessage="#{msg.pass_required}" />
+                                    </h:panelGrid>
+                                    <br/>
+                                    <h:commandButton styleClass="button" action="#{userBean.loginNow}" value="#{msg.login_submit}" />
+                                    <br/>
+                                    <br/>
+                                    <h:link styleClass="link2" outcome="new_register" value="#{msg.global_register}"></h:link>
+                                    <br/>
+                                </h:form>
+                                <br/>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+        </h:body>
+    </f:view>
+    
+</html>
