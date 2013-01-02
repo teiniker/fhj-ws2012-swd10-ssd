@@ -12,18 +12,27 @@
                         <td><b>#{msg.document_name}</b></td>
                         <td><b>#{msg.document_owner}</b></td>
                         <td><b>#{msg.document_date}</b></td>
+                        <td><b>#{msg.global_communities}</b></td>
                         <td><b></b></td>
                     </tr>
                     <ui:repeat var="item" value="#{documentBean.getAll()}">
                         <tr>
                             <td>#{item.name}</td>
                             <td>#{item.owner.username}</td>
-                            <td>#{item.dateCreated}</td>
-
+                            <td>
+	                            <h:outputText value="#{item.dateCreated}" >
+	              					<f:convertDateTime pattern="dd.MM.yyyy" />
+	 							</h:outputText>
+                            </td>
+                            <td>
+                            	 <ui:repeat var="com" value="#{item.communities}">
+                            	 	#{com.name}<br />
+                            	 </ui:repeat>
+                            </td>
                             <td><ui:fragment>
-                                    <h:commandButton action="#{documentBean.download(item)}" value="#{msg.document_download}" />
-                                    <h:commandButton rendered="#{item.owner.id eq user.id}" action="#{documentBean.delete(item.id)}" value="#{msg.document_delete}" />
-                                </ui:fragment></td>
+                               <h:commandButton action="#{documentBean.download(item)}" value="#{msg.document_download}" />
+                               <h:commandButton rendered="#{item.owner.id == user.id || user.admin == true}" action="#{documentBean.delete(item.id)}" value="#{msg.document_delete}" />
+                           </ui:fragment></td>
                         </tr>
                     </ui:repeat>
                 </table>
