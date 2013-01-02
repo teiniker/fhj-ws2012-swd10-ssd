@@ -59,7 +59,7 @@ public class ActivityPostBean {
 
     public Boolean isAuthor(Post p) {        
         if (p==null){
-            return false;
+            return true;
         }
         else
         {
