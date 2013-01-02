@@ -2,6 +2,16 @@
 
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     version="2.0">
+    
+    <application>
+    	<message-bundle>at.fhj.swd.i18n.messages</message-bundle>
+    	<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>de_AT</supported-locale>
+			<supported-locale>de_DE</supported-locale>
+			<supported-locale>de</supported-locale>
+		</locale-config>
+    </application>
 
     <managed-bean>
         <managed-bean-name>userBean</managed-bean-name>
