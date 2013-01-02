@@ -1,8 +1,9 @@
 package at.fhj.swd.business;
 
+import junit.framework.Assert;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import at.fhj.swd.data.DBContext;
 import at.fhj.swd.data.IDataContext;
 import at.fhj.swd.domain.User;
@@ -56,16 +57,26 @@ public class UserBOTest {
     @Test
     public void searchUser_ShouldReturnTwoUsers() throws Exception {
         
-        //System.out.println(userBO.getAll());
-        System.out.println(userBO.searchUser("Max Muster").toString());
-        
+//        System.out.println(userBO.getAll());
+        String searchResult = userBO.searchUser("Max Muster").toString();
+        Assert.assertEquals("[ID = 1, username = user1, isAdmin = false, " +
+        		"isPortalAdmin = false, ID = 2, username = user2, isAdmin = false, " +
+        		"isPortalAdmin = false]", searchResult);
     }
     
     @Test
     public void searchUser_ShouldReturnOneUsers() throws Exception {
         
-        System.out.println(userBO.searchUser("Maike Mai").toString());
+        String searchResult = userBO.searchUser("Maike Mur").toString();
+        Assert.assertEquals("[ID = 3, username = user3, isAdmin = false, " +
+        		"isPortalAdmin = false]", searchResult);
+    }
+    
+    @Test
+    public void searchUser_ShouldReturnNoUsers() throws Exception {
         
+        String searchResult = userBO.searchUser("Heinrich Mur").toString();
+        Assert.assertEquals("[]", searchResult);
     }
 
 }
