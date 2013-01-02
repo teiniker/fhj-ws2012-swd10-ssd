@@ -11,14 +11,25 @@
         <h:form>
             <p>#{post.getPostDate()}<br/>#{post.author.getUsername()}<br/>#{post.community.name}<br/>#{post.idAsString}</p>
             <p><strong>#{post.entry}</strong></p>
-            
+                        
             <c:set var="varIsAuthor" value="#{activityPostBean.isAuthor(post)}" />
-            <c:set var="varIsPortalAdmin" value="#{activityPostBean.isPortalAdmin()}" />
             
-            
+            <c:if test="${varIsAuthor}" value="true">
+                    <h:outputText value="${varIsAuthor}" />
+                    <h:commandButton action="#{activityPostBean.editpost(item.idAsString)}" value="#{msg.post_edit}"/>
+                    <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
+            </c:if>  
+            <c:if test="${varIsAuthor}" value ="false">
+                <c:if test="${varIsPortalAdmin}">
+                    <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
+                </c:if>
+             </c:if>
+                      
+        </h:form>
+         <h:form>
             <ui:include src="_comments.xhtml">
                 <ui:param name="post" value="#{post}" />
-            </ui:include>             
-       </h:form>
+            </ui:include>
+          </h:form>
     </body>			
 </html>
