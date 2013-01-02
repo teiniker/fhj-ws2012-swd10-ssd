@@ -58,9 +58,13 @@ public class ActivityPostBean {
     }
 
     public Boolean isAuthor(Post p) {
-        return _bo.isAuthor(p);
+       return _bo.isAuthor(p);
     }
 
+    public Boolean isPortalAdmin(){
+       return _bo.isPortalAdmin();
+    }
+    
     public Collection<Post> getAllByCommunity(Community c) {
         return c.getPosts();
     }
