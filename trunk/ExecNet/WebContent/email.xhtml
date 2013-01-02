@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="layout/_template_master.xhtml">
+
+<ui:define name="title">#{msg.email_title}</ui:define>
+	<ui:define name="content">
+	   <f:view>
+	   	<h:form>
+	   	<table>
+	   		<tr>
+		   		<td>
+			   		<h:outputLabel for="recipient"
+			   			value="#{msg.email_to}"
+			   			required="True"/> 
+			   	</td>
+			   	<td>
+			   		<h:inputText id="recipient" 
+			   			value="#{emailBean.recipient}"
+			   			required="true" />
+		   		</td>
+		   	</tr>
+		   	<tr>
+		   		<td>
+			   		<h:outputLabel for="subject"
+		   			value="#{msg.email_subject}"
+		   			required="True"/>
+		   		</td>
+		   		<td>
+			   		<h:inputText id="subject" 
+			   			value="#{emailBean.subject}"
+			   			required="true" >
+			   		</h:inputText>
+			   	</td>
+			</tr>
+			<tr>
+		   		<td>
+			   		<h:outputLabel for="emailtext"
+		   			value="#{msg.email_text}"
+		   			required="True"/>
+		   		</td>
+		   		<td>
+			   		<h:inputTextarea id="emailtext" 
+			   			value="#{emailBean.messagetext}"
+			   			required="true" >
+			   		</h:inputTextarea>
+			   	</td>
+			</tr>
+			
+			<tr><td/>
+				<td> 
+			   		<h:commandButton 
+			   			action="#{emailsenderBean.Send}"
+			   			value="#{msg.email_send}"/>
+			   	</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+	   				<h:messages/>
+	   			</td>
+	   		</tr>
+	   	</table>
+	   	</h:form>	   	
+	 
+	   </f:view>
+	</ui:define>
+</ui:composition>
+</html>
