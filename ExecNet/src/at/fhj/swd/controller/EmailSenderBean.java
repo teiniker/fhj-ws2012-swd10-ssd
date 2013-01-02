@@ -43,15 +43,16 @@ public class EmailSenderBean {
 		logger = Logger.getLogger(EmailSenderBean.class.getName());
 	}
 	
-	public String Send(String recipient, String subject, String message){
+	public String Send(){
 		String ret = "Not OK";
 		FacesContext context;
 		String bundlename;
 		ResourceBundle bundle;
 		User user = (User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+		EmailBean email = (EmailBean)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("emailBean");
 		
 		try{			
-			EmailSender emailsender = new EmailSender(recipient, subject, message, _emailuser, user.getEmail(), user.getLastname(), _authenticator, _properties);
+			EmailSender emailsender = new EmailSender(email.getRecipient(), email.getSubject(), email.getMessagetext(), _emailuser, user.getEmail(), user.getLastname(), _authenticator, _properties);
 			emailsender.Send();
 			
 			context = FacesContext.getCurrentInstance();
