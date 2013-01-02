@@ -16,13 +16,12 @@ public class SSTFileDataExtractorResult {
 
     // Haui
 
-    Boolean parsingSuccessfull;
+    Boolean parsingSuccessfull = new Boolean(false);
 
-    String errorMessage;
+    String errorMessage = "";
 
-    List<User> users;
+    List<User> users = new ArrayList<User>();
 
-    
     /**
      * @return the parsingSuccessfull
      */
@@ -68,20 +67,17 @@ public class SSTFileDataExtractorResult {
 	this.users = users;
     }
 
-    
     /**
      * @param user
      *            the user to add
      */
     public void addUser(User user) {
-	
-	if ( this.users == null )
+
+	if (this.users == null)
 	    this.users = new ArrayList<User>();
-	
+
 	this.users.add(user);
-	
-    }    
-    
-    
-    
+
+    }
+
 }

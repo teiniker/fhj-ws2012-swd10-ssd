@@ -20,12 +20,12 @@ import au.com.bytecode.opencsv.CSVReader;
  * @author Michael Hausegger, CAFK
  * 
  */
-public class TestOpenCSVLibrary {
+public class OpenCSVLibraryTest {
 
-    private String goodString1WithOneLine = new String(
+    private static final String _goodString1WithOneLine = new String(
 	    "firstname;lastname;department;location;username;password;email");
 
-    private String goodString1WithThreeLines = new String(
+    private static final String _goodString1WithThreeLines = new String(
 	    "firstname;lastname;department;location;username;password;email"
 		    + "\n"
 		    + "firstname;lastname2;department;location;username;password;email2"
@@ -40,14 +40,14 @@ public class TestOpenCSVLibrary {
     @Test
     public void doTestGoodInput1() throws IOException {
 
-	CSVReader reader1 = SSTFileDataExtractor.getCSVReader(new StringReader(
-		this.goodString1WithOneLine));
+	CSVReader _reader1 = SSTFileDataExtractor
+		.getCSVReader(new StringReader(this._goodString1WithOneLine));
 
-	List<String[]> myDatas = reader1.readAll();
+	List<String[]> _myDatas = _reader1.readAll();
 
-	assertEquals(1, myDatas.size());
+	assertEquals(1, _myDatas.size());
 
-	for (String[] line : myDatas) {
+	for (String[] line : _myDatas) {
 
 	    assertEquals("firstname", line[0]);
 	    assertEquals("lastname", line[1]);
@@ -69,16 +69,16 @@ public class TestOpenCSVLibrary {
     @Test
     public void doTestGoodInputWithThreeLines() throws IOException {
 
-	CSVReader reader1 = SSTFileDataExtractor.getCSVReader(new StringReader(
-		this.goodString1WithThreeLines));
+	CSVReader _reader = SSTFileDataExtractor.getCSVReader(new StringReader(
+		this._goodString1WithThreeLines));
 
-	List<String[]> myDatas = reader1.readAll();
+	List<String[]> _myDatas = _reader.readAll();
 
-	assertEquals(3, myDatas.size());
+	assertEquals(3, _myDatas.size());
 
-	String[] line1 = myDatas.get(0);
-	String[] line2 = myDatas.get(1);
-	String[] line3 = myDatas.get(2);
+	String[] line1 = _myDatas.get(0);
+	String[] line2 = _myDatas.get(1);
+	String[] line3 = _myDatas.get(2);
 
 	assertEquals("firstname", line1[0]);
 	assertEquals("lastname", line1[1]);
