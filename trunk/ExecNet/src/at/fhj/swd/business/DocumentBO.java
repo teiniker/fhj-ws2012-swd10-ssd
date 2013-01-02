@@ -87,16 +87,6 @@ public class DocumentBO extends ABusinessObject {
         }
     }
 
-    public boolean update(User Document) {
-        try {
-            User _newdoc = this.getRuntimeContext().getCurrentUser();
-            return true;
-        } catch (Exception e) {
-            logger.error(getClass().getSimpleName(), e);
-            return false;
-        }
-    }
-
     public boolean remove(long id) {
         try {
             Document d = _dc.readOne(id, Document.class);
@@ -114,7 +104,7 @@ public class DocumentBO extends ABusinessObject {
                 }
             }
 
-            if (WebFileIO.deleteFile(d.getUrl()) && _dc.delete(d)) {
+            if (_dc.delete(d) && WebFileIO.deleteFile(d.getUrl())) {
 
                 return true;
             } else {
