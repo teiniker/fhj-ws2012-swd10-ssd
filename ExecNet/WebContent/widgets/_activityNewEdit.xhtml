@@ -21,7 +21,11 @@
                         <h:outputLabel for="text" value="#{msg.activityNewEdit_message}" required="True"/> 
                     </td>
                     <td>
-                        <h:inputText id="entry" value="#{activityPostBean.entry}" required="true" />
+                        <h:inputTextarea id="entry" value="#{activityPostBean.entry}" 
+                            required="true" 
+                            maxlength="255"
+                            cols="100"
+                            rows="10" />
                     </td>
                 </tr>
                 <tr>
