@@ -48,6 +48,7 @@ public class TestDataFactory {
     public Post createPost(String text) {
         Post _result = new Post();
         _result.setDate(new Date());
+        _result.setActivityEntry(true);
         // _result.setPublic(true);
         _result.setEntry(text);
         return _result;
