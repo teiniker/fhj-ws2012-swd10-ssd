@@ -19,15 +19,15 @@
             <h:graphicImage value="STYLE/IMG/icon_user.jpg" />
             <rich:panel header="#{msg.global_otherPage} - #{userBean.viewUser.username}">
                 <h:panelGrid columns="2">
-                    <h:outputText styleClass="h5" value="#{msg.profile_firstname}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_firstname}:" />
                     <h:outputText styleClass="h6" value="#{userBean.viewUser.firstname}" />
-                    <h:outputText styleClass="h5" value="#{msg.profile_lastname}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_lastname}:" />
                     <h:outputText styleClass="h6" value="#{userBean.viewUser.lastname}" />
-                    <h:outputText styleClass="h5" value="#{msg.profile_email}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_email}:" />
                     <h:outputText styleClass="h6" value="#{userBean.viewUser.email}" />
-                    <h:outputText styleClass="h5" value="#{msg.profile_department}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_department}:" />
                     <h:outputText styleClass="h6" value="#{userBean.viewUser.department}" />
-                    <h:outputText styleClass="h5" value="#{msg.profile_location}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_location}:" />
                     <h:outputText styleClass="h6" value="#{userBean.viewUser.location}" />
                 </h:panelGrid>
             </rich:panel>
