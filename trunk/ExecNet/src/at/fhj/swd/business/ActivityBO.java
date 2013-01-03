@@ -71,7 +71,11 @@ public class ActivityBO {
      */
     public Boolean delete(Post p) {
         try {
-            return _pc.delete(p);
+            if (_pc.delete(p)) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
