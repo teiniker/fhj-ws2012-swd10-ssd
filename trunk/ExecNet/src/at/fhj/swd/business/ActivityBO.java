@@ -26,6 +26,41 @@ public class ActivityBO {
     }
 
     /**
+     * Adding new Post
+     * 
+     * @param entry
+     * @return
+     */
+    public Boolean add(String entry, Date datefrom, Date dateto, long idCommunity) {
+        User _u = _rc.getCurrentUser();
+
+        Community _c = _cc.readOne(idCommunity, Community.class);
+
+        Post _new = new Post();
+        _new.setEntry(entry);
+        _new.setAuthor(_u);
+        _new.setDate(new Date());
+        _new.setActivityEntry(true);
+        _new.setDatefrom(datefrom);
+        _new.setDateto(dateto);
+        _new.setCommunity(_c);
+
+        try {
+            if (_pc.create(_new)) {
+                _c.addPost(_new);
+                _cc.update(_c);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * update
      * 
      * @param idPost
      * @param entry
@@ -50,39 +85,6 @@ public class ActivityBO {
         try {
             if (_pc.update(_update) != null) {
                 _c.addPost(_update);
-                _cc.update(_c);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * Adding new Post
-     * 
-     * @param entry
-     * @return
-     */
-    public Boolean add(String entry, Date datefrom, Date dateto, long idCommunity) {
-        User _u = _rc.getCurrentUser();
-        Community _c = _cc.readOne(idCommunity, Community.class);
-
-        Post _new = new Post();
-        _new.setEntry(entry);
-        _new.setAuthor(_u);
-        _new.setDate(new Date());
-        _new.setActivityEntry(true);
-        _new.setDatefrom(datefrom);
-        _new.setDateto(dateto);
-        _new.setCommunity(_c);
-
-        try {
-            if (_pc.create(_new)) {
-                _c.addPost(_new);
                 _cc.update(_c);
                 return true;
             } else {
@@ -163,6 +165,7 @@ public class ActivityBO {
         }
         return ps;
 
+
         /*
          * try {
          * ps = _pc.readAll(Post.class);
@@ -186,8 +189,6 @@ public class ActivityBO {
         Collection<Community> co = new ArrayList<Community>();
         Community cn = new Community();
         cn.setName("Global");
-        cn.setId((long)999);
-        cn.setDescription("F�r alle sichtbar");
         co.add(cn);
 
         for (Community c : _rc.getCurrentUser().getCommunities()) {
