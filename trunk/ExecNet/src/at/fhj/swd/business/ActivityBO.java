@@ -116,22 +116,21 @@ public class ActivityBO {
      * @return
      * @throws Exception
      */
-    public Boolean isPortalAdmin(){
+    public Boolean isPortalAdmin() {
         User _u = _rc.getCurrentUser();
-        
-        if(_u==null){
+
+        if (_u == null) {
             return false;
         }
-        
-        try{
+
+        try {
             return _u.isPortalAdmin();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
-    
-    
+
+
     /**
      * All posts from communities where the user logged in is member
      * 
@@ -143,7 +142,7 @@ public class ActivityBO {
         // so irgendwie
         // Collection<Post> ps = _pc.readByQuery("WHERE community IS NULL AND pinpost IS NULL", Post.class);
 
-        Collection<Post> ps = new ArrayList<Post>();        
+        Collection<Post> ps = new ArrayList<Post>();
         Collection<Community> cs = _rc.getCurrentUser().getCommunities();
         for (Community c : cs) {
             ps.addAll(c.getPosts());

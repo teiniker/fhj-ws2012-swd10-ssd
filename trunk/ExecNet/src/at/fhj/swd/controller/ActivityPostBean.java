@@ -33,6 +33,9 @@ public class ActivityPostBean {
             dateto = datefrom;
         }
         if (_bo.add(entry, getDatefrom(), getDateto(), getIdCommunity())) {
+            setEntry("");
+            setDatefrom(null);
+            setDateto(null);
             return Nav.activity_add.toString();
         } else {
             ThreadLocals.setErrorMessage("add activity failed");
@@ -57,14 +60,14 @@ public class ActivityPostBean {
 
     }
 
-    public Boolean isAuthor(Post p) {   
-        return  _bo.isAuthor(p);  
+    public Boolean isAuthor(Post p) {
+        return _bo.isAuthor(p);
     }
 
-    public Boolean isPortalAdmin(){
-       return _bo.isPortalAdmin();
+    public Boolean isPortalAdmin() {
+        return _bo.isPortalAdmin();
     }
-    
+
     public Collection<Post> getAllByCommunity(Community c) {
         return c.getPosts();
     }
@@ -93,10 +96,10 @@ public class ActivityPostBean {
         return idPostToEdit;
     }
 
-    public Boolean compareIDs(Long id){
-        return getIdPostToEdit()==id;
+    public Boolean compareIDs(Long id) {
+        return getIdPostToEdit() == id;
     }
-    
+
     public void setIdPostToEdit(long idPostToEdit) {
         this.idPostToEdit = idPostToEdit;
     }
@@ -136,4 +139,6 @@ public class ActivityPostBean {
     public void setDateto(Date dateto) {
         this.dateto = dateto;
     }
+
+
 }
