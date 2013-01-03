@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+    <h:head>
+        
+    </h:head>
+    <h:body>
+        <center>
+            <h:outputText styleClass="h2" value="#{msg.global_otherPage}" />
+        </center>
+        <br/>
+        <h:panelGrid columns="2">
+            <h:graphicImage value="STYLE/IMG/icon_user.jpg" />
+            <rich:panel header="#{msg.global_myPage} - #{userBean.viewUser.username}">
+                <h:panelGrid columns="2">
+                    <h:outputText styleClass="h5" value="#{msg.profile_firstname}" />
+                    <h:outputText styleClass="h6" value="#{userBean.viewUser.firstname}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_lastname}" />
+                    <h:outputText styleClass="h6" value="#{userBean.viewUser.lastname}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_email}" />
+                    <h:outputText styleClass="h6" value="#{userBean.viewUser.email}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_department}" />
+                    <h:outputText styleClass="h6" value="#{userBean.viewUser.department}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_location}" />
+                    <h:outputText styleClass="h6" value="#{userBean.viewUser.location}" />
+                </h:panelGrid>
+            </rich:panel>
+        </h:panelGrid>
+        <br/><br/><br/><br/><br/>
+    </h:body>
+      
+</html>
