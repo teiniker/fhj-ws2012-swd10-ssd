@@ -14,6 +14,4 @@ public interface IRuntimeContext {
 
     public Community getCurrentCommunity();
 
-    public void setCurrentUser(User currentUser);
-
 }
