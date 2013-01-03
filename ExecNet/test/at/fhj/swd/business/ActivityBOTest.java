@@ -1,5 +1,8 @@
 package at.fhj.swd.business;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -43,6 +46,7 @@ public class ActivityBOTest {
 
         _context.setCurrentUser(user);
         _context.setAuthenticated(user);
+        _context.setCurrentCommunity(community);
 
         activityBO = new ActivityBO();
         activityBO.set_rc(_context);
@@ -56,6 +60,7 @@ public class ActivityBOTest {
 
         _uc.create(user);
         _pc.create(post);
+        _cc.create(community);
     }
 
     @Test
@@ -113,6 +118,13 @@ public class ActivityBOTest {
         Assert.assertTrue(activityBO.delete(post));
     }
 
+    @Test
+    public void testGetCommunities() {
+        Collection<Community> co = new ArrayList<Community>();
+        co.add(community);
+        user.setCommunities(co);
+        Assert.assertEquals(2, activityBO.getCommunities().size());
+    }
 
     @Test
     // (expected = IllegalStateException.class)
@@ -120,6 +132,7 @@ public class ActivityBOTest {
         activityBO.delete(null);
         Assert.assertTrue(true);
     }
+
 
     @Test(expected = IllegalArgumentException.class)
     public void addEntry() {
