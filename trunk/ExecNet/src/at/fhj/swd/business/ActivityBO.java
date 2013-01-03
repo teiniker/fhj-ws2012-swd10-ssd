@@ -108,7 +108,11 @@ public class ActivityBO {
      */
     public Boolean delete(Post p) {
         try {
-            return _pc.delete(p);
+            if (_pc.delete(p)) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -143,6 +147,19 @@ public class ActivityBO {
             return p.getAuthor().getId() == _rc.getCurrentUser().getId();
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean isPortalAdmin() {
+        User _u = _rc.getCurrentUser();
+
+        if (_u == null) {
+            return false;
+        }
+        try {
+            return _u.isPortalAdmin();
+        } catch (Exception e) {
             return false;
         }
     }
