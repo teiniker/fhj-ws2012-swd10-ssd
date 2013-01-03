@@ -2,7 +2,9 @@ package at.fhj.swd.controller;
 
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -20,10 +22,24 @@ public class UserBean {
     private String culture = "en";
     private String department;
     private String location;
+    private User viewUser;
+
     private UserBO _bo;
 
     public UserBean() {
         _bo = new UserBO();
+    }
+
+    @PostConstruct
+    public void init() {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+
+        try {
+            Long id = Long.valueOf(context.getRequestParameterMap().get("viewUserId"));
+            viewUser = _bo.getOne(id);
+        } catch (Exception e) {
+            viewUser = null;
+        }
     }
 
     public String login() {
@@ -223,5 +239,13 @@ public class UserBean {
 
     public boolean setActive(int id) {
         return _bo.setActive(id);
+    }
+
+    public User getViewUser() {
+        return viewUser;
+    }
+
+    public void setViewUser(User viewUser) {
+        this.viewUser = viewUser;
     }
 }
