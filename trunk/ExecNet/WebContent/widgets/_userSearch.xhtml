@@ -32,7 +32,40 @@
 					</p>
 				</h:form>
 				
-<!-- 				<ui:repeat var="user" value="#{userBean.searchResultUsers}"></ui:repeat> -->
+<!-- 				only for testing search method				 -->
+<!-- 				<rich:dataTable value="#{userBean.searchResultUsers}" var="tableUser" iterationStatusVar="it"> -->
+<!--             		<rich:column> -->
+<!--                 		<f:facet name="header">#</f:facet> -->
+<!--                 		<h:outputText styleClass="h5" value="#{it.index+1}" /> -->
+<!--             		</rich:column> -->
+<!--             		<rich:column> -->
+<!-- 		                <f:facet name="header">#{msg.profile_firstname}</f:facet> -->
+<!-- 		                <h:outputText styleClass="h5" value="#{tableUser.firstname}" /> -->
+<!-- 		            </rich:column> -->
+<!-- 		            <rich:column> -->
+<!-- 		                <f:facet name="header">#{msg.profile_lastname}</f:facet> -->
+<!-- 		                <h:outputText styleClass="h5" value="#{tableUser.lastname}" /> -->
+<!-- 		            </rich:column> -->
+<!-- 		            <rich:column> -->
+<!-- 		                <f:facet name="header">#{msg.profile_email}</f:facet> -->
+<!-- 		                <h:outputText styleClass="h5" value="#{tableUser.email}" /> -->
+<!-- 		            </rich:column> -->
+<!-- 		            <rich:column> -->
+<!-- 		                <f:facet name="header">#{msg.profile_department}</f:facet> -->
+<!-- 		                <h:outputText styleClass="h5" value="#{tableUser.department}" /> -->
+<!-- 		            </rich:column> -->
+<!-- 		            <rich:column> -->
+<!-- 		                <f:facet name="header">#{msg.profile_location}</f:facet> -->
+<!-- 		                <h:outputText styleClass="h5" value="#{tableUser.location}" /> -->
+<!-- 		            </rich:column> -->
+<!-- 		            <rich:column> -->
+<!-- 		                <f:facet name="header">#{msg.profile_view}</f:facet> -->
+<!-- 		                <h:outputLink value="./new_otherPage.xhtml"> -->
+<!-- 		                    <h:graphicImage value="STYLE/IMG/icon_view.jpg" /> -->
+<!-- 		                    <f:param name="viewUserId" value="#{tableUser.id}" /> -->
+<!-- 		                </h:outputLink> -->
+<!-- 		            </rich:column> -->
+<!-- 		        </rich:dataTable> -->
 				
 			</f:view>
 		</div>
