@@ -50,8 +50,7 @@ public class ActivityPostBean {
 
     public String deletepost(Post p) {
         _bo.delete(p);
-        return "refresh";
-        // return Nav.actitity_delete.toString();
+        return Nav.actitity_delete.toString();
     }
 
     public String editpost(Post p) {
@@ -59,13 +58,22 @@ public class ActivityPostBean {
         setDatefromforUpdate(p.getDatefrom());
         setDatetoforUpdate(p.getDateto());
         setEntryforUpdate(p.getEntry());
-        setIdCommunityforUpdate(p.getCommunity().getId());
+        
+        if (p.getCommunity() ==null){
+        	setIdCommunityforUpdate(0l);
+        }
+        else{
+        	setIdCommunityforUpdate(p.getCommunity().getId());
+        }
+        
         idPostToEdit = p.getId();
-        return "refresh";
+        
+        return Nav.activity_edit.toString();
     }
 
-    public Boolean updatePost(Post p) {
-        return true;
+    public String updatepost(Post p) {
+       _bo.updatepost(p);
+       return Nav.activity_update.toString();
     }
 
     public Collection<Community> getCommunities() {
