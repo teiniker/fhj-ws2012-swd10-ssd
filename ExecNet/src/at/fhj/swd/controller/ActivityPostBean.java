@@ -43,11 +43,17 @@ public class ActivityPostBean {
         }
     }
 
-    public String deletepost(String idPost) {
-        _bo.delete(Long.parseLong(idPost));
+    public String deletepost(Post p) {
+        _bo.delete(p);
         return Nav.actitity_delete.toString();
     }
 
+    /*
+     * public String deletepost(String idPost) {
+     * _bo.delete(Long.parseLong(idPost));
+     * return Nav.actitity_delete.toString();
+     * }
+     */
     public String editpost(Post p) {
         // ThreadLocals.setPostToEdit(p);
         setDatefrom(p.getDatefrom());
@@ -57,12 +63,13 @@ public class ActivityPostBean {
         return Nav.activity_edit.toString();
     }
 
-    public String editpost(String idPost) {
-        // ThreadLocals.setPostToEdit(p);
-        idPostToEdit = Long.parseLong(idPost);
-        return Nav.activity_edit.toString();
-    }
-
+    /*
+     * public String editpost(String idPost) {
+     * // ThreadLocals.setPostToEdit(p);
+     * idPostToEdit = Long.parseLong(idPost);
+     * return Nav.activity_edit.toString();
+     * }
+     */
     public Collection<Community> getCommunities() {
         return _bo.getCommunities();
 
