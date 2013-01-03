@@ -18,7 +18,10 @@
         <rich:list value="#{communityBean.getMy()}" var="community" type="definitions">
             <h:panelGrid columns="2">
                 <h:graphicImage value="STYLE/IMG/icon_communities.jpg" />
-                <h:outputText styleClass="h6" value="#{community.name}" />
+                <h:outputLink value="./new_communities_overview.xhtml">
+                    <h:outputText styleClass="h5" value="#{community.name}" />
+                    <f:param name="viewCommunityId" value="#{community.id}" />
+                </h:outputLink>
             </h:panelGrid>
         </rich:list>
     </h:body>
