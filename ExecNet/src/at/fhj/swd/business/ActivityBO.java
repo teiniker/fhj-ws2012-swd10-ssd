@@ -26,6 +26,42 @@ public class ActivityBO {
     }
 
     /**
+     * 
+     * @param idPost
+     * @param entry
+     * @param datefrom
+     * @param dateto
+     * @param idCommunity
+     * @return
+     */
+    public Boolean update(long idPost, String entry, Date datefrom, Date dateto, long idCommunity) {
+        User _u = _rc.getCurrentUser();
+        Community _c = _cc.readOne(idCommunity, Community.class);
+        Post _update = _pc.readOne(idPost, Post.class);
+
+        _update.setEntry(entry);
+        _update.setAuthor(_u);
+        _update.setDate(new Date());
+        _update.setActivityEntry(true);
+        _update.setDatefrom(datefrom);
+        _update.setDateto(dateto);
+        _update.setCommunity(_c);
+
+        try {
+            if (_pc.update(_update) != null) {
+                _c.addPost(_update);
+                _cc.update(_c);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
      * Adding new Post
      * 
      * @param entry
@@ -33,7 +69,6 @@ public class ActivityBO {
      */
     public Boolean add(String entry, Date datefrom, Date dateto, long idCommunity) {
         User _u = _rc.getCurrentUser();
-
         Community _c = _cc.readOne(idCommunity, Community.class);
 
         Post _new = new Post();
@@ -71,11 +106,7 @@ public class ActivityBO {
      */
     public Boolean delete(Post p) {
         try {
-            if (_pc.delete(p)) {
-                return true;
-            } else {
-                return false;
-            }
+            return _pc.delete(p);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -115,27 +146,6 @@ public class ActivityBO {
     }
 
     /**
-     * is User PortalAdmin
-     * 
-     * @return
-     * @throws Exception
-     */
-    public Boolean isPortalAdmin() {
-        User _u = _rc.getCurrentUser();
-
-        if (_u == null) {
-            return false;
-        }
-
-        try {
-            return _u.isPortalAdmin();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-
-    /**
      * All posts from communities where the user logged in is member
      * 
      * @return
@@ -152,7 +162,6 @@ public class ActivityBO {
             ps.addAll(c.getPosts());
         }
         return ps;
-
 
         /*
          * try {
@@ -178,7 +187,7 @@ public class ActivityBO {
         Community cn = new Community();
         cn.setName("Global");
         cn.setId((long)999);
-        cn.setDescription("Für alle sichtbar");
+        cn.setDescription("Fï¿½r alle sichtbar");
         co.add(cn);
 
         for (Community c : _rc.getCurrentUser().getCommunities()) {
