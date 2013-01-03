@@ -43,44 +43,56 @@ public class DocumentBO extends ABusinessObject {
     }
 
 
-    public void upload(UploadedFile _file, List<Community> selectionItems) {
+    public Document createDocument(String name, List<Community> communities, User owner, String uploadDirectory) {
 
         try {
 
-            User _u = _rt.getCurrentUser();
             Document _new = new Document();
-            _new.setName(_file.getName());
-            // set empty url -> filename = Document.id
+
+            _new.setName(name);
             _new.setUrl("");
+
             Date CreationTime = Calendar.getInstance().getTime();
             _new.setDateCreated(CreationTime);
             _new.setPublic(true);
-            _new.setOwner(_u);
+            _new.setOwner(owner);
             _dc.create(_new);
 
-            _new = _dc.update(_new);
+            for (Community c : communities) {
 
-            for (Community c : selectionItems) {
-
-                System.out.println(c.toString());
+                // System.out.println(c.toString());
                 Community _tc = _cc.readOne(c.getId(), Community.class);
                 _new.addCommunity(_tc);
             }
+
             // getting file extension
-            String Ext = "";
+            String ext = "";
             String[] TempArray = _new.getName().split("\\.");
             if (TempArray.length > 1) {
-                Ext = "." + TempArray[TempArray.length - 1];
+                ext = "." + TempArray[TempArray.length - 1];
             }
 
             // setting url with Document.id as filename
-            _new.setUrl(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("uploadDirectory")
-                + _new.getId().toString() + Ext);
+            _new.setUrl(uploadDirectory + _new.getId().toString() + ext);
 
-            _new.setUrl(_new.getUrl());
             _new = _dc.update(_new);
 
-            WebFileIO.copyFile(_file, _new.getUrl());
+
+            return _new;
+        } catch (Exception e) {
+            logger.error(getClass().getSimpleName(), e);
+            return null;
+        }
+    }
+
+    public void upload(UploadedFile _file, List<Community> communities) {
+
+        try {
+
+            String _URL = createDocument(_file.getName(), communities, _rt.getCurrentUser(),
+                FacesContext.getCurrentInstance().getExternalContext().getInitParameter("uploadDirectory")).getUrl();
+
+            WebFileIO.copyFile(_file, _URL);
 
         } catch (Exception e) {
             logger.error(getClass().getSimpleName(), e);
@@ -116,48 +128,48 @@ public class DocumentBO extends ABusinessObject {
         }
     }
 
-    public boolean addCommunity(Document document, Community community) {
-        try {
-            User _newdoc = this.getRuntimeContext().getCurrentUser();
-
-            return true;
-        } catch (Exception e) {
-            logger.error(getClass().getSimpleName(), e);
-            return false;
-        }
-    }
-
-    public boolean addCommunites(Document document, Collection<Community> communites) {
-        try {
-            User _newdoc = this.getRuntimeContext().getCurrentUser();
-
-            return true;
-        } catch (Exception e) {
-            logger.error(getClass().getSimpleName(), e);
-            return false;
-        }
-    }
-
-    public boolean removeCommunity(Document document, Community community) {
-        try {
-
-            return true;
-        } catch (Exception e) {
-            logger.error(getClass().getSimpleName(), e);
-            return false;
-        }
-    }
-
-    public boolean removeCommunites(Document document) {
-        try {
-
-
-            return true;
-        } catch (Exception e) {
-            logger.error(getClass().getSimpleName(), e);
-            return false;
-        }
-    }
+    // public boolean addCommunity(Document document, Community community) {
+    // try {
+    // User _newdoc = this.getRuntimeContext().getCurrentUser();
+    //
+    // return true;
+    // } catch (Exception e) {
+    // logger.error(getClass().getSimpleName(), e);
+    // return false;
+    // }
+    // }
+    //
+    // public boolean addCommunites(Document document, Collection<Community> communites) {
+    // try {
+    // User _newdoc = this.getRuntimeContext().getCurrentUser();
+    //
+    // return true;
+    // } catch (Exception e) {
+    // logger.error(getClass().getSimpleName(), e);
+    // return false;
+    // }
+    // }
+    //
+    // public boolean removeCommunity(Document document, Community community) {
+    // try {
+    //
+    // return true;
+    // } catch (Exception e) {
+    // logger.error(getClass().getSimpleName(), e);
+    // return false;
+    // }
+    // }
+    //
+    // public boolean removeCommunites(Document document) {
+    // try {
+    //
+    //
+    // return true;
+    // } catch (Exception e) {
+    // logger.error(getClass().getSimpleName(), e);
+    // return false;
+    // }
+    // }
 
     public boolean download(Document doc) {
 
