@@ -8,12 +8,18 @@ import at.fhj.swd.domain.User;
 public class TestRuntimeContext implements IRuntimeContext {
 
     private User currentUser;
+    
     private ActivityStream currentActivityStream;
     private Community currentCommunity;
 
     @Override
     public User getCurrentUser() {
         return currentUser;
+    }
+    
+    @Override
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     @Override
