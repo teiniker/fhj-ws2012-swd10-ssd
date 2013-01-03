@@ -176,30 +176,25 @@ public class ActivityBO {
         // Collection<Post> ps = _pc.readByQuery("WHERE community IS NULL AND pinpost IS NULL", Post.class);
 
         Collection<Post> ps = new ArrayList<Post>();
+
+        Date tdNow = new Date();
+
         Collection<Community> cs = _rc.getCurrentUser().getCommunities();
         for (Community c : cs) {
-            ps.addAll(c.getPosts());
+            // zum jetztigen zeitpunkt gültigen posts holen
+            ps.addAll(c.getPosts(tdNow));
         }
+
+        Collection<Post> psAll = _pc.readAll(Post.class);
+        for (Post p : psAll) {
+            // wenn post Global ist (community == null) und zum jetztigen zeitpunkt gültigkeit hat.
+            if (p.getCommunity() == null && p.getDatefrom().before(tdNow) && p.getDateto().after(tdNow)) {
+                ps.add(p);
+            }
+        }
+
         return ps;
 
-
-        /*
-         * try {
-         * ps = _pc.readAll(Post.class);
-         * 
-         * Collection<Community> cs = _rc.getCurrentUser().getCommunities();
-         * for(Post p : ps){
-         * if(p.getCommunity() != null && !cs.contains(p.getCommunity())){
-         * ps.remove(p);
-         * }
-         * }
-         * return ps;
-         * } catch (Exception e) {
-         * // TODO Auto-generated catch block
-         * e.printStackTrace();
-         * return null;
-         * }
-         */
     }
 
     public Collection<Community> getCommunities() {

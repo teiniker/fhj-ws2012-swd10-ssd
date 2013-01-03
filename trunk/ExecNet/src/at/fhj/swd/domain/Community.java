@@ -2,6 +2,8 @@ package at.fhj.swd.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -216,6 +218,22 @@ public class Community implements IEntity {
 
     public Collection<Post> getPosts() {
         return posts;
+    }
+
+    /**
+     * Posts from Community betwenn DateFrom and DateTo
+     * 
+     * @param dtNow
+     * @return Posts
+     */
+    public Collection<Post> getPosts(Date dtNow) {
+        List<Post> postsNew = new ArrayList<Post>();
+        for (Post p : posts) {
+            if (p.getDatefrom().before(dtNow) && p.getDateto().after(dtNow)) {
+                postsNew.add(p);
+            }
+        }
+        return postsNew;
     }
 
     public void setPosts(Collection<Post> posts) {
