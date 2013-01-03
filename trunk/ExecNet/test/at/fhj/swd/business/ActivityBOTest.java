@@ -1,7 +1,6 @@
 package at.fhj.swd.business;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,34 +23,42 @@ public class ActivityBOTest {
 
     private static TestRuntimeContext _context;
     private static TestDataFactory _factory;
-    
-    
+
+
     private static User user;
     private static Post post;
+    private static Community community;
 
     @BeforeClass
     public static void setup() {
 
         _factory = new TestDataFactory();
         _context = new TestRuntimeContext();
-        
+
         user = _factory.createUser("testUser");
-        
-        _context.setAuthenticated(user);
+        community = _factory.createCommunity("Huehott");
+
         _context.setCurrentUser(user);
-        
+        _context.setAuthenticated(user);
+
         activityBO = new ActivityBO();
         activityBO.set_rc(_context);
-        
+
         _pc = new DBContext<Post>();
         _cc = new DBContext<Community>();
         _uc = new DBContext<User>();
 
         post = _factory.createPost("TestPostText");
         post.setAuthor(user);
-        
+
         _uc.create(user);
         _pc.create(post);
+    }
+
+    @Test
+    public void testGetCurrentCulture() throws Exception {
+        user.setCulture("EN");
+        Assert.assertEquals("EN", activityBO.getCurrentCulture());
     }
 
     @Test
@@ -69,4 +76,44 @@ public class ActivityBOTest {
         Assert.assertFalse(activityBO.isAuthor(null));
     }
 
+    @Test
+    public void testIsPortalAdmin_falseExpected_UserNull() throws Exception {
+        user = _factory.createUser(null);
+        _context.setCurrentUser(user);
+        activityBO.set_rc(_context);
+        Assert.assertFalse(activityBO.isPortalAdmin());
+    }
+
+    @Test
+    public void testIsPortalAdmin_trueExpected() throws Exception {
+        User user1 = new User();
+        user1.setEmail("user1@email.com");
+        user1.setPassword("p@ssword");
+        user1.setAdmin(true);
+        user1.setPortalAdmin(true);
+        user1.setUsername("user1");
+        user1.setFirstname("Max");
+        user1.setLastname("Mustermann");
+        _context.setCurrentUser(user1);
+        activityBO.set_rc(_context);
+        Assert.assertTrue(activityBO.isPortalAdmin());
+    }
+
+    @Test
+    public void testUpdatePost_trueExpected() throws Exception {
+        post.setCommunity(community);
+        Assert.assertTrue(activityBO.updatePost(post));
+    }
+
+    @Test
+    public void testDelete_trueExpected() throws Exception {
+        Assert.assertTrue(activityBO.delete(post));
+    }
+
+    /*
+     * @Test(expected = IllegalArgumentException.class)
+     * public void testDelete_ExceptionExpected() {
+     * activityBO.delete(null);
+     * }
+     */
 }
