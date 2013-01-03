@@ -11,91 +11,60 @@
     xmlns:rich="http://richfaces.org/rich">
     
     <body>
-        	<h:form>        
+        <h:form>        
             <table>
-                 <tr>
+                <tr>
                     <th> #{msg.activitys_add}</th>
-                 </tr>
-                 <tr>
+                </tr>
+                <tr>
                     <td>
-                        <h:outputLabel for="text"
-                            value="#{msg.activityNewEdit_message}"
-                            required="True"/> 
+                        <h:outputLabel for="text" value="#{msg.activityNewEdit_message}" required="True"/> 
                     </td>
                     <td>
-                        <h:inputText id="entry" 
-                            value="#{activityPostBean.entry}"
-                            required="true" />
+                        <h:inputText id="entry" value="#{activityPostBean.entry}" required="true" />
                     </td>
-                  </tr>
-                  <tr>
-                       <td>
-                            <h:outputLabel for="datefrom"
-                                value="#{msg.activity_datefrom_text}"
-                                required="True"/> 
-                        </td>
-                        <td>
-                             <a4j:outputPanel id="calendarfrom" layout="block">
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputLabel for="datefrom" value="#{msg.activity_datefrom_text}" required="True"/> 
+                    </td>
+                    <td>
+                        <a4j:outputPanel id="calendarfrom" layout="block">
                             <rich:calendar value="#{activityPostBean.datefrom}"
                                 locale="#{activityPostBean.locale}"
                                 popup="#{activityPostBean.popup}"/>
-                            </a4j:outputPanel>
-                         </td>
-                    </tr>
-                       <tr>
-                       <td>
-                            <h:outputLabel for="dateto"
-                                value="#{msg.activity_dateto_text}"
-                                required="True"/> 
-                        </td>
-                        <td>
-                             <a4j:outputPanel id="calendarto" layout="block">
+                        </a4j:outputPanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputLabel for="dateto" value="#{msg.activity_dateto_text}" required="True"/> 
+                    </td>
+                    <td>
+                        <a4j:outputPanel id="calendarto" layout="block">
                             <rich:calendar value="#{activityPostBean.dateto}"
                                 locale="#{activityPostBean.locale}"
                                 popup="#{activityPostBean.popup}" />
-                            </a4j:outputPanel>
-                         </td>
-                    </tr>
-                   
-
-                    <tr>
-                        <td>                 
-                                <h:selectOneMenu value="#{activityPostBean.idCommunity}">
-                                    <f:selectItems value="#{activityPostBean.communities}" var="itemCommunitiy" itemValue="#{itemCommunitiy.id}" itemLabel="#{itemCommunitiy.name}" />
-                                </h:selectOneMenu> 
-                        </td>
-                        <td> 
-                            <h:commandButton 
-                                action="#{activityPostBean.addNow()}"
-                                value="#{msg.post_submit}"/>
-                        </td>
-                     </tr>
-               
+                        </a4j:outputPanel>
+                    </td>
+                </tr>
                 <tr>
-   
+                    <td>                 
+                        <h:selectOneMenu value="#{activityPostBean.idCommunity}">
+                            <f:selectItems value="#{activityPostBean.communities}" var="itemCommunitiy" itemValue="#{itemCommunitiy.id}" itemLabel="#{itemCommunitiy.name}" />
+                        </h:selectOneMenu> 
+                    </td>
+                    <td> 
+                        <h:commandButton action="#{activityPostBean.addNow()}" value="#{msg.post_submit}"/>
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="2">
-                        <h:messages style="color: Red;"/>
-                        
-                   <br/>
-                      <br/>
-                       <br/>
-                        <br/>
-                         <br/>
-                          <br/>
-                           <br/>
-                            <br/>
-                             <br/>
-                              <br/>
-                               <br/>
-                                <br/>
-                                   <br/>
-                             <br/>
-                              <br/>
-                               <br/>
-                                <br/>
+                        <h:messages style="color: Red;"/>     
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                     </td>
                 </tr>                           
-                </table>    
-            </h:form>
+            </table>    
+        </h:form>
     </body>			
 </html>
