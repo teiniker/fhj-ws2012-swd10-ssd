@@ -37,6 +37,10 @@ public class ActivityBO {
      * @return
      */
     public Boolean add(String entry, Date datefrom, Date dateto, long idCommunity) {
+        if (datefrom.after(dateto)) {
+            throw new IllegalArgumentException("datefrom must be before dateto");
+        }
+
         User _u = _rc.getCurrentUser();
 
         Post _new = new Post();
