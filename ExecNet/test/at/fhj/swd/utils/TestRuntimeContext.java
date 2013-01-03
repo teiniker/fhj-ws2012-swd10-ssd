@@ -20,6 +20,7 @@ public class TestRuntimeContext implements IRuntimeContext {
     @Override
     public void setAuthenticated(User user) {
         user.authenticate();
+       
     }
 
     @Override
@@ -30,6 +31,10 @@ public class TestRuntimeContext implements IRuntimeContext {
     @Override
     public Community getCurrentCommunity() {
         return currentCommunity;
+    }
+    
+    public void setCurrentUSer(User user){
+        this.currentUser=user;
     }
 
 }
