@@ -14,26 +14,17 @@
         
         <!-- Left Content -->
         <ui:define name="left">
-            <center>
-                <h:outputText styleClass="h3" value="Left" />
-            </center>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> 
+            
         </ui:define>
         
         <!-- Center Content -->
         <ui:define name="center">
-            <center>
-                <h:outputText styleClass="h1" value="#{msg.global_myPage}" />
-            </center>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <ui:include src="widgets/_myprofile_overview.xhtml" />
         </ui:define>
         
         <!-- Right Content -->
         <ui:define name="right">
-            <center>
-                <h:outputText styleClass="h3" value="right" />
-            </center>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <ui:include src="widgets/_myprofile_communities.xhtml" />
         </ui:define>
     
     </ui:composition>
