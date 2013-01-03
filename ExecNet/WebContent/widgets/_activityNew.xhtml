@@ -59,14 +59,7 @@
                         </h:selectOneMenu> 
                     </td>
                     <td> 
-                        <c:choose>
-                        <c:when test="not empty post">
-                            <h:commandButton action="#{activityPostBean.updatePost(post)}" value="#{msg.post_submit}"/>
-                        </c:when>
-                        <c:otherwise>
-                            <h:commandButton action="#{activityPostBean.addNow()}" value="#{msg.post_submit}"/>
-                        </c:otherwise>
-                        </c:choose>                            
+                        <h:commandButton action="#{activityPostBean.addNow()}" value="#{msg.activity_submit}"/>                        
                     </td>
                 </tr>
                 <tr>

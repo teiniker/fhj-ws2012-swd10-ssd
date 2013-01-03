@@ -14,7 +14,7 @@
         <h:form>        
             <table>
                 <tr>
-                    <th> #{msg.activitys_add}</th>
+                    <th> #{msg.activitys_edit}</th>
                 </tr>
                 <tr>
                     <td>
@@ -58,14 +58,14 @@
                             <f:selectItems value="#{activityPostBean.communities}" var="itemCommunitiy" itemValue="#{itemCommunitiy.id}" itemLabel="#{itemCommunitiy.name}" />
                         </h:selectOneMenu> 
                     </td>
-                    <td> 
-                        <h:commandButton action="#{activityPostBean.updatePost(post)}" value="update"/>
+                   <td> 
+                        <h:commandButton action="#{activityPostBean.updatePost(post)}" value="#{msg.activity_submit}"/>                        
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <h:messages style="color: Red;"/>     
-                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        <br/><br/><br/><br/><br/><br/><br/>
                     </td>
                 </tr>                           
             </table>    
