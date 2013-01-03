@@ -19,15 +19,15 @@
             <h:graphicImage value="STYLE/IMG/icon_user.jpg" />
             <rich:panel header="#{msg.global_myPage} - #{user.getUsername()}">
                 <h:panelGrid columns="2">
-                    <h:outputText styleClass="h5" value="#{msg.profile_firstname}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_firstname}:" />
                     <h:outputText styleClass="h6" value="#{user.getFirstname()}" />
-                    <h:outputText styleClass="h5" value="#{msg.profile_lastname}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_lastname}:" />
                     <h:outputText styleClass="h6" value="#{user.getLastname()}" />
-                    <h:outputText styleClass="h5" value="#{msg.profile_email}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_email}:" />
                     <h:outputText styleClass="h6" value="#{user.getEmail()}" />
-                    <h:outputText styleClass="h5" value="#{msg.profile_department}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_department}:" />
                     <h:outputText styleClass="h6" value="#{user.getDepartment()}" />
-                    <h:outputText styleClass="h5" value="#{msg.profile_location}" />
+                    <h:outputText styleClass="h5" value="#{msg.profile_location}:" />
                     <h:outputText styleClass="h6" value="#{user.getLocation()}" />
                 </h:panelGrid>
             </rich:panel>
