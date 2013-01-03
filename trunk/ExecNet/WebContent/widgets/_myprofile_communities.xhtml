@@ -15,7 +15,7 @@
             <h:outputText styleClass="h3" value="#{msg.global_communities}" />
         </center>
         <br/>
-        <rich:list value="#{communityBean.getMy()}" var="community" type="definitions">
+        <rich:list value="#{user.getCommunities()}" var="community" type="definitions">
             <h:panelGrid columns="2">
                 <h:graphicImage value="STYLE/IMG/icon_communities.jpg" />
                 <h:outputLink value="./new_communities_overview.xhtml">
