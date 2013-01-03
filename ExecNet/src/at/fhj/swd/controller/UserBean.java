@@ -159,10 +159,27 @@ public class UserBean {
         return _bo.getAll();
     }
 
-    public String searchUser() throws Exception {
-        String searchQuery = this.searchQuery;
-        searchResultUsers = _bo.searchUser(searchQuery);
-        return "searchResult";
+    public String searchUser() {
+        String searchQuery;
+        
+        if (this.searchQuery != null) {
+            searchQuery = this.searchQuery;
+        } else {
+            return "no search query";
+        }
+
+        try {
+            searchResultUsers = _bo.searchUser(searchQuery);
+        } catch (Exception e) {
+            return "error";
+        }
+        
+        if (searchResultUsers != null) {
+            return "search results";
+        } else {
+            return "no search Results";
+        }
+
     }
 
     public String getFirstname() {
