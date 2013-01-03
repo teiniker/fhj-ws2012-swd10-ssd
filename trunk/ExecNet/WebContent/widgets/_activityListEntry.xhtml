@@ -32,19 +32,19 @@
                         <ui:fragment rendered="${varIsAuthor == true}">
                            <tr>
                                 <td>
-                                    <h:commandButton action="#{activityPostBean.editpost(item)}" value="#{msg.post_edit}"/>
+                                    <h:commandButton action="#{activityPostBean.editpost(post)}" value="#{msg.post_edit}"/>
                                 </td>
                            </tr>
                             <tr>
                                 <td>
-                                    <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
+                                    <h:commandButton action="#{activityPostBean.deletepost(post)}" value="#{msg.post_delete}"/>
                                 </td>
                             </tr>
                         </ui:fragment> 
                         <ui:fragment rendered="${varIsAuthor == false}">
                             <ui:fragment rendered="${varIsPortalAdmin == true}">
                                 <tr>
-                                    <td><h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/></td>
+                                    <td><h:commandButton action="#{activityPostBean.deletepost(post)}" value="#{msg.post_delete}"/></td>
                                </tr>
                             </ui:fragment>
                         </ui:fragment>                                           
