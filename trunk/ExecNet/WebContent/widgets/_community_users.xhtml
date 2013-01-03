@@ -15,12 +15,12 @@
             <h:outputText styleClass="h3" value="#{msg.global_users}" />
         </center>
         <br/>
-        <rich:list value="#{communityBean.viewCommunity.getUsers()}" var="user" type="definitions">
+        <rich:list value="#{communityBean.viewCommunity.getUsers()}" var="listUser" type="definitions">
             <h:panelGrid columns="2">
                 <h:graphicImage value="STYLE/IMG/icon_users.jpg" />
                 <h:outputLink value="./new_otherPage.xhtml">
-                    <h:outputText styleClass="h5" value="#{user.username}" />
-                    <f:param name="viewUserId" value="#{user.id}" />
+                    <h:outputText styleClass="h5" value="#{listUser.username}" />
+                    <f:param name="viewUserId" value="#{listUser.id}" />
                 </h:outputLink>
             </h:panelGrid>
         </rich:list>
