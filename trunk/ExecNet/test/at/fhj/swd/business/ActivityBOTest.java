@@ -110,10 +110,11 @@ public class ActivityBOTest {
         Assert.assertTrue(activityBO.delete(post));
     }
 
-    /*
-     * @Test(expected = IllegalArgumentException.class)
-     * public void testDelete_ExceptionExpected() {
-     * activityBO.delete(null);
-     * }
-     */
+
+    @Test
+    // (expected = IllegalStateException.class)
+    public void testDelete_ExceptionExpected() {
+        activityBO.delete(null);
+        Assert.assertTrue(true);
+    }
 }
