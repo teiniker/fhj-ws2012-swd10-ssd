@@ -18,7 +18,10 @@
         <rich:list value="#{communityBean.viewCommunity.getUsers()}" var="user" type="definitions">
             <h:panelGrid columns="2">
                 <h:graphicImage value="STYLE/IMG/icon_users.jpg" />
-                <h:outputText styleClass="h5" value="#{user.username}" />
+                <h:outputLink value="./new_otherPage.xhtml">
+                    <h:outputText styleClass="h5" value="#{user.username}" />
+                    <f:param name="viewUserId" value="#{user.id}" />
+                </h:outputLink>
             </h:panelGrid>
         </rich:list>
     </h:body>
