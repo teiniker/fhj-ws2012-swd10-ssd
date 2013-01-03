@@ -34,10 +34,12 @@ public class ActivityBOTest {
     private static Post post;
     private static Community community;
 
-    private static Post post1;
-    private static Post post2;
-    private static Community community1;
-    private static Community community2;
+    /*
+     * private static Post post1;
+     * private static Post post2;
+     * private static Community community1;
+     * private static Community community2;
+     */
 
     @BeforeClass
     public static void setup() {
@@ -52,14 +54,14 @@ public class ActivityBOTest {
         _context.setAuthenticated(user);
         _context.setCurrentCommunity(community);
 
-
-        Date dtNow = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(dtNow);
-        cal.add(Calendar.DATE, 1);
-        Date dtNowPlus1Day = cal.getTime();
-
         /*
+         * 
+         * Date dtNow = new Date();
+         * Calendar cal = Calendar.getInstance();
+         * cal.setTime(dtNow);
+         * cal.add(Calendar.DATE, 1);
+         * Date dtNowPlus1Day = cal.getTime();
+         * 
          * community1 = _factory.createCommunity("new");
          * community2 = _factory.createCommunity("york");
          * user.addCommunity(community);
@@ -71,7 +73,7 @@ public class ActivityBOTest {
          * post2.setDatefrom(dtNow);
          * post2.setDateto(dtNowPlus1Day);
          * community1.addPost(post1);
-         * community2.addPost(post1);
+         * community2.addPost(post2);
          */
 
         activityBO = new ActivityBO();
@@ -168,10 +170,12 @@ public class ActivityBOTest {
     }
 
     /*
+     * @Test
      * public void getAllByUser() {
-     * Assert.assertEquals(2, activityBO.getAllByUser());
+     * Assert.assertEquals(2, activityBO.getAllByUser().size());
      * }
      */
+
     @Test(expected = IllegalArgumentException.class)
     public void addEntryExpectException() {
         Date dtNow = new Date();
