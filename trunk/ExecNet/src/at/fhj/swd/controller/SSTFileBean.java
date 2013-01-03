@@ -4,11 +4,15 @@
  */
 package at.fhj.swd.controller;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.event.FileUploadEvent;
+import org.apache.commons.io.IOUtils;
+import org.richfaces.event.FileUploadEvent;
 
+import at.fhj.swd.business.UserBO;
 import at.fhj.swd.utils.sst.SSTFileDataExtractor;
 import at.fhj.swd.utils.sst.SSTFileDataExtractorResult;
 
@@ -18,15 +22,40 @@ import at.fhj.swd.utils.sst.SSTFileDataExtractorResult;
  */
 public class SSTFileBean {
 
-    // Haui todo
+    private UserBO _userBO = null;
 
-    public void handleFileUpload(FileUploadEvent event) {
+    private String textForUser = new String("");
 
-	SSTFileDataExtractorResult _result = SSTFileDataExtractor
-		.getParseResult(event.getFile().getContents().toString());
+    /**
+     * @return the textForUser
+     */
+    public String getTextForUser() {
+	return textForUser;
+    }
+
+    /**
+     * @param textForUser
+     *            the textForUser to set
+     */
+    private void setTextForUser(String textForUser) {
+	this.textForUser = textForUser;
+    }
+
+    public void uploadFile(FileUploadEvent event) {
+
+	// System.out.println(System.getProperty("user.dir"));
+	SSTFileDataExtractorResult _result = new SSTFileDataExtractorResult();
+
+	try {
+	    _result = SSTFileDataExtractor.getParseResult(IOUtils
+		    .toString(event.getUploadedFile().getInputStream()));
+	} catch (IOException e) {
+	    // Haui TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
 
 	// Haui
-	// System.out.println(_result.getErrorMessage());
+	// System.out.println(event.getFile().getInputstream() );
 
 	if (_result.getParsingSuccessfull() == false) {
 
@@ -39,12 +68,27 @@ public class SSTFileBean {
 
 	}
 
+	_userBO = new UserBO();
+
+	if (_userBO.create(_result.getUsers()) == false) {
+
+	    // Haui TODO
+	    showMessageToUser("BenutzerInnen konnten nicht importiert werden.");
+	    return;
+
+	}
+
 	// Haui hier später noch überlegen wegen der Anzeige der automatischen
 	// Fehlermessages.
 	// Jedoch: http://forum.primefaces.org/viewtopic.php?f=3&t=23853
 
-	showMessageToUser("\"" + event.getFile().getFileName() + "\""
-		+ " is uploaded.");
+	showMessageToUser("Datei \""
+		+ event.getUploadedFile().getName()
+		+ "\""
+		+ " wurde hochgeladen und alle sich darin befindlichen BenutzerInnen erfolgreich importiert.");
+
+	// Haui TODO
+	// Noch die Seite nach dem importieren reloaden
 
     }
 
@@ -53,9 +97,10 @@ public class SSTFileBean {
      * 
      * @param messageString
      */
-    private static void showMessageToUser(String messageString) {
+    private void showMessageToUser(String messageString) {
 
-	FacesMessage _msg = new FacesMessage("Information", messageString);
+	FacesMessage _msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		"Information", messageString);
 
 	if (FacesContext.getCurrentInstance().getMessages("message_sst_file")
 		.hasNext())
@@ -64,6 +109,14 @@ public class SSTFileBean {
 
 	FacesContext.getCurrentInstance().addMessage("message_sst_file", _msg);
 
+	setTextForUser(messageString);
+
+    }
+
+    public void upload(FileUploadEvent event) {
+
+	// UploadedFile _file = event.getUploadedFile();
+	// _dbo.upload(_file, selectionItems);
     }
 
 }

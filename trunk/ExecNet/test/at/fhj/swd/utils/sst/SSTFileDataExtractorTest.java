@@ -6,9 +6,11 @@ package at.fhj.swd.utils.sst;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -213,4 +215,45 @@ public class SSTFileDataExtractorTest {
 
     }
 
+    /**
+     * Test method for
+     * {@link at.fhj.swd.utils.sst.SSTFileDataExtractor#getParseResult(java.io.InputStream)}
+     * .
+     * 
+     * @throws IOException
+     */
+    @Test
+    public void testGetParseResultWithRealFile() throws IOException {
+
+	// System.out.println(System.getProperty("user.dir"));
+
+	// To be independent from the actual file system this program is running
+	// on we use Java classloader functionality to read the file from the
+	// file system.
+	InputStream inputStream = Thread
+		.currentThread()
+		.getContextClassLoader()
+		.getResourceAsStream(
+			"at/fhj/swd/utils/sst/ressources/ImportTest.csv");
+
+	// System.out.println(new InputStreamReader(inputStream).getEncoding());
+
+	SSTFileDataExtractorResult _result = SSTFileDataExtractor
+		.getParseResult(IOUtils.toString(inputStream));
+
+	// The parsing has to be successful.
+	assertEquals(true, _result.parsingSuccessfull.booleanValue());
+
+	// We have exactly one user.
+	assertEquals(1, _result.users.size());
+
+	assertEquals("firstname3", _result.getUsers().get(0).getFirstname());
+	assertEquals("lastname3", _result.getUsers().get(0).getLastname());
+	assertEquals("department3", _result.getUsers().get(0).getDepartment());
+	assertEquals("my Location3", _result.getUsers().get(0).getLocation());
+	assertEquals("username3", _result.getUsers().get(0).getUsername());
+	assertEquals("password3", _result.getUsers().get(0).getPassword());
+	assertEquals("email3", _result.getUsers().get(0).getEmail());
+
+    }
 }
