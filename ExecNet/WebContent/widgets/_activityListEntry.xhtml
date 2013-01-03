@@ -29,24 +29,25 @@
                         <td>#{msg.activity_Entry}</td>               
                         <td><strong>#{post.entry}</strong></td>
                     </tr>
-                    <tr>
                         <ui:fragment rendered="${varIsAuthor == true}">
-                           <td>
-                             <h:commandButton action="#{activityPostBean.editpost(item.idAsString)}" value="#{msg.post_edit}"/>
-                            </td>
-                            <td>
-                                <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
-                            </td>
+                           <tr>
+                                <td>
+                                    <h:commandButton action="#{activityPostBean.editpost(item.idAsString)}" value="#{msg.post_edit}"/>
+                                </td>
+                           </tr>
+                            <tr>
+                                <td>
+                                    <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
+                                </td>
+                            </tr>
                         </ui:fragment> 
                         <ui:fragment rendered="${varIsAuthor == false}">
                             <ui:fragment rendered="${varIsPortalAdmin == true}">
-                                <td>
-                                    <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
-                               </td>
+                                <tr>
+                                    <td><h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/></td>
+                               </tr>
                             </ui:fragment>
-                        </ui:fragment>
-                    </tr>
-                    
+                        </ui:fragment>                                           
                 </table>
             </h:form>
             <h:form>
