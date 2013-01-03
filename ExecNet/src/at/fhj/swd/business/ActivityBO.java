@@ -83,7 +83,7 @@ public class ActivityBO {
      * @param idCommunity
      * @return
      */
-    public Boolean updatePost(Post p) {
+    public Boolean updatepost(Post p) {
         Community _c = p.getCommunity();
 
         try {
@@ -111,8 +111,22 @@ public class ActivityBO {
      * @return
      */
     public Boolean delete(Post p) {
-        try {
-            if (_pc.delete(p)) {
+    	Boolean removedfromCommunity;
+    	try {
+			if (p.getCommunity() !=null){
+				Community _c = p.getCommunity();
+				_c = p.getCommunity();
+       		 	_c.removePost(p);
+       		 	_cc.update(_c);
+       		 	Collection<Post> _pl = _c.getPosts();
+       		 	
+       		 	removedfromCommunity= _pl.contains(p);
+			}
+			else{
+				removedfromCommunity=false;
+			}   		
+    		
+       		if (_pc.delete(p)  && !removedfromCommunity){
                 return true;
             } else {
                 return false;
