@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+    <h:head>
+        
+    </h:head>
+    <h:body>
+        <center>
+            <h:outputText styleClass="h3" value="#{msg.global_communities}" />
+        </center>
+        <br/>
+        <rich:list value="#{userBean.viewUser.getCommunities()}" var="community" type="definitions">
+            <h:panelGrid columns="2">
+                <h:graphicImage value="STYLE/IMG/icon_communities.jpg" />
+                <h:outputLink value="./new_communities_overview.xhtml">
+                    <h:outputText styleClass="h5" value="#{community.name}" />
+                    <f:param name="viewCommunityId" value="#{community.id}" />
+                </h:outputLink>
+            </h:panelGrid>
+        </rich:list>
+    </h:body>
+      
+</html>
