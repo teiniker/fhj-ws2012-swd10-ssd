@@ -23,6 +23,9 @@ public class UserBean {
     private String department;
     private String location;
     private User viewUser;
+    private String searchQuery;
+    private Collection<User> searchResultUsers;
+
 
     private UserBO _bo;
 
@@ -156,6 +159,12 @@ public class UserBean {
     public Collection<User> getAll() {
         return _bo.getAll();
     }
+    
+    public String searchUser() throws Exception {
+        String searchQuery = this.searchQuery;
+        searchResultUsers = _bo.searchUser(searchQuery);
+        return "searchResult";
+    }
 
     public String getFirstname() {
         return firstname;
@@ -247,5 +256,24 @@ public class UserBean {
 
     public void setViewUser(User viewUser) {
         this.viewUser = viewUser;
+    }
+
+    
+    public String getSearchQuery() {
+        return searchQuery;
+    }
+
+    
+    public void setSearchQuery(String searchQuery) {
+        this.searchQuery = searchQuery;
+    }
+    
+    public Collection<User> getSearchResultUsers() {
+        return searchResultUsers;
+    }
+
+    
+    public void setSearchResultUsers(Collection<User> searchResultUsers) {
+        this.searchResultUsers = searchResultUsers;
     }
 }
