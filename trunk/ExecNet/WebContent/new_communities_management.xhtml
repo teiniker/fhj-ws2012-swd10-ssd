@@ -19,18 +19,14 @@
         
         <!-- Center Content -->
         <ui:define name="center">
-            <center>
-                <h:outputText styleClass="h1" value="#{msg.global_communities}" />
-            </center>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <ui:include src="widgets/_community_all_overview.xhtml" />
         </ui:define>
         
         <!-- Right Content -->
         <ui:define name="right">
-            
+            <ui:include src="widgets/_community_add.xhtml" />
         </ui:define>
     
     </ui:composition>
       
 </html>
-      

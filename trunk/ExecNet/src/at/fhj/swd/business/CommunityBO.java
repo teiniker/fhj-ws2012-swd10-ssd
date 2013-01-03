@@ -78,7 +78,7 @@ public class CommunityBO extends ABusinessObject {
             }
             return false;
         } catch (Exception e) {
-            logger.error(e);
+            // No Log Entry - JSF Issue.
             return false;
         }
     }
