@@ -68,14 +68,19 @@ public class CommunityBO extends ABusinessObject {
     }
 
     public boolean isCurrentMember(Long id) {
-        User _u = this.getRuntimeContext().getCurrentUser();
-        Community c = _context.readOne(id, Community.class);
+        try {
+            User _u = this.getRuntimeContext().getCurrentUser();
+            Community c = _context.readOne(id, Community.class);
 
-        for (User u : c.getUsers()) {
-            if (u.getId() == _u.getId())
-                return true;
+            for (User u : c.getUsers()) {
+                if (u.getId() == _u.getId())
+                    return true;
+            }
+            return false;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
         }
-        return false;
     }
 
     public Boolean delete(Long id) {
