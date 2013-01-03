@@ -8,37 +8,52 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
     <body>
-        <h:form>
-        
-        
-            <p>#{post.getPostDate()}<br/>
-            #{post.author.getUsername()}<br/>#{post.community.name}<br/>#{post.idAsString}</p>
-            <p><strong>#{post.entry}</strong></p>
-                                    
-            <c:set var="varIsAuthor" value="#{activityPostBean.isAuthor(post)}" />            
-            <c:set var="varIsPortalAdmin" value="#{activityPostBean.isPortalAdmin()}" /> 
-            
-            <ui:fragment rendered="${varIsAuthor == true}">
-                <h:outputText value="${varIsAuthor}" />
-                <h:commandButton action="#{activityPostBean.editpost(item.idAsString)}" value="#{msg.post_edit}"/>
-                <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
-            </ui:fragment>
-            <c:set var="varIsPortalAdmin" value="#{activityPostBean.isPortalAdmin()}" />
-            
-            <ui:fragment rendered="${varIsAuthor == false}">
-                <ui:fragment rendered="${varIsPortalAdmin == true}">
-                    <h:outputText value="${varIsPortalAdmin}" />
-                    <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
-                </ui:fragment>
-            </ui:fragment>
-            
-            
-                     
-        </h:form>
-        <h:form>
-            <ui:include src="_comments.xhtml">
-                <ui:param name="post" value="#{post}" />
-            </ui:include>
-        </h:form>
+        <div class="widget" id="posts">
+            <h:form>
+                <c:set var="varIsAuthor" value="#{activityPostBean.isAuthor(post)}" />            
+                <c:set var="varIsPortalAdmin" value="#{activityPostBean.isPortalAdmin()}" />
+                
+                <table>
+                    <tr>
+                        <th>#{post.community.name}</th>
+                    </tr>
+                    <tr>
+                        <td>#{msg.activity_Postdate}</td>               
+                        <td>#{post.getPostDate()}</td>
+                    </tr>     
+                    <tr>
+                        <td>#{msg.global_users}</td>               
+                        <td>#{post.author.getUsername()}</td>
+                    </tr>
+                    <tr>
+                        <td>#{msg.activity_Entry}</td>               
+                        <td><strong>#{post.entry}</strong></td>
+                    </tr>
+                    <tr>
+                        <ui:fragment rendered="${varIsAuthor == true}">
+                           <td>
+                             <h:commandButton action="#{activityPostBean.editpost(item.idAsString)}" value="#{msg.post_edit}"/>
+                            </td>
+                            <td>
+                                <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
+                            </td>
+                        </ui:fragment> 
+                        <ui:fragment rendered="${varIsAuthor == false}">
+                            <ui:fragment rendered="${varIsPortalAdmin == true}">
+                                <td>
+                                    <h:commandButton action="#{activityPostBean.deletepost(item.idAsString)}" value="#{msg.post_delete}"/>
+                               </td>
+                            </ui:fragment>
+                        </ui:fragment>
+                    </tr>
+                    
+                </table>
+            </h:form>
+            <h:form>
+                <ui:include src="_comments.xhtml">
+                    <ui:param name="post" value="#{post}" />
+                </ui:include>
+            </h:form>
+        </div>            
     </body>			
 </html>

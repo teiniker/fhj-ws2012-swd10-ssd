@@ -57,21 +57,8 @@ public class ActivityPostBean {
 
     }
 
-    public Boolean isAuthor(Post p) {        
-        if (p==null){
-            return true;
-        }
-        else
-        {
-            if (p.getIdAsString()!=null){
-                System.out.println("ID=" +p.getIdAsString());
-            }
-            else
-            {
-                System.out.println("ID==null");
-            }
-                return  _bo.isAuthor(p);  
-        }
+    public Boolean isAuthor(Post p) {   
+        return  _bo.isAuthor(p);  
     }
 
     public Boolean isPortalAdmin(){
@@ -106,6 +93,10 @@ public class ActivityPostBean {
         return idPostToEdit;
     }
 
+    public Boolean compareIDs(Long id){
+        return getIdPostToEdit()==id;
+    }
+    
     public void setIdPostToEdit(long idPostToEdit) {
         this.idPostToEdit = idPostToEdit;
     }
