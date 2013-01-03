@@ -1,9 +1,8 @@
 package at.fhj.swd.business;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 
 import org.junit.Assert;
@@ -35,6 +34,11 @@ public class ActivityBOTest {
     private static Post post;
     private static Community community;
 
+    private static Post post1;
+    private static Post post2;
+    private static Community community1;
+    private static Community community2;
+
     @BeforeClass
     public static void setup() {
 
@@ -42,11 +46,33 @@ public class ActivityBOTest {
         _context = new TestRuntimeContext();
 
         user = _factory.createUser("testUser");
-        community = _factory.createCommunity("Huehott");
+        community = _factory.createCommunity("Huehott1");
 
         _context.setCurrentUser(user);
         _context.setAuthenticated(user);
         _context.setCurrentCommunity(community);
+
+
+        Date dtNow = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dtNow);
+        cal.add(Calendar.DATE, 1);
+        Date dtNowPlus1Day = cal.getTime();
+
+        /*
+         * community1 = _factory.createCommunity("new");
+         * community2 = _factory.createCommunity("york");
+         * user.addCommunity(community);
+         * user.addCommunity(community2);
+         * post1 = _factory.createPost("Post1");
+         * post1.setDatefrom(dtNow);
+         * post1.setDateto(dtNowPlus1Day);
+         * post2 = _factory.createPost("Post2");
+         * post2.setDatefrom(dtNow);
+         * post2.setDateto(dtNowPlus1Day);
+         * community1.addPost(post1);
+         * community2.addPost(post1);
+         */
 
         activityBO = new ActivityBO();
         activityBO.set_rc(_context);
@@ -61,6 +87,14 @@ public class ActivityBOTest {
         _uc.create(user);
         _pc.create(post);
         _cc.create(community);
+
+        /*
+         * _cc.create(community1);
+         * _cc.create(community2);
+         * _pc.create(post1);
+         * _pc.create(post2);
+         */
+
     }
 
     @Test
@@ -110,7 +144,7 @@ public class ActivityBOTest {
     @Test
     public void testUpdatePost_trueExpected() throws Exception {
         post.setCommunity(community);
-        Assert.assertTrue(activityBO.updatePost(post));
+        Assert.assertTrue(activityBO.updatepost(post));
     }
 
     @Test
@@ -133,9 +167,13 @@ public class ActivityBOTest {
         Assert.assertTrue(true);
     }
 
-
+    /*
+     * public void getAllByUser() {
+     * Assert.assertEquals(2, activityBO.getAllByUser());
+     * }
+     */
     @Test(expected = IllegalArgumentException.class)
-    public void addEntry() {
+    public void addEntryExpectException() {
         Date dtNow = new Date();
 
         Calendar cal = Calendar.getInstance();
