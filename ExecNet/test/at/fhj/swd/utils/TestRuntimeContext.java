@@ -18,11 +18,6 @@ public class TestRuntimeContext implements IRuntimeContext {
     }
     
     @Override
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    @Override
     public void setAuthenticated(User user) {
         user.authenticate();
     }
