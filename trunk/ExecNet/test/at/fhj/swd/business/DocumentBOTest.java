@@ -1,10 +1,10 @@
 package at.fhj.swd.business;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import at.fhj.swd.data.DBContext;
@@ -13,7 +13,6 @@ import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Document;
 import at.fhj.swd.domain.User;
 import at.fhj.swd.utils.TestDataFactory;
-import at.fhj.swd.utils.TestRuntimeContext;
 
 /**
  * @author christoph.seiltinger
@@ -21,26 +20,24 @@ import at.fhj.swd.utils.TestRuntimeContext;
 
 public class DocumentBOTest {
 
-    private DocumentBO _DocumentBO;
-    private CommunityBO _CommunityBO;
+    private static DocumentBO _DocumentBO;
+    private static CommunityBO _CommunityBO;
 
-    private TestDataFactory _testDataFactory;
-    private TestRuntimeContext _testRuntimeContext;
+    private static TestDataFactory _testDataFactory;
 
-    private IDataContext<Document> _contextDocument;
-    private IDataContext<User> _contextUser;
-    private IDataContext<Community> _contextCommunity;
+    private static IDataContext<Document> _contextDocument;
+    private static IDataContext<User> _contextUser;
+    private static IDataContext<Community> _contextCommunity;
 
-    private File _file;
 
-    Document document1;
-    Community community;
+    static Document document1;
+    static Community community;
+    static User _user;
 
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
 
         _testDataFactory = new TestDataFactory();
-        _testRuntimeContext = new TestRuntimeContext();
 
         _CommunityBO = new CommunityBO();
         _DocumentBO = new DocumentBO();
@@ -51,18 +48,15 @@ public class DocumentBOTest {
 
 
         document1 = _testDataFactory.createDocument("document1");
-        User user = _testDataFactory.createUser("Test User");
+        _user = _testDataFactory.createUser("Test User");
         community = _testDataFactory.createCommunity("Test community");
 
-        _testRuntimeContext.setAuthenticated(user);
-
-
-        _contextUser.create(user);
-        document1.setOwner(user);
+        _contextUser.create(_user);
+        document1.setOwner(_user);
         _contextDocument.create(document1);
 
 
-        community.setAdmin(user);
+        community.setAdmin(_user);
         _contextCommunity.create(community);
 
         document1.addCommunity(community);
@@ -78,13 +72,19 @@ public class DocumentBOTest {
 
     @Test
     public void testUpload() throws IOException {
-        System.out.println("war da");
+        Document _new = _DocumentBO.createDocument("test.jpg", (List<Community>)_CommunityBO.getAll(), _user,
+            "d bla bla");
+        Assert.assertTrue(_new.getCommunities().toString().contains("Test community"));
+        Assert.assertTrue(_new.getUrl().contains(_new.getId().toString()));
+        Assert.assertEquals("test.jpg", _new.getName());
+        Assert.assertTrue(_new.isPublic());
 
-        _file.createTempFile("test", "test");
+        // _contextDocument.delete(document1);
+        // Document _empty = _DocumentBO.createDocument("test.jpg", (List<Community>)_CommunityBO.getAll(), _user,
+        // "d bla bla");
+        // Assert.assertEquals("", _empty.getCommunities().toString());
 
-        System.out.println(_file.getName());
-
-        // _DocumentBO.upload((UploadedFile)_file, (List<Community>)document1.getCommunities());
+        Assert.assertFalse(_DocumentBO.download(_new));
+        Assert.assertFalse(_DocumentBO.remove(_new.getId()));
     }
-
 }
