@@ -18,12 +18,12 @@ public class ActivityPostBean {
     private boolean popup;
     private Date datefrom;
     private Date dateto;
-    
+
     private String entryforUpdate;
     private long idCommunityforUpdate;
     private Date datefromforUpdate;
     private Date datetoforUpdate;
-       
+
     public ActivityPostBean() {
         _bo = new ActivityBO();
         idPostToEdit = 0;
@@ -51,7 +51,7 @@ public class ActivityPostBean {
     public String deletepost(Post p) {
         _bo.delete(p);
         return "refresh";
-        //return Nav.actitity_delete.toString();
+        // return Nav.actitity_delete.toString();
     }
 
     public String editpost(Post p) {
@@ -62,12 +62,12 @@ public class ActivityPostBean {
         setIdCommunityforUpdate(p.getCommunity().getId());
         idPostToEdit = p.getId();
         return "refresh";
-    }   
-    
-    public Boolean updatePost(Post p){
+    }
+
+    public Boolean updatePost(Post p) {
         return true;
     }
-        
+
     public Collection<Community> getCommunities() {
         return _bo.getCommunities();
 
@@ -82,7 +82,7 @@ public class ActivityPostBean {
     }
 
     public Collection<Post> getAllByCommunity(Community c) {
-        return c.getPosts();
+        return c.getPosts(new Date());
     }
 
     public Collection<Post> getAllByUser() {
@@ -157,37 +157,37 @@ public class ActivityPostBean {
         return entryforUpdate;
     }
 
-    
+
     public void setEntryforUpdate(String entryforUpdate) {
         this.entryforUpdate = entryforUpdate;
     }
 
-    
+
     public long getIdCommunityforUpdate() {
         return idCommunityforUpdate;
     }
 
-    
+
     public void setIdCommunityforUpdate(long idCommunityforUpdate) {
         this.idCommunityforUpdate = idCommunityforUpdate;
     }
 
-    
+
     public Date getDatefromforUpdate() {
         return datefromforUpdate;
     }
 
-    
+
     public void setDatefromforUpdate(Date datefromforUpdate) {
         this.datefromforUpdate = datefromforUpdate;
     }
 
-    
+
     public Date getDatetoforUpdate() {
         return datetoforUpdate;
     }
 
-    
+
     public void setDatetoforUpdate(Date datetoforUpdate) {
         this.datetoforUpdate = datetoforUpdate;
     }
