@@ -24,6 +24,16 @@ public class UserBO extends ABusinessObject {
         }
     }
 
+    public User getOne(Long id) {
+        try {
+            User u = _context.readOne(id, User.class);
+            return u;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
     public boolean login(User user) {
         user.setPassword(hashSHA1(user.getPassword()));
 
