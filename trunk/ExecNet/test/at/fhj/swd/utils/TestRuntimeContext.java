@@ -33,7 +33,7 @@ public class TestRuntimeContext implements IRuntimeContext {
         return currentCommunity;
     }
     
-    public void setCurrentUSer(User user){
+    public void setCurrentUser(User user){
         this.currentUser=user;
     }
 
