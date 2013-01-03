@@ -2,6 +2,7 @@ package at.fhj.swd.business;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import at.fhj.swd.data.DBContext;
@@ -15,34 +16,39 @@ import at.fhj.swd.utils.TestRuntimeContext;
 
 public class ActivityBOTest {
 
-    private ActivityBO activityBO;
+    private static ActivityBO activityBO;
 
-    private IDataContext<Post> _pc;
-    private IDataContext<Community> _cc;
-    private IDataContext<User> _uc;
+    private static IDataContext<Post> _pc;
+    private static IDataContext<Community> _cc;
+    private static IDataContext<User> _uc;
 
-    private TestRuntimeContext _context;
-    private TestDataFactory _factory;
+    private static TestRuntimeContext _context;
+    private static TestDataFactory _factory;
+    
+    
+    private static User user;
+    private static Post post;
 
-    private Post post;
+    @BeforeClass
+    public static void setup() {
 
-    @Before
-    public void setup() {
-
+        _factory = new TestDataFactory();
+        _context = new TestRuntimeContext();
+        
+        user = _factory.createUser("testUser");
+        
+        _context.setAuthenticated(user);
+        
         activityBO = new ActivityBO();
-
+        activityBO.set_rc(_context);
+        
         _pc = new DBContext<Post>();
         _cc = new DBContext<Community>();
         _uc = new DBContext<User>();
 
-        User user = new User();
-        post = new Post();
-
-        _factory = new TestDataFactory();
-        _context = new TestRuntimeContext();
-
-        user = _factory.createUser("testUser");
         post = _factory.createPost("TestPostText");
+        post.setAuthor(user);
+        
         _uc.create(user);
         _pc.create(post);
     }
