@@ -1,5 +1,8 @@
 package at.fhj.swd.business;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -116,5 +119,17 @@ public class ActivityBOTest {
     public void testDelete_ExceptionExpected() {
         activityBO.delete(null);
         Assert.assertTrue(true);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addEntry() {
+        Date dtNow = new Date();
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dtNow);
+        cal.add(Calendar.DATE, 1);
+        Date dtNowPlus1Day = cal.getTime();
+
+        activityBO.add("", dtNowPlus1Day, dtNow, 1);
     }
 }
