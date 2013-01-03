@@ -15,6 +15,8 @@
             <h:outputText styleClass="h2" value="#{msg.global_users}" />
         </center>
         <br/>
+        <h:messages styleClass="h3" />
+        <br/>
         <rich:dataTable value="#{userBean.getAll()}" var="tableUser" iterationStatusVar="it">
             <rich:column>
                 <f:facet name="header">#</f:facet>
