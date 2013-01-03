@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich">
+    
+    <body>
+        <h:form>        
+            <table>
+                <tr>
+                    <th> #{msg.activitys_add}</th>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputLabel for="text" value="#{msg.activityNewEdit_message}" required="True"/> 
+                    </td>
+                    <td>
+                        <h:inputTextarea id="entryforUpdate" value="#{activityPostBean.entryforUpdate}" 
+                            required="true" 
+                            maxlength="255"
+                            cols="100"
+                            rows="10" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputLabel for="datefromforUpdate" value="#{msg.activity_datefrom_text}" required="True"/> 
+                    </td>
+                    <td>
+                        <a4j:outputPanel id="calendarfrom" layout="block">
+                            <rich:calendar value="#{activityPostBean.datefromforUpdate}"
+                                locale="#{activityPostBean.locale}"
+                                popup="#{activityPostBean.popup}"/>
+                        </a4j:outputPanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputLabel for="datetoforUpdate" value="#{msg.activity_dateto_text}" required="True"/> 
+                    </td>
+                    <td>
+                        <a4j:outputPanel id="calendarto" layout="block">
+                            <rich:calendar value="#{activityPostBean.datetoforUpdate}"
+                                locale="#{activityPostBean.locale}"
+                                popup="#{activityPostBean.popup}" />
+                        </a4j:outputPanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td>                 
+                        <h:selectOneMenu value="#{activityPostBean.idCommunityforUpdate}">
+                            <f:selectItems value="#{activityPostBean.communities}" var="itemCommunitiy" itemValue="#{itemCommunitiy.id}" itemLabel="#{itemCommunitiy.name}" />
+                        </h:selectOneMenu> 
+                    </td>
+                    <td> 
+                        <h:commandButton action="#{activityPostBean.updatePost(post)}" value="update"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h:messages style="color: Red;"/>     
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    </td>
+                </tr>                           
+            </table>    
+        </h:form>
+    </body>			
+</html>
