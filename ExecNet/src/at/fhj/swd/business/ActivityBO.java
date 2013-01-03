@@ -19,6 +19,11 @@ public class ActivityBO {
 
     private IRuntimeContext _rc;
 
+    
+    public void set_rc(IRuntimeContext _rc) {
+        this._rc = _rc;
+    }
+
     public ActivityBO() {
         this._pc = Application.getInstance().getPostContext();
         this._rc = Application.getInstance().getRuntime();
@@ -69,22 +74,12 @@ public class ActivityBO {
      * @param idCommunity
      * @return
      */
-    public Boolean update(long idPost, String entry, Date datefrom, Date dateto, long idCommunity) {
-        User _u = _rc.getCurrentUser();
-        Community _c = _cc.readOne(idCommunity, Community.class);
-        Post _update = _pc.readOne(idPost, Post.class);
-
-        _update.setEntry(entry);
-        _update.setAuthor(_u);
-        _update.setDate(new Date());
-        _update.setActivityEntry(true);
-        _update.setDatefrom(datefrom);
-        _update.setDateto(dateto);
-        _update.setCommunity(_c);
+    public Boolean updatePost(Post p) {
+        Community _c = p.getCommunity();
 
         try {
-            if (_pc.update(_update) != null) {
-                _c.addPost(_update);
+            if (_pc.update(p) != null) {
+                _c.addPost(p);
                 _cc.update(_c);
                 return true;
             } else {
