@@ -15,7 +15,7 @@
 				<c:choose>
                     <c:when test="#{user.isLoggedIn() == true}">
                     	<ui:include src="widgets/_activityList.xhtml"></ui:include>
-                        <ui:include src="widgets/_activityNewEdit.xhtml"></ui:include>
+                        <ui:include src="widgets/_activityNew.xhtml"></ui:include>
                     </c:when>
                         <c:otherwise>#{msg.global_signinfirst}
                     </c:otherwise>
