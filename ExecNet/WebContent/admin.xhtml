@@ -4,7 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" 
       xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:rich="http://richfaces.org/rich"      
+      xmlns:a4j="http://richfaces.org/a4j"      >
+
+
 
 <ui:composition template="layout/_template_master.xhtml">
 
@@ -46,28 +49,49 @@
 
 
                 </table>
-            </h:form>
+
 
 
             <!--  Haui todo begin  -->
-            <h:form enctype="multipart/form-data" rendered="#{user.isLoggedIn() == true}" title="#{msg.admin_user_file_upload}" >  
-              
-                <p:fileUpload fileUploadListener="#{sstFileBean.handleFileUpload}"  
-                        mode="advanced"  
-                        update="messages"  
-                        auto="true"  
-                        sizeLimit="100000"   
-                        label="#{msg.global_File_Upload_Choose}"  
-                                              
-                        
-                        />  
-              
-                <p:messages id="messages" display="both" showSummary="false" showDetail="true" autoUpdate="true" />  
-              
-              
-            </h:form>  
 
+
+
+
+<!--  Haui -->
+
+
+<!--  Haui TODO 
+
+FUCK MESSAGE MIT FUCK RICHFACES ZUM LAUFEN KRIEGEN.
+
+Reload der vorhandenen Benutzer nach Import.
+
+-->
+
+
+            <rich:fileUpload fileUploadListener="#{sstFileBean.uploadFile}" 
+                             id="upload" 
+                             acceptedTypes="txt, csv, sst"
+                             ontyperejected="alert('Only txt, csv and sst files are accepted');" 
+                             maxFilesQuantity="1"
+                             reRender="messageBar">
+
+                <a4j:ajax event="uploadcomplete" 
+                          execute="@none" 
+                          render="info"
+                          immediate="true" />
+                          
+               <rich:messages for="upload" id="messageBar" showDetail="true"> </rich:messages>                          
+                          
+               <h:outputText  value="#{sstFileBean.textForUser}"></h:outputText>           
+                          
+            </rich:fileUpload>
+
+
+           </h:form>
+           
             <!--  Haui todo end -->
+
 
             <c:if test="#{user.isLoggedIn() == false}">#{msg.global_signinfirst}</c:if>
         </f:view>
