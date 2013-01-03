@@ -37,6 +37,7 @@ public class ActivityBOTest {
         
         user = _factory.createUser("testUser");
         
+        _context.setCurrentUser(user);
         _context.setAuthenticated(user);
         
         activityBO = new ActivityBO();
