@@ -54,9 +54,7 @@
                 </tr>
                 <tr>
                     <td>                 
-                        <h:selectOneMenu value="#{activityPostBean.idCommunityforUpdate}">
-                            <f:selectItems value="#{activityPostBean.communities}" var="itemCommunitiy" itemValue="#{itemCommunitiy.id}" itemLabel="#{itemCommunitiy.name}" />
-                        </h:selectOneMenu> 
+                       
                     </td>
                    <td> 
                         <h:commandButton action="#{activityPostBean.updatePost(post)}" value="#{msg.activity_update}"/>                        

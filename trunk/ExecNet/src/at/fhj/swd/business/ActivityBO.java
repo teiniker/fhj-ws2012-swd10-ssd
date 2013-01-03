@@ -19,7 +19,7 @@ public class ActivityBO {
 
     private IRuntimeContext _rc;
 
-    
+
     public void set_rc(IRuntimeContext _rc) {
         this._rc = _rc;
     }
@@ -39,8 +39,6 @@ public class ActivityBO {
     public Boolean add(String entry, Date datefrom, Date dateto, long idCommunity) {
         User _u = _rc.getCurrentUser();
 
-        Community _c = _cc.readOne(idCommunity, Community.class);
-
         Post _new = new Post();
         _new.setEntry(entry);
         _new.setAuthor(_u);
@@ -48,12 +46,19 @@ public class ActivityBO {
         _new.setActivityEntry(true);
         _new.setDatefrom(datefrom);
         _new.setDateto(dateto);
-        _new.setCommunity(_c);
+
+        Community _c = null;
+        if (idCommunity != 0L) {
+            _c = _cc.readOne(idCommunity, Community.class);
+            _new.setCommunity(_c);
+        }
 
         try {
             if (_pc.create(_new)) {
-                _c.addPost(_new);
-                _cc.update(_c);
+                if (_c != null) {
+                    _c.addPost(_new);
+                    _cc.update(_c);
+                }
                 return true;
             } else {
                 return false;
@@ -201,6 +206,7 @@ public class ActivityBO {
         Collection<Community> co = new ArrayList<Community>();
         Community cn = new Community();
         cn.setName("Global");
+        cn.setId(0L);
         co.add(cn);
 
         for (Community c : _rc.getCurrentUser().getCommunities()) {
