@@ -8,6 +8,21 @@
 	 xmlns:c="http://java.sun.com/jsp/jstl/core">
       	<body>
 			<div class="widget" id="posts">
+				<h:outputText styleClass="h2" value="#{msg.newestPosts}" />		
+						   	<h:form>
+							<table>			
+								<ui:repeat var="item" value="#{pinboardBean.getMy()}">
+									<tr>
+										<td>on #{item.getPostDate()}, #{item.author.getUsername()} wrote: </td> 
+										<td>#{item.entry}</td>
+										<td>
+											<h:commandButton action="#{pinboardBean.delete(item.id)}"
+												value="#{msg.post_delete}" />
+										</td>
+									</tr>
+								</ui:repeat>
+							</table>
+							</h:form>
 							<h:form id="posts">
 							<table>
 								<tr><th>#{msg.post_add}</th></tr>
@@ -31,23 +46,6 @@
 						   		</tr>						   	
 								</table>   	
 						   	</h:form>
-						   	<h:form>
-							<table>
-									<tr>
-										<th>#{msg.global_posts}</th>
-									</tr>				
-								<ui:repeat var="item" value="#{pinboardBean.getAll()}">
-									<tr>
-										<td>on #{item.getPostDate()}, #{item.author.getUsername()} wrote: </td> 
-										<td>#{item.entry}</td>
-										<td>
-											<h:commandButton action="#{pinboardBean.delete(item.id)}"
-												value="#{msg.post_delete}" />
-										</td>
-									</tr>
-								</ui:repeat>
-							</table>
-							</h:form>
 						</div>
 						</body>
 						
