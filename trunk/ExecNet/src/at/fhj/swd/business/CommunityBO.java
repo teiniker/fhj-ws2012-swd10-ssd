@@ -47,6 +47,7 @@ public class CommunityBO extends ABusinessObject {
             _context.update(c);
             _u.addCommunity(c);
             _usercontext.update(_u);
+            this.getRuntimeContext().setAuthenticated(_usercontext.update(_u));
             logger.info("Community entry successful");
             return true;
         } catch (Exception e) {
@@ -63,6 +64,7 @@ public class CommunityBO extends ABusinessObject {
             _context.update(c);
             _u.removeCommunity(c);
             _usercontext.update(_u);
+            this.getRuntimeContext().setAuthenticated(_usercontext.update(_u));
             logger.info("Community exit successful");
             return true;
         } catch (Exception e) {
@@ -90,9 +92,11 @@ public class CommunityBO extends ABusinessObject {
     public Boolean delete(Long id) {
         try {
             Community community = _context.readOne(id, Community.class);
-
+            User _u = this.getRuntimeContext().getCurrentUser();
+            
             if (_context.delete(community)) {
                 logger.info("Community deletion successful");
+                this.getRuntimeContext().setAuthenticated(_usercontext.update(_u));
                 return true;
             } else {
                 logger.info("Community deletion not successful");

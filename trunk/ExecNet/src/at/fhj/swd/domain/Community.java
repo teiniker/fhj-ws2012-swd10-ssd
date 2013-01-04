@@ -34,7 +34,7 @@ public class Community implements IEntity {
     @Column(name = "F_DESC", nullable = false)
     private String description;
 
-    @ManyToMany(cascade = CascadeType.MERGE, targetEntity = User.class)
+    @ManyToMany(cascade = CascadeType.REFRESH, targetEntity = User.class)
     @JoinTable(name = "tbl_community_user")
     private Collection<User> users;
 
