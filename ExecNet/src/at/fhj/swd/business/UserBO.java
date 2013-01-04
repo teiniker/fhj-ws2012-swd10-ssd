@@ -66,12 +66,14 @@ public class UserBO extends ABusinessObject {
             }
             _newuser.setFirstname(user.getFirstname());
             _newuser.setLastname(user.getLastname());
+            _newuser.setPassword(hashSHA1(user.getPassword()));
+            _newuser.setEmail(user.getEmail());
+            _newuser.setCulture(user.getCulture());
             _newuser.setDepartment(user.getDepartment());
             _newuser.setLocation(user.getLocation());
-            _newuser.setEmail(user.getEmail());
             _newuser.setAdmin(true);
-            _newuser.setCulture(user.getCulture());
-            _newuser.setPassword(hashSHA1(user.getPassword()));
+            _newuser.setPortalAdmin(false);
+            _newuser.setActive(true);
 
             this.getRuntimeContext().setAuthenticated(_context.update(_newuser));
             logger.info("Edit successful");
