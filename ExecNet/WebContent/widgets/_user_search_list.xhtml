@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+    <h:head>
+        
+    </h:head>
+    <h:body>
+        <center>
+            <h:outputText styleClass="h2" value="#{msg.global_users} - #{msg.search_result_title}" />
+        </center>
+        <br/>
+        <h:messages styleClass="h3" />
+        <br/>
+        <rich:dataTable value="#{userBean.searchResultUsers}" var="tableUser" iterationStatusVar="it">
+            <rich:column>
+                <f:facet name="header">#</f:facet>
+                <h:outputText styleClass="h5" value="#{it.index+1}" />
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">#{msg.profile_firstname}</f:facet>
+                <h:outputText styleClass="h5" value="#{tableUser.firstname}" />
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">#{msg.profile_lastname}</f:facet>
+                <h:outputText styleClass="h5" value="#{tableUser.lastname}" />
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">#{msg.profile_email}</f:facet>
+                <h:outputText styleClass="h5" value="#{tableUser.email}" />
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">#{msg.profile_department}</f:facet>
+                <h:outputText styleClass="h5" value="#{tableUser.department}" />
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">#{msg.profile_location}</f:facet>
+                <h:outputText styleClass="h5" value="#{tableUser.location}" />
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">#{msg.profile_view}</f:facet>
+                <h:outputLink value="./new_otherPage.xhtml">
+                    <h:graphicImage value="STYLE/IMG/icon_view.jpg" />
+                    <f:param name="viewUserId" value="#{tableUser.id}" />
+                </h:outputLink>
+            </rich:column>
+        </rich:dataTable>
+        <br/><br/><br/><br/><br/>
+    </h:body>
+      
+</html>
