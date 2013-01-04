@@ -1,5 +1,6 @@
 package at.fhj.swd.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -7,6 +8,7 @@ import at.fhj.swd.application.Application;
 import at.fhj.swd.application.IRuntimeContext;
 import at.fhj.swd.data.IDataContext;
 
+import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Post;
 import at.fhj.swd.domain.User;
 
@@ -25,8 +27,7 @@ public class PinBoardBean {
     }
 
     public String addNow() {
-    	System.out.println("PinBox addNow");
-        User _u = _rc.getCurrentUser();
+    	User _u = _rc.getCurrentUser();
 
         Post _new = new Post();
         _new.setEntry(this.getEntry());
@@ -71,6 +72,21 @@ public class PinBoardBean {
         }
     }
 
+    /*
+     * Returns only Posts from the current User	
+     */
+    public Collection<Post> getMy() {
+    	
+    	 Collection<Post> ps = new ArrayList<Post>();
+    	 Collection<Post> psAll = _pc.readAll(Post.class);
+         for (Post p : psAll) {    	 
+             if (p.getAuthor().getUsername() == _rc.getCurrentUser().getUsername()) {
+                 ps.add(p);
+             }
+         }
+       return ps;
+
+    }
 
 	public String getEntry() {
 		return entry;
