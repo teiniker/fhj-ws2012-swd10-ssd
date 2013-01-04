@@ -32,7 +32,26 @@
                 </h:panelGrid>
             </rich:panel>
         </h:panelGrid>
-        <br/><br/><br/><br/><br/>
+        <br/>
+        <hr/>
+        <br/>
+        <center>
+            <h:outputText styleClass="h2" value="#{msg.newestPosts}" />
+        </center>
+        <br/>
+        <h:messages styleClass="h3" />
+        <br/>
+        <h:form>
+            <h:dataTable value="#{pinboardBean.getOthers(userBean.viewUser.id)}" var="post" border="0">
+                <h:column>
+                    <h:outputText styleClass="h5" value="#{post.getPostDate()}, #{post.author.getUsername()}:" />
+                </h:column>
+                <h:column>
+                    <h:outputText styleClass="h6" value="#{post.entry}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <br/><br/><br/> 
     </h:body>
       
 </html>
