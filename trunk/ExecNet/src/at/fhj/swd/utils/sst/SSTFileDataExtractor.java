@@ -9,6 +9,8 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import at.fhj.swd.domain.User;
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -18,12 +20,15 @@ import au.com.bytecode.opencsv.CSVReader;
  */
 public class SSTFileDataExtractor {
 
+    private static final Logger logger = Logger
+	    .getLogger(SSTFileDataExtractor.class.getName());
+
     /**
-     * Haui TODO
+     * Returns the new CSV Reader instance with the predefined options.
      * 
      * @param reader
      * 
-     * @return Returns the new CSV Reader instance with the predefined options.
+     * @return The new CSV Reader instance with the predefined options.
      */
     static CSVReader getCSVReader(Reader reader) {
 
@@ -63,9 +68,8 @@ public class SSTFileDataExtractor {
 	    _myDatas = SSTFileDataExtractor
 		    .getListOfStringArraysFromCSVReader(_csvReader);
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    // Haui hier noch loggen
-	    e.printStackTrace();
+
+	    logger.fatal(e.getStackTrace());
 
 	    // Haui
 	    // Noch bessere Mitteilung schreiben und Textkürzel setzen.
