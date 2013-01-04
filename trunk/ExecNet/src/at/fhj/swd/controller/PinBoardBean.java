@@ -2,7 +2,9 @@ package at.fhj.swd.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import at.fhj.swd.application.Application;
 import at.fhj.swd.application.IRuntimeContext;
@@ -28,14 +30,15 @@ public class PinBoardBean {
 
     public String addNow() {
     	User _u = _rc.getCurrentUser();
-
-        Post _new = new Post();
+    
+    	Post _new = new Post();
         _new.setEntry(this.getEntry());
         _new.setPinboard(_u);
         _new.setAuthor(_u);
         _new.setDate(new Date());
+        
         _u.addPinPost(_new);
-
+        System.out.println("Date" + _new.getDate().toString());
         try {
             if (_pc.create(_new)) {
                 return "post-added";
@@ -48,17 +51,17 @@ public class PinBoardBean {
         }
     }
 
-    public Boolean delete(Long id) {
+	public String delete(Long id) {
         try {
             Post p = _pc.readOne(id, Post.class);
             if (_pc.delete(p)) {
-                return true;
+            	return "post-added";
             } else {
-                return false;
+            	return "postadd-failed";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return "postadd-failed";
         }
     	
     }
@@ -79,14 +82,41 @@ public class PinBoardBean {
     	
     	 Collection<Post> ps = new ArrayList<Post>();
     	 Collection<Post> psAll = _pc.readAll(Post.class);
+    	
          for (Post p : psAll) {    	 
              if (p.getAuthor().getUsername() == _rc.getCurrentUser().getUsername()) {
                  ps.add(p);
              }
          }
-       return ps;
+       
+       return sort(ps);
 
     }
+    
+    /*
+     * Returns only Posts from the current User	
+     */
+    public Collection<Post> getOthers(Long id) {
+    	
+    	 Collection<Post> ps = new ArrayList<Post>();
+    	 Collection<Post> psAll = _pc.readAll(Post.class);
+    	
+         for (Post p : psAll) {    	 
+             if (p.getAuthor().getId() == id) {
+                 ps.add(p);
+             }
+         }
+       
+       return sort(ps);
+
+    }
+
+	private Collection<Post> sort(Collection<Post> ps) {
+		List<Post> list = new ArrayList<Post>(ps);
+	//	Collections.sort(list, c)
+		
+		return ps;
+	}
 
 	public String getEntry() {
 		return entry;
