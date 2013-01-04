@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.io.IOUtils;
 import org.richfaces.event.FileUploadEvent;
+import org.richfaces.model.UploadedFile;
 
 import at.fhj.swd.business.UserBO;
 import at.fhj.swd.utils.sst.SSTFileDataExtractor;
@@ -26,8 +27,15 @@ public class SSTFileBean {
 
     private String textForUser = new String("");
 
+    private int size = 0;
+
+    private UploadedFile file = null;
+
     /**
      * @return the textForUser
+     * 
+     *         Haui ...
+     * 
      */
     public String getTextForUser() {
 	return textForUser;
@@ -41,14 +49,22 @@ public class SSTFileBean {
 	this.textForUser = textForUser;
     }
 
+    /**
+     * Haui
+     * 
+     * @param event
+     */
     public void uploadFile(FileUploadEvent event) {
 
-	// System.out.println(System.getProperty("user.dir"));
+	this.file = event.getUploadedFile();
+
+	this.size = this.file.getData().length;
+
 	SSTFileDataExtractorResult _result = new SSTFileDataExtractorResult();
 
 	try {
 	    _result = SSTFileDataExtractor.getParseResult(IOUtils
-		    .toString(event.getUploadedFile().getInputStream()));
+		    .toString(this.file.getInputStream()));
 	} catch (IOException e) {
 	    // Haui TODO Auto-generated catch block
 	    e.printStackTrace();
@@ -111,12 +127,25 @@ public class SSTFileBean {
 
 	setTextForUser(messageString);
 
+	try {
+	    this.file.delete();
+	} catch (IOException e) {
+	    // Haui TODO Auto-generated catch block
+	    // Noch Logger einbauen.
+	    e.printStackTrace();
+	}
+
     }
 
-    public void upload(FileUploadEvent event) {
+    /**
+     * Haui TODO
+     * 
+     * @return
+     */
+    public int getSize() {
 
-	// UploadedFile _file = event.getUploadedFile();
-	// _dbo.upload(_file, selectionItems);
+	return this.size;
+
     }
 
 }
