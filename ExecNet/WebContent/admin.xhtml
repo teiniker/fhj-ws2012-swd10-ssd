@@ -14,8 +14,8 @@
     <ui:define name="title">#{msg.global_admin}</ui:define>
     <ui:define name="content">
         <f:view>
-            <h:form rendered="#{user.isLoggedIn() == true}">
-                <table>
+            <h:form rendered="#{user.isLoggedIn() == true}" id="listingTableId">
+                <table >
                     <ui:repeat var="item" value="#{userBean.getAll()}">
                         <tr>
                             <td>#{item.getUsername()}</td>
@@ -93,8 +93,22 @@ Reload der vorhandenen Benutzer nach Import.
                              id="upload" 
                              acceptedTypes="txt, csv, sst"
                              maxFilesQuantity="1"
+                             addLabel="Importdatei hochladen"
+                             execute="listingTableId"
+                             render="listingTableId"
                              >
-                <a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+                             
+                <!-- Hier beim onComplete muß dieser Javascript Befehl angegeben werden.
+                     Sowie ebenfalls unabdingbar notwendig dass die id bei dem HTML Formular
+                     angegeben wird.
+                     Nicht bei der HTML Tabelle.       
+                -->                             
+                <a4j:ajax event="uploadcomplete" 
+                          execute="listingTableId" 
+                          render="info" 
+                          oncomplete="#{rich:component('listingTableId')}.reload(); return false;"
+                          />
+                
             </rich:fileUpload>
             <h:panelGroup id="info">
                 <rich:panel bodyClass="info">
