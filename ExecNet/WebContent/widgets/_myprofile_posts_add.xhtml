@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+    <h:head>
+        
+    </h:head>
+    <h:body>
+        <center>
+            <h:outputText styleClass="h3" value="#{msg.post_add}" />
+        </center>
+        <br/>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText styleClass="h5" value="#{msg.post_message}:" />
+                <h:inputText styleClass="h6" id="entry" value="#{pinboardBean.entry}" required="true" requiredMessage="#{msg.post_message_required}" />
+            </h:panelGrid>
+            <br/>
+            <h:commandButton styleClass="button" action="#{pinboardBean.addNow}" value="#{msg.post_submit}" />
+            <br/>
+        </h:form>
+    </h:body>
+      
+</html>
