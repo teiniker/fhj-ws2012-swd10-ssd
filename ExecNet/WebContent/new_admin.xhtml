@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="layout/_new_template_master.xhtml">
+
+    <!-- Title -->
+    <ui:define name="title">#{msg.global_admin}</ui:define>
+
+    <!-- Left Content -->
+    <ui:define name="left">
+
+    </ui:define>
+
+    <!-- Center Content -->
+    <ui:define name="center">
+
+
+        
+        <f:view>
+            <h:form rendered="#{user.isLoggedIn() == true}">
+                
+                <table>
+                    <ui:repeat var="item" value="#{userBean.getAll()}">
+                        <tr>
+                            <td>#{item.getUsername()}</td>
+                            <td><ui:fragment rendered="#{item.isAdmin()}">
+                                    <h:commandButton action="#{userBean.setAdmin(item.getId())}" value="#{msg.admin_unset_admin}" />
+                                </ui:fragment> <ui:fragment rendered="#{!item.isAdmin()}">
+                                    <h:commandButton action="#{userBean.setAdmin(item.getId())}" value="#{msg.admin_set_admin}" />
+                                </ui:fragment><br /></td>
+                            <td>#{item.isAdmin()}</td>
+                            <td><ui:fragment rendered="#{item.isPortalAdmin()}">
+                                    <h:commandButton action="#{userBean.setPortalAdmin(item.getId())}" value="#{msg.admin_unset_portal_admin}" />
+                                </ui:fragment> <ui:fragment rendered="#{!item.isPortalAdmin()}">
+                                    <h:commandButton action="#{userBean.setPortalAdmin(item.getId())}" value="#{msg.admin_set_portal_admin}" />
+                                </ui:fragment><br /></td>
+                            <td>#{item.isPortalAdmin()}</td>
+                            <td><ui:fragment rendered="#{item.isActive()}">
+                                    <h:commandButton action="#{userBean.setActive(item.getId())}" value="#{msg.admin_unset_active}" />
+                                </ui:fragment> <ui:fragment rendered="#{!item.isActive()}">
+                                    <h:commandButton action="#{userBean.setActive(item.getId())}" value="#{msg.admin_set_active}" />
+                                </ui:fragment><br /></td>
+                            <td>#{item.isActive()}</td>
+                        </tr>
+                    </ui:repeat>
+
+
+                </table>
+            </h:form>
+        </f:view>
+    
+
+    </ui:define>
+
+    <!-- Right Content -->
+    <ui:define name="right">
+        <ui:include src="widgets/_otherprofile_communities.xhtml" />
+    </ui:define>
+
+</ui:composition>
+
+</html>
