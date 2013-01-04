@@ -19,7 +19,7 @@
         
         <f:view>
             <h:form rendered="#{user.isLoggedIn() == true}">
-                
+                <rich:panel bodyClass="rich-laguna-panel-no-header">
                 <table>
                     <ui:repeat var="item" value="#{userBean.getAll()}">
                         <tr>
@@ -47,6 +47,7 @@
 
 
                 </table>
+                </rich:panel>
             </h:form>
             
              <style>
