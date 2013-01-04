@@ -37,6 +37,7 @@ public class CommunityBean {
         Community _new = new Community();
         _new.setDescription(this.getDescription());
         _new.setName(this.getName());
+
         if (_bo.add(_new)) {
             return "community-added";
         } else {
