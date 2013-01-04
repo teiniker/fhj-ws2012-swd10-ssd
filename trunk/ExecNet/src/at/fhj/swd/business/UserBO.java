@@ -116,7 +116,6 @@ public class UserBO extends ABusinessObject {
         // _context.beginTransaction();
 
         for (User user : users) {
-
             user.setPassword(hashSHA1(user.getPassword()));
 
             try {
@@ -124,9 +123,7 @@ public class UserBO extends ABusinessObject {
                     logger.info("User creation successful");
                 } else {
                     logger.info("User Creation failed: could not create user");
-                    // Because import of users has to work with the
-                    // "all or noting" principle
-                    // we do a rollback here.
+                    // Because import of users has to work with the "all or noting" principle we do a rollback here.
                     // _context.rollbackTransaction();
                     return false;
                 }
@@ -134,13 +131,11 @@ public class UserBO extends ABusinessObject {
                 logger.error(e);
                 return false;
             }
-
         }
 
         // _context.commitTransaction();
 
         return true;
-
     }
 
     private String hashSHA1(String password) {
@@ -164,6 +159,28 @@ public class UserBO extends ABusinessObject {
         } catch (Exception e) {
             logger.error(e);
             return false;
+        }
+    }
+
+    public Collection<User> searchUser(String searchQuery) {
+        String[] tokens = searchQuery.trim().split("\\s+");
+
+        StringBuffer queryBuffer = new StringBuffer();
+        for (int i = 0; i < tokens.length; i++) {
+            queryBuffer.append("i.firstname like '%" + tokens[i] + "%' or i.lastname like '%" + tokens[i] + "%'");
+
+            if (i < tokens.length - 1) {
+                queryBuffer.append(" or ");
+            }
+        }
+        String query = queryBuffer.toString();
+
+        try {
+            Collection<User> users = _context.readByQuery(query, User.class);
+            return users;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
     }
 
@@ -225,28 +242,6 @@ public class UserBO extends ABusinessObject {
             logger.error(e);
             return false;
         }
-    }
-
-    public Collection<User> searchUser(String searchQuery) throws Exception {
-
-        String[] tokens = searchQuery.trim().split("\\s+");
-
-        StringBuffer queryBuffer = new StringBuffer();
-
-        for (int i = 0; i < tokens.length; i++) {
-            queryBuffer.append("i.firstname like '%" + tokens[i] + "%' or i.lastname like '%" + tokens[i] + "%'");
-
-            if (i < tokens.length - 1) {
-                queryBuffer.append(" or ");
-            }
-
-        }
-
-        String query = queryBuffer.toString();
-
-        Collection<User> users = _context.readByQuery(query, User.class);
-        return users;
-
     }
 
 }

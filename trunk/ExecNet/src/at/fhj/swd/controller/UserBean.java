@@ -87,6 +87,23 @@ public class UserBean {
         }
     }
 
+    public String changeCulture(String culture) {
+        if (_bo.changeCulture(culture))
+            return "language-change";
+        return "language-change-failed";
+    }
+
+    public String searchUser() {
+        searchResultUsers = _bo.searchUser(searchQuery);
+
+        if (searchResultUsers == null || searchResultUsers.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage("search", new FacesMessage("User Search not successful!"));
+            return "new_users";
+        }
+
+        return "new_search";
+    }
+
     @Deprecated
     public String loginNow() {
         User _ref = new User();
@@ -149,37 +166,8 @@ public class UserBean {
         }
     }
 
-    public String changeCulture(String culture) {
-        if (_bo.changeCulture(culture))
-            return "language-change";
-        return "language-change-failed";
-    }
-
     public Collection<User> getAll() {
         return _bo.getAll();
-    }
-
-    public String searchUser() {
-        String searchQuery;
-        
-        if (this.searchQuery != null) {
-            searchQuery = this.searchQuery;
-        } else {
-            return "no search query";
-        }
-
-        try {
-            searchResultUsers = _bo.searchUser(searchQuery);
-        } catch (Exception e) {
-            return "error";
-        }
-        
-        if (searchResultUsers != null) {
-            return "search results";
-        } else {
-            return "no search Results";
-        }
-
     }
 
     public String getFirstname() {
