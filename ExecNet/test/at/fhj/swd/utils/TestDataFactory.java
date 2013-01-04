@@ -54,6 +54,15 @@ public class TestDataFactory {
         return _result;
     }
 
+    public Post createPinBoardPost(String text) {
+        Post _result = new Post();
+        _result.setDate(new Date());
+        _result.setActivityEntry(false);
+        // _result.setPublic(true);
+        _result.setEntry(text);
+        return _result;
+    }
+    
     public User createUser(String UserName) {
         User _result = new User();
         _result.setEmail("jacke@wie.hose");
