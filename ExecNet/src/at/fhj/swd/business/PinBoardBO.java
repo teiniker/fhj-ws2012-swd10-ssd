@@ -20,6 +20,8 @@ public class PinBoardBO extends ABusinessObject {
     public boolean add(Post post) {
         try {
             User _u = this.getRuntimeContext().getCurrentUser();
+            post.setAuthor(_u);
+            post.setPinboard(_u);
             _u.addPinPost(post);
 
             if (_context.create(post)) {
