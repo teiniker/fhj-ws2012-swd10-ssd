@@ -17,7 +17,6 @@
 		<li><a href="login.xhtml">#{msg.global_login}</a></li>
 	</c:if>
 	<c:if test="#{user.isLoggedIn() == true}">
-		<li><a href="user.xhtml">#{msg.global_posts}</a></li>
         <li><a href="comment.xhtml">#{msg.global_comments}</a></li>
         <li><a href="activitystream.xhtml">#{msg.global_activitystream}</a></li>
 		<li><a href="communities.xhtml">#{msg.global_communities}</a></li>
