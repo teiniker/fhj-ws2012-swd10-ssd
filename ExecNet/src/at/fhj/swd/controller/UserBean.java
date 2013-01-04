@@ -87,6 +87,27 @@ public class UserBean {
         }
     }
 
+    public String edit() {
+        User user = new User();
+        user.setFirstname(this.getFirstname());
+        user.setLastname(this.getLastname());
+        user.setPassword(this.getPassword());
+        user.setEmail(this.getEmail());
+        user.setCulture(this.getCulture());
+        user.setDepartment(this.getDepartment());
+        user.setLocation(this.getLocation());
+        user.setAdmin(true);
+        user.setPortalAdmin(false);
+        user.setActive(true);
+
+        if (_bo.edit(user)) {
+            return "new_home";
+        } else {
+            FacesContext.getCurrentInstance().addMessage("edit", new FacesMessage("Edit not successful!"));
+            return "new_settings";
+        }
+    }
+
     public String changeCulture(String culture) {
         if (_bo.changeCulture(culture))
             return "language-change";
@@ -106,11 +127,11 @@ public class UserBean {
 
     @Deprecated
     public String loginNow() {
-        User _ref = new User();
-        _ref.setUsername(this.getUsername());
-        _ref.setPassword(this.getPassword());
+        User _newuser = new User();
+        _newuser.setUsername(this.getUsername());
+        _newuser.setPassword(this.getPassword());
 
-        if (_bo.login(_ref)) {
+        if (_bo.login(_newuser)) {
             return "logged-in";
         } else {
             return "login-failed";
@@ -148,6 +169,7 @@ public class UserBean {
         }
     }
 
+    @Deprecated
     public String editNow() {
         User _newuser = new User();
         _newuser.setFirstname(this.getFirstname());

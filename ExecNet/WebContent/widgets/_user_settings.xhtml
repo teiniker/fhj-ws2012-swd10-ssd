@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+    <h:head>
+        
+    </h:head>
+    <h:body>
+        <center>
+            <h:outputText styleClass="h2" value="#{msg.usersettings_title}" />
+        </center>
+        <br/>
+        <h:messages styleClass="h3" />
+        <br/>
+        <h:form>
+            <h:panelGrid columns="2">
+            	<h:outputText styleClass="h5" value="#{msg.fname_enter}" />
+                <h:inputText styleClass="h6" id="firstname" value="#{userBean.firstname}" required="true" requiredMessage="#{msg.fname_required}" validatorMessage="#{msg.fname_valid}">
+                    <f:validateLength minimum="3" maximum="100" />
+                </h:inputText>
+                <h:outputText styleClass="h5" value="#{msg.lname_enter}" />
+                <h:inputText styleClass="h6" id="lastname" value="#{userBean.lastname}" required="true" requiredMessage="#{msg.lname_required}" validatorMessage="#{msg.lname_valid}">
+                    <f:validateLength minimum="3" maximum="100" />
+                </h:inputText>
+                <h:outputText styleClass="h5" value="#{msg.pass_enter}" />
+                <h:inputSecret styleClass="h6" id="password" value="#{userBean.password}" required="true" requiredMessage="#{msg.pass_required}" validatorMessage="#{msg.pass_valid}">
+                    <f:validateLength minimum="6" />
+                </h:inputSecret>
+                <h:outputText styleClass="h5" value="#{msg.email_enter}" />
+                <h:inputText styleClass="h6" id="email" value="#{userBean.email}" required="true" requiredMessage="#{msg.email_required}" validatorMessage="#{msg.email_valid}">
+                    <f:validateRegex pattern=".+@.+\..+" />
+                </h:inputText>
+                <h:outputText styleClass="h5" value="#{msg.culture_choose}" />
+                <h:selectOneMenu styleClass="h6" id="culture" value="#{userBean.culture}">
+                    <f:selectItem id="si1" itemLabel="English" itemValue="en" />
+                    <f:selectItem id="si2" itemLabel="Deutsch" itemValue="de" />
+                </h:selectOneMenu>
+                <h:outputText styleClass="h5" value="#{msg.department_enter}" />
+                <h:inputText styleClass="h6" id="department" value="#{userBean.department}" required="false" />
+                <h:outputText styleClass="h5" value="#{msg.location_enter}" />
+                <h:inputText styleClass="h6" id="location" value="#{userBean.location}" required="false" />
+            </h:panelGrid>
+            <br/>
+            <center>
+                <h:commandButton styleClass="button" action="#{userBean.edit}" value="#{msg.usersettings_submit}" />
+            </center>
+            <br/>
+        </h:form>
+        <br/><br/><br/><br/><br/>
+    </h:body>
+      
+</html>
