@@ -5,6 +5,8 @@
 package at.fhj.swd.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -29,7 +31,31 @@ public class SSTFileBean {
 
     private int size = 0;
 
-    private UploadedFile file = null;
+    private List<UploadedFile> files = new ArrayList<UploadedFile>();
+
+    /**
+     * @param file
+     *            the file to set
+     */
+    private void setFile(List<UploadedFile> files) {
+	this.files = files;
+    }
+
+    /**
+     * @return the file
+     */
+    @SuppressWarnings("unused")
+    public List<UploadedFile> getFiles() {
+	return files;
+    }
+
+    /**
+     * @param file
+     *            the file to set
+     */
+    private void addFile(UploadedFile file) {
+	this.files.add(file);
+    }
 
     /**
      * @return the textForUser
@@ -56,15 +82,27 @@ public class SSTFileBean {
      */
     public void uploadFile(FileUploadEvent event) {
 
-	this.file = event.getUploadedFile();
+	try {
 
-	this.size = this.file.getData().length;
+	    if (this.files.size() > 0)
+		this.files.get(0).delete();
+
+	    this.files.clear();
+
+	} catch (IOException e1) {
+	    // Haui TODO Auto-generated catch block
+	    e1.printStackTrace();
+	}
+
+	addFile(event.getUploadedFile());
+
+	this.size = this.files.get(0).getData().length;
 
 	SSTFileDataExtractorResult _result = new SSTFileDataExtractorResult();
 
 	try {
 	    _result = SSTFileDataExtractor.getParseResult(IOUtils
-		    .toString(this.file.getInputStream()));
+		    .toString(this.files.get(0).getInputStream()));
 	} catch (IOException e) {
 	    // Haui TODO Auto-generated catch block
 	    e.printStackTrace();
@@ -126,14 +164,6 @@ public class SSTFileBean {
 	FacesContext.getCurrentInstance().addMessage("message_sst_file", _msg);
 
 	setTextForUser(messageString);
-
-	try {
-	    this.file.delete();
-	} catch (IOException e) {
-	    // Haui TODO Auto-generated catch block
-	    // Noch Logger einbauen.
-	    e.printStackTrace();
-	}
 
     }
 

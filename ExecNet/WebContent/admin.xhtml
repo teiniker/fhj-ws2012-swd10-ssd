@@ -92,6 +92,7 @@ Reload der vorhandenen Benutzer nach Import.
             <rich:fileUpload fileUploadListener="#{sstFileBean.uploadFile}"
                              id="upload" 
                              acceptedTypes="txt, csv, sst"
+                             maxFilesQuantity="1"
                              >
                 <a4j:ajax event="uploadcomplete" execute="@none" render="info" />
             </rich:fileUpload>
@@ -102,15 +103,15 @@ Reload der vorhandenen Benutzer nach Import.
                     </f:facet>
                     <h:outputText value="Bisher wurde keine Importdatei hochgeladen"
                         rendered="#{sstFileBean.size==0}" />
-                    <rich:dataGrid columns="1" value="#{fileUploadBean.file}"
+                    <rich:dataGrid columns="1" value="#{sstFileBean.files}"
                         var="file" rowKeyVar="row">
                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                             <h:panelGrid columns="2">
-                                <h:panelGrid columns="2">
-                                    <h:outputText value="File Name:" />
+                                <h:panelGrid columns="2" >
+                                    <h:outputText value="Dateiname:" />
                                     <h:outputText value="#{file.name}" />
-                                    <h:outputText value="File Length(bytes):" />
-                                    <h:outputText value="#{file.length}" />
+                                    <h:outputText value="Status:" />                                    
+                                    <h:outputText  value="#{sstFileBean.textForUser}" />
                                 </h:panelGrid>
                             </h:panelGrid>
                         </rich:panel>
