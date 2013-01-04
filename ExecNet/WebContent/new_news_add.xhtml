@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="layout/_new_template_master.xhtml">
+
+    <!-- Title -->
+    <ui:define name="title">#{msg.news_add}</ui:define>
+
+    <!-- Left Content -->
+    <ui:define name="left">
+
+    </ui:define>
+
+    <!-- Center Content -->
+    <ui:define name="center">
+         
+        
+        <f:view>
+       <center>
+            <h:outputText styleClass="h2" value="#{msg.news_add}" />
+        </center>
+       <h:form rendered="#{user.isPortalAdmin()}">
+                <rich:panel bodyClass="rich-laguna-panel-no-header">
+                    <table>
+                        <tr>
+                            <td><h:outputLabel for="title" value="#{msg.news_title}" required="True" /></td>
+                            <td><h:inputText id="title" value="#{newsBean.title}" required="true">
+
+                                </h:inputText></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputLabel for="entry" value="#{msg.news_entry}" required="True" /></td>
+                            <td><h:inputText id="entry" value="#{newsBean.entry}" required="true">
+
+
+                                </h:inputText></td>
+                        </tr>
+
+
+                        <tr>
+                            <td />
+                            <td><h:commandButton action="#{newsBean.addNow}" value="#{msg.news_submit}" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><h:messages style="color: Red;" /></td>
+                        </tr>
+                    </table>
+                </rich:panel>
+
+
+            </h:form>
+            
+            
+        </f:view>
+
+
+
+    </ui:define>
+
+    <!-- Right Content -->
+    <ui:define name="right">
+        <ui:include src="widgets/_otherprofile_communities.xhtml" />
+    </ui:define>
+
+</ui:composition>
+
+</html>
