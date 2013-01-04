@@ -137,6 +137,7 @@ public class UserBO extends ABusinessObject {
             User _newuser = this.getRuntimeContext().getCurrentUser();
             _newuser.setCulture(culture);
             this.getRuntimeContext().setAuthenticated(_context.update(_newuser));
+            logger.info("Change culture successful");
             return true;
         } catch (Exception e) {
             logger.error(e);
