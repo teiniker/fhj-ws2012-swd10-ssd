@@ -14,29 +14,19 @@
         
         <!-- Left Content -->
         <ui:define name="left">
-            <center>
-                <h:outputText styleClass="h3" value="Left" />
-            </center>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> 
+            
         </ui:define>
         
         <!-- Center Content -->
         <ui:define name="center">
-            <center>
-                <h:outputText styleClass="h1" value="#{msg.global_usersettings}" />
-            </center>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <ui:include src="widgets/_user_settings.xhtml" />
         </ui:define>
         
         <!-- Right Content -->
         <ui:define name="right">
-            <center>
-                <h:outputText styleClass="h3" value="Right" />
-            </center>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            
         </ui:define>
     
     </ui:composition>
       
 </html>
-      
