@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
 
@@ -20,6 +18,9 @@ import at.fhj.swd.utils.sst.SSTFileDataExtractor;
 import at.fhj.swd.utils.sst.SSTFileDataExtractorResult;
 
 /**
+ * Controller bean for the Java Server Faces page that acts as controller for
+ * it.
+ * 
  * @author Michael Hausegger, CAFK
  * 
  */
@@ -33,23 +34,32 @@ public class SSTFileBean {
 
     private List<UploadedFile> files = new ArrayList<UploadedFile>();
 
+    private static final Logger logger = Logger.getLogger(SSTFileBean.class
+	    .getName());
+
     /**
+     * Sets the uploaded files internally.
+     * 
      * @param file
      *            the file to set
      */
+    @SuppressWarnings("unused")
     private void setFile(List<UploadedFile> files) {
 	this.files = files;
     }
 
     /**
+     * Returns the uploaded files.
+     * 
      * @return the file
      */
-    @SuppressWarnings("unused")
     public List<UploadedFile> getFiles() {
 	return files;
     }
 
     /**
+     * Adds one file to the internal list of uploaded files.
+     * 
      * @param file
      *            the file to set
      */
@@ -58,9 +68,10 @@ public class SSTFileBean {
     }
 
     /**
-     * @return the textForUser
+     * Returns the text for the users that contains status information about the
+     * upload and the import of users.
      * 
-     *         Haui ...
+     * @return the textForUser
      * 
      */
     public String getTextForUser() {
@@ -68,6 +79,9 @@ public class SSTFileBean {
     }
 
     /**
+     * Sets the text for the users that contains status information about the
+     * upload and the import of users.
+     * 
      * @param textForUser
      *            the textForUser to set
      */
@@ -76,7 +90,8 @@ public class SSTFileBean {
     }
 
     /**
-     * Haui
+     * Handels the upload of the file that contains user data, tries to import
+     * the data and sets the feedback for the user.
      * 
      * @param event
      */
@@ -94,8 +109,10 @@ public class SSTFileBean {
 	    this.files.clear();
 
 	} catch (IOException e1) {
-	    // Haui TODO Auto-generated catch block
-	    e1.printStackTrace();
+	    // Haui
+	    logger.fatal(e1.getStackTrace());
+	    showMessageToUser("Fataler Fehler aufgetreten. Bitte kontaktieren Sie den Support.");
+	    return;
 	}
 
 	addFile(event.getUploadedFile());
@@ -108,12 +125,11 @@ public class SSTFileBean {
 	    _result = SSTFileDataExtractor.getParseResult(IOUtils
 		    .toString(this.files.get(0).getInputStream()));
 	} catch (IOException e) {
-	    // Haui TODO Auto-generated catch block
-	    e.printStackTrace();
+	    // Haui
+	    logger.fatal(e.getStackTrace());
+	    showMessageToUser("Fataler Fehler aufgetreten. Bitte kontaktieren Sie den Support.");
+	    return;
 	}
-
-	// Haui
-	// System.out.println(event.getFile().getInputstream() );
 
 	if (_result.getParsingSuccessfull() == false) {
 
@@ -136,45 +152,28 @@ public class SSTFileBean {
 
 	}
 
-	// Haui hier später noch überlegen wegen der Anzeige der automatischen
-	// Fehlermessages.
-	// Jedoch: http://forum.primefaces.org/viewtopic.php?f=3&t=23853
-
 	showMessageToUser("Datei \""
 		+ event.getUploadedFile().getName()
 		+ "\""
 		+ " wurde hochgeladen und alle sich darin befindlichen BenutzerInnen erfolgreich importiert.");
 
-	// Haui TODO
-	// Noch die Seite nach dem importieren reloaden
-
     }
 
     /**
-     * Haui TODO
+     * Takes care the status message for the user will be shown to him.
      * 
      * @param messageString
      */
     private void showMessageToUser(String messageString) {
-
-	FacesMessage _msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-		"Information", messageString);
-
-	if (FacesContext.getCurrentInstance().getMessages("message_sst_file")
-		.hasNext())
-	    FacesContext.getCurrentInstance().getMessages("message_sst_file")
-		    .remove();
-
-	FacesContext.getCurrentInstance().addMessage("message_sst_file", _msg);
 
 	setTextForUser(messageString);
 
     }
 
     /**
-     * Haui TODO
+     * Returns the size of the uploaded file.
      * 
-     * @return
+     * @return The size of the uploaded file as int.
      */
     public int getSize() {
 

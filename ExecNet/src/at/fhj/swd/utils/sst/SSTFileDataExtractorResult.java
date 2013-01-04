@@ -1,5 +1,8 @@
 /**
  * 
+ * The class that contains all relevant information after parsing a file with
+ * user data to import. 
+ *
  */
 package at.fhj.swd.utils.sst;
 
@@ -9,6 +12,9 @@ import java.util.List;
 import at.fhj.swd.domain.User;
 
 /**
+ * The class that contains all relevant information after parsing a file with
+ * user data to import.
+ * 
  * @author Michael Hausegger, CAFK
  * 
  */
@@ -23,6 +29,8 @@ public class SSTFileDataExtractorResult {
     List<User> users = new ArrayList<User>();
 
     /**
+     * Returns if the last parsing process was successful.
+     * 
      * @return the parsingSuccessfull
      */
     public Boolean getParsingSuccessfull() {
@@ -30,14 +38,18 @@ public class SSTFileDataExtractorResult {
     }
 
     /**
+     * Sets internally if the parsing process was successful.
+     * 
      * @param parsingSuccessfull
      *            the parsingSuccessfull to set
      */
-    public void setParsingSuccessfull(Boolean parsingSuccessfull) {
+    protected void setParsingSuccessfull(Boolean parsingSuccessfull) {
 	this.parsingSuccessfull = parsingSuccessfull;
     }
 
     /**
+     * Returns the error message if existing. Otherwise an empty string.
+     * 
      * @return the errorMessage
      */
     public String getErrorMessage() {
@@ -45,14 +57,19 @@ public class SSTFileDataExtractorResult {
     }
 
     /**
+     * Sets the error message.
+     * 
      * @param errorMessage
      *            the errorMessage to set
      */
-    public void setErrorMessage(String errorMessage) {
+    protected void setErrorMessage(String errorMessage) {
 	this.errorMessage = errorMessage;
     }
 
     /**
+     * Returns the list of users that comprise the result of the parsing
+     * process.
+     * 
      * @return the users
      */
     public List<User> getUsers() {
@@ -60,18 +77,22 @@ public class SSTFileDataExtractorResult {
     }
 
     /**
+     * Sets the internal list of users.
+     * 
      * @param users
      *            the users to set
      */
-    public void setUsers(List<User> users) {
+    protected void setUsers(List<User> users) {
 	this.users = users;
     }
 
     /**
+     * Adds one specific user to the internal list of users.
+     * 
      * @param user
      *            the user to add
      */
-    public void addUser(User user) {
+    protected void addUser(User user) {
 
 	if (this.users == null)
 	    this.users = new ArrayList<User>();
