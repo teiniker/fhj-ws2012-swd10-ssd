@@ -35,21 +35,21 @@
                 <f:facet name="header">#{msg.community_adminname}</f:facet>
                 <h:outputText styleClass="h5" value="#{community.admin.username}" />
             </rich:column>
-            <rich:column rendered="#{community.admin.id eq user.id}" style="text-align: center">
+            <rich:column style="text-align: center">
                 <f:facet name="header">#{msg.community_delete}</f:facet>
-                <h:commandLink action="#{communityBean.delete(community.id)}">
+                <h:commandLink action="#{communityBean.delete(community.id)}" rendered="#{community.admin.id eq user.id}">
                 	<h:graphicImage value="STYLE/IMG/icon_delete.jpg" />
             	</h:commandLink>
             </rich:column>
-            <rich:column rendered="#{!communityBean.isCurrentMember(community.id)}" style="text-align: center">
+            <rich:column style="text-align: center">
                 <f:facet name="header">#{msg.community_join}</f:facet>
-                <h:commandLink action="#{communityBean.joinNow(community.id)}">
+                <h:commandLink action="#{communityBean.joinNow(community.id)}" rendered="#{!communityBean.isCurrentMember(community.id)}">
                     <h:graphicImage value="STYLE/IMG/icon_join.jpg" />
                 </h:commandLink>
             </rich:column>
-            <rich:column rendered="#{communityBean.isCurrentMember(community.id) and community.admin.id ne user.id}" style="text-align: center">
+            <rich:column style="text-align: center">
                 <f:facet name="header">#{msg.community_leave}</f:facet>
-                <h:commandLink action="#{communityBean.leaveNow(community.id)}">
+                <h:commandLink action="#{communityBean.leaveNow(community.id)}" rendered="#{communityBean.isCurrentMember(community.id) and community.admin.id ne user.id}">
                     <h:graphicImage value="STYLE/IMG/icon_leave.jpg" />
                 </h:commandLink>
             </rich:column>
