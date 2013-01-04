@@ -152,13 +152,13 @@ public class UserBean {
         User _newuser = new User();
         _newuser.setFirstname(this.getFirstname());
         _newuser.setLastname(this.getLastname());
+        _newuser.setUsername(this.getUsername());
+        _newuser.setPassword(this.getPassword());
+        _newuser.setEmail(this.getEmail());
+        _newuser.setCulture(this.getCulture());
         _newuser.setDepartment(this.getDepartment());
         _newuser.setLocation(this.getLocation());
-        _newuser.setUsername(this.getUsername());
-        _newuser.setEmail(this.getEmail());
         _newuser.setAdmin(true);
-        _newuser.setCulture(this.getCulture());
-        _newuser.setPassword(this.getPassword());
         _newuser.setActive(true);
         _newuser.setPortalAdmin(false);
 
@@ -174,12 +174,14 @@ public class UserBean {
         User _newuser = new User();
         _newuser.setFirstname(this.getFirstname());
         _newuser.setLastname(this.getLastname());
+        _newuser.setPassword(this.getPassword());
+        _newuser.setEmail(this.getEmail());
+        _newuser.setCulture(this.getCulture());
         _newuser.setDepartment(this.getDepartment());
         _newuser.setLocation(this.getLocation());
-        _newuser.setEmail(this.getEmail());
         _newuser.setAdmin(true);
-        _newuser.setCulture(this.getCulture());
-        _newuser.setPassword(this.getPassword());
+        _newuser.setActive(true);
+        _newuser.setPortalAdmin(false);
 
         if (_bo.edit(_newuser)) {
             return "user-edited";
