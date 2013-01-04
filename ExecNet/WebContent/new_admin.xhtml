@@ -48,6 +48,54 @@
 
                 </table>
             </h:form>
+            
+             <style>
+        .top {
+            vertical-align: top;
+        }
+         
+        .info {
+            height: 202px;
+            overflow: auto;
+        }
+        </style>
+
+
+        <h:panelGrid columns="2" columnClasses="top,top">
+            <rich:fileUpload fileUploadListener="#{sstFileBean.uploadFile}"
+                             id="upload" 
+                             acceptedTypes="txt, csv, sst"
+                             >
+                <a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+            </rich:fileUpload>
+            <h:panelGroup id="info">
+                <rich:panel bodyClass="info">
+                    <f:facet name="header">
+                        <h:outputText value="Information" />
+                    </f:facet>
+                    <h:outputText value="Bisher wurde keine Importdatei hochgeladen"
+                        rendered="#{sstFileBean.size==0}" />
+                    <rich:dataGrid columns="1" value="#{fileUploadBean.file}"
+                        var="file" rowKeyVar="row">
+                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="File Name:" />
+                                    <h:outputText value="#{file.name}" />
+                                    <h:outputText value="File Length(bytes):" />
+                                    <h:outputText value="#{file.length}" />
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </rich:panel>
+                    </rich:dataGrid>
+                </rich:panel>
+                <br />
+                <a4j:commandButton action="#{fileUploadBean.clearUploadData}"
+                    render="info, upload" value="Clear Uploaded Data"
+                    rendered="#{fileUploadBean.size>0}" />
+            </h:panelGroup>
+        </h:panelGrid>
+            
         </f:view>
     
 
