@@ -6,7 +6,7 @@ package at.fhj.swd.controller;
 public class NavigationBean {
 
     public String home() {
-        return "home";
+        return "new_home";
     }
 
     public String myPage() {
