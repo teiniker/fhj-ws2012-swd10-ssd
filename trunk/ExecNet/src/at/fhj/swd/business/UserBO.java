@@ -13,26 +13,8 @@ public class UserBO extends ABusinessObject {
     private IDataContext<User> _context;
 
     public UserBO() {
+        super();
         this._context = Application.getInstance().getUserContext();
-    }
-
-    public Collection<User> getAll() {
-        try {
-            return _context.readAll(User.class);
-        } catch (Exception e) {
-            logger.error(e);
-            return null;
-        }
-    }
-
-    public User getOne(Long id) {
-        try {
-            User u = _context.readOne(id, User.class);
-            return u;
-        } catch (Exception e) {
-            logger.error(e);
-            return null;
-        }
     }
 
     public boolean login(User user) {
@@ -241,6 +223,24 @@ public class UserBO extends ABusinessObject {
         } catch (Exception e) {
             logger.error(e);
             return false;
+        }
+    }
+
+    public Collection<User> getAll() {
+        try {
+            return _context.readAll(User.class);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    public User getOne(Long id) {
+        try {
+            return _context.readOne(id, User.class);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
     }
 

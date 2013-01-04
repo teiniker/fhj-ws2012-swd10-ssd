@@ -114,8 +114,7 @@ public class CommunityBO extends ABusinessObject {
 
     public Community getOne(Long id) {
         try {
-            Community c = _context.readOne(id, Community.class);
-            return c;
+            return _context.readOne(id, Community.class);
         } catch (Exception e) {
             logger.error(e);
             return null;
