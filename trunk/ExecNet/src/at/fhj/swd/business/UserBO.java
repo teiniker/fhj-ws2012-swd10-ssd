@@ -13,93 +13,91 @@ public class UserBO extends ABusinessObject {
     private IDataContext<User> _context;
 
     public UserBO() {
-	this._context = Application.getInstance().getUserContext();
+        this._context = Application.getInstance().getUserContext();
     }
 
     public Collection<User> getAll() {
-	try {
-	    return _context.readAll(User.class);
-	} catch (Exception e) {
-	    logger.error(e);
-	    return null;
-	}
+        try {
+            return _context.readAll(User.class);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     public User getOne(Long id) {
-	try {
-	    User u = _context.readOne(id, User.class);
-	    return u;
-	} catch (Exception e) {
-	    logger.error(e);
-	    return null;
-	}
+        try {
+            User u = _context.readOne(id, User.class);
+            return u;
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
     }
 
     public boolean login(User user) {
-	user.setPassword(hashSHA1(user.getPassword()));
+        user.setPassword(hashSHA1(user.getPassword()));
 
-	try {
-	    String _query = "i.username='" + user.getUsername()
-		    + "' and i.password='" + user.getPassword() + "'";
-	    User _refuser = _context.readOneByQuery(_query, User.class);
-	    if (_refuser.isActive()) {
-		_refuser.authenticate();
-		this.getRuntimeContext().setAuthenticated(_refuser);
-		logger.info("Login successful");
-		return true;
-	    } else {
-		logger.info("Login failed: user is not active");
-		return false;
-	    }
-	} catch (Exception e) {
-	    logger.error(e);
-	    return false;
-	}
+        try {
+            String _query = "i.username='" + user.getUsername() + "' and i.password='" + user.getPassword() + "'";
+            User _refuser = _context.readOneByQuery(_query, User.class);
+            if (_refuser.isActive()) {
+                _refuser.authenticate();
+                this.getRuntimeContext().setAuthenticated(_refuser);
+                logger.info("Login successful");
+                return true;
+            } else {
+                logger.info("Login failed: user is not active");
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     public boolean register(User user) {
-	user.setPassword(hashSHA1(user.getPassword()));
+        user.setPassword(hashSHA1(user.getPassword()));
 
-	try {
-	    if (_context.create(user)) {
-		user.authenticate();
-		this.getRuntimeContext().setAuthenticated(user);
-		logger.info("Registration successful");
-		return true;
-	    } else {
-		logger.info("Registration failed: could not create user");
-		return false;
-	    }
-	} catch (Exception e) {
-	    logger.error(e);
-	    return false;
-	}
+        try {
+            if (_context.create(user)) {
+                user.authenticate();
+                this.getRuntimeContext().setAuthenticated(user);
+                logger.info("Registration successful");
+                return true;
+            } else {
+                logger.info("Registration failed: could not create user");
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     public boolean edit(User user) {
-	try {
-	    User _newuser = this.getRuntimeContext().getCurrentUser();
-	    if (hashSHA1(user.getPassword()).equals(_newuser.getPassword())) {
-		logger.info("Edit failed: unequal passwords");
-		return false;
-	    }
-	    _newuser.setFirstname(user.getFirstname());
-	    _newuser.setLastname(user.getLastname());
-	    _newuser.setDepartment(user.getDepartment());
-	    _newuser.setLocation(user.getLocation());
-	    _newuser.setEmail(user.getEmail());
-	    _newuser.setAdmin(true);
-	    _newuser.setCulture(user.getCulture());
-	    _newuser.setPassword(hashSHA1(user.getPassword()));
+        try {
+            User _newuser = this.getRuntimeContext().getCurrentUser();
+            if (hashSHA1(user.getPassword()).equals(_newuser.getPassword())) {
+                logger.info("Edit failed: unequal passwords");
+                return false;
+            }
+            _newuser.setFirstname(user.getFirstname());
+            _newuser.setLastname(user.getLastname());
+            _newuser.setDepartment(user.getDepartment());
+            _newuser.setLocation(user.getLocation());
+            _newuser.setEmail(user.getEmail());
+            _newuser.setAdmin(true);
+            _newuser.setCulture(user.getCulture());
+            _newuser.setPassword(hashSHA1(user.getPassword()));
 
-	    this.getRuntimeContext()
-		    .setAuthenticated(_context.update(_newuser));
-	    logger.info("Edit successful");
-	    return true;
-	} catch (Exception e) {
-	    logger.error(e);
-	    return false;
-	}
+            this.getRuntimeContext().setAuthenticated(_context.update(_newuser));
+            logger.info("Edit successful");
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     /**
@@ -115,141 +113,139 @@ public class UserBO extends ABusinessObject {
      */
     public boolean create(List<User> users) {
 
-	// _context.beginTransaction();
+        // _context.beginTransaction();
 
-	for (User user : users) {
+        for (User user : users) {
 
-	    user.setPassword(hashSHA1(user.getPassword()));
+            user.setPassword(hashSHA1(user.getPassword()));
 
-	    try {
-		if (_context.create(user)) {
-		    logger.info("User creation successful");
-		} else {
-		    logger.info("User Creation failed: could not create user");
-		    // Because import of users has to work with the
-		    // "all or noting" principle
-		    // we do a rollback here.
-		    // _context.rollbackTransaction();
-		    return false;
-		}
-	    } catch (Exception e) {
-		logger.error(e);
-		return false;
-	    }
+            try {
+                if (_context.create(user)) {
+                    logger.info("User creation successful");
+                } else {
+                    logger.info("User Creation failed: could not create user");
+                    // Because import of users has to work with the
+                    // "all or noting" principle
+                    // we do a rollback here.
+                    // _context.rollbackTransaction();
+                    return false;
+                }
+            } catch (Exception e) {
+                logger.error(e);
+                return false;
+            }
 
-	}
+        }
 
-	// _context.commitTransaction();
+        // _context.commitTransaction();
 
-	return true;
+        return true;
 
     }
 
     private String hashSHA1(String password) {
-	try {
-	    MessageDigest cript = MessageDigest.getInstance("SHA-1");
-	    cript.reset();
-	    cript.update(password.getBytes());
-	    password = new String(cript.digest());
-	} catch (Exception e) {
-	    logger.error(e);
-	}
-	return password;
+        try {
+            MessageDigest cript = MessageDigest.getInstance("SHA-1");
+            cript.reset();
+            cript.update(password.getBytes());
+            password = new String(cript.digest());
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return password;
     }
 
     public boolean changeCulture(String culture) {
-	try {
-	    User _newuser = this.getRuntimeContext().getCurrentUser();
-	    _newuser.setCulture(culture);
-	    this.getRuntimeContext()
-		    .setAuthenticated(_context.update(_newuser));
-	    return true;
-	} catch (Exception e) {
-	    logger.error(e);
-	    return false;
-	}
+        try {
+            User _newuser = this.getRuntimeContext().getCurrentUser();
+            _newuser.setCulture(culture);
+            this.getRuntimeContext().setAuthenticated(_context.update(_newuser));
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     public Boolean setAdmin(int id) {
-	try {
-	    User u = _context.readOne(id, User.class);
+        try {
+            User u = _context.readOne(id, User.class);
 
-	    if (u.isAdmin() == true) {
-		u.setAdmin(false);
-		logger.info("setAdmin: false");
-	    } else {
-		u.setAdmin(true);
-		logger.info("setAdmin: true");
-	    }
+            if (u.isAdmin() == true) {
+                u.setAdmin(false);
+                logger.info("setAdmin: false");
+            } else {
+                u.setAdmin(true);
+                logger.info("setAdmin: true");
+            }
 
-	    _context.update(u);
-	    return true;
-	} catch (Exception e) {
-	    logger.error(e);
-	    return false;
-	}
+            _context.update(u);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     public Boolean setPortalAdmin(int id) {
-	try {
-	    User u = _context.readOne(id, User.class);
+        try {
+            User u = _context.readOne(id, User.class);
 
-	    if (u.isPortalAdmin() == true) {
-		u.setPortalAdmin(false);
-		logger.info("setPortalAdmin: false");
-	    } else {
-		u.setPortalAdmin(true);
-		logger.info("setPortalAdmin: true");
-	    }
+            if (u.isPortalAdmin() == true) {
+                u.setPortalAdmin(false);
+                logger.info("setPortalAdmin: false");
+            } else {
+                u.setPortalAdmin(true);
+                logger.info("setPortalAdmin: true");
+            }
 
-	    _context.update(u);
-	    return true;
-	} catch (Exception e) {
-	    logger.error(e);
-	    return false;
-	}
+            _context.update(u);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     public Boolean setActive(int id) {
-	try {
-	    User u = _context.readOne(id, User.class);
+        try {
+            User u = _context.readOne(id, User.class);
 
-	    if (u.isActive() == true) {
-		u.setActive(false);
-		logger.info("setActive: false");
-	    } else {
-		u.setActive(true);
-		logger.info("setActive: true");
-	    }
+            if (u.isActive() == true) {
+                u.setActive(false);
+                logger.info("setActive: false");
+            } else {
+                u.setActive(true);
+                logger.info("setActive: true");
+            }
 
-	    _context.update(u);
-	    return true;
-	} catch (Exception e) {
-	    logger.error(e);
-	    return false;
-	}
+            _context.update(u);
+            return true;
+        } catch (Exception e) {
+            logger.error(e);
+            return false;
+        }
     }
 
     public Collection<User> searchUser(String searchQuery) throws Exception {
 
-	String[] tokens = searchQuery.trim().split("\\s+");
+        String[] tokens = searchQuery.trim().split("\\s+");
 
-	StringBuffer queryBuffer = new StringBuffer();
+        StringBuffer queryBuffer = new StringBuffer();
 
-	for (int i = 0; i < tokens.length; i++) {
-	    queryBuffer.append("i.firstname like '%" + tokens[i]
-		    + "%' or i.lastname like '%" + tokens[i] + "%'");
+        for (int i = 0; i < tokens.length; i++) {
+            queryBuffer.append("i.firstname like '%" + tokens[i] + "%' or i.lastname like '%" + tokens[i] + "%'");
 
-	    if (i < tokens.length - 1) {
-		queryBuffer.append(" or ");
-	    }
+            if (i < tokens.length - 1) {
+                queryBuffer.append(" or ");
+            }
 
-	}
+        }
 
-	String query = queryBuffer.toString();
+        String query = queryBuffer.toString();
 
-	Collection<User> users = _context.readByQuery(query, User.class);
-	return users;
+        Collection<User> users = _context.readByQuery(query, User.class);
+        return users;
 
     }
 
