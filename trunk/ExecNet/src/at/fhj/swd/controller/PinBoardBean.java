@@ -1,130 +1,54 @@
 package at.fhj.swd.controller;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
-import at.fhj.swd.application.Application;
-import at.fhj.swd.application.IRuntimeContext;
-import at.fhj.swd.data.IDataContext;
-
-import at.fhj.swd.domain.Community;
+import at.fhj.swd.business.PinBoardBO;
 import at.fhj.swd.domain.Post;
-import at.fhj.swd.domain.User;
 
 public class PinBoardBean {
 
-	private String entry;
-	    //private boolean ispublic = true
+    private String entry;
 
-	private IDataContext<Post> _pc;
-    private IRuntimeContext _rc;
-
+    private PinBoardBO _bo;
 
     public PinBoardBean() {
-    	   this._pc = Application.getInstance().getPostContext();
-           this._rc = Application.getInstance().getRuntime();
+        _bo = new PinBoardBO();
     }
 
     public String addNow() {
-    	User _u = _rc.getCurrentUser();
-    
-    	Post _new = new Post();
+        Post _new = new Post();
         _new.setEntry(this.getEntry());
-        _new.setPinboard(_u);
-        _new.setAuthor(_u);
         _new.setDate(new Date());
-        
-        _u.addPinPost(_new);
-        System.out.println("Date" + _new.getDate().toString());
-        try {
-            if (_pc.create(_new)) {
-                return "post-added";
-            } else {
-                return "post-failed";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if (_bo.add(_new)) {
+            return "post-added";
+        } else {
             return "post-failed";
         }
     }
 
-	public String delete(Long id) {
-        try {
-            Post p = _pc.readOne(id, Post.class);
-            if (_pc.delete(p)) {
-            	return "post-added";
-            } else {
-            	return "postadd-failed";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "postadd-failed";
-        }
-    	
+    public Boolean delete(Long id) {
+        return _bo.delete(id);
     }
 
     public Collection<Post> getAll() {
-        try {
-        
-            return _pc.readAll(Post.class);
-        } catch (Exception e) {
-            return null;
-        }
+        return _bo.getAll();
     }
 
-    /*
-     * Returns only Posts from the current User	
-     */
     public Collection<Post> getMy() {
-    	
-    	 Collection<Post> ps = new ArrayList<Post>();
-    	 Collection<Post> psAll = _pc.readAll(Post.class);
-    	
-         for (Post p : psAll) {    	 
-             if (p.getAuthor().getUsername() == _rc.getCurrentUser().getUsername()) {
-                 ps.add(p);
-             }
-         }
-       
-       return sort(ps);
-
+        return _bo.getMy();
     }
-    
-    /*
-     * Returns only Posts from the current User	
-     */
+
     public Collection<Post> getOthers(Long id) {
-    	
-    	 Collection<Post> ps = new ArrayList<Post>();
-    	 Collection<Post> psAll = _pc.readAll(Post.class);
-    	
-         for (Post p : psAll) {    	 
-             if (p.getAuthor().getId() == id) {
-                 ps.add(p);
-             }
-         }
-       
-       return sort(ps);
-
+        return _bo.getOthers(id);
     }
 
-	private Collection<Post> sort(Collection<Post> ps) {
-		List<Post> list = new ArrayList<Post>(ps);
-	//	Collections.sort(list, c)
-		
-		return ps;
-	}
+    public String getEntry() {
+        return entry;
+    }
 
-	public String getEntry() {
-		return entry;
-	}
-
-	public void setEntry(String entry) {
-		this.entry = entry;
-	}
-
-   
+    public void setEntry(String entry) {
+        this.entry = entry;
+    }
 }
