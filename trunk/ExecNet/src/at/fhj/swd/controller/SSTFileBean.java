@@ -144,7 +144,7 @@ public class SSTFileBean {
     }
 
     /**
-     * Haui
+     * Clears, means deletes physically, the uploaded files on the server.
      * 
      */
     public void clearUploadData() {

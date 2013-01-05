@@ -33,7 +33,7 @@ public class OpenCSVLibraryTest {
 		    + "firstname;lastname3;department;my Location;username;password;email3");
 
     /**
-     * Haui TODO
+     * Tests the CSVReader functionality with a good String of one line.
      * 
      * @throws IOException
      */
@@ -62,7 +62,7 @@ public class OpenCSVLibraryTest {
     }
 
     /**
-     * Haui TODO
+     * Tests the CSVReader functionality with a good String of three lines.
      * 
      * @throws IOException
      */
