@@ -102,6 +102,7 @@ public class SSTFileBean {
 	    if (this.files.size() > 0) {
 
 		this.files.get(0).delete();
+		this.size = 0;
 		this.textForUser = "";
 
 	    }

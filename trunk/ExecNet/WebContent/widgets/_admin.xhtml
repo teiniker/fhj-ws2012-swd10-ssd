@@ -10,7 +10,7 @@
 
 
 <f:view>
-            <h:form rendered="#{user.isAdmin() == true}">
+            <h:form rendered="#{user.isAdmin() == true}" id="listingTableId">
                 <rich:panel header="#{msg.admin_user_control}">
                 <table>
                     <ui:repeat var="item" value="#{userBean.getAll()}">
