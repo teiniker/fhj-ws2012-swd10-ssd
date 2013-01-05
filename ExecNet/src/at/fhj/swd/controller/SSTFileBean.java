@@ -97,24 +97,7 @@ public class SSTFileBean {
      */
     public void uploadFile(FileUploadEvent event) {
 
-	try {
-
-	    if (this.files.size() > 0) {
-
-		this.files.get(0).delete();
-		this.size = 0;
-		this.textForUser = "";
-
-	    }
-
-	    this.files.clear();
-
-	} catch (IOException e1) {
-	    // Haui
-	    logger.fatal(e1.getStackTrace());
-	    showMessageToUser("Fataler Fehler aufgetreten. Bitte kontaktieren Sie den Support.");
-	    return;
-	}
+	clearUploadData();
 
 	addFile(event.getUploadedFile());
 
@@ -158,6 +141,31 @@ public class SSTFileBean {
 		+ "\""
 		+ " wurde hochgeladen und alle sich darin befindlichen BenutzerInnen erfolgreich importiert.");
 
+    }
+
+    /**
+     * Haui
+     * 
+     */
+    public void clearUploadData() {
+	try {
+
+	    if (this.files.size() > 0) {
+
+		this.files.get(0).delete();
+		this.size = 0;
+		this.textForUser = "";
+
+	    }
+
+	    this.files.clear();
+
+	} catch (IOException e1) {
+	    // Haui
+	    logger.fatal(e1.getStackTrace());
+	    showMessageToUser("Fataler Fehler aufgetreten. Bitte kontaktieren Sie den Support.");
+	    return;
+	}
     }
 
     /**
