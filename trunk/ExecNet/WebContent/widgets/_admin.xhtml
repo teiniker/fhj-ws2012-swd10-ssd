@@ -40,9 +40,9 @@
 
                 </table>
                 </rich:panel>
-            </h:form>
+           
             
-             <style>
+           <style>
         .top {
             vertical-align: top;
         }
@@ -58,8 +58,23 @@
             <rich:fileUpload fileUploadListener="#{sstFileBean.uploadFile}"
                              id="upload" 
                              acceptedTypes="txt, csv, sst"
+                             maxFilesQuantity="1"
+                             addLabel="Importdatei hochladen"
+                             execute="listingTableId"
+                             render="listingTableId"
                              >
-                <a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+                             
+                <!-- Hier beim onComplete muß dieser Javascript Befehl angegeben werden.
+                     Sowie ebenfalls unabdingbar notwendig dass die id bei dem HTML Formular
+                     angegeben wird.
+                     Nicht bei der HTML Tabelle.       
+                -->                             
+                <a4j:ajax event="uploadcomplete" 
+                          execute="listingTableId" 
+                          render="info" 
+                          oncomplete="#{rich:component('listingTableId')}.reload(); return false;"
+                          />
+                
             </rich:fileUpload>
             <h:panelGroup id="info">
                 <rich:panel bodyClass="info">
@@ -68,15 +83,15 @@
                     </f:facet>
                     <h:outputText value="Bisher wurde keine Importdatei hochgeladen"
                         rendered="#{sstFileBean.size==0}" />
-                    <rich:dataGrid columns="1" value="#{fileUploadBean.file}"
+                    <rich:dataGrid columns="1" value="#{sstFileBean.files}"
                         var="file" rowKeyVar="row">
                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                             <h:panelGrid columns="2">
-                                <h:panelGrid columns="2">
-                                    <h:outputText value="File Name:" />
+                                <h:panelGrid columns="2" >
+                                    <h:outputText value="Dateiname:" />
                                     <h:outputText value="#{file.name}" />
-                                    <h:outputText value="File Length(bytes):" />
-                                    <h:outputText value="#{file.length}" />
+                                    <h:outputText value="Status:" />                                    
+                                    <h:outputText  value="#{sstFileBean.textForUser}" />
                                 </h:panelGrid>
                             </h:panelGrid>
                         </rich:panel>
@@ -88,7 +103,7 @@
                     rendered="#{fileUploadBean.size>0}" />
             </h:panelGroup>
         </h:panelGrid>
-            
+             </h:form>
         </f:view>
 
 
