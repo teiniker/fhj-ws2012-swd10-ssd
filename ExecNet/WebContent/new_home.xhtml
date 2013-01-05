@@ -19,9 +19,7 @@
         
         <!-- Center Content -->
         <ui:define name="center">
-            <center>
-                <h:outputText styleClass="h1" value="#{msg.global_home}" />
-            </center>
+            <ui:include src="editorial/#{user.culture}/_ed_index.xhtml" />
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         </ui:define>
         
