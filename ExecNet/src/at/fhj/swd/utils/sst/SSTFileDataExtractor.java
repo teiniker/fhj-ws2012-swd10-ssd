@@ -1,5 +1,5 @@
 /**
- * 
+ * Extracts the data out of the sst file, which is actually a comma separated (csv) file.
  */
 package at.fhj.swd.utils.sst;
 
@@ -12,9 +12,13 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import at.fhj.swd.domain.User;
+import at.fhj.swd.utils.UserMessage;
 import au.com.bytecode.opencsv.CSVReader;
 
 /**
+ * Extracts the data out of the sst file, which is actually a comma separated
+ * (csv) file.
+ * 
  * @author Michael Hausegger, CAFK
  * 
  */
@@ -37,7 +41,7 @@ public class SSTFileDataExtractor {
     }
 
     /**
-     * Haui TODO
+     * Returns the result of the csv parsing process as a List of String arrays.
      * 
      * @throws IOException
      * 
@@ -50,7 +54,8 @@ public class SSTFileDataExtractor {
     }
 
     /**
-     * Haui TODO
+     * Returns the result of the csv parsing process as an instance of the class
+     * SSTFileDataExtractorResult.
      * 
      */
     public static SSTFileDataExtractorResult getParseResult(String stringToParse) {
@@ -71,9 +76,8 @@ public class SSTFileDataExtractor {
 
 	    logger.fatal(e.getStackTrace());
 
-	    // Haui
-	    // Noch bessere Mitteilung schreiben und Textkürzel setzen.
-	    _result.errorMessage = "Interner Fehler aufgetreten.";
+	    _result.errorMessage = UserMessage
+		    .getLocalizedMessage("admin_fatal_error");
 
 	    return _result;
 
@@ -87,10 +91,8 @@ public class SSTFileDataExtractor {
 		// object.
 		_result.setUsers(new ArrayList<User>());
 
-		// Haui
-		// Textkürzel
-		_result.errorMessage = "Sie müssen alle der folgenden Attribute in der folgenden Reihenfolge, bei allen BenutzerInnen, getrennt durch \";\", angeben: "
-			+ "firstname; lastname; department; location; username; password; email";
+		_result.errorMessage = UserMessage
+			.getLocalizedMessage("admin_wrong_file_format");
 
 		return _result;
 

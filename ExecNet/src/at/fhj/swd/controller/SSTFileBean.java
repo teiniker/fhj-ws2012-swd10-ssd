@@ -14,6 +14,7 @@ import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
 
 import at.fhj.swd.business.UserBO;
+import at.fhj.swd.utils.UserMessage;
 import at.fhj.swd.utils.sst.SSTFileDataExtractor;
 import at.fhj.swd.utils.sst.SSTFileDataExtractorResult;
 
@@ -109,17 +110,19 @@ public class SSTFileBean {
 	    _result = SSTFileDataExtractor.getParseResult(IOUtils
 		    .toString(this.files.get(0).getInputStream()));
 	} catch (IOException e) {
-	    // Haui
+
 	    logger.fatal(e.getStackTrace());
-	    showMessageToUser("Fataler Fehler aufgetreten. Bitte kontaktieren Sie den Support.");
+	    showMessageToUser(UserMessage
+		    .getLocalizedMessage("admin_fatal_error"));
+
 	    return;
+
 	}
 
 	if (_result.getParsingSuccessfull() == false) {
 
-	    // Haui
-	    // Noch Textkürzel
-	    showMessageToUser("Es konnte kein Import durchgeführt werden. Ursache: "
+	    showMessageToUser(UserMessage
+		    .getLocalizedMessage("admin_no_import_and_cause")
 		    + _result.getErrorMessage());
 
 	    return;
@@ -130,16 +133,15 @@ public class SSTFileBean {
 
 	if (_userBO.create(_result.getUsers()) == false) {
 
-	    // Haui TODO
-	    showMessageToUser("BenutzerInnen konnten nicht importiert werden.");
+	    showMessageToUser(UserMessage
+		    .getLocalizedMessage("admin_no_user_db_error"));
 	    return;
 
 	}
 
-	showMessageToUser("Datei \""
-		+ event.getUploadedFile().getName()
-		+ "\""
-		+ " wurde hochgeladen und alle sich darin befindlichen BenutzerInnen erfolgreich importiert.");
+	showMessageToUser(UserMessage.getLocalizedMessage(
+		"admin_import_success").replace("%filename%",
+		event.getUploadedFile().getName()));
 
     }
 
@@ -161,11 +163,15 @@ public class SSTFileBean {
 	    this.files.clear();
 
 	} catch (IOException e1) {
-	    // Haui
+
 	    logger.fatal(e1.getStackTrace());
-	    showMessageToUser("Fataler Fehler aufgetreten. Bitte kontaktieren Sie den Support.");
+	    showMessageToUser(UserMessage
+		    .getLocalizedMessage("admin_fatal_error"));
+
 	    return;
+
 	}
+
     }
 
     /**

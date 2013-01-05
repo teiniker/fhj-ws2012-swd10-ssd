@@ -20,8 +20,6 @@ import at.fhj.swd.domain.User;
  */
 public class SSTFileDataExtractorResult {
 
-    // Haui
-
     Boolean parsingSuccessfull = new Boolean(false);
 
     String errorMessage = "";
