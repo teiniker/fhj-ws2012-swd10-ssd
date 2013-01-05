@@ -34,7 +34,7 @@ public class NewsBean {
         
 
         if (_bo.create(_newNews)) {
-            return "news-posted";
+            return "new_home";
         } else {
             return "news-failed";
         }

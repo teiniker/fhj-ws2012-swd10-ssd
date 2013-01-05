@@ -15,13 +15,13 @@
                 <table>
                     <tr>
                         <td><h:outputLabel for="title" value="#{msg.news_title}" required="True" /></td>
-                        <td><h:inputText id="title" value="#{newsBean.title}" required="true">
+                        <td><h:inputText id="title" value="#{newsBean.title}" required="true"  requiredMessage="#{msg.news_title_required}">
 
                             </h:inputText></td>
                     </tr>
                     <tr>
                         <td><h:outputLabel for="entry" value="#{msg.news_entry}" required="True" /></td>
-                        <td><h:inputText id="entry" value="#{newsBean.entry}" required="true">
+                        <td><h:inputText id="entry" value="#{newsBean.entry}" required="true" requiredMessage="#{msg.news_entry_required}">
 
 
                             </h:inputText></td>
