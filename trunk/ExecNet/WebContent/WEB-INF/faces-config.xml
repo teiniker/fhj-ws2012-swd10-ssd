@@ -2,15 +2,15 @@
 
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     version="2.0">
-    
+
     <application>
-    	<message-bundle>at.fhj.swd.i18n.messages</message-bundle>
-    	<locale-config>
-			<default-locale>en</default-locale>
-			<supported-locale>de_AT</supported-locale>
-			<supported-locale>de_DE</supported-locale>
-			<supported-locale>de</supported-locale>
-		</locale-config>
+        <message-bundle>at.fhj.swd.i18n.messages</message-bundle>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>de_AT</supported-locale>
+            <supported-locale>de_DE</supported-locale>
+            <supported-locale>de</supported-locale>
+        </locale-config>
     </application>
 
     <managed-bean>
@@ -18,7 +18,7 @@
         <managed-bean-class>at.fhj.swd.controller.UserBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-        <managed-bean>
+    <managed-bean>
         <managed-bean-name>newsBean</managed-bean-name>
         <managed-bean-class>at.fhj.swd.controller.NewsBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
@@ -47,7 +47,7 @@
         <managed-bean-name>sstFileBean</managed-bean-name>
         <managed-bean-class>at.fhj.swd.controller.SSTFileBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>    
+    </managed-bean>
     <managed-bean>
         <managed-bean-name>user</managed-bean-name>
         <managed-bean-class>at.fhj.swd.domain.User</managed-bean-class>
@@ -78,63 +78,5 @@
         <managed-bean-class>at.fhj.swd.controller.EmailSenderBean</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
-
-    <!-- TODO: check navigation rules -->
-    <navigation-rule>
-        <display-name>usersettings.xhtml</display-name>
-        <from-view-id>/usersettings.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>user-edited</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>lessons.xhtml</display-name>
-        <from-view-id>/lessons.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>logged-out</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>courses.xhtml</display-name>
-        <from-view-id>/courses.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>logged-out</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>tasks.xhtml</display-name>
-        <from-view-id>/tasks.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>logged-out</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>register.xhtml</display-name>
-        <from-view-id>/register.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>logged-out</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>usersettings.xhtml</display-name>
-        <from-view-id>/usersettings.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>logged-out</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>lessons.xhtml</display-name>
-        <from-view-id>/lessons.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>name-set</from-outcome>
-            <to-view-id>/courses.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
 
 </faces-config>
