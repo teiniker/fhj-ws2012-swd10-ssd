@@ -8,7 +8,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
     <body>
-        <div class="widget" id="posts">
+        <div class="widget" id="activityListEntry">
             <h:form>
                 <c:set var="varIsAuthor" value="#{activityPostBean.isAuthor(post)}" />            
                 <c:set var="varIsPortalAdmin" value="#{activityPostBean.isPortalAdmin()}" />
@@ -50,11 +50,9 @@
                         </ui:fragment>                                           
                 </table>
             </h:form>
-            <h:form>
                 <ui:include src="_comments.xhtml">
                     <ui:param name="post" value="#{post}" />
-                </ui:include>
-            </h:form>
+                </ui:include>              
         </div>            
     </body>			
 </html>
