@@ -88,8 +88,10 @@ public class ActivityBO {
 
         try {
             if (_pc.update(p) != null) {
+                // if (p.getCommunity() != null) {
                 _c.addPost(p);
                 _cc.update(_c);
+                // }
                 return true;
             } else {
                 return false;
@@ -111,22 +113,21 @@ public class ActivityBO {
      * @return
      */
     public Boolean delete(Post p) {
-    	Boolean removedfromCommunity;
-    	try {
-			if (p.getCommunity() !=null){
-				Community _c = p.getCommunity();
-				_c = p.getCommunity();
-       		 	_c.removePost(p);
-       		 	_cc.update(_c);
-       		 	Collection<Post> _pl = _c.getPosts();
-       		 	
-       		 	removedfromCommunity= _pl.contains(p);
-			}
-			else{
-				removedfromCommunity=false;
-			}   		
-    		
-       		if (_pc.delete(p)  && !removedfromCommunity){
+        Boolean removedfromCommunity;
+        try {
+            if (p.getCommunity() != null) {
+                Community _c = p.getCommunity();
+                _c = p.getCommunity();
+                _c.removePost(p);
+                _cc.update(_c);
+                Collection<Post> _pl = _c.getPosts();
+
+                removedfromCommunity = _pl.contains(p);
+            } else {
+                removedfromCommunity = false;
+            }
+
+            if (_pc.delete(p) && !removedfromCommunity) {
                 return true;
             } else {
                 return false;
