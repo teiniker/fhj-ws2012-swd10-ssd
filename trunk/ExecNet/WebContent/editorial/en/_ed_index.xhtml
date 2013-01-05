@@ -1,16 +1,24 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      	xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html">
 
-			<h2>Welcome to ExecNet</h2>
-			<p>
-				For all employees who want to be connected to the "Internal World of our company"
-			</p>
-			<p>
-				This is the project of the course SWD 10.
-			</p>
-
+    <h:head>
+        
+    </h:head>
+    <h:body>
+        <center>
+            <h:outputText styleClass="h2" value="#{msg.global_welcome}" />
+            <br/>
+            <br/>
+            <h:outputText styleClass="h3" value="#{msg.global_welcome_text}" />
+            <br/>
+            <br/>
+            <h:outputText styleClass="h5" value="#{msg.global_welcome_swd10}" />
+        </center>
+        <br/>
+        <hr/>
+        <br/>
+    </h:body>
+      
 </html>
