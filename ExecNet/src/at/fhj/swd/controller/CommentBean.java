@@ -35,9 +35,17 @@ public class CommentBean {
 
     public Collection<Comment> getcomments(Post p) {
         Collection<Comment>_c = new ArrayList<Comment>();
+        
+        if (p==null){
+            System.out.println("Scheiﬂe");
+            return null;
+        }
+        
+        else {
         _c.addAll(p.getComments());
         
         return _c;
+        }
         
     }
 
