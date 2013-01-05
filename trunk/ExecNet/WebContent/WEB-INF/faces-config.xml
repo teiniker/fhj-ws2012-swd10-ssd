@@ -54,7 +54,7 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>comment</managed-bean-name>
+        <managed-bean-name>commentBean</managed-bean-name>
         <managed-bean-class>at.fhj.swd.controller.CommentBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
