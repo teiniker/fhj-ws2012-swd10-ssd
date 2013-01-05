@@ -26,7 +26,7 @@
                             <h:form>
                                 <h:outputText styleClass="h1" value="#{msg.notitle}" />
                                 <br/>
-                                <h:outputText styleClass="h2" value="#{msg.notitle} - Slogan" />
+                                <h:outputText styleClass="h2" value="#{msg.notitle} - Internal World of our company" />
                                 <h:panelGrid columns="2">
                                     <h:commandLink action="#{userBean.changeCulture('de')}">
                                         <h:graphicImage value="STYLE/IMG/icon_flag_german.jpg" />
@@ -82,6 +82,12 @@
                                         <h:panelGrid columns="2">
                                             <h:graphicImage value="STYLE/IMG/icon_settings.jpg" />
                                             <h:commandLink styleClass="link" value="#{msg.global_usersettings}" action="#{navigationBean.settings}" />
+                                        </h:panelGrid>
+                                    </rich:toolbarGroup>
+                                    <rich:toolbarGroup rendered="#{user.isAdmin()}">
+                                        <h:panelGrid columns="2">
+                                            <h:graphicImage value="STYLE/IMG/icon_admin.jpg" />
+                                            <h:commandLink styleClass="link" value="#{msg.global_admin}" action="#{navigationBean.admin}" />
                                         </h:panelGrid>
                                     </rich:toolbarGroup>
                                     <rich:toolbarGroup location="right">
