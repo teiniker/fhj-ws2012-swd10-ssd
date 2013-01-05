@@ -1,5 +1,5 @@
 /**
- * 
+ * Class to test the functionality of the SSTFileDataExtractorResult class. 
  */
 package at.fhj.swd.utils.sst;
 
@@ -14,7 +14,9 @@ import org.junit.Test;
 import at.fhj.swd.domain.User;
 
 /**
- * @author haui
+ * Class to test the functionality of the SSTFileDataExtractorResult class.
+ * 
+ * @author Michael Hausegger, CAFK
  * 
  */
 public class SSTFileDataExtractorResultTest {
@@ -77,6 +79,7 @@ public class SSTFileDataExtractorResultTest {
      * {@link at.fhj.swd.utils.sst.SSTFileDataExtractorResult#getErrorMessage()}
      * .
      */
+    @SuppressWarnings("static-access")
     @Test
     public void testGetErrorMessage() {
 
@@ -89,6 +92,7 @@ public class SSTFileDataExtractorResultTest {
      * {@link at.fhj.swd.utils.sst.SSTFileDataExtractorResult#setErrorMessage(java.lang.String)}
      * .
      */
+    @SuppressWarnings("static-access")
     @Test
     public void testSetErrorMessage() {
 
