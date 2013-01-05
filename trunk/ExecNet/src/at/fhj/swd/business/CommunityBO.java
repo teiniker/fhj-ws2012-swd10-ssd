@@ -91,12 +91,12 @@ public class CommunityBO extends ABusinessObject {
 
     public Boolean delete(Long id) {
         try {
-            Community community = _context.readOne(id, Community.class);
             User _u = this.getRuntimeContext().getCurrentUser();
-            
+            Community community = _context.readOne(id, Community.class);
+
             if (_context.delete(community)) {
-                logger.info("Community deletion successful");
                 this.getRuntimeContext().setAuthenticated(_usercontext.update(_u));
+                logger.info("Community deletion successful");
                 return true;
             } else {
                 logger.info("Community deletion not successful");
