@@ -21,6 +21,7 @@ import at.fhj.swd.utils.TestDataFactory;
 public class DocumentBOTest {
 
     private static DocumentBO _DocumentBO;
+
     private static CommunityBO _CommunityBO;
 
     private static TestDataFactory _testDataFactory;
