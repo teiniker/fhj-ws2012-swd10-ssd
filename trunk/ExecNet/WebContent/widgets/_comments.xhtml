@@ -7,7 +7,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
     <body>
-        <h:form>
+    <h:form>
         <table>
         	<tr><th>#{msg.comment_add}</th></tr>
         	<tr>
@@ -18,15 +18,15 @@
         	   	</td>
         	   	<td>
         	   		<h:inputText id="entry" 
-        	   			value="#{comment.entry}"
-        	   			required="true" />
+        	   			value="#{commentBean.entry}"
+        	   			required="True" />
            		</td>
         	</tr>
         	<tr>
         		<td/>
         		<td> 
         	   		<h:commandButton 
-        	   			action="#{CommentBean.addNow(post)}"
+        	   			action="#{commentBean.add(post)}"
         	   			value="#{msg.comment_submit}"/>
         	   	</td>
         	</tr>
@@ -36,19 +36,22 @@
            			</td>
            		</tr>						   	
         		</table>   	
-           	</h:form>
-        	<table>
-        			<tr>
-        				<th>#{msg.global_comments}</th>
-        			</tr>				
-        		<ui:repeat var="item" value="#{CommentBean.getComments(post)}">
-        			<tr>
-        				<td>on #{item.getCommentDate()}, #{item.user.getUsername()} #{msg.comment_output}: </td> 
-        			</tr>
-        			<tr>
-        				<td>#{item.entry}</td>
-        			</tr>
-        		</ui:repeat>
-        	</table>
+                #{msg.global_comments}
+                
+                <c:set rendered ="true" var="varCommentsIsEmpty" value="#{commentBean.commentsOrPostEmpty(post)}" />      
+                
+                <ui:fragment rendered="${varCommentsIsEmpty == false}">
+                	<ui:repeat var="item" value="#{commentBean.getcomments(post)}">
+                        <table>
+                            <tr>
+                                <td>on #{item.getCommentDate()}, #{item.user.getUsername()} #{msg.comment_output}: </td> 
+                            </tr>
+                            <tr>
+                                <td>#{item.entry}</td>
+                            </tr>
+                        </table>                    
+                    </ui:repeat>	
+                </ui:fragment>
+        </h:form>
         </body>				
 </html>
