@@ -11,7 +11,7 @@
 
 <f:view>
             <h:form rendered="#{user.isAdmin() == true}">
-                <rich:panel bodyClass="rich-laguna-panel-no-header">
+                <rich:panel header="#{msg.admin_user_control}">
                 <table>
                     <ui:repeat var="item" value="#{userBean.getAll()}">
                         <tr>
