@@ -1,5 +1,6 @@
 package at.fhj.swd.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import at.fhj.swd.business.CommentBO;
@@ -17,12 +18,30 @@ public class CommentBean {
 
     }
 
-
-    public Collection<Comment> getComments(Post p) {
-        return p.getComments();
+    public Boolean commentsOrPostEmpty(Post p){
+            if(p==null){
+                return true;
+            }
+            else{
+                if (p.getComments() == null){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+                
+            }        
     }
 
-    public String addNow(Post p) {
+    public Collection<Comment> getcomments(Post p) {
+        Collection<Comment>_c = new ArrayList<Comment>();
+        _c.addAll(p.getComments());
+        
+        return _c;
+        
+    }
+
+    public String add(Post p) {
         return (_bo.add(p, this.getEntry())) ? "comment-added" : "commentadding-failed";
     }
 
