@@ -21,19 +21,19 @@
                                 </ui:fragment> <ui:fragment rendered="#{!item.isAdmin()}">
                                     <h:commandButton action="#{userBean.setAdmin(item.getId())}" value="#{msg.admin_set_admin}" />
                                 </ui:fragment><br /></td>
-                            <td>#{item.isAdmin()}</td>
+                            
                             <td><ui:fragment rendered="#{item.isPortalAdmin()}">
                                     <h:commandButton action="#{userBean.setPortalAdmin(item.getId())}" value="#{msg.admin_unset_portal_admin}" />
                                 </ui:fragment> <ui:fragment rendered="#{!item.isPortalAdmin()}">
                                     <h:commandButton action="#{userBean.setPortalAdmin(item.getId())}" value="#{msg.admin_set_portal_admin}" />
                                 </ui:fragment><br /></td>
-                            <td>#{item.isPortalAdmin()}</td>
+                            
                             <td><ui:fragment rendered="#{item.isActive()}">
                                     <h:commandButton action="#{userBean.setActive(item.getId())}" value="#{msg.admin_unset_active}" />
                                 </ui:fragment> <ui:fragment rendered="#{!item.isActive()}">
                                     <h:commandButton action="#{userBean.setActive(item.getId())}" value="#{msg.admin_set_active}" />
                                 </ui:fragment><br /></td>
-                            <td>#{item.isActive()}</td>
+                            
                         </tr>
                     </ui:repeat>
 
