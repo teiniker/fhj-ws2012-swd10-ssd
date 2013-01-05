@@ -10,6 +10,17 @@ import at.fhj.swd.domain.Post;
 public class CommentBean {
 
     private String entry;
+    private String inputEntry;
+
+    public String getInputEntry() {
+        return inputEntry;
+    }
+
+
+    public void setInputEntry(String e) {
+        this.inputEntry = e;
+    }
+
     private CommentBO _bo;
 
 
@@ -18,39 +29,36 @@ public class CommentBean {
 
     }
 
-    public Boolean commentsOrPostEmpty(Post p){
-            if(p==null){
+    public Boolean commentsOrPostEmpty(Post p) {
+        if (p == null) {
+            return true;
+        } else {
+            if (p.getComments() == null) {
                 return true;
+            } else {
+                return false;
             }
-            else{
-                if (p.getComments() == null){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-                
-            }        
+
+        }
     }
 
     public Collection<Comment> getcomments(Post p) {
-        Collection<Comment>_c = new ArrayList<Comment>();
-        
-        if (p==null){
-            System.out.println("Scheiﬂe");
+        Collection<Comment> _c = new ArrayList<Comment>();
+        if (p == null) {
             return null;
+        } else {
+            _c.addAll(p.getComments());
+            return _c;
         }
-        
-        else {
-        _c.addAll(p.getComments());
-        
-        return _c;
-        }
-        
     }
 
     public String add(Post p) {
-        return (_bo.add(p, this.getEntry())) ? "comment-added" : "commentadding-failed";
+        if (_bo.add(p, getInputEntry())) {
+            setInputEntry("");
+            return "comment-added";
+        } else {
+            return "commentadding-failed";
+        }
     }
 
     public String getEntry() {
