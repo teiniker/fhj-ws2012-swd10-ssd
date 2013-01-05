@@ -194,6 +194,18 @@ public class UserBean {
         return _bo.getAll();
     }
 
+    public boolean setAdmin(Long id) {
+        return _bo.setAdmin(id);
+    }
+
+    public boolean setPortalAdmin(Long id) {
+        return _bo.setPortalAdmin(id);
+    }
+
+    public boolean setActive(Long id) {
+        return _bo.setActive(id);
+    }
+
     public String getFirstname() {
         return firstname;
     }
@@ -264,18 +276,6 @@ public class UserBean {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public boolean setAdmin(int id) {
-        return _bo.setAdmin(id);
-    }
-
-    public boolean setPortalAdmin(int id) {
-        return _bo.setPortalAdmin(id);
-    }
-
-    public boolean setActive(int id) {
-        return _bo.setActive(id);
     }
 
     public User getViewUser() {
