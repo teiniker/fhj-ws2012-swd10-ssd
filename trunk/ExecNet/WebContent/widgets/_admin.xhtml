@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+
+<f:view>
+            <h:form rendered="#{user.isAdmin() == true}">
+                <rich:panel bodyClass="rich-laguna-panel-no-header">
+                <table>
+                    <ui:repeat var="item" value="#{userBean.getAll()}">
+                        <tr>
+                            <td>#{item.getUsername()}</td>
+                            <td><ui:fragment rendered="#{item.isAdmin()}">
+                                    <h:commandButton action="#{userBean.setAdmin(item.getId())}" value="#{msg.admin_unset_admin}" />
+                                </ui:fragment> <ui:fragment rendered="#{!item.isAdmin()}">
+                                    <h:commandButton action="#{userBean.setAdmin(item.getId())}" value="#{msg.admin_set_admin}" />
+                                </ui:fragment><br /></td>
+                            <td>#{item.isAdmin()}</td>
+                            <td><ui:fragment rendered="#{item.isPortalAdmin()}">
+                                    <h:commandButton action="#{userBean.setPortalAdmin(item.getId())}" value="#{msg.admin_unset_portal_admin}" />
+                                </ui:fragment> <ui:fragment rendered="#{!item.isPortalAdmin()}">
+                                    <h:commandButton action="#{userBean.setPortalAdmin(item.getId())}" value="#{msg.admin_set_portal_admin}" />
+                                </ui:fragment><br /></td>
+                            <td>#{item.isPortalAdmin()}</td>
+                            <td><ui:fragment rendered="#{item.isActive()}">
+                                    <h:commandButton action="#{userBean.setActive(item.getId())}" value="#{msg.admin_unset_active}" />
+                                </ui:fragment> <ui:fragment rendered="#{!item.isActive()}">
+                                    <h:commandButton action="#{userBean.setActive(item.getId())}" value="#{msg.admin_set_active}" />
+                                </ui:fragment><br /></td>
+                            <td>#{item.isActive()}</td>
+                        </tr>
+                    </ui:repeat>
+
+
+                </table>
+                </rich:panel>
+            </h:form>
+            
+             <style>
+        .top {
+            vertical-align: top;
+        }
+         
+        .info {
+            height: 202px;
+            overflow: auto;
+        }
+        </style>
+
+
+        <h:panelGrid columns="2" columnClasses="top,top">
+            <rich:fileUpload fileUploadListener="#{sstFileBean.uploadFile}"
+                             id="upload" 
+                             acceptedTypes="txt, csv, sst"
+                             >
+                <a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+            </rich:fileUpload>
+            <h:panelGroup id="info">
+                <rich:panel bodyClass="info">
+                    <f:facet name="header">
+                        <h:outputText value="Information" />
+                    </f:facet>
+                    <h:outputText value="Bisher wurde keine Importdatei hochgeladen"
+                        rendered="#{sstFileBean.size==0}" />
+                    <rich:dataGrid columns="1" value="#{fileUploadBean.file}"
+                        var="file" rowKeyVar="row">
+                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="File Name:" />
+                                    <h:outputText value="#{file.name}" />
+                                    <h:outputText value="File Length(bytes):" />
+                                    <h:outputText value="#{file.length}" />
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </rich:panel>
+                    </rich:dataGrid>
+                </rich:panel>
+                <br />
+                <a4j:commandButton action="#{fileUploadBean.clearUploadData}"
+                    render="info, upload" value="Clear Uploaded Data"
+                    rendered="#{fileUploadBean.size>0}" />
+            </h:panelGroup>
+        </h:panelGrid>
+            
+        </f:view>
+
+
+</body>
+
+</html>
