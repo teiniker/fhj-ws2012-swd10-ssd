@@ -18,8 +18,6 @@
 	</c:if>
 	<c:if test="#{user.isLoggedIn() == true}">
         <li><a href="activitystream.xhtml">#{msg.global_activitystream}</a></li>
-		<li><a href="usersettings.xhtml">#{msg.global_usersettings}</a></li>
-        <li><a href="uploads.xhtml">#{msg.global_documents}</a></li>
         <c:if test="#{user.isAdmin() == true}">
            <li><a href="admin.xhtml">#{msg.global_admin}</a></li>
         </c:if>
