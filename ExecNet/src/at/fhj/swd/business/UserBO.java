@@ -163,7 +163,7 @@ public class UserBO extends ABusinessObject {
         }
     }
 
-    public Boolean setAdmin(int id) {
+    public Boolean setAdmin(Long id) {
         try {
             User u = _context.readOne(id, User.class);
 
@@ -183,7 +183,7 @@ public class UserBO extends ABusinessObject {
         }
     }
 
-    public Boolean setPortalAdmin(int id) {
+    public Boolean setPortalAdmin(Long id) {
         try {
             User u = _context.readOne(id, User.class);
 
@@ -203,7 +203,7 @@ public class UserBO extends ABusinessObject {
         }
     }
 
-    public Boolean setActive(int id) {
+    public Boolean setActive(Long id) {
         try {
             User u = _context.readOne(id, User.class);
 
