@@ -17,9 +17,7 @@
         	   			required="True"/> 
         	   	</td>
         	   	<td>
-        	   		<h:inputText id="entry" 
-        	   			value="#{commentBean.entry}"
-        	   			required="True" />
+        	   		<h:inputText id="entry" value="#{commentBean.inputEntry}" required="True" />
            		</td>
         	</tr>
         	<tr>
@@ -37,21 +35,19 @@
            		</tr>						   	
         		</table>   	
                 #{msg.global_comments}
-                
-                <c:set rendered ="true" var="varCommentsIsEmpty" value="#{commentBean.commentsOrPostEmpty(post)}" />      
-                
-                <ui:fragment rendered="${varCommentsIsEmpty == false}">
-                	<ui:repeat var="item" value="#{commentBean.getcomments(post)}">
+               
+               <c:set rendered ="true" var="varCommentsIsEmpty" value="#{commentBean.commentsOrPostEmpty(post)}"/>
+               
+                	<ui:repeat rendered="${varCommentsIsEmpty == false}" var="item" value="#{commentBean.getcomments(post)}">
                         <table>
                             <tr>
-                                <td>on #{item.getCommentDate()}, #{item.user.getUsername()} #{msg.comment_output}: </td> 
+                                <td>on #{item.date}, #{item.user.getUsername()} #{msg.comment_output}: </td> 
                             </tr>
                             <tr>
                                 <td>#{item.entry}</td>
                             </tr>
                         </table>                    
-                    </ui:repeat>	
-                </ui:fragment>
+                    </ui:repeat>		
         </h:form>
         </body>				
 </html>
