@@ -8,46 +8,42 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
     <body>
     <h:form>
-        <table>
-        	<tr><th>#{msg.comment_add}</th></tr>
-        	<tr>
-           		<td>
-        	   		<h:outputLabel for="entry"
-        	   			value="#{msg.comment_message}"
-        	   			required="True"/> 
-        	   	</td>
-        	   	<td>
-        	   		<h:inputText id="entry" value="#{commentBean.inputEntry}" required="True" />
-           		</td>
-        	</tr>
-        	<tr>
-        		<td/>
-        		<td> 
-        	   		<h:commandButton 
-        	   			action="#{commentBean.add(post)}"
-        	   			value="#{msg.comment_submit}"/>
-        	   	</td>
-        	</tr>
-        	<tr>
-        		<td colspan="2">
-        			<h:messages style="color: Red;"/>
-           			</td>
-           		</tr>						   	
-        		</table>   	
-                #{msg.global_comments}
-               
-               <c:set rendered ="true" var="varCommentsIsEmpty" value="#{commentBean.commentsOrPostEmpty(post)}"/>
-               
-                	<ui:repeat rendered="${varCommentsIsEmpty == false}" var="item" value="#{commentBean.getcomments(post)}">
-                        <table>
-                            <tr>
-                                <td>on #{item.date}, #{item.user.getUsername()} #{msg.comment_output}: </td> 
-                            </tr>
-                            <tr>
-                                <td>#{item.entry}</td>
-                            </tr>
-                        </table>                    
-                    </ui:repeat>		
-        </h:form>
-        </body>				
+	        <table>
+	        	<tr><th>#{msg.comment_add}</th></tr>
+	        	<tr>
+	           		<td>
+	        	   		<h:outputLabel for="entry" value="#{msg.comment_message}" required="True"/> 
+	        	   	</td>
+	        	   	<td>
+	        	   		<h:inputText id="entry" value="#{commentBean.inputEntry}" required="true" />
+	           		</td>
+	        	</tr>
+	        	<tr>
+	        		<td> 
+	        	   		<h:commandButton action="#{commentBean.add(post)}" value="#{msg.comment_submit}"/>
+	        	   	</td>
+	        	</tr>
+	        	<tr>
+	        		<td colspan="2">
+	        			<h:messages style="color: Red;"/>
+	          		</td>
+	         	</tr>						   	
+	        </table> 
+      </h:form>
+      <h:form>
+	        <table>
+	    		<tr>
+	    			<th>#{msg.global_comments}</th>
+	    		</tr>	
+	        	<ui:repeat var="item" value="#{commentBean.getcomments(post)}">
+	      			<tr>
+	      				<td>on #{item.getDate()}, #{item.getUser().getUsername()} #{msg.comment_output}: </td> 
+	      			</tr>
+	        		<tr>
+	        			<td>#{item.getEntry()}</td>
+	        		</tr>
+	        	</ui:repeat>
+	        </table>
+		</h:form>	        
+	</body>				
 </html>

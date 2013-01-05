@@ -192,10 +192,20 @@ public class ActivityBO {
 
         Collection<Post> psAll = _pc.readAll(Post.class);
         for (Post p : psAll) {
-            // wenn post Global ist (community == null) und zum jetztigen zeitpunkt gültigkeit hat.
-            if (p.getCommunity() == null && p.getDatefrom().before(tdNow) && p.getDateto().after(tdNow)) {
-                ps.add(p);
-            }
+            if(p !=null){        
+            	if (p.getDatefrom()== null){
+            		p.setDatefrom(tdNow);
+            	}
+            	
+            	if(p.getDateto()==null){
+            		p.setDateto(tdNow);
+            	}
+            	
+            	// wenn post Global ist (community == null) und zum jetztigen zeitpunkt gültigkeit hat.
+                if (p.getCommunity() == null && p.getDatefrom().before(tdNow) && p.getDateto().after(tdNow)) {
+                    ps.add(p);
+                }
+            }        	
         }
 
         return ps;

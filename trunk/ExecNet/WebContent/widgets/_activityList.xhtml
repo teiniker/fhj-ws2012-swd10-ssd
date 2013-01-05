@@ -15,7 +15,6 @@
                 <c:when test="not empty community">
                     <ui:repeat var="item" value="#{activityPostBean.getAllByCommunity(community)}">                       
                        <c:set var="varIdMatches" value="#{activityPostBean.compareIDs(item.id)}" />
-                        
                         <ui:fragment rendered="${varIdMatches == true}">
                             <ui:include src="_activityEdit.xhtml">
                                 <ui:param name="post" value="#{item}"></ui:param>
@@ -40,6 +39,8 @@
                             <ui:include src="_activityListEntry.xhtml">
                                 <ui:param name="post" value="#{item}"></ui:param>
                             </ui:include>
+                            
+                            
                        </ui:fragment>
                     </ui:repeat>
                 </c:otherwise>
