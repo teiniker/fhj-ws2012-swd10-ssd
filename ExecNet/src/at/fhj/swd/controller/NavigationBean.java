@@ -29,4 +29,8 @@ public class NavigationBean {
         return "new_settings";
     }
 
+    public String admin() {
+        return "new_admin";
+    }
+
 }
