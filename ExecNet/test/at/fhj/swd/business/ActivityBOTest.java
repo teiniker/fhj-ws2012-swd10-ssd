@@ -188,7 +188,6 @@ public class ActivityBOTest {
         cal.add(Calendar.DATE, 1);
         Date dtNowPlus1Day = cal.getTime();
 
-
         Assert.assertTrue(activityBO.add("", dtNow, dtNowPlus1Day, 1));
     }
 }
