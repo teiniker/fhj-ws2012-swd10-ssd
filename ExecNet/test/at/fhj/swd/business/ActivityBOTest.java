@@ -31,11 +31,6 @@ public class ActivityBOTest {
     private static Post post;
     private static Community community;
 
-    // private static Post post1;
-    // private static Post post2;
-    // private static Community community1;
-    // private static Community community2;
-
     @BeforeClass
     public static void setup() {
 
@@ -48,27 +43,6 @@ public class ActivityBOTest {
         _context.setCurrentUser(user);
         _context.setAuthenticated(user);
         _context.setCurrentCommunity(community);
-
-
-        Date dtNow = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(dtNow);
-        cal.add(Calendar.DATE, 1);
-        Date dtNowPlus1Day = cal.getTime();
-
-        // community1 = _factory.createCommunity("new");
-        // community2 = _factory.createCommunity("york");
-        // user.addCommunity(community1);
-        // user.addCommunity(community2);
-        // post1 = _factory.createPost("Post1");
-        // post1.setDatefrom(dtNow);
-        // post1.setDateto(dtNowPlus1Day);
-        // post2 = _factory.createPost("Post2");
-        // post2.setDatefrom(dtNow);
-        // post2.setDateto(dtNowPlus1Day);
-        // community1.addPost(post1);
-        // community2.addPost(post2);
-
 
         activityBO = new ActivityBO();
         activityBO.set_rc(_context);
@@ -83,17 +57,12 @@ public class ActivityBOTest {
         _uc.create(user);
         _pc.create(post);
         _cc.create(community);
-
-        // _cc.create(community1);
-        // _cc.create(community2);
-        // _pc.create(post1);
-        // _pc.create(post2);
     }
 
     @Test
     public void testGetCurrentCulture() throws Exception {
-        user.setCulture("EN");
-        Assert.assertEquals("EN", activityBO.getCurrentCulture());
+        user.setCulture("en");
+        Assert.assertEquals("en", activityBO.getCurrentCulture());
     }
 
     @Test
@@ -152,10 +121,8 @@ public class ActivityBOTest {
     // }
 
     @Test
-    // (expected = IllegalStateException.class)
-    public void testDelete_ExceptionExpected() {
-        activityBO.delete(null);
-        Assert.assertTrue(true);
+    public void testDelete_EmptyPost() {
+        Assert.assertFalse(activityBO.delete(null));
     }
 
     // @Test
@@ -178,7 +145,6 @@ public class ActivityBOTest {
     @Test
     public void addEntry_trueExpected() {
         Date dtNow = new Date();
-
         Calendar cal = Calendar.getInstance();
         cal.setTime(dtNow);
         cal.add(Calendar.DATE, 1);
