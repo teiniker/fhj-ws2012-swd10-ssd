@@ -58,22 +58,21 @@ public class ActivityPostBean {
         setDatefromforUpdate(p.getDatefrom());
         setDatetoforUpdate(p.getDateto());
         setEntryforUpdate(p.getEntry());
-        
-        if (p.getCommunity() ==null){
-        	setIdCommunityforUpdate(0l);
+
+        if (p.getCommunity() == null) {
+            setIdCommunityforUpdate(0l);
+        } else {
+            setIdCommunityforUpdate(p.getCommunity().getId());
         }
-        else{
-        	setIdCommunityforUpdate(p.getCommunity().getId());
-        }
-        
+
         idPostToEdit = p.getId();
-        
+
         return Nav.activity_edit.toString();
     }
 
     public String updatepost(Post p) {
-       _bo.updatepost(p);
-       return Nav.activity_update.toString();
+        _bo.updatepost(p);
+        return Nav.activity_update.toString();
     }
 
     public Collection<Community> getCommunities() {
@@ -95,6 +94,14 @@ public class ActivityPostBean {
 
     public Collection<Post> getAllByUser() {
         return _bo.getAllByUser();
+    }
+
+    public Collection<Post> getAllFromUser() {
+        return _bo.getAllFromUser();
+    }
+
+    public Collection<Post> getAll() {
+        return _bo.getAll();
     }
 
     public String getEntry() {
