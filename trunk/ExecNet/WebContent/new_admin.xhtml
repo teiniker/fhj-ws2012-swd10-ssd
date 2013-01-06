@@ -20,6 +20,13 @@
         <!-- Center Content -->
         <ui:define name="center">
             <ui:include src="widgets/_admin.xhtml" />
+            
+            <hr/>
+            <center>
+                <h:outputText styleClass="h3" value="#{msg.user_stream}" />
+            </center>
+            <ui:include src="widgets/_activityListAdmin.xhtml" />
+        
         </ui:define>
         
         <!-- Right Content -->
