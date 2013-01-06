@@ -14,44 +14,11 @@ public class CommentBeanTest {
         assertEquals("This is a Entry", bean.getInputEntry());
     }
 
-    // @Test
-    // public void testCommentBeanIsNull() {
-    //
-    //
-    // System.out.print("Not yet implemented");
-    // fail("Not yet implemented");
-    // }
 
-    // @Test
-    // public void testCommentBean() {
-    // System.out.print("Not yet implemented");
-    // fail("Not yet implemented");
-    // }
-    //
-    // @Test
-    // public void testCommentsOrPostEmpty() {
-    // fail("Not yet implemented");
-    // }
-
-
-    // @Test
-    // public void testGetcomments() {
-    // fail("Not yet implemented");
-    // }
-    //
-    // @Test
-    // public void testAdd() {
-    // fail("Not yet implemented");
-    // }
-    //
-    // @Test
-    // public void testGetEntry() {
-    // fail("Not yet implemented");
-    // }
-    //
-    // @Test
-    // public void testSetEntry() {
-    // fail("Not yet implemented");
-    // }
+    @Test
+    public void test_Set_GetEntry() {
+        CommentBean bean = new CommentBean();
+        bean.setEntry("This is a Entry");
+    }
 
 }
