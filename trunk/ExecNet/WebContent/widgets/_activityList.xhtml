@@ -10,7 +10,8 @@
     >
     <body>
     	<div class="widget" id="activityList">
-            <span>#{msg.global_activitys}</span>         
+            <b><span>#{msg.global_activitys}</span></b>  
+            <hr/>     
             <c:choose>
                 <c:when test="not empty community">
                     <ui:repeat var="item" value="#{activityPostBean.getAllByCommunity(community)}">                       
@@ -39,9 +40,8 @@
                             <ui:include src="_activityListEntry.xhtml">
                                 <ui:param name="post" value="#{item}"></ui:param>
                             </ui:include>
-                            
-                            
                        </ui:fragment>
+                       <hr/>
                     </ui:repeat>
                 </c:otherwise>
             </c:choose>

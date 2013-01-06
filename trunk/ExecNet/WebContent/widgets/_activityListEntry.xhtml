@@ -15,39 +15,30 @@
                 
                 <table>
                     <tr>
-                        <th>#{post.community.name}</th>
-                    </tr>
-                    <tr>
-                        <td>#{msg.activity_Postdate}</td>               
-                        <td>#{post.getPostDate()}</td>
-                    </tr>     
-                    <tr>
-                        <td>#{msg.global_users}</td>               
-                        <td>#{post.author.getUsername()}</td>
+                        <td></td>
+                        <td>#{post.community.name} | #{msg.activity_Postdate} #{post.getPostDate()} | #{post.author.getUsername()}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>#{msg.activity_Entry}</td>               
                         <td><strong>#{post.entry}</strong></td>
-                    </tr>
+    
                         <ui:fragment rendered="${varIsAuthor == true}">
-                           <tr>
-                                <td>
-                                    <h:commandButton action="#{activityPostBean.editpost(post)}" value="#{msg.post_edit}"/>
-                                </td>
-                           </tr>
-                            <tr>
-                                <td>
-                                    <h:commandButton action="#{activityPostBean.deletepost(post)}" value="#{msg.post_delete}"/>
-                                </td>
-                            </tr>
+                            <td>
+                                <h:commandButton action="#{activityPostBean.editpost(post)}" value="#{msg.post_edit}"/>
+                            </td>
+                            <td>
+                                <h:commandButton action="#{activityPostBean.deletepost(post)}" value="#{msg.post_delete}"/>
+                            </td>
                         </ui:fragment> 
                         <ui:fragment rendered="${varIsAuthor == false}">
                             <ui:fragment rendered="${varIsPortalAdmin == true}">
-                                <tr>
-                                    <td><h:commandButton action="#{activityPostBean.deletepost(post)}" value="#{msg.post_delete}"/></td>
-                               </tr>
+                                <td><h:commandButton action="#{activityPostBean.deletepost(post)}" value="#{msg.post_delete}"/></td>
                             </ui:fragment>
-                        </ui:fragment>                                           
+                        </ui:fragment>
+                    </tr>                                      
                 </table>
             </h:form>
                 <ui:include src="_comments.xhtml">
