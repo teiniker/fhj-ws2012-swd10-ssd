@@ -21,10 +21,6 @@
         <ui:define name="center">
             <ui:include src="widgets/_admin.xhtml" />
             <ui:fragment rendered="#{!item.isPortalAdmin()}">
-                <hr/>
-                    <center>
-                        <h:outputText styleClass="h3" value="#{msg.admin_stream}" />
-                    </center>
                 <ui:include src="widgets/_activityListAdmin.xhtml" />
             </ui:fragment>
         </ui:define>
