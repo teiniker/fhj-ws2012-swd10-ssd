@@ -6,25 +6,28 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" 
-    >
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
     <body>
     	<div class="widget" id="activityList">
             <hr/>
+            <center>
+                <h:outputText styleClass="h3" value="#{msg.user_stream}" />
+            </center>
+            <br/>
             <ui:repeat var="item" value="#{activityPostBean.getAllFromUser()}">                        
                 <c:set var="varIdMatches" value="#{activityPostBean.compareIDs(item.id)}" />
                 <ui:fragment rendered="${varIdMatches == true}">
                     <ui:include src="_activityEdit.xhtml">
                         <ui:param name="post" value="#{item}"></ui:param>
                     </ui:include>
-               </ui:fragment>
-               <ui:fragment rendered="${varIdMatches == false}">
+                </ui:fragment>
+                <ui:fragment rendered="${varIdMatches == false}">
                     <ui:include src="_activityListEntry.xhtml">
                         <ui:param name="post" value="#{item}"></ui:param>
                     </ui:include>
-               </ui:fragment>
-               <hr/> 
-             </ui:repeat>
+				</ui:fragment>
+            </ui:repeat>
         </div>
     </body>			
 </html>
