@@ -35,7 +35,7 @@
                             </td>
                             <td><ui:fragment>
                                <h:commandButton action="#{documentBean.download(item)}" value="#{msg.document_download}" />
-                               <h:commandButton rendered="#{item.owner.id == user.id || user.admin == true}" action="#{documentBean.delete(item.id)}" value="#{msg.document_delete}" />
+                               <h:commandButton rendered="#{item.owner.id == user.id || user.isAdmin()}" action="#{documentBean.delete(item.id)}" value="#{msg.document_delete}" />
                            </ui:fragment></td>
                         </tr>
                     </ui:repeat>
