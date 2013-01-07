@@ -26,13 +26,17 @@ public class DBContext<T> implements IDataContext<T> {
     public boolean create(T item) {
         boolean result = false;
         EntityManager _em = _factory.createEntityManager();
+        
         try {
             _em.getTransaction().begin();
             _em.persist(item);
             _em.getTransaction().commit();
             result = true;
         } catch (Exception ex) {
-            _em.getTransaction().rollback();
+        	if (_em.getTransaction().isActive()){
+            	_em.getTransaction().rollback();        		
+        	}
+        	//_em.getTransaction().rollback();
             logger.error(ex.getMessage(), ex);
             result = false;
         } finally {
