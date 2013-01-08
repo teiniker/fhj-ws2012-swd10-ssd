@@ -1,7 +1,12 @@
 package at.fhj.swd.business;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import org.junit.AfterClass;
+
 import java.util.Calendar;
 import java.util.Date;
+
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -14,6 +19,7 @@ import at.fhj.swd.domain.Comment;
 import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Post;
 import at.fhj.swd.domain.User;
+import at.fhj.swd.testhelper.TestHelper;
 import at.fhj.swd.utils.TestDataFactory;
 import at.fhj.swd.utils.TestRuntimeContext;
 
@@ -74,6 +80,12 @@ public class CommentBOTest {
 
     }
 
+    @AfterClass
+	 public static void tearDown() {
+   	//TODO tear down at setup created data
+		TestHelper.ShutDownDerby();
+	 } 
+    
     @Test
     public void testAddPost() {
         Assert.assertTrue(commentBO.add(post, "This is a test"));

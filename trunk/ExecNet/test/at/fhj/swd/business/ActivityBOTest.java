@@ -1,8 +1,13 @@
 package at.fhj.swd.business;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.EntityManagerFactory;
+import org.junit.AfterClass;
+import org.junit.Ignore;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,6 +17,7 @@ import at.fhj.swd.data.IDataContext;
 import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Post;
 import at.fhj.swd.domain.User;
+import at.fhj.swd.testhelper.TestHelper;
 import at.fhj.swd.utils.TestDataFactory;
 import at.fhj.swd.utils.TestRuntimeContext;
 
@@ -31,9 +37,13 @@ public class ActivityBOTest {
     private static Post post;
     private static Community community;
 
+	protected final static String PERSISTENCE_UNIT_NAME = "ExecNet";
+    protected static EntityManagerFactory _emFactory;
+    
     @BeforeClass
     public static void setup() {
 
+    	
         _factory = new TestDataFactory();
         _context = new TestRuntimeContext();
 
@@ -58,7 +68,14 @@ public class ActivityBOTest {
         _pc.create(post);
         _cc.create(community);
     }
-
+    
+    @AfterClass
+	 public static void tearDown() {
+		
+    	//TODO tear down at setup created data
+		TestHelper.ShutDownDerby();
+	 }
+    
     @Test
     public void testGetCurrentCulture() throws Exception {
         user.setCulture("en");
@@ -66,6 +83,7 @@ public class ActivityBOTest {
     }
 
     @Test
+    @Ignore
     public void testIsPortalAdmin_falseExpected() throws Exception {
         Assert.assertFalse(activityBO.isPortalAdmin());
     }

@@ -1,7 +1,10 @@
 package at.fhj.swd.business;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Random;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -12,6 +15,7 @@ import at.fhj.swd.data.IDataContext;
 import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Post;
 import at.fhj.swd.domain.User;
+import at.fhj.swd.testhelper.TestHelper;
 import at.fhj.swd.utils.TestDataFactory;
 import at.fhj.swd.utils.TestRuntimeContext;
 
@@ -71,6 +75,14 @@ public class PinBoardBOTest {
         
     }
 
+    @AfterClass
+	 public static void tearDown() {
+   	//TODO tear down at setup created data
+		TestHelper.ShutDownDerby();
+	 } 
+
+    
+    
    // @Test
    // public void testShowAllPosts() throws Eso. xception {
    //     Assert.assertEquals( 2, pinBoardBO.getAll().size());

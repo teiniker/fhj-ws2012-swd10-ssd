@@ -1,12 +1,17 @@
 package at.fhj.swd.business;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import junit.framework.Assert;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import at.fhj.swd.data.DBContext;
 import at.fhj.swd.data.IDataContext;
 import at.fhj.swd.domain.User;
+import at.fhj.swd.testhelper.TestHelper;
 
 /**
  * @author david.tomes, elke.mattheiss
@@ -54,6 +59,12 @@ public class UserBOTest {
         _context.create(user3);
     }
     
+    @AfterClass
+	 public static void tearDown() {
+   	//TODO tear down at setup created data
+		TestHelper.ShutDownDerby();
+	 } 
+
     @Test
     public void searchUser_ShouldReturnTwoUsers() throws Exception {
         

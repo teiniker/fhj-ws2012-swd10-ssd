@@ -1,8 +1,11 @@
 package at.fhj.swd.business;
 
 import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,6 +15,7 @@ import at.fhj.swd.data.IDataContext;
 import at.fhj.swd.domain.Community;
 import at.fhj.swd.domain.Document;
 import at.fhj.swd.domain.User;
+import at.fhj.swd.testhelper.TestHelper;
 import at.fhj.swd.utils.TestDataFactory;
 
 /**
@@ -65,6 +69,12 @@ public class DocumentBOTest {
 
     }
 
+    @AfterClass
+	 public static void tearDown() {
+   	//TODO tear down at setup created data
+		TestHelper.ShutDownDerby();
+	 } 
+    
     @Test
     public void testGetAll() {
         Assert.assertTrue(_DocumentBO.getAll().contains(document1));
