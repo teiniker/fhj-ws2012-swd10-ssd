@@ -8,6 +8,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.internet.AddressException;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class EmailTest {
@@ -58,6 +59,7 @@ public class EmailTest {
 		emailsender.Send();
 	}
 
+	@Ignore
 	@Test
 	public void send() throws AddressException, MessagingException {
 		EmailSender emailsender = new EmailSender(_recipient,
