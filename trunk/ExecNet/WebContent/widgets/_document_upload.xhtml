@@ -16,8 +16,9 @@
                         <h:outputText value="#{item.name}" />
                     </rich:column>
                 </rich:extendedDataTable>
-                <rich:fileUpload fileUploadListener="#{documentBean.upload}" id="upload" addLabel="#{msg.document_upload_browse}" uploadLabel="#{msg.document_upload_upload}" deleteLabel="#{msg.document_upload_delete}" clearAllLabel="#{msg.document_upload_clearall}" clearLabel="#{msg.document_upload_clear}"  style="width: 240px; height: 222px">
-                    <a4j:ajax event="uploadcomplete" execute="@none" oncomplete="#{rich:component('upload')}.__removeAllItems(this);" render="info" />
+                <rich:fileUpload fileUploadListener="#{documentBean.upload}" id="upload" addLabel="#{msg.document_upload_browse}" uploadLabel="#{msg.document_upload_upload}" deleteLabel="#{msg.document_upload_delete}"
+                     clearAllLabel="#{msg.document_upload_clearall}" clearLabel="#{msg.document_upload_clear}" style="width: 240px; height: 222px">
+                    <a4j:ajax event="uploadcomplete" execute="@none" oncomplete="#{rich:component('upload')}.__removeAllItems(this);" render=":documentsTable" />
                 </rich:fileUpload>
             </h:panelGrid>
         </h:form>

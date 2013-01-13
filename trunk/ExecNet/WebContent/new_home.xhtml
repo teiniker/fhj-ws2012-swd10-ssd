@@ -27,7 +27,9 @@
         <!-- Right Content -->
         <ui:define name="right">
              <ui:include src="widgets/_news.xhtml" />
-             <ui:include src="widgets/_document.xhtml" />
+             <ui:include src="widgets/_document.xhtml">
+                <ui:param name="showAll" value="false"></ui:param>
+             </ui:include>
         </ui:define>
     
     </ui:composition>
