@@ -10,37 +10,43 @@
                 <h:outputText styleClass="h2" value="#{msg.global_documents}" />
             </center>
             <br/>
-            <a4j:outputPanel id="info">
-                <table>
-                    <tr>
-                        <td><b>#{msg.document_name}</b></td>
-                        <td><b>#{msg.document_owner}</b></td>
-                        <td><b>#{msg.document_date}</b></td>
-                        <td><b>#{msg.global_communities}</b></td>
-                        <td><b></b></td>
-                    </tr>
-                    <ui:repeat var="item" value="#{documentBean.getAll()}">
-                        <tr>
-                            <td>#{item.name}</td>
-                            <td>#{item.owner.username}</td>
-                            <td>
-	                            <h:outputText value="#{item.dateCreated}" >
-	              					<f:convertDateTime pattern="dd.MM.yyyy" />
-	 							</h:outputText>
-                            </td>
-                            <td>
-                            	 <ui:repeat var="com" value="#{item.communities}">
-                            	 	#{com.name}<br />
-                            	 </ui:repeat>
-                            </td>
-                            <td><ui:fragment>
-                               <h:commandButton action="#{documentBean.download(item)}" value="#{msg.document_download}" />
-                               <h:commandButton rendered="#{item.owner.id == user.id || user.isAdmin()}" action="#{documentBean.delete(item.id)}" value="#{msg.document_delete}" />
-                           </ui:fragment></td>
-                        </tr>
-                    </ui:repeat>
-                </table>
-            </a4j:outputPanel>
+            <rich:dataTable id="documentsTable" value="#{documentBean.getAll()}" var="document" iterationStatusVar="it" style="visibility: #{(documentBean.getAll().size() gt 0) ? 'visible' : 'hidden'};">
+                <rich:column>
+                    <f:facet name="header">#{msg.document_name}</f:facet>
+                    <h:outputText styleClass="h5" value="#{document.name}" />
+                </rich:column>
+                <rich:column rendered="#{showAll}">
+                    <f:facet name="header">#{msg.document_owner}</f:facet>
+                    <h:outputText styleClass="h5" value="#{document.owner.username}" />
+                </rich:column>
+                <rich:column rendered="#{showAll}">
+                    <f:facet name="header">#{msg.document_date}</f:facet>
+                    <h:outputText styleClass="h5" value="#{document.dateCreated}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:outputText>
+                </rich:column>
+                <rich:column style="text-align: center">
+                    <f:facet name="header">#{msg.document_communities}</f:facet>
+                    <rich:list value="#{document.communities}" var="community" type="definitions">
+                        <h:panelGrid columns="2">
+                            <h:graphicImage value="STYLE/IMG/icon_communities.jpg" />
+                            <h:outputLink value="./new_communities_overview.xhtml">
+                                <h:outputText styleClass="h5" value="#{community.name}" />
+                                <f:param name="viewCommunityId" value="#{community.id}" />
+                            </h:outputLink>
+                        </h:panelGrid>
+                    </rich:list>
+                </rich:column>
+                <rich:column style="text-align: center">
+                    <f:facet name="header">#{msg.document_actions}</f:facet>
+                    <h:commandLink action="#{documentBean.delete(document.id)}" rendered="#{document.owner.id == user.id || user.isAdmin()}" title="#{msg.document_delete}">
+                        <h:graphicImage value="STYLE/IMG/icon_delete.jpg" />
+                    </h:commandLink>
+                    <h:commandLink action="#{documentBean.download(document)}" title="#{msg.document_download}">
+                        <h:graphicImage value="STYLE/IMG/icon_view.jpg" />
+                    </h:commandLink>
+                </rich:column>
+            </rich:dataTable>
         </h:form>
     </div>
 </body>
