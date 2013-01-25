@@ -9,15 +9,14 @@ public class Login {
 
        private WebDriver driver;
 
-       @FindBy(id = "")
+       @FindBy(id = "j_idt22:username")
        private WebElement userField;
-       @FindBy(id = "")
+       @FindBy(id = "j_idt22:password")
        private WebElement passwordField;
 
-       @FindBy(id = "")
+       @FindBy(name = "j_idt22:j_idt27")
        private WebElement loginButton;
-       @FindBy(id = "")
-       private WebElement logoutButton;
+       
 
        public Login(WebDriver driver) {
              this.driver = driver;
@@ -30,9 +29,6 @@ public class Login {
              return new Homepage(driver);
        }
 
-       public void logout() {
-             logoutButton.click();
-       }
-
+      
 }
 
