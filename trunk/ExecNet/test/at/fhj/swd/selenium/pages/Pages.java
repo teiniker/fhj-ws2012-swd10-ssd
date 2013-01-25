@@ -4,13 +4,15 @@ package at.fhj.swd.selenium.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class Pages {
+import at.fhj.swd.selenium.AbstractPage;
 
-       private WebDriver driver;
+public class Pages extends AbstractPage {
 
        public Pages(WebDriver driver) {
-             this.driver = driver;
-       }
+        super(driver);
+        // TODO Auto-generated constructor stub
+    }
+       
 
        public void openSite(String site) {
              driver.get(site);
