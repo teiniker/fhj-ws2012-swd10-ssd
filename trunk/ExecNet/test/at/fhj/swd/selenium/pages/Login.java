@@ -9,13 +9,12 @@ import at.fhj.swd.selenium.AbstractPage;
 
 public class Login extends AbstractPage {
 
-
-    @FindBy(id = "j_idt22:username")
+	@FindBy(xpath = "html/body/div/center/table/tbody/tr/td/form/table/tbody/tr[1]/td[2]/input")
     private WebElement userField;
-    @FindBy(id = "j_idt22:password")
+    @FindBy(xpath = "html/body/div/center/table/tbody/tr/td/form/table/tbody/tr[2]/td[2]/input")
     private WebElement passwordField;
 
-    @FindBy(name = "j_idt22:j_idt27")
+    @FindBy(xpath = "html/body/div/center/table/tbody/tr/td/form/input[2]")
     private WebElement loginButton;
 
     public Login(WebDriver driver) {
@@ -29,6 +28,5 @@ public class Login extends AbstractPage {
         loginButton.click();
         return new Homepage(driver);
     }
-
-
+    
 }
