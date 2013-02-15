@@ -8,30 +8,34 @@ import at.fhj.swd.selenium.AbstractPage;
 
 public class Pages extends AbstractPage {
 
-       public Pages(WebDriver driver) {
+    public Pages(WebDriver driver) {
         super(driver);
         // TODO Auto-generated constructor stub
     }
-       
 
-       public void openSite(String site) {
-             driver.get(site);
-       }
 
-       public void maximizeWindow() {
-             driver.manage().window().maximize();
-       }
+    public void openSite(String site) {
+        driver.get(site);
+    }
 
-       public void close() {
-             driver.close();
-       }
+    public void maximizeWindow() {
+        driver.manage().window().maximize();
+    }
 
-       public WebDriver getWebDriver() {
-             return driver;
-       }
+    public void close() {
+        driver.close();
+    }
 
-       public Login loginPage() {
-             return PageFactory.initElements(driver, Login.class);
-       }
+    public WebDriver getWebDriver() {
+        return driver;
+    }
+
+    public Login loginPage() {
+        return PageFactory.initElements(driver, Login.class);
+    }
+
+    public Homepage homepage() {
+        return PageFactory.initElements(driver, Homepage.class);
+    }
 
 }
