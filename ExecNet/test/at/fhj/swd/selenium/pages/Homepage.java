@@ -29,12 +29,16 @@ public class Homepage extends AbstractPage {
         // TODO Auto-generated constructor stub
     }
 
-    public void sendActivity(String entryfield) {
+    public void fillActivity(String entryfield) {
         getEntryField().sendKeys(entryfield);
         btnPopupDateFrom.click();
         btnDateFrom.click();
         btnPopupDateTo.click();
         btnDateTo.click();
+        sendActivity();
+    }
+
+    public void sendActivity() {
         btnCreateActivity.click();
     }
 
