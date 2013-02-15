@@ -19,11 +19,11 @@ public abstract class AbstractTest {
         page = new Pages(driver);
         page.maximizeWindow();
         page.openSite("http://localhost:8080/ExecNet/");
-        page.loginPage().login("TestName", "123456");
+        page.loginPage().login("TestNamen", "TestPasswort");
     }
 
     @After
     public void tearDown() throws Exception {
-        driver.close();
+        // driver.close();
     }
 }
