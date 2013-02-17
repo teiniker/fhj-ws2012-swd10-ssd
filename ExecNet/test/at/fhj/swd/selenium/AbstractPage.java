@@ -21,7 +21,9 @@ public abstract class AbstractPage implements IPage {
     }
 
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see at.fhj.swd.selenium.IPage#clickMySide()
      */
     @Override
@@ -30,16 +32,20 @@ public abstract class AbstractPage implements IPage {
         return new MySite(driver);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see at.fhj.swd.selenium.IPage#clickUser()
      */
     @Override
     public User clickUser() {
-    	driver.get("http://localhost:8080/ExecNet/new_otherPage.xhtml");
+        driver.get("http://localhost:8080/ExecNet/new_otherPage.xhtml");
         return new User(driver);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see at.fhj.swd.selenium.IPage#clickGroups()
      */
     @Override
@@ -47,15 +53,20 @@ public abstract class AbstractPage implements IPage {
         return new Groups(driver);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see at.fhj.swd.selenium.IPage#clickDocuments()
      */
     @Override
     public Documents clickDocuments() {
+        driver.findElement(By.xpath("//td[9]/table/tbody/tr/td[2]/a")).click();
         return new Documents(driver);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see at.fhj.swd.selenium.IPage#clickSettings()
      */
     @Override
@@ -63,7 +74,9 @@ public abstract class AbstractPage implements IPage {
         return new Settings(driver);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see at.fhj.swd.selenium.IPage#clickAdmin()
      */
     @Override
