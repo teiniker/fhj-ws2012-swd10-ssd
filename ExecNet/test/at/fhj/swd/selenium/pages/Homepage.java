@@ -9,19 +9,21 @@ import at.fhj.swd.selenium.AbstractPage;
 
 public class Homepage extends AbstractPage {
 
-    @FindBy(id = "j_idt148:entry")
+    @FindBy(xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[2]/td[2]/textarea")
     private WebElement entryField;
-    @FindBy(id = "j_idt148:j_idt161")
+    @FindBy(xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[5]/td[1]/select")
     private WebElement dropdownboxCommunity;
-    @FindBy(name = "j_idt148:j_idt164")
+    @FindBy(xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[5]/td[2]/input")
     private WebElement btnCreateActivity;
-    @FindBy(id = "j_idt148:j_idt155PopupButton")
+    @FindBy(xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[3]/td[2]/div/span/span[1]/img")
     private WebElement btnPopupDateFrom;
-    @FindBy(id = "j_idt148:j_idt155DayCell17")
+    @FindBy(
+            xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[3]/td[2]/div/span/table/tbody/tr[7]/td[4]")
     private WebElement btnDateFrom;
-    @FindBy(id = "j_idt148:j_idt159PopupButton")
+    @FindBy(xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[4]/td[2]/div/span/span[1]/img")
     private WebElement btnPopupDateTo;
-    @FindBy(id = "j_idt148:j_idt159DayCell19")
+    @FindBy(
+            xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[4]/td[2]/div/span/table/tbody/tr[7]/td[6]")
     private WebElement btnDateTo;
 
     public Homepage(WebDriver driver) {
