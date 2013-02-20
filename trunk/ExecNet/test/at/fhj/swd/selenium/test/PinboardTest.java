@@ -14,4 +14,10 @@ public class PinboardTest extends AbstractTest {
         Assert.assertEquals("TEST", mySite.insertPinBoardEntry("TEST"));
     }
 
+    @Test
+    public void deletePinBoardEntry() {
+        MySite mySite = page.clickMySide();
+        mySite.deletePinBoardEntry();
+    }
+
 }
