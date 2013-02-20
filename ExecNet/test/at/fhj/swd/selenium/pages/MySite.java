@@ -23,4 +23,9 @@ public class MySite extends AbstractPage {
         return element.getText();
     }
 
+    public void deletePinBoardEntry() {
+        WebElement element = driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr/td[3]/a"));
+        element.click();
+    }
+    
 }
