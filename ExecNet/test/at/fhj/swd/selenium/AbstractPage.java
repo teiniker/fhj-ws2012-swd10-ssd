@@ -50,6 +50,7 @@ public abstract class AbstractPage implements IPage {
      */
     @Override
     public Groups clickGroups() {
+        driver.findElement(By.id("j_idt23:j_idt38_itm")).findElement(By.tagName("a")).click();
         return new Groups(driver);
     }
 
