@@ -1,6 +1,7 @@
 package at.fhj.swd.selenium;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import at.fhj.swd.selenium.pages.Admin;
@@ -71,6 +72,13 @@ public abstract class AbstractPage implements IPage {
      */
     @Override
     public Settings clickSettings() {
+
+	try {
+	    driver.findElement(By.linkText("Settings")).click();
+	} catch (NoSuchElementException ex) {
+	    driver.findElement(By.linkText("Einstellungen")).click();
+	}
+
 	return new Settings(driver);
     }
 

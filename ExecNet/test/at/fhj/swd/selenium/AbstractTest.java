@@ -21,13 +21,13 @@ public abstract class AbstractTest {
 	page = new Pages(driver);
 	page.maximizeWindow();
 	page.openSite("http://localhost:8080/ExecNet/");
-	page.loginPage().login(this.username, this.password);
+	page.loginPage().login(this.getUsername(), this.getPassword());
     }
 
     /**
      * @return the username
      */
-    private String getUsername() {
+    public String getUsername() {
 	return username;
     }
 
@@ -35,14 +35,14 @@ public abstract class AbstractTest {
      * @param username
      *            the username to set
      */
-    private void setUsername(String username) {
+    public void setUsername(String username) {
 	this.username = username;
     }
 
     /**
      * @return the password
      */
-    private String getPassword() {
+    public String getPassword() {
 	return password;
     }
 
@@ -50,7 +50,7 @@ public abstract class AbstractTest {
      * @param password
      *            the password to set
      */
-    private void setPassword(String password) {
+    public void setPassword(String password) {
 	this.password = password;
     }
 
