@@ -170,16 +170,17 @@ public class ActivityBO {
     }
 
     public Collection<Post> getAllFromUser() {
-        Collection<Post> ps = _pc.readAll(Post.class);
+        Collection<Post> posts = _pc.readAll(Post.class);
 
         Long idAuthor = _rc.getCurrentUser().getId();
 
-        for (Post p : ps) {
-            if (p.getAuthor().getId() != idAuthor) {
-                ps.remove(p);
+        Collection<Post> suitablePosts = new ArrayList<Post>();
+        for (Post p : posts) {
+            if (p.getAuthor().getId() == idAuthor) {
+                suitablePosts.add(p);
             }
         }
-        return ps;
+        return suitablePosts;
     }
 
     public Collection<Post> getAll() {
