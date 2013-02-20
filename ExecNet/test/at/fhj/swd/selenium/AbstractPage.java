@@ -10,16 +10,13 @@ import at.fhj.swd.selenium.pages.MySite;
 import at.fhj.swd.selenium.pages.Settings;
 import at.fhj.swd.selenium.pages.User;
 
-
 public abstract class AbstractPage implements IPage {
 
     protected WebDriver driver;
 
-
     public AbstractPage(WebDriver driver) {
-        this.driver = driver;
+	this.driver = driver;
     }
-
 
     /*
      * (non-Javadoc)
@@ -28,8 +25,9 @@ public abstract class AbstractPage implements IPage {
      */
     @Override
     public MySite clickMySide() {
-        driver.findElement(By.id("j_idt23:j_idt30_itm")).findElement(By.tagName("a")).click();
-        return new MySite(driver);
+	driver.findElement(By.id("j_idt23:j_idt30_itm"))
+		.findElement(By.tagName("a")).click();
+	return new MySite(driver);
     }
 
     /*
@@ -39,8 +37,8 @@ public abstract class AbstractPage implements IPage {
      */
     @Override
     public User clickUser() {
-        driver.get("http://localhost:8080/ExecNet/new_otherPage.xhtml");
-        return new User(driver);
+	driver.get("http://localhost:8080/ExecNet/new_otherPage.xhtml");
+	return new User(driver);
     }
 
     /*
@@ -50,8 +48,9 @@ public abstract class AbstractPage implements IPage {
      */
     @Override
     public Groups clickGroups() {
-        driver.findElement(By.id("j_idt23:j_idt38_itm")).findElement(By.tagName("a")).click();
-        return new Groups(driver);
+	driver.findElement(By.id("j_idt23:j_idt38_itm"))
+		.findElement(By.tagName("a")).click();
+	return new Groups(driver);
     }
 
     /*
@@ -61,8 +60,8 @@ public abstract class AbstractPage implements IPage {
      */
     @Override
     public Documents clickDocuments() {
-        driver.findElement(By.xpath("//td[9]/table/tbody/tr/td[2]/a")).click();
-        return new Documents(driver);
+	driver.findElement(By.xpath("//td[9]/table/tbody/tr/td[2]/a")).click();
+	return new Documents(driver);
     }
 
     /*
@@ -72,7 +71,7 @@ public abstract class AbstractPage implements IPage {
      */
     @Override
     public Settings clickSettings() {
-        return new Settings(driver);
+	return new Settings(driver);
     }
 
     /*
@@ -82,8 +81,8 @@ public abstract class AbstractPage implements IPage {
      */
     @Override
     public Admin clickAdmin() {
-        return new Admin(driver);
+	driver.findElement(By.linkText("Admin")).click();
+	return new Admin(driver);
     }
-
 
 }
