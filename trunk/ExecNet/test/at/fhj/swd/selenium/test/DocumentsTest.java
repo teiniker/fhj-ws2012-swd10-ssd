@@ -33,4 +33,13 @@ public class DocumentsTest extends AbstractTest {
 
         Assert.assertTrue(documentsPage.isDocumentCommunitySelected(pos));
     }
+
+    @Test
+    public void deleteDokument() throws Exception {
+        Documents documentsPage = super.page.clickDocuments();
+        int documentsCountBefore = documentsPage.getDocumentsCount();
+        documentsPage.deleteDocument();
+        int documentsCountAfter = documentsPage.getDocumentsCount();
+        Assert.assertTrue(documentsCountAfter < documentsCountBefore);
+    }
 }

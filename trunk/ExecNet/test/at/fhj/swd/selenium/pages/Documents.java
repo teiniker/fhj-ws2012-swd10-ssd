@@ -55,4 +55,10 @@ public class Documents {
     public int getDocumentsCount() {
         return driver.findElements(By.xpath("//tr/td[2]/div/form/table/tbody/tr/td[1]/span")).size();
     }
+
+    public void deleteDocument() throws InterruptedException {
+        // tr/td[2]/div/form/table/tbody/tr/td[5]/a/img
+        driver.findElement(By.xpath("//tr[last()]/td[5]/a[1]")).click();
+        Thread.sleep(1000);
+    }
 }
