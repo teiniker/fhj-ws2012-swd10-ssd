@@ -8,6 +8,7 @@ import at.fhj.swd.selenium.pages.Admin;
 import at.fhj.swd.selenium.pages.Documents;
 import at.fhj.swd.selenium.pages.Groups;
 import at.fhj.swd.selenium.pages.MySite;
+import at.fhj.swd.selenium.pages.News;
 import at.fhj.swd.selenium.pages.Settings;
 import at.fhj.swd.selenium.pages.User;
 
@@ -91,6 +92,17 @@ public abstract class AbstractPage implements IPage {
     public Admin clickAdmin() {
 	driver.findElement(By.linkText("Admin")).click();
 	return new Admin(driver);
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see at.fhj.swd.selenium.IPage#clickNews()
+     */
+    @Override
+    public News clickNews() {
+    driver.findElement(By.linkText("Add News")).click();
+    return new News(driver);
     }
 
 }
