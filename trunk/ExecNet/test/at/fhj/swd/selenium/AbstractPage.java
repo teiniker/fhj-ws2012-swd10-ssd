@@ -43,6 +43,12 @@ public abstract class AbstractPage implements IPage {
 	return new User(driver);
     }
 
+    @Override
+    public User clickUserOverview() {
+    driver.get("http://localhost:8080/ExecNet/new_users.xhtml");
+    return new User(driver);
+    }
+    
     /*
      * (non-Javadoc)
      * 

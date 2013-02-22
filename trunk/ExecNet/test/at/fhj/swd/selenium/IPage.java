@@ -24,5 +24,7 @@ public interface IPage {
     public abstract Admin clickAdmin();
     
     public abstract News clickNews();
+    
+    public abstract User clickUserOverview();
 
 }
