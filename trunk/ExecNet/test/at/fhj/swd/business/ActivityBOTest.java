@@ -1,15 +1,15 @@
 package at.fhj.swd.business;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.EntityManagerFactory;
+
 import org.junit.AfterClass;
-import org.junit.Ignore;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import at.fhj.swd.data.DBContext;
@@ -37,15 +37,17 @@ public class ActivityBOTest {
     private static Post post;
     private static Community community;
 
-	protected final static String PERSISTENCE_UNIT_NAME = "ExecNet";
+    protected final static String PERSISTENCE_UNIT_NAME = "ExecNet";
     protected static EntityManagerFactory _emFactory;
-    
-    @BeforeClass
-    public static void setup() {
 
-    	
+    @BeforeClass
+    public static void initSetup() {
         _factory = new TestDataFactory();
         _context = new TestRuntimeContext();
+    }
+
+    @Before
+    public void setup() {
 
         user = _factory.createUser("testUser");
         community = _factory.createCommunity("Huehott1");
@@ -68,14 +70,12 @@ public class ActivityBOTest {
         _pc.create(post);
         _cc.create(community);
     }
-    
+
     @AfterClass
-	 public static void tearDown() {
-		
-    	//TODO tear down at setup created data
-		TestHelper.ShutDownDerby();
-	 }
-    
+    public static void tearDown() {
+        TestHelper.ShutDownDerby();
+    }
+
     @Test
     public void testGetCurrentCulture() throws Exception {
         user.setCulture("en");
