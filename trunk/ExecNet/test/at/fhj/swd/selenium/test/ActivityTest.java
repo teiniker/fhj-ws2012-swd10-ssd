@@ -10,13 +10,12 @@ public class ActivityTest extends AbstractTest {
 
     @Test
     public void testIfAllDataOk() {
-        page.homepage().fillActivity("TestString");
+    	String compareString = "TestString";
+        page.homepage().fillActivity(compareString);
         Assert.assertTrue(page.homepage().getEntryField().getText().isEmpty());
     }
 
-    /**
-     * @author s.fuchs
-     */
+    
     @Test
     public void testIfDataIsNotEntered() {
         page.homepage().sendActivity();
