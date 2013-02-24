@@ -29,11 +29,9 @@ public class ActivityTest extends AbstractTest {
     @Test
     public void testifDataIsInList() {
         String sSource = "Text text";
-        
         page.homepage().fillActivity(sSource);
-        String sDest =page.homepage().getEntryField().getText();
+        String sDest =page.homepage().getEntryField().getAttribute("value");
         page.homepage().sendActivity();
         Assert.assertEquals(sSource, sDest);
-
     }
 }
