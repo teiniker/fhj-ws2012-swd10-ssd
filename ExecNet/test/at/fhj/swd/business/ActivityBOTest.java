@@ -169,16 +169,4 @@ public class ActivityBOTest {
 
         activityBO.add("", dtNowPlus1Day, dtNow, 1);
     }
-
-    @Test
-    @Ignore
-    public void addEntry_trueExpected() {
-        Date dtNow = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(dtNow);
-        cal.add(Calendar.DATE, 1);
-        Date dtNowPlus1Day = cal.getTime();
-
-        Assert.assertTrue(activityBO.add("", dtNow, dtNowPlus1Day, 0L));
-    }
 }
