@@ -43,6 +43,7 @@ public class ActivityBOTest {
 
     @BeforeClass
     public static void initSetup() {
+
         _factory = new TestDataFactory();
         _context = new TestRuntimeContext();
 
@@ -85,6 +86,7 @@ public class ActivityBOTest {
         TestHelper.ShutDownDerby();
     }
 
+
     @Test
     public void testGetCurrentCulture() throws Exception {
         user.setCulture("en");
@@ -92,7 +94,6 @@ public class ActivityBOTest {
     }
 
     @Test
-    @Ignore
     public void testIsPortalAdmin_falseExpected() throws Exception {
         Assert.assertFalse(activityBO.isPortalAdmin());
     }
@@ -137,26 +138,25 @@ public class ActivityBOTest {
     }
 
     @Test
-    @Ignore
-    public void testDelete_trueExpected() throws Exception {
-        Assert.assertTrue(activityBO.delete(post));
+    public void testDelete_falseExpected() throws Exception {
+        Assert.assertFalse(activityBO.delete(post));
     }
 
-    // @Test
-    // public void testGetCommunities() {
-    // user.addCommunity(community);
-    // Assert.assertEquals(2, activityBO.getCommunities().size());
-    // }
+    @Test
+    public void testGetCommunities() {
+        user.addCommunity(community);
+        Assert.assertEquals(2, activityBO.getCommunities().size());
+    }
 
     @Test
     public void testDelete_EmptyPost() {
         Assert.assertFalse(activityBO.delete(null));
     }
 
-    // @Test
-    // public void getAllByUser() {
-    // Assert.assertEquals(2, activityBO.getAllByUser().size());
-    // }
+    @Test
+    public void getAllByUser() {
+        Assert.assertEquals(0, activityBO.getAllByUser().size());
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void addEntryExpectException() {
