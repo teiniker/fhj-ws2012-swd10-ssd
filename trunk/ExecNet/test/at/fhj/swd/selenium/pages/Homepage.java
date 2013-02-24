@@ -41,7 +41,6 @@ public class Homepage extends AbstractPage {
         btnPopupDateTo.click();
         btnNextMonth.click();
         btnDateTo.click();
-        sendActivity();
     }
 
     public void sendActivity() {
