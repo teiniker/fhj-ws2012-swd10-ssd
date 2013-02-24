@@ -12,6 +12,7 @@ public class ActivityTest extends AbstractTest {
     public void testIfAllDataOk() {
         String compareString = "TestString";
         page.homepage().fillActivity(compareString);
+        page.homepage().sendActivity();
         Assert.assertTrue(page.homepage().getEntryField().getText().isEmpty());
     }
 
@@ -28,10 +29,10 @@ public class ActivityTest extends AbstractTest {
     @Test
     public void testifDataIsInList() {
         String sSource = "Text text";
+        
         page.homepage().fillActivity(sSource);
-        String sDest = driver.findElement(
-            By.xpath("html/body/div/table[3]/tbody/tr/td[2]/div/div/form[1]/table/tbody/tr[2]/td[2]/strong")).getText();
-        // html/body/div[1]/table[3]/tbody/tr/td[2]/form/table/tbody/tr[2]/td[2]/textarea
+        String sDest =page.homepage().getEntryField().getText();
+        page.homepage().sendActivity();
         Assert.assertEquals(sSource, sDest);
 
     }
