@@ -61,4 +61,14 @@ public class Documents {
         driver.findElement(By.xpath("//tr[last()]/td[5]/a[1]")).click();
         Thread.sleep(1000);
     }
+    
+    public String getLastDocumentOwner () {
+    	String owner = driver.findElement(By.xpath("//table[@id='documentsTable']/tbody/tr[last()]/td[2]/span")).getText();
+    	return owner;
+    }
+
+    public String getLastDocumentDate () {
+    	String date = driver.findElement(By.xpath("//table[@id='documentsTable']/tbody/tr[last()]/td[3]/span")).getText();
+    	return date;
+    }
 }

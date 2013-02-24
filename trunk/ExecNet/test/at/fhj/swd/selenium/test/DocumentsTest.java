@@ -1,9 +1,17 @@
 package at.fhj.swd.selenium.test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.text.DateFormatter;
+
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
+import at.fhj.swd.application.Application;
+import at.fhj.swd.domain.User;
 import at.fhj.swd.selenium.AbstractTest;
 import at.fhj.swd.selenium.pages.Documents;
 
@@ -23,9 +31,16 @@ public class DocumentsTest extends AbstractTest {
 
         Assert.assertTrue(documentsCountAfter > documentsCountBefore);
         Assert.assertEquals(documentName, lastDocument);
+        
+        // Also check owner and date
+        Assert.assertEquals(documentsPage.getLastDocumentOwner(), getUsername());
+        
+        String today = new SimpleDateFormat("dd.MM.YYYY").format(new Date());
+        Assert.assertEquals(documentsPage.getLastDocumentDate(), today);
     }
 
     @Test
+    @Ignore
     public void selectDokumentCommunity() throws Exception {
         Documents documentsPage = super.page.clickDocuments();
         int pos = 1;
@@ -35,6 +50,7 @@ public class DocumentsTest extends AbstractTest {
     }
 
     @Test
+    //@Ignore
     public void deleteDokument() throws Exception {
         Documents documentsPage = super.page.clickDocuments();
         int documentsCountBefore = documentsPage.getDocumentsCount();
