@@ -3,6 +3,7 @@ package at.fhj.swd.selenium.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 import at.fhj.swd.selenium.AbstractPage;
@@ -38,7 +39,12 @@ public class Settings extends AbstractPage {
 	setItem("j_idt68:location", whereYouCanBeFound);
 
 	driver.findElement(By.name("j_idt68:j_idt78")).click();
-
     }
+    
+    public String getPageHeadline(){
+    	WebElement element = driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[2]/center/span"));
+    	return element.getText();
+    }
+
 
 }

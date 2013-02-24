@@ -27,5 +27,9 @@ public class MySite extends AbstractPage {
         WebElement element = driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr/td[3]/a"));
         element.click();
     }
-    
+
+    public String getPageHeadline(){
+    	WebElement element = driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[2]/center/span"));
+    	return element.getText();
+    }
 }
