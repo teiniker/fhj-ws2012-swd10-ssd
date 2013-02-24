@@ -18,12 +18,12 @@ public class Homepage extends AbstractPage {
     @FindBy(xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[3]/td[2]/div/span/span[1]/img")
     private WebElement btnPopupDateFrom;
     @FindBy(
-            xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[3]/td[2]/div/span/table/tbody/tr[7]/td[4]")
+            xpath = "html/body/div[1]/table[3]/tbody/tr/td[2]/form/table/tbody/tr[3]/td[2]/div/span/table/tbody/tr[4]/td[3]")
     private WebElement btnDateFrom;
     @FindBy(xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[4]/td[2]/div/span/span[1]/img")
     private WebElement btnPopupDateTo;
     @FindBy(
-            xpath = "html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr[4]/td[2]/div/span/table/tbody/tr[7]/td[6]")
+            xpath = "html/body/div[1]/table[3]/tbody/tr/td[2]/form/table/tbody/tr[4]/td[2]/div/span/table/tbody/tr[7]/td[7]")
     private WebElement btnDateTo;
 
     public Homepage(WebDriver driver) {
