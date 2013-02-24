@@ -40,7 +40,6 @@ public class DocumentsTest extends AbstractTest {
     }
 
     @Test
-    @Ignore
     public void selectDokumentCommunity() throws Exception {
         Documents documentsPage = super.page.clickDocuments();
         int pos = 1;
@@ -50,7 +49,6 @@ public class DocumentsTest extends AbstractTest {
     }
 
     @Test
-    //@Ignore
     public void deleteDokument() throws Exception {
         Documents documentsPage = super.page.clickDocuments();
         int documentsCountBefore = documentsPage.getDocumentsCount();
