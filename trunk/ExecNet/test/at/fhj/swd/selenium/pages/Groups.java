@@ -21,9 +21,24 @@ public class Groups extends AbstractPage {
         driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[3]/form/input[2]")).click();
     }
 
-    public String getPageHeadline(){
-    	WebElement element = driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[2]/center/span"));
-    	return element.getText();
+    public void joinCommunity() {
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr/td[6]/a")).click();
+    }
+
+    public void leaveCommunity() {
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr/td[7]/a")).click();
+    }
+
+    public void deleteCommunity() {
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[2]/form/table/tbody/tr/td[5]/a")).click();
+    }
+
+    public String getPageHeadline() {
+        WebElement element = driver.findElement(By.xpath("/html/body/div/table[3]/tbody/tr/td[2]/center/span"));
+        return element.getText();
     }
 
 }
