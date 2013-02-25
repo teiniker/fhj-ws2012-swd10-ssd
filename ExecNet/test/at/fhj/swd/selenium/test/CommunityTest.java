@@ -13,4 +13,22 @@ public class CommunityTest extends AbstractTest {
         groupSite.insertCommunity("TEST-Community", "TEST-Description");
     }
 
+    @Test
+    public void joinCommunity() {
+        Groups groupSite = page.clickGroups();
+        groupSite.joinCommunity();
+    }
+
+    @Test
+    public void leaveCommunity() {
+        Groups groupSite = page.clickGroups();
+        groupSite.leaveCommunity();
+    }
+
+    @Test
+    public void deleteCommunity() {
+        Groups groupSite = page.clickGroups();
+        groupSite.deleteCommunity();
+    }
+
 }
