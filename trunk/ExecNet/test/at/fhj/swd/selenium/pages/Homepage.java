@@ -54,4 +54,8 @@ public class Homepage extends AbstractPage {
     public void setEntryField(WebElement entryField) {
         this.entryField = entryField;
     }
+
+    public void logout(String link) {
+        WebElement logoutButton = driver.findElement(By.linkText(link)).click();
+    }
 }
